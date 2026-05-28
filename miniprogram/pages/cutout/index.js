@@ -216,4 +216,3 @@ Page({
     this.choosePhoto()
   }
 })
-

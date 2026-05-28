@@ -533,4 +533,3 @@ module.exports = {
   getGridRects,
   removeBackground
 }
-
