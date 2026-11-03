@@ -1,0 +1,60 @@
+<view class="page-shell">
+  <view class="page-intro">
+    <text class="intro-index">05 / GRID CUT</text>
+    <text class="intro-title">一张图，九宫格，\n发圈更有排面。</text>
+    <text class="intro-desc">自动居中裁成正方形，再按 1–9 顺序切成 3 × 3 小图。</text>
+  </view>
+
+  <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="chooseImage">
+    <view class="upload-plus">+</view>
+    <text class="upload-title">选择一张完整图片</text>
+    <text class="upload-tip">会自动居中裁切，重要内容请放在中间</text>
+  </button>
+
+  <view wx:else class="grid-workspace">
+    <view class="card grid-card">
+      <view class="setting-head">
+        <view>
+          <text class="setting-label">九宫格预览</text>
+          <text class="grid-subtitle">按编号依次发布</text>
+        </view>
+        <button class="text-action" bindtap="chooseImage">换一张</button>
+      </view>
+
+      <view wx:if="{{cells.length === 9}}" class="nine-grid">
+        <image
+          wx:for="{{cells}}"
+          wx:key="index"
+          class="grid-cell"
+          src="{{item.path}}"
+          mode="aspectFill"
+          data-index="{{index}}"
+          bindtap="previewCell"
+        ></image>
+      </view>
+      <view wx:else class="grid-placeholder">
+        <view class="placeholder-spinner"></view>
+        <text>正在切图…</text>
+      </view>
+    </view>
+
+    <view class="tips-card">
+      <view class="tip-number">01</view>
+      <view class="tip-copy">
+        <text class="tip-title">保存后按顺序选择</text>
+        <text class="tip-desc">微信朋友圈一次最多 9 张，按相册中的保存顺序选图即可。</text>
+      </view>
+    </view>
+
+    <view class="button-row">
+      <button class="secondary-button" bindtap="generateGrid" disabled="{{busy}}">重新生成</button>
+      <button class="primary-button" bindtap="saveAll" disabled="{{cells.length !== 9}}">保存全部 9 张</button>
+    </view>
+  </view>
+
+  <view wx:if="{{busy}}" class="busy-mask">
+    <view class="busy-spinner"></view>
+    <text>正在切图…</text>
+  </view>
+</view>
+

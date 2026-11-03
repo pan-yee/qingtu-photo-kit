@@ -1,0 +1,99 @@
+<view class="page-shell">
+  <view class="page-intro">
+    <text class="intro-index">04 / COLLAGE</text>
+    <text class="intro-title">不用排版软件，\n也能把故事拼在一起。</text>
+    <text class="intro-desc">最多选择 9 张图片，挑一个版式，自动裁切并生成高清拼接图。</text>
+  </view>
+
+  <button wx:if="{{!images.length}}" class="empty-upload" bindtap="addImages">
+    <view class="upload-plus">+</view>
+    <text class="upload-title">选择 2–9 张图片</text>
+    <text class="upload-tip">可以一次多选，也可以分次添加</text>
+  </button>
+
+  <view wx:else class="collage-workspace">
+    <view class="card photo-picker-card">
+      <view class="setting-head">
+        <view>
+          <text class="setting-label">已选图片</text>
+          <text class="picker-count"> {{images.length}} / 9</text>
+        </view>
+        <button class="text-action" bindtap="clearImages">清空</button>
+      </view>
+      <view class="thumbnail-grid">
+        <view
+          wx:for="{{images}}"
+          wx:key="key"
+          class="thumbnail"
+        >
+          <image src="{{item.path}}" mode="aspectFill"></image>
+          <button
+            class="thumbnail-remove"
+            data-index="{{index}}"
+            catchtap="removeImage"
+          >×</button>
+          <text class="thumbnail-index">{{index + 1}}</text>
+        </view>
+        <button
+          wx:if="{{images.length < 9}}"
+          class="thumbnail-add"
+          bindtap="addImages"
+        >
+          <text class="add-symbol">+</text>
+          <text>继续添加</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="card template-card">
+      <view class="setting-head">
+        <text class="setting-label">拼接版式</text>
+        <text class="setting-value">{{outputLabel}}</text>
+      </view>
+      <view class="template-list">
+        <button
+          wx:for="{{templates}}"
+          wx:key="id"
+          class="template-item {{template === item.id ? 'active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="selectTemplate"
+        >
+          <view class="template-glyph glyph-{{item.id}}">
+            <view class="glyph-block block-a"></view>
+            <view class="glyph-block block-b"></view>
+            <view class="glyph-block block-c"></view>
+            <view class="glyph-block block-d"></view>
+          </view>
+          <text class="template-label">{{item.label}}</text>
+          <text class="template-note">{{item.note}}</text>
+        </button>
+      </view>
+    </view>
+
+    <view wx:if="{{resultSrc}}" class="card result-card">
+      <view class="setting-head result-title-row">
+        <text class="setting-label">拼接预览</text>
+        <text class="setting-value">点击图片查看大图</text>
+      </view>
+      <view class="preview-shell collage-preview">
+        <image
+          class="preview-image"
+          src="{{resultSrc}}"
+          mode="widthFix"
+          bindtap="previewResult"
+        ></image>
+      </view>
+    </view>
+
+    <view class="button-row">
+      <button class="secondary-button" bindtap="generateCollage">生成拼接图</button>
+      <button class="primary-button" bindtap="saveResult" disabled="{{!resultSrc}}">保存图片</button>
+    </view>
+  </view>
+
+  <view wx:if="{{busy}}" class="busy-mask">
+    <view class="busy-spinner"></view>
+    <text>正在拼接图片…</text>
+  </view>
+</view>
+

@@ -1,0 +1,91 @@
+<view class="home">
+  <view class="hero">
+    <view class="hero-topline">
+      <view class="brand">
+        <view class="brand-mark">
+          <view class="brand-dot"></view>
+          <view class="brand-line"></view>
+        </view>
+        <text>QINGTU</text>
+      </view>
+      <view class="privacy-badge">
+        <view class="privacy-dot"></view>
+        <text>图片仅在本机处理</text>
+      </view>
+    </view>
+
+    <view class="hero-copy">
+      <text class="hero-kicker">随手处理，不占相册</text>
+      <text class="hero-title">你的图片，\n还差最后一步。</text>
+      <text class="hero-desc">换底色、压缩、拼接，常用工具都在这里。</text>
+      <button class="hero-cta" bindtap="startCutout">
+        <text>制作证件照</text>
+        <text class="hero-arrow">→</text>
+      </button>
+    </view>
+
+    <view class="hero-art" aria-hidden="true">
+      <view class="photo-back">
+        <view class="photo-head"></view>
+        <view class="photo-body"></view>
+      </view>
+      <view class="photo-front">
+        <view class="photo-grid-line line-one"></view>
+        <view class="photo-grid-line line-two"></view>
+        <view class="photo-grid-line line-three"></view>
+        <view class="photo-grid-line vertical-one"></view>
+        <view class="photo-grid-line vertical-two"></view>
+        <view class="photo-grid-line vertical-three"></view>
+      </view>
+      <view class="art-sticker">AI 辅助</view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="section-head">
+      <view>
+        <text class="eyebrow">TOOLKIT</text>
+        <text class="section-title">几步就完成</text>
+      </view>
+      <text class="section-note">免登录 · 即选即用</text>
+    </view>
+
+    <view class="tool-grid">
+      <view
+        wx:for="{{tools}}"
+        wx:key="id"
+        class="tool-card tool-{{item.tone}} {{index === 0 ? 'tool-featured' : ''}}"
+        data-url="{{item.url}}"
+        bindtap="openTool"
+      >
+        <view class="tool-icon">
+          <text>{{item.glyph}}</text>
+        </view>
+        <view class="tool-copy">
+          <view class="tool-title-row">
+            <text class="tool-title">{{item.title}}</text>
+            <text wx:if="{{item.badge}}" class="tool-badge">{{item.badge}}</text>
+          </view>
+          <text class="tool-desc">{{item.description}}</text>
+        </view>
+        <view class="tool-go">↗</view>
+      </view>
+    </view>
+
+    <view class="promise-card">
+      <view class="promise-icon">
+        <view class="shield-check">✓</view>
+      </view>
+      <view class="promise-copy">
+        <text class="promise-title">不下云，不上传</text>
+        <text class="promise-desc">普通图片处理在微信本地完成，速度更快，也更安心。</text>
+      </view>
+    </view>
+
+    <view class="footer-note">
+      <text>请勿使用工具伪造证件或规避版权保护</text>
+      <text class="footer-mark">轻图盒 1.0</text>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,69 @@
+<view class="page-shell">
+  <view class="page-intro">
+    <text class="intro-index">03 / LOCAL ERASE</text>
+    <text class="intro-title">用手指轻轻一抹，\n让画面恢复干净。</text>
+    <text class="intro-desc">适合纯色背景上的文字、小图标和轻水印。输出会裁成正方形。</text>
+  </view>
+
+  <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="chooseImage">
+    <view class="upload-plus">+</view>
+    <text class="upload-title">选择一张需要清理的图片</text>
+    <text class="upload-tip">水印下方最好是纯色或简单纹理</text>
+  </button>
+
+  <view wx:else class="erase-workspace">
+    <view class="card canvas-card">
+      <view class="canvas-stage">
+        <canvas
+          id="eraserCanvas"
+          type="2d"
+          class="eraser-canvas"
+          bindtouchstart="onTouchStart"
+          catchtouchmove="onTouchMove"
+        ></canvas>
+        <view wx:if="{{!dirty}}" class="brush-tip">按住图片并涂抹</view>
+      </view>
+      <view class="canvas-actions">
+        <button bindtap="chooseImage">换一张</button>
+        <view class="action-right">
+          <button bindtap="undo" disabled="{{!canUndo}}">撤销</button>
+          <button bindtap="reset" disabled="{{!dirty}}">重置</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">修复笔刷</text>
+        <text class="setting-value">{{brushSize}} px</text>
+      </view>
+      <slider
+        value="{{brushSize}}"
+        min="20"
+        max="90"
+        step="1"
+        activeColor="#d89a2a"
+        backgroundColor="#e7e2d6"
+        block-size="24"
+        bindchange="onBrushChange"
+      />
+      <view class="range-labels">
+        <text>小字细节</text>
+        <text>大面积水印</text>
+      </view>
+    </view>
+
+    <view class="notice">
+      <view class="notice-dot"></view>
+      <text>修复时会采样笔刷周围的颜色，因此复杂纹理上可能留下模糊色块。请只在拥有处理权限的图片上使用。</text>
+    </view>
+
+    <button class="primary-button" bindtap="saveResult">保存处理结果</button>
+  </view>
+
+  <view wx:if="{{busy}}" class="busy-mask">
+    <view class="busy-spinner"></view>
+    <text>正在准备画布…</text>
+  </view>
+</view>
+

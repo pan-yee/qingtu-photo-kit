@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/cutout/index",
+    "pages/compress/index",
+    "pages/erase/index",
+    "pages/collage/index",
+    "pages/grid/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#f6f3ec",
+    "navigationBarTitleText": "轻图盒",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f3ec"
+  },
+  "permission": {
+    "scope.writePhotosAlbum": {
+      "desc": "用于将处理后的图片保存到你的相册"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}
+

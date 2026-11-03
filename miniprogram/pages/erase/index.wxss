@@ -1,0 +1,106 @@
+.page-intro {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 14rpx 8rpx 34rpx;
+}
+
+.intro-index {
+  margin-bottom: 12rpx;
+  color: #ad7516;
+  font-size: 18rpx;
+  font-weight: 750;
+  letter-spacing: 3rpx;
+}
+
+.intro-title {
+  font-size: 48rpx;
+  font-weight: 800;
+  line-height: 1.23;
+  letter-spacing: -1.5rpx;
+  white-space: pre-line;
+}
+
+.intro-desc {
+  margin-top: 18rpx;
+  color: #747b74;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.erase-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.canvas-card {
+  padding: 18rpx;
+}
+
+.canvas-stage {
+  position: relative;
+  width: 100%;
+  height: 658rpx;
+  overflow: hidden;
+  border-radius: 22rpx;
+  background: #e2e2dc;
+}
+
+.eraser-canvas {
+  display: block;
+  width: 100%;
+  height: 658rpx;
+  touch-action: none;
+}
+
+.brush-tip {
+  position: absolute;
+  top: 18rpx;
+  left: 50%;
+  padding: 9rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(20, 27, 25, 0.68);
+  color: #ffffff;
+  font-size: 20rpx;
+  transform: translateX(-50%);
+  pointer-events: none;
+  backdrop-filter: blur(8rpx);
+}
+
+.canvas-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14rpx 4rpx 0;
+}
+
+.canvas-actions button {
+  padding: 9rpx 16rpx;
+  border-radius: 13rpx;
+  background: #f0f1ec;
+  color: #545d56;
+  font-size: 22rpx;
+}
+
+.canvas-actions button[disabled] {
+  color: #b8bbb5;
+}
+
+.action-right {
+  display: flex;
+  gap: 10rpx;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2rpx;
+  color: #9a9e98;
+  font-size: 20rpx;
+}
+
+.notice {
+  margin-top: 0;
+}
+

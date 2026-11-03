@@ -1,0 +1,25 @@
+{
+  "appid": "touristappid",
+  "projectname": "qingtu-photo-kit",
+  "description": "轻图盒 - 本地优先的微信图片处理工具箱",
+  "compileType": "miniprogram",
+  "miniprogramRoot": "miniprogram/",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "coverView": true,
+    "showShadowRootInWxmlPanel": true,
+    "useCompilerModule": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "libVersion": "3.5.0",
+  "condition": {}
+}
+

@@ -1,0 +1,136 @@
+.page-intro {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 14rpx 8rpx 34rpx;
+}
+
+.intro-index {
+  margin-bottom: 12rpx;
+  color: #a47b4d;
+  font-size: 18rpx;
+  font-weight: 750;
+  letter-spacing: 3rpx;
+}
+
+.intro-title {
+  font-size: 48rpx;
+  font-weight: 800;
+  line-height: 1.23;
+  letter-spacing: -1.5rpx;
+  white-space: pre-line;
+}
+
+.intro-desc {
+  margin-top: 18rpx;
+  color: #747b74;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.photo-preview {
+  min-height: 560rpx;
+  border: 10rpx solid #ffffff;
+  box-shadow: 0 16rpx 44rpx rgba(32, 42, 35, 0.1);
+}
+
+.preview-label {
+  position: absolute;
+  right: 16rpx;
+  bottom: 16rpx;
+  padding: 7rpx 13rpx;
+  border-radius: 9rpx;
+  background: rgba(24, 33, 32, 0.68);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 18rpx;
+  backdrop-filter: blur(8rpx);
+}
+
+.preview-loading {
+  color: #6f766f;
+  font-size: 25rpx;
+}
+
+.toolbar {
+  margin-top: -4rpx;
+}
+
+.color-group {
+  padding-bottom: 34rpx;
+}
+
+.swatch-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.swatch-item {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 19%;
+}
+
+.swatch-color {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx;
+  height: 72rpx;
+  border: 5rpx solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  font-size: 25rpx;
+  font-weight: 800;
+  box-shadow: 0 0 0 1rpx rgba(24, 33, 32, 0.12);
+}
+
+.swatch-item.active .swatch-color {
+  box-shadow: 0 0 0 3rpx #1d6b4f, 0 7rpx 18rpx rgba(29, 107, 79, 0.16);
+}
+
+.swatch-transparent {
+  background-color: #f6f6f2;
+  background-image:
+    linear-gradient(45deg, #d3d3ca 25%, transparent 25%),
+    linear-gradient(-45deg, #d3d3ca 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #d3d3ca 75%),
+    linear-gradient(-45deg, transparent 75%, #d3d3ca 75%);
+  background-position: 0 0, 0 9rpx, 9rpx -9rpx, -9rpx 0;
+  background-size: 18rpx 18rpx;
+  color: #1d6b4f;
+}
+
+.swatch-label {
+  margin-top: 10rpx;
+  color: #747b74;
+  font-size: 21rpx;
+}
+
+.swatch-item.active .swatch-label {
+  color: #1d6b4f;
+  font-weight: 650;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2rpx;
+  color: #9a9e98;
+  font-size: 20rpx;
+}
+
+.notice {
+  margin-top: 0;
+}
+
+.save-button {
+  margin-top: 4rpx;
+}
+

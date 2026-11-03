@@ -1,0 +1,76 @@
+<view class="page-shell">
+  <view class="page-intro">
+    <text class="intro-index">02 / COMPRESS</text>
+    <text class="intro-title">少一点体积，\n保留该有的清晰。</text>
+    <text class="intro-desc">在微信允许的范围内重新编码，几分钟内完成上传、分享前的瘦身。</text>
+  </view>
+
+  <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="chooseImage">
+    <view class="upload-plus">+</view>
+    <text class="upload-title">选择需要压缩的图片</text>
+    <text class="upload-tip">支持 JPG、PNG、HEIC 等常见格式</text>
+  </button>
+
+  <view wx:else class="compress-workspace">
+    <view class="result-card card">
+      <view class="result-head">
+        <view>
+          <text class="result-kicker">压缩结果</text>
+          <text class="result-size">{{resultSizeText}}</text>
+        </view>
+        <view wx:if="{{savedPercent > 0}}" class="saving-pill">
+          减少 {{savedPercent}}%
+        </view>
+      </view>
+      <view class="preview-shell result-preview">
+        <image
+          wx:if="{{resultSrc}}"
+          class="preview-image"
+          src="{{resultSrc}}"
+          mode="widthFix"
+          bindtap="previewResult"
+        ></image>
+        <text wx:else class="loading-text">正在生成压缩版本…</text>
+      </view>
+      <view class="file-meta">
+        <text>{{width}} × {{height}} px</text>
+        <text>原图 {{sourceSizeText}}</text>
+      </view>
+    </view>
+
+    <view class="card preset-card">
+      <view class="setting-head">
+        <text class="setting-label">选择清晰度</text>
+        <text class="setting-value">按用途选一档</text>
+      </view>
+      <view class="preset-list">
+        <button
+          wx:for="{{presets}}"
+          wx:key="id"
+          class="preset-item {{preset === item.id ? 'active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="selectPreset"
+        >
+          <text class="preset-label">{{item.label}}</text>
+          <text class="preset-note">{{item.note}}</text>
+        </button>
+      </view>
+      <view class="preset-hint">
+        <text wx:if="{{preset === 'high'}}">适合留存和打印，细节更完整。</text>
+        <text wx:if="{{preset === 'balanced'}}">适合朋友圈和聊天分享，推荐使用。</text>
+        <text wx:if="{{preset === 'light'}}">适合网页上传或对大小要求严格的场景。</text>
+      </view>
+    </view>
+
+    <view class="button-row">
+      <button class="ghost-button" bindtap="changeImage">换一张</button>
+      <button class="primary-button" bindtap="saveResult">保存图片</button>
+    </view>
+  </view>
+
+  <view wx:if="{{busy}}" class="busy-mask">
+    <view class="busy-spinner"></view>
+    <text>正在压缩图片…</text>
+  </view>
+</view>
+

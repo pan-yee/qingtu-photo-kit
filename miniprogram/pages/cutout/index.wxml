@@ -1,0 +1,90 @@
+<view class="page-shell">
+  <view class="page-intro">
+    <text class="intro-index">01 / ID PHOTO</text>
+    <text class="intro-title">一张清楚的人像，\n换好底色立刻可用。</text>
+    <text class="intro-desc">自动识别与边缘连通的背景，适合纯色背景拍摄的照片。</text>
+  </view>
+
+  <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="choosePhoto">
+    <view class="upload-plus">+</view>
+    <text class="upload-title">选择一张人像照片</text>
+    <text class="upload-tip">建议正面、光线均匀、背景颜色单一</text>
+  </button>
+
+  <view wx:else class="workspace">
+    <view class="preview-shell photo-preview">
+      <image
+        wx:if="{{resultSrc}}"
+        class="preview-image"
+        src="{{resultSrc}}"
+        mode="widthFix"
+        bindtap="previewResult"
+      ></image>
+      <view wx:else class="preview-loading">正在识别人像边缘…</view>
+      <view class="preview-label">3:4 证件照预览</view>
+    </view>
+
+    <view class="toolbar">
+      <text>已移除约 {{removedPercent}}% 的背景</text>
+      <button bindtap="changePhoto">换一张</button>
+    </view>
+
+    <view class="card setting-group color-group">
+      <view class="setting-head">
+        <text class="setting-label">背景颜色</text>
+        <text class="setting-value">{{backgroundKey === 'transparent' ? 'PNG 透明底' : '高清 900 × 1200'}}</text>
+      </view>
+      <view class="swatch-list">
+        <button
+          wx:for="{{backgrounds}}"
+          wx:key="id"
+          class="swatch-item {{backgroundKey === item.id ? 'active' : ''}}"
+          data-key="{{item.id}}"
+          bindtap="chooseBackground"
+        >
+          <view
+            class="swatch-color {{item.id === 'transparent' ? 'swatch-transparent' : ''}}"
+            style="{{item.id === 'transparent' ? '' : 'background:' + item.color}}"
+          >
+            <text wx:if="{{backgroundKey === item.id}}">✓</text>
+          </view>
+          <text class="swatch-label">{{item.label}}</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">识别容差</text>
+        <text class="setting-value">{{tolerance}}</text>
+      </view>
+      <slider
+        value="{{tolerance}}"
+        min="12"
+        max="82"
+        step="1"
+        activeColor="#1d6b4f"
+        backgroundColor="#e2e5de"
+        block-size="22"
+        bindchange="onToleranceChange"
+      />
+      <view class="range-labels">
+        <text>保留更多</text>
+        <text>清除更彻底</text>
+      </view>
+    </view>
+
+    <view class="notice">
+      <view class="notice-dot"></view>
+      <text>纯色背景效果最好。复杂背景、发丝和白衣边缘如不自然，可调低容差后重试。</text>
+    </view>
+
+    <button class="primary-button save-button" bindtap="saveResult">保存高清图片</button>
+  </view>
+
+  <view wx:if="{{processing}}" class="busy-mask">
+    <view class="busy-spinner"></view>
+    <text>正在处理图片…</text>
+  </view>
+</view>
+
