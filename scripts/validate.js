@@ -57,6 +57,14 @@ Object.keys(components).forEach(function checkComponent(name) {
 if (appJson.__usePrivacyCheck__ !== true) {
   errors.push('Privacy check must be enabled in app.json')
 }
+if (
+  appJson.permission &&
+  appJson.permission['scope.writePhotosAlbum']
+) {
+  errors.push(
+    'Remove legacy scope.writePhotosAlbum from app.json; declare it in the privacy guide instead'
+  )
+}
 
 function walk(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(function map(entry) {

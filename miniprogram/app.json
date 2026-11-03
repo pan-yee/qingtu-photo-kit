@@ -14,11 +14,6 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#f6f3ec"
   },
-  "permission": {
-    "scope.writePhotosAlbum": {
-      "desc": "用于将处理后的图片保存到你的相册"
-    }
-  },
   "__usePrivacyCheck__": true,
   "usingComponents": {
     "privacy-dialog": "/components/privacy-dialog/index"
