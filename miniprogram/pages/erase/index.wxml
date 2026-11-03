@@ -65,5 +65,6 @@
     <view class="busy-spinner"></view>
     <text>正在准备画布…</text>
   </view>
+  <privacy-dialog />
 </view>
 

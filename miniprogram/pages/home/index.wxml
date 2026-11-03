@@ -37,7 +37,7 @@
         <view class="photo-grid-line vertical-two"></view>
         <view class="photo-grid-line vertical-three"></view>
       </view>
-      <view class="art-sticker">AI 辅助</view>
+      <view class="art-sticker">本地处理</view>
     </view>
   </view>
 
@@ -87,5 +87,6 @@
       <text class="footer-mark">轻图盒 1.0</text>
     </view>
   </view>
+  <privacy-dialog />
 </view>
 

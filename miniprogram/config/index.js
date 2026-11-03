@@ -5,9 +5,6 @@ module.exports = {
   enableRewardedAds: false,
   rewardedVideoAdUnitId: '',
 
-  // 留给云端 AI 抠图或其他付费能力。密钥必须保存在服务端。
-  aiCutoutEndpoint: '',
-
   limits: {
     maxImageSide: 1600,
     eraseCanvasSide: 900,

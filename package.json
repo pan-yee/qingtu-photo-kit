@@ -2,7 +2,7 @@
   "name": "qingtu-photo-kit",
   "version": "1.0.0",
   "private": true,
-  "description": "轻图盒 - 微信小程序图片处理工具箱",
+  "description": "轻图盒 - 离线微信小程序图片处理工具箱",
   "scripts": {
     "test": "node tests/run-tests.js",
     "validate": "node scripts/validate.js"

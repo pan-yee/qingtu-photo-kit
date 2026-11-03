@@ -1,7 +1,7 @@
 {
   "appid": "touristappid",
   "projectname": "qingtu-photo-kit",
-  "description": "轻图盒 - 本地优先的微信图片处理工具箱",
+  "description": "轻图盒 - 离线图片处理工具",
   "compileType": "miniprogram",
   "miniprogramRoot": "miniprogram/",
   "setting": {

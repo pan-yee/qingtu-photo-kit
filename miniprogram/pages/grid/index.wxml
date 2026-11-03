@@ -56,5 +56,6 @@
     <view class="busy-spinner"></view>
     <text>正在切图…</text>
   </view>
+  <privacy-dialog />
 </view>
 

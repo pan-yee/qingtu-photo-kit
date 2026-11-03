@@ -1,0 +1,22 @@
+<view wx:if="{{visible}}" class="privacy-mask" catchtouchmove="noop">
+  <view class="privacy-sheet">
+    <view class="privacy-icon">✓</view>
+    <text class="privacy-title">使用前请阅读隐私说明</text>
+    <text class="privacy-copy">
+      轻图盒需要使用你主动选择的图片，并在你确认后保存处理结果到相册。图片仅在本机处理，不会上传服务器。
+    </text>
+    <button class="privacy-link" bindtap="openPrivacyContract">
+      查看 {{contractName}}
+    </button>
+    <button
+      class="privacy-button"
+      open-type="agreePrivacyAuthorization"
+      bindagreeprivacyauthorization="agreePrivacy"
+    >
+      同意并继续
+    </button>
+    <button class="privacy-cancel" bindtap="refusePrivacy">暂不使用</button>
+    <text class="privacy-note">不同意时仍可浏览工具介绍，但无法选择或保存图片。</text>
+  </view>
+</view>
+

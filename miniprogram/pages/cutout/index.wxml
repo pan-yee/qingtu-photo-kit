@@ -1,8 +1,8 @@
 <view class="page-shell">
   <view class="page-intro">
-    <text class="intro-index">01 / ID PHOTO</text>
+    <text class="intro-index">01 / PORTRAIT BACKGROUND</text>
     <text class="intro-title">一张清楚的人像，\n换好底色立刻可用。</text>
-    <text class="intro-desc">自动识别与边缘连通的背景，适合纯色背景拍摄的照片。</text>
+    <text class="intro-desc">通过本地颜色分析识别与边缘连通的区域，适合纯色背景照片。</text>
   </view>
 
   <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="choosePhoto">
@@ -86,5 +86,6 @@
     <view class="busy-spinner"></view>
     <text>正在处理图片…</text>
   </view>
+  <privacy-dialog />
 </view>
 

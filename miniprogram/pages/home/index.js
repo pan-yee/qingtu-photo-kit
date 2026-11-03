@@ -3,8 +3,8 @@ Page({
     tools: [
       {
         id: 'cutout',
-        title: '证件照换底',
-        description: '白蓝红底色，一键生成 3:4 证件照',
+        title: '人像换底色',
+        description: '为纯色背景人像更换常用底色',
         glyph: '证',
         badge: '热门',
         tone: 'coral',
@@ -40,7 +40,7 @@ Page({
       {
         id: 'grid',
         title: '九宫格切图',
-        description: '一次生成 9 张，直接发朋友圈',
+        description: '一次切成 9 张，按顺序发布',
         glyph: '切',
         badge: '',
         tone: 'purple',

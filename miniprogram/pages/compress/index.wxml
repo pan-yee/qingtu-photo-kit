@@ -30,7 +30,7 @@
           mode="widthFix"
           bindtap="previewResult"
         ></image>
-        <text wx:else class="loading-text">正在生成压缩版本…</text>
+        <text wx:else class="loading-text">正在压缩图片…</text>
       </view>
       <view class="file-meta">
         <text>{{width}} × {{height}} px</text>
@@ -72,5 +72,6 @@
     <view class="busy-spinner"></view>
     <text>正在压缩图片…</text>
   </view>
+  <privacy-dialog />
 </view>
 

@@ -15,7 +15,35 @@ appJson.pages.forEach(function checkPage(page) {
       errors.push('Missing page file: ' + path.relative(root, file))
     }
   })
+
+  const wxml = fs.readFileSync(
+    path.join(miniprogram, page + '.wxml'),
+    'utf8'
+  )
+  if (!wxml.includes('<privacy-dialog')) {
+    errors.push('Missing privacy dialog on page: ' + page)
+  }
 })
+
+const components = appJson.usingComponents || {}
+Object.keys(components).forEach(function checkComponent(name) {
+  const componentRoot = path.join(
+    miniprogram,
+    components[name].replace(/^\//, '')
+  )
+  ;['js', 'json', 'wxml', 'wxss'].forEach(function checkExtension(ext) {
+    const file = componentRoot + '.' + ext
+    if (!fs.existsSync(file)) {
+      errors.push(
+        'Missing component file for ' + name + ': ' + path.relative(root, file)
+      )
+    }
+  })
+})
+
+if (appJson.__usePrivacyCheck__ !== true) {
+  errors.push('Privacy check must be enabled in app.json')
+}
 
 function walk(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap(function map(entry) {
@@ -41,6 +69,17 @@ walk(miniprogram).forEach(function validateFile(file) {
     } catch (error) {
       errors.push('Invalid JavaScript: ' + error.message)
     }
+  }
+  if (
+    (extension === '.js' || extension === '.wxml') &&
+    /\bAI\b|人工智能|智能抠图|AI 辅助/.test(
+      fs.readFileSync(file, 'utf8')
+    )
+  ) {
+    errors.push(
+      'AI wording must not appear in the offline utility UI: ' +
+        path.relative(root, file)
+    )
   }
 })
 

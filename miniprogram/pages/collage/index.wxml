@@ -95,5 +95,6 @@
     <view class="busy-spinner"></view>
     <text>正在拼接图片…</text>
   </view>
+  <privacy-dialog />
 </view>
 
