@@ -26,7 +26,13 @@
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
-    }
+    },
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "condition": false
   },
   "simulatorPluginLibVersion": {},
   "packOptions": {
@@ -37,4 +43,3 @@
   "editorSetting": {},
   "condition": {}
 }
-

@@ -61,6 +61,7 @@ rewardedVideoAdUnitId: 'adunit-你的广告位ID'
 
 - 确认 `project.config.json` 中的 AppID 与本次提交的小程序主体一致。
 - 在“用户隐私保护指引”中声明选择图片、保存到相册的用途。
+- 若出现 `chooseMedia:fail api scope is not declared in the privacy agreement`，按[隐私错误处理说明](./docs/审核说明.md#解决-choosmedia-隐私错误)补齐“收集你选中的照片或视频信息”和“使用你的相册（仅写入）权限”两项。
 - 以真机检查相册授权拒绝后的引导流程。
 - 使用自己的原创图片测试，不收集、不上传未经用户许可的素材。
 - 执行 `npm test` 和 `npm run validate`。
