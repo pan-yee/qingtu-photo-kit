@@ -6,7 +6,20 @@ const root = path.resolve(__dirname, '..')
 const miniprogram = path.join(root, 'miniprogram')
 const appJsonPath = path.join(miniprogram, 'app.json')
 const appJson = JSON.parse(fs.readFileSync(appJsonPath, 'utf8'))
+const projectConfig = JSON.parse(
+  fs.readFileSync(path.join(root, 'project.config.json'), 'utf8')
+)
 const errors = []
+
+if (!/^wx[0-9a-z]{16}$/i.test(projectConfig.appid || '')) {
+  errors.push('project.config.json must contain a valid WeChat AppID')
+}
+if (projectConfig.compileType !== 'miniprogram') {
+  errors.push('project.config.json compileType must be miniprogram')
+}
+if (!projectConfig.libVersion) {
+  errors.push('project.config.json must declare a base library version')
+}
 
 appJson.pages.forEach(function checkPage(page) {
   ;['js', 'json', 'wxml', 'wxss'].forEach(function checkExtension(ext) {

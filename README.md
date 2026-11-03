@@ -16,7 +16,7 @@
 
 1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)。
 2. 打开工具，选择“导入项目”，目录选择本仓库根目录。
-3. 测试可直接使用 `project.config.json` 中的游客 AppID；真机预览、上传和保存相册前，请换成自己的小程序 AppID。
+3. `project.config.json` 已配置正式 AppID `wx2b68d0818781b66d` 和基础库 `3.17.1`，直接导入即可进行真机预览；若使用其他小程序主体，请替换为对应 AppID。
 4. 在管理后台补充小程序名称、类目、隐私保护指引，并按实际页面截图提交审核。
 
 ## 功能边界
@@ -59,7 +59,7 @@ rewardedVideoAdUnitId: 'adunit-你的广告位ID'
 
 ## 发布前检查
 
-- 将 `project.config.json` 的 `appid` 替换为正式 AppID。
+- 确认 `project.config.json` 中的 AppID 与本次提交的小程序主体一致。
 - 在“用户隐私保护指引”中声明选择图片、保存到相册的用途。
 - 以真机检查相册授权拒绝后的引导流程。
 - 使用自己的原创图片测试，不收集、不上传未经用户许可的素材。

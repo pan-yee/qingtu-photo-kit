@@ -1,25 +1,40 @@
 {
-  "appid": "touristappid",
+  "appid": "wx2b68d0818781b66d",
   "projectname": "qingtu-photo-kit",
   "description": "轻图盒 - 离线图片处理工具",
   "compileType": "miniprogram",
   "miniprogramRoot": "miniprogram/",
   "setting": {
-    "urlCheck": false,
+    "urlCheck": true,
     "es6": true,
     "enhance": true,
     "postcss": true,
     "minified": true,
+    "minifyWXML": true,
+    "minifyWXSS": true,
+    "uglifyFileName": false,
     "coverView": true,
+    "lazyloadPlaceholderEnable": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
-    "useCompilerModule": true,
+    "compileHotReLoad": true,
+    "useCompilerPlugins": false,
+    "packNpmRelationList": [],
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     }
   },
-  "libVersion": "3.5.0",
+  "simulatorPluginLibVersion": {},
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "libVersion": "3.17.1",
+  "editorSetting": {},
   "condition": {}
 }
 
