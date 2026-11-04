@@ -8,9 +8,15 @@ function getAd() {
     return null
   }
   if (!rewardedAd) {
-    rewardedAd = wx.createRewardedVideoAd({
-      adUnitId: config.rewardedVideoAdUnitId
-    })
+    try {
+      rewardedAd = wx.createRewardedVideoAd({
+        adUnitId: config.rewardedVideoAdUnitId
+      })
+    } catch (error) {
+      // 未开通流量主或广告位配置有误时不阻塞导出。
+      console.warn('Rewarded ad is unavailable:', error)
+      return null
+    }
     rewardedAd.onClose(function onClose(result) {
       const completed = !result || result.isEnded
       if (pendingResolve) {

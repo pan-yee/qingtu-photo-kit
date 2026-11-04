@@ -17,10 +17,17 @@ function perceptualColorDistanceSq(a, b) {
   return dr * dr * 0.3 + dg * dg * 0.59 + db * db * 0.11
 }
 
-function buildDistanceField(width, height, isBackground) {
+// Uint16 足够存放 900×1200 图像的距离场，比 Float32 省一半内存；
+// 上限留出 1 的余量，避免 +1 时回绕。
+const DISTANCE_CEILING = 65534
+
+function buildDistanceField(width, height, isBackground, target) {
   const pixelCount = width * height
-  const distance = new Float32Array(pixelCount)
-  const infinity = width + height + 4
+  const distance =
+    target && target.length === pixelCount
+      ? target
+      : new Uint16Array(pixelCount)
+  const infinity = Math.min(DISTANCE_CEILING, width + height + 4)
 
   for (let index = 0; index < pixelCount; index += 1) {
     distance[index] = isBackground[index] ? 0 : infinity
@@ -69,16 +76,41 @@ function buildDistanceField(width, height, isBackground) {
 
 /**
  * 在初始分割结果上做距离场羽化，并对半透明边缘去背景色污染。
+ * output 缓冲可复用，避免每次渲染都重新分配整张图像。
  */
-function refineCutoutAlpha(imageData, isBackground, backgrounds, tolerance, featherRadius) {
+function refineCutoutAlpha(
+  imageData,
+  isBackground,
+  backgrounds,
+  tolerance,
+  featherRadius,
+  scratch
+) {
   const width = imageData.width
   const height = imageData.height
   const pixelCount = width * height
   const source = imageData.data
-  const output = new Uint8ClampedArray(source)
-  const radius = clamp(Math.round(featherRadius || 3), 0, 12)
+  const reusable = scratch || {}
+  const output =
+    reusable.output instanceof Uint8ClampedArray &&
+    reusable.output.length === source.length
+      ? reusable.output
+      : new Uint8ClampedArray(source.length)
+  output.set(source)
+  // 0 是有效值（锐利边缘），只有未传参数时才用默认羽化。
+  const requestedRadius = Number(featherRadius)
+  const radius = clamp(
+    Number.isFinite(requestedRadius) ? Math.round(requestedRadius) : 3,
+    0,
+    12
+  )
   const background = backgrounds[0] || [255, 255, 255]
-  const distance = buildDistanceField(width, height, isBackground)
+  const distance = buildDistanceField(
+    width,
+    height,
+    isBackground,
+    reusable.distance
+  )
   const edgeLimitSq = (tolerance + 26) * (tolerance + 26) * 3
 
   for (let index = 0; index < pixelCount; index += 1) {
@@ -90,13 +122,18 @@ function refineCutoutAlpha(imageData, isBackground, backgrounds, tolerance, feat
     }
     if (currentDistance > radius) continue
 
-    const color = [source[offset], source[offset + 1], source[offset + 2]]
+    // 逐像素直接算加权距离，避免为每个像素分配临时数组。
+    const red = source[offset]
+    const green = source[offset + 1]
+    const blue = source[offset + 2]
     let closest = Infinity
     for (let i = 0; i < backgrounds.length; i += 1) {
-      closest = Math.min(
-        closest,
-        perceptualColorDistanceSq(color, backgrounds[i])
-      )
+      const candidate = backgrounds[i]
+      const dr = red - candidate[0]
+      const dg = green - candidate[1]
+      const db = blue - candidate[2]
+      const distanceSq = dr * dr * 0.3 + dg * dg * 0.59 + db * db * 0.11
+      if (distanceSq < closest) closest = distanceSq
     }
 
     const colorT = clamp(Math.sqrt(closest / edgeLimitSq), 0, 1)
@@ -208,14 +245,55 @@ function estimateBorderColors(data, width, height) {
 }
 
 /**
+ * 预分配去背景所需的中间缓冲。抠图面板拖动滑杆会反复重算，
+ * 复用这些缓冲可避免每次渲染都申请十几 MB 内存。
+ */
+function createCutoutWorkspace(width, height) {
+  const pixelCount = width * height
+  return {
+    width: width,
+    height: height,
+    visited: new Uint8Array(pixelCount),
+    queue: new Int32Array(pixelCount),
+    distance: new Uint16Array(pixelCount)
+  }
+}
+
+function resolveCutoutWorkspace(width, height, workspace) {
+  const pixelCount = width * height
+  if (
+    workspace &&
+    workspace.width === width &&
+    workspace.height === height &&
+    workspace.visited.length === pixelCount &&
+    workspace.queue.length === pixelCount &&
+    workspace.distance.length === pixelCount
+  ) {
+    return workspace
+  }
+  return createCutoutWorkspace(width, height)
+}
+
+function resolveCutoutOutput(source, target) {
+  return target instanceof Uint8ClampedArray && target.length === source.length
+    ? target
+    : new Uint8ClampedArray(source.length)
+}
+
+/**
  * 从四边开始泛洪，仅移除与边缘连通的背景区域。
  * imageData 可为 Canvas 的 ImageData 或含 data/width/height 的普通对象。
+ *
+ * options.workspace 可传入上一次返回的 workspace 复用中间缓冲；
+ * options.output 可传入等长的 Uint8ClampedArray 直接写入结果，
+ * 适合面板拖动时反复重算的场景。
  */
 function removeBackground(imageData, options) {
   const opts = options || {}
   const width = imageData.width
   const height = imageData.height
   const source = imageData.data
+  const pixelCount = width * height
   const tolerance = clamp(Number(opts.tolerance) || 34, 5, 100)
   const backgrounds =
     opts.backgroundColors && opts.backgroundColors.length
@@ -223,30 +301,44 @@ function removeBackground(imageData, options) {
       : estimateBorderColors(source, width, height)
 
   if (!backgrounds.length) {
+    // 无需分割时不必分配中间缓冲。
+    const copy = resolveCutoutOutput(source, opts.output)
+    copy.set(source)
     return {
-      data: new Uint8ClampedArray(source),
+      data: copy,
       width: width,
       height: height,
       removedPixels: 0,
-      backgroundColors: []
+      backgroundColors: [],
+      workspace: opts.workspace || null
     }
   }
 
-  const pixelCount = width * height
-  const visited = new Uint8Array(pixelCount)
-  const queue = new Int32Array(pixelCount)
+  const workspace = resolveCutoutWorkspace(width, height, opts.workspace)
+
+  const visited = workspace.visited
+  const queue = workspace.queue
   const thresholdSq = tolerance * tolerance * 3
   let head = 0
   let tail = 0
+
+  // 上次渲染的 visited 标记必须清空，否则会把旧背景区域误判为已访问。
+  visited.fill(0)
 
   function isBackground(index) {
     const offset = index * 4
     if (source[offset + 3] < 24) {
       return true
     }
-    const color = [source[offset], source[offset + 1], source[offset + 2]]
+    const red = source[offset]
+    const green = source[offset + 1]
+    const blue = source[offset + 2]
     for (let i = 0; i < backgrounds.length; i += 1) {
-      if (perceptualColorDistanceSq(color, backgrounds[i]) <= thresholdSq) {
+      const candidate = backgrounds[i]
+      const dr = red - candidate[0]
+      const dg = green - candidate[1]
+      const db = blue - candidate[2]
+      if (dr * dr * 0.3 + dg * dg * 0.59 + db * db * 0.11 <= thresholdSq) {
         return true
       }
     }
@@ -283,15 +375,15 @@ function removeBackground(imageData, options) {
   }
 
   const output = refineCutoutAlpha(
-    {
-      data: new Uint8ClampedArray(source),
-      width: width,
-      height: height
-    },
+    imageData,
     visited,
     backgrounds,
     tolerance,
-    opts.feather !== false ? opts.featherRadius : 0
+    opts.feather !== false ? opts.featherRadius : 0,
+    {
+      distance: workspace.distance,
+      output: resolveCutoutOutput(source, opts.output)
+    }
   )
 
   return {
@@ -299,7 +391,8 @@ function removeBackground(imageData, options) {
     width: width,
     height: height,
     removedPixels: tail,
-    backgroundColors: backgrounds
+    backgroundColors: backgrounds,
+    workspace: workspace
   }
 }
 
@@ -432,6 +525,7 @@ module.exports = {
   centerCropRect,
   clamp,
   colorDistanceSq,
+  createCutoutWorkspace,
   perceptualColorDistanceSq,
   estimateBorderColors,
   formatBytes,

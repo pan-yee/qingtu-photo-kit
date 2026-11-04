@@ -1,7 +1,8 @@
 const canvasTools = require('../../utils/canvas')
+const exportImage = require('../../utils/export-image')
+const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
 const processing = require('../../utils/image-processing')
-const rewarded = require('../../utils/rewarded')
 
 Page({
   data: {
@@ -41,7 +42,7 @@ Page({
         resultSrc: ''
       })
     } catch (error) {
-      this.showError(error)
+      feedback.showError(error, '读取图片失败，请重试')
     }
   },
 
@@ -81,6 +82,7 @@ Page({
 
   async generateCollage() {
     const images = this.data.images
+    if (this.data.busy) return
     if (!images.length) {
       wx.showToast({ title: '请先选择图片', icon: 'none' })
       return
@@ -124,7 +126,7 @@ Page({
       this._resultPath = path
       this.setData({ resultSrc: path })
     } catch (error) {
-      this.showError(error)
+      feedback.showError(error, '生成失败，请重试')
     } finally {
       this.setData({ busy: false })
     }
@@ -141,26 +143,12 @@ Page({
       return
     }
     try {
-      const unlocked = await rewarded.unlockHighQuality()
-      if (!unlocked) {
-        wx.showToast({ title: '完整观看后可保存', icon: 'none' })
-        return
-      }
-      await media.saveImage(this.data.resultSrc)
-      wx.showToast({ title: '已保存到相册', icon: 'success' })
+      await exportImage.saveWithReward(this.data.resultSrc)
     } catch (error) {
-      if (!/cancel/i.test((error && error.errMsg) || '')) {
-        this.showError(error)
+      if (!exportImage.isCancelled(error)) {
+        feedback.showError(error, '保存失败，请重试')
       }
     }
-  },
-
-  showError(error) {
-    console.error(error)
-    wx.showToast({
-      title: (error && error.message) || '生成失败，请重试',
-      icon: 'none'
-    })
   }
 })
 

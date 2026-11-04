@@ -36,12 +36,12 @@ miniprogram/
     erase/      局部擦除
     collage/    图片拼接
     grid/       九宫格切图
-  utils/        图片算法、画布和媒体工具
+  utils/        图片算法、画笔修复、画布、媒体与保存链路
   components/   隐私授权等公共组件
   config/       功能参数与广告配置
 docs/           审核与发布说明
-tests/          核心算法单元测试
-scripts/        项目静态校验
+tests/          核心算法、修复算法、校验规则与页面工具单元测试（tests/*.test.js）
+scripts/        静态校验：checks.js 存放纯文本规则，validate.js 负责遍历与报告
 ```
 
 ## 商业化配置
@@ -64,7 +64,8 @@ rewardedVideoAdUnitId: 'adunit-你的广告位ID'
 - 若出现 `chooseMedia:fail api scope is not declared in the privacy agreement`，按[隐私错误处理说明](./docs/审核说明.md#解决-choosmedia-隐私错误)补齐“收集你选中的照片或视频信息”和“使用你的相册（仅写入）权限”两项。
 - 以真机检查相册授权拒绝后的引导流程。
 - 使用自己的原创图片测试，不收集、不上传未经用户许可的素材。
-- 执行 `npm test` 和 `npm run validate`。
+- 执行 `npm run check`（静态校验 + 单元测试），或分别执行 `npm test` 和 `npm run validate`。
+- 项目只发布单端小程序。微信开发者工具若提示转换为「多端应用」，请选择不转换；`npm run check` 会拦截 `multiPlatform` 配置以及 `*.miniapp.json`、`miniapp/`、`i18n/` 产物。
 
 ## License
 

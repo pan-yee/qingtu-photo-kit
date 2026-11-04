@@ -38,6 +38,13 @@ function explainPrivacyError(error) {
   return error
 }
 
+function createAlbumPermissionError(message) {
+  const error = new Error('未获得相册权限，请在设置中开启后重试')
+  error.errMsg = message
+  error.code = 'ALBUM_PERMISSION_DENIED'
+  return error
+}
+
 function chooseImages(count, sourceType) {
   return ensurePrivacyAuthorization().then(function authorized() {
     return new Promise(function choose(resolve, reject) {
@@ -71,6 +78,12 @@ function chooseImages(count, sourceType) {
   })
 }
 
+function getImageInfo(path) {
+  return new Promise(function info(resolve, reject) {
+    wx.getImageInfo({ src: path, success: resolve, fail: reject })
+  })
+}
+
 function getFileInfo(path) {
   return new Promise(function info(resolve) {
     if (!wx.getFileInfo) {
@@ -97,7 +110,8 @@ function saveImage(path) {
         },
         fail: function fail(error) {
           const message = (error && error.errMsg) || ''
-          if (/auth deny|auth denied|authorize/i.test(message)) {
+          const denied = /auth deny|auth denied|authorize/i.test(message)
+          if (denied) {
             wx.showModal({
               title: '需要相册权限',
               content: '请在设置中允许保存图片到相册。',
@@ -109,7 +123,11 @@ function saveImage(path) {
               }
             })
           }
-          reject(explainPrivacyError(error))
+          reject(
+            denied
+              ? createAlbumPermissionError(message)
+              : explainPrivacyError(error)
+          )
         }
       })
     })
@@ -127,6 +145,7 @@ module.exports = {
   chooseImages,
   ensurePrivacyAuthorization,
   getFileInfo,
+  getImageInfo,
   previewImage,
   saveImage
 }

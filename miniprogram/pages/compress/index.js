@@ -1,7 +1,8 @@
 const config = require('../../config/index')
+const exportImage = require('../../utils/export-image')
+const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
 const processing = require('../../utils/image-processing')
-const rewarded = require('../../utils/rewarded')
 
 Page({
   data: {
@@ -46,14 +47,14 @@ Page({
       if (!files.length) return
       await this.prepareImage(files[0])
     } catch (error) {
-      this.showError(error)
+      feedback.showError(error, '读取图片失败，请重试')
     }
   },
 
   async prepareImage(file) {
     this.setData({ busy: true })
     try {
-      const info = await this.getImageInfo(file.path)
+      const info = await media.getImageInfo(file.path)
       const fileInfo = await media.getFileInfo(file.path)
       this._sourcePath = file.path
       this._sourceWidth = info.width
@@ -65,32 +66,29 @@ Page({
         resultSrc: '',
         width: info.width,
         height: info.height,
-        sourceSizeText: processing.formatBytes(fileInfo.size || file.size)
+        sourceSizeText: processing.formatBytes(this._sourceBytes)
       })
       await this.compressImage()
+    } catch (error) {
+      feedback.showError(error, '读取图片失败，请重试')
     } finally {
       this.setData({ busy: false })
     }
   },
 
-  getImageInfo(path) {
-    return new Promise(function getInfo(resolve, reject) {
-      wx.getImageInfo({ src: path, success: resolve, fail: reject })
-    })
-  },
-
   getPreset() {
+    const presetId = this.data.preset
     return (
-      this.data.presets.find(
-        function find(item) {
-          return item.id === this.data.preset
-        }.bind(this)
-      ) || this.data.presets[1]
+      this.data.presets.find(function find(item) {
+        return item.id === presetId
+      }) || this.data.presets[1]
     )
   },
 
   async compressImage() {
     if (!this._sourcePath) return
+    const token = (this._compressToken || 0) + 1
+    this._compressToken = token
     const preset = this.getPreset()
     const maxSide = Math.min(preset.maxSide, config.limits.maxImageSide)
     const ratio = Math.min(
@@ -119,12 +117,14 @@ Page({
         })
       }
       const fileInfo = await media.getFileInfo(result.tempFilePath)
-      const sourceBytes = this.getSourceBytes()
+      const sourceBytes = this._sourceBytes || 0
       const resultBytes = fileInfo.size
       const saved =
         sourceBytes > 0
           ? Math.max(0, Math.round((1 - resultBytes / sourceBytes) * 100))
           : 0
+      // 快速切换清晰度档位时只保留最后一次压缩的结果。
+      if (token !== this._compressToken) return
       this._resultPath = result.tempFilePath
       this.setData({
         resultSrc: result.tempFilePath,
@@ -132,9 +132,13 @@ Page({
         savedPercent: saved
       })
     } catch (error) {
-      this.showError(error)
+      if (token === this._compressToken) {
+        feedback.showError(error, '压缩失败，请重试')
+      }
     } finally {
-      this.setData({ busy: false })
+      if (token === this._compressToken) {
+        this.setData({ busy: false })
+      }
     }
   },
 
@@ -146,10 +150,6 @@ Page({
         fail: reject
       })
     })
-  },
-
-  getSourceBytes() {
-    return this._sourceBytes || 0
   },
 
   selectPreset(event) {
@@ -171,26 +171,12 @@ Page({
   async saveResult() {
     if (!this.data.resultSrc) return
     try {
-      const unlocked = await rewarded.unlockHighQuality()
-      if (!unlocked) {
-        wx.showToast({ title: '完整观看后可保存', icon: 'none' })
-        return
-      }
-      await media.saveImage(this.data.resultSrc)
-      wx.showToast({ title: '已保存到相册', icon: 'success' })
+      await exportImage.saveWithReward(this.data.resultSrc)
     } catch (error) {
-      if (!/cancel/i.test((error && error.errMsg) || '')) {
-        this.showError(error)
+      if (!exportImage.isCancelled(error)) {
+        feedback.showError(error, '保存失败，请重试')
       }
     }
-  },
-
-  showError(error) {
-    console.error(error)
-    wx.showToast({
-      title: (error && error.message) || '压缩失败，请重试',
-      icon: 'none'
-    })
   }
 })
 

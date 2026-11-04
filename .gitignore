@@ -3,7 +3,13 @@ dist/
 .DS_Store
 Thumbs.db
 project.private.config.json
+# 微信开发者工具「多端应用」产物，本项目只发布单端小程序
+*.miniapp.json
+miniapp/
+i18n/
 *.log
 .idea/
 .vscode/
+# Qoder 自动生成的项目知识库缓存
+.qoder/
 

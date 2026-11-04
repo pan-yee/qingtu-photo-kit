@@ -86,8 +86,8 @@
     </view>
 
     <view class="button-row">
-      <button class="secondary-button" bindtap="generateCollage">生成拼接图</button>
-      <button class="primary-button" bindtap="saveResult" disabled="{{!resultSrc}}">保存图片</button>
+      <button class="secondary-button" bindtap="generateCollage" disabled="{{busy}}">生成拼接图</button>
+      <button class="primary-button" bindtap="saveResult" disabled="{{busy || !resultSrc}}">保存图片</button>
     </view>
   </view>
 

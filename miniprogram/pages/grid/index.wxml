@@ -48,7 +48,7 @@
 
     <view class="button-row">
       <button class="secondary-button" bindtap="generateGrid" disabled="{{busy}}">重新生成</button>
-      <button class="primary-button" bindtap="saveAll" disabled="{{cells.length !== 9}}">保存全部 9 张</button>
+      <button class="primary-button" bindtap="saveAll" disabled="{{busy || cells.length !== 9}}">保存全部 9 张</button>
     </view>
   </view>
 

@@ -1,5 +1,7 @@
 const config = require('../../config/index')
 const canvasTools = require('../../utils/canvas')
+const exportImage = require('../../utils/export-image')
+const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
 const processing = require('../../utils/image-processing')
 const rewarded = require('../../utils/rewarded')
@@ -10,6 +12,10 @@ Page({
     busy: false,
     sourceSrc: '',
     cells: []
+  },
+
+  onUnload() {
+    this._gridToken = (this._gridToken || 0) + 1
   },
 
   async chooseImage() {
@@ -24,12 +30,14 @@ Page({
       })
       await this.generateGrid()
     } catch (error) {
-      this.showError(error)
+      feedback.showError(error, '读取图片失败，请重试')
     }
   },
 
   async generateGrid() {
     if (!this._sourcePath) return
+    const token = (this._gridToken || 0) + 1
+    this._gridToken = token
     this.setData({ busy: true })
     try {
       const side = config.limits.gridSide
@@ -77,11 +85,17 @@ Page({
           path: path
         })
       }
+      // 重复点击“重新生成”时只采纳最后一次的结果。
+      if (token !== this._gridToken) return
       this.setData({ cells: cells })
     } catch (error) {
-      this.showError(error)
+      if (token === this._gridToken) {
+        feedback.showError(error, '生成失败，请重试')
+      }
     } finally {
-      this.setData({ busy: false })
+      if (token === this._gridToken) {
+        this.setData({ busy: false })
+      }
     }
   },
 
@@ -90,7 +104,9 @@ Page({
     const urls = this.data.cells.map(function mapCell(item) {
       return item.path
     })
-    media.previewImage(urls[index], urls)
+    if (!urls.length) return
+    const safeIndex = Math.min(Math.max(index || 0, 0), urls.length - 1)
+    media.previewImage(urls[safeIndex], urls)
   },
 
   async saveAll() {
@@ -98,18 +114,22 @@ Page({
       wx.showToast({ title: '请先生成九宫格', icon: 'none' })
       return
     }
+    // 连续点击会重复播放激励视频并重复写入相册，这里做一次互斥。
+    if (this._saving) return
+    this._saving = true
     try {
       const unlocked = await rewarded.unlockHighQuality()
       if (!unlocked) {
         wx.showToast({ title: '完整观看后可保存', icon: 'none' })
         return
       }
-      for (let i = 0; i < this.data.cells.length; i += 1) {
+      const cells = this.data.cells
+      for (let i = 0; i < cells.length; i += 1) {
         wx.showLoading({
-          title: '保存 ' + (i + 1) + ' / 9',
+          title: '保存 ' + (i + 1) + ' / ' + cells.length,
           mask: true
         })
-        await media.saveImage(this.data.cells[i].path)
+        await media.saveImage(cells[i].path)
       }
       wx.hideLoading()
       wx.showModal({
@@ -119,19 +139,13 @@ Page({
         confirmText: '知道了'
       })
     } catch (error) {
-      wx.hideLoading()
-      if (!/cancel/i.test((error && error.errMsg) || '')) {
-        this.showError(error)
+      if (!exportImage.isCancelled(error)) {
+        feedback.showError(error, '保存失败，请重试')
       }
+    } finally {
+      wx.hideLoading()
+      this._saving = false
     }
-  },
-
-  showError(error) {
-    console.error(error)
-    wx.showToast({
-      title: (error && error.message) || '生成失败，请重试',
-      icon: 'none'
-    })
   }
 })
 

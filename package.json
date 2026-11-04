@@ -5,7 +5,8 @@
   "description": "拾格图匣 - 本地图片压缩、拼接与九宫格切图",
   "scripts": {
     "test": "node tests/run-tests.js",
-    "validate": "node scripts/validate.js"
+    "validate": "node scripts/validate.js",
+    "check": "node scripts/validate.js && node tests/run-tests.js"
   },
   "license": "MIT"
 }
