@@ -1,5 +1,5 @@
 module.exports = {
-  appName: '轻图盒',
+  appName: '拾格图匣',
 
   // 配置正式广告位 ID 后，保存高清图片前展示激励视频。
   enableRewardedAds: false,

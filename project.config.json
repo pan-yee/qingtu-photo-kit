@@ -1,7 +1,7 @@
 {
   "appid": "wx2b68d0818781b66d",
   "projectname": "qingtu-photo-kit",
-  "description": "轻图盒图片处理工具 - 图片压缩、拼接、九宫格切图",
+  "description": "拾格图匣 - 本地图片压缩、拼接与九宫格切图",
   "compileType": "miniprogram",
   "miniprogramRoot": "miniprogram/",
   "setting": {

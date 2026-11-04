@@ -1,7 +1,7 @@
 Component({
   data: {
     visible: false,
-    contractName: '《轻图盒隐私保护指引》'
+    contractName: '《拾格图匣隐私保护指引》'
   },
 
   lifetimes: {
@@ -21,7 +21,7 @@ Component({
           this.setData({
             visible: true,
             contractName:
-              result.privacyContractName || '《轻图盒隐私保护指引》'
+              result.privacyContractName || '《拾格图匣隐私保护指引》'
           })
         }
       })

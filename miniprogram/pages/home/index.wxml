@@ -84,7 +84,7 @@
 
     <view class="footer-note">
       <text>请勿使用工具伪造证件或规避版权保护</text>
-        <text class="footer-mark">轻图盒图片处理工具 1.0</text>
+        <text class="footer-mark">拾格图匣 1.0</text>
     </view>
   </view>
   <privacy-dialog />
