@@ -15,9 +15,9 @@
     </view>
 
     <view class="hero-copy">
-      <text class="hero-kicker">随手处理，不占相册</text>
-      <text class="hero-title">你的图片，\n还差最后一步。</text>
-      <text class="hero-desc">换底色、压缩、拼接，常用工具都在这里。</text>
+      <text class="hero-kicker">图片压缩 · 拼接 · 九宫格切图</text>
+      <text class="hero-title">图片处理，\n也可以很简单。</text>
+      <text class="hero-desc">换底色、压缩、拼接和九宫格切图，常用工具都在这里。</text>
       <button class="hero-cta" bindtap="startCutout">
         <text>制作证件照</text>
         <text class="hero-arrow">→</text>
@@ -84,7 +84,7 @@
 
     <view class="footer-note">
       <text>请勿使用工具伪造证件或规避版权保护</text>
-      <text class="footer-mark">轻图盒 1.0</text>
+        <text class="footer-mark">轻图盒图片处理工具 1.0</text>
     </view>
   </view>
   <privacy-dialog />

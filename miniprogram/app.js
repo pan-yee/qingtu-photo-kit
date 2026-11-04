@@ -1,6 +1,6 @@
 App({
   globalData: {
-    appName: '轻图盒',
+    appName: '轻图盒图片处理工具',
     version: '1.0.0'
   },
 
