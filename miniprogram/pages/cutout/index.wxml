@@ -74,6 +74,27 @@
       </view>
     </view>
 
+    <view class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">边缘柔化</text>
+        <text class="setting-value">{{feather}} px</text>
+      </view>
+      <slider
+        value="{{feather}}"
+        min="0"
+        max="8"
+        step="1"
+        activeColor="#1d6b4f"
+        backgroundColor="#e2e5de"
+        block-size="22"
+        bindchange="onFeatherChange"
+      />
+      <view class="range-labels">
+        <text>锐利</text>
+        <text>柔和</text>
+      </view>
+    </view>
+
     <view class="notice">
       <view class="notice-dot"></view>
       <text>纯色背景效果最好。复杂背景、发丝和白衣边缘如不自然，可调低容差后重试。</text>

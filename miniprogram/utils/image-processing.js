@@ -9,6 +9,125 @@ function colorDistanceSq(a, b) {
   return dr * dr + dg * dg + db * db
 }
 
+// 加权 RGB 距离，比等权欧氏距离更接近人眼对亮度和色偏的感知。
+function perceptualColorDistanceSq(a, b) {
+  const dr = a[0] - b[0]
+  const dg = a[1] - b[1]
+  const db = a[2] - b[2]
+  return dr * dr * 0.3 + dg * dg * 0.59 + db * db * 0.11
+}
+
+function buildDistanceField(width, height, isBackground) {
+  const pixelCount = width * height
+  const distance = new Float32Array(pixelCount)
+  const infinity = width + height + 4
+
+  for (let index = 0; index < pixelCount; index += 1) {
+    distance[index] = isBackground[index] ? 0 : infinity
+  }
+
+  for (let y = 0; y < height; y += 1) {
+    const row = y * width
+    for (let x = 0; x < width; x += 1) {
+      const index = row + x
+      if (x > 0) {
+        distance[index] = Math.min(
+          distance[index],
+          distance[index - 1] + 1
+        )
+      }
+      if (y > 0) {
+        distance[index] = Math.min(
+          distance[index],
+          distance[index - width] + 1
+        )
+      }
+    }
+  }
+
+  for (let y = height - 1; y >= 0; y -= 1) {
+    const row = y * width
+    for (let x = width - 1; x >= 0; x -= 1) {
+      const index = row + x
+      if (x + 1 < width) {
+        distance[index] = Math.min(
+          distance[index],
+          distance[index + 1] + 1
+        )
+      }
+      if (y + 1 < height) {
+        distance[index] = Math.min(
+          distance[index],
+          distance[index + width] + 1
+        )
+      }
+    }
+  }
+
+  return distance
+}
+
+/**
+ * 在初始分割结果上做距离场羽化，并对半透明边缘去背景色污染。
+ */
+function refineCutoutAlpha(imageData, isBackground, backgrounds, tolerance, featherRadius) {
+  const width = imageData.width
+  const height = imageData.height
+  const pixelCount = width * height
+  const source = imageData.data
+  const output = new Uint8ClampedArray(source)
+  const radius = clamp(Math.round(featherRadius || 3), 0, 12)
+  const background = backgrounds[0] || [255, 255, 255]
+  const distance = buildDistanceField(width, height, isBackground)
+  const edgeLimitSq = (tolerance + 26) * (tolerance + 26) * 3
+
+  for (let index = 0; index < pixelCount; index += 1) {
+    const currentDistance = distance[index]
+    const offset = index * 4
+    if (currentDistance === 0) {
+      output[offset + 3] = 0
+      continue
+    }
+    if (currentDistance > radius) continue
+
+    const color = [source[offset], source[offset + 1], source[offset + 2]]
+    let closest = Infinity
+    for (let i = 0; i < backgrounds.length; i += 1) {
+      closest = Math.min(
+        closest,
+        perceptualColorDistanceSq(color, backgrounds[i])
+      )
+    }
+
+    const colorT = clamp(Math.sqrt(closest / edgeLimitSq), 0, 1)
+    const distanceT = clamp(currentDistance / (radius + 1), 0, 1)
+    const alpha = Math.round(255 * Math.max(colorT, distanceT * 0.5))
+    output[offset + 3] = Math.min(output[offset + 3], alpha)
+
+    if (alpha > 0 && alpha < 255) {
+      const a = alpha / 255
+      const inverse = 1 - a
+      output[offset] = clamp(
+        (source[offset] - background[0] * inverse) / a,
+        0,
+        255
+      )
+      output[offset + 1] = clamp(
+        (source[offset + 1] - background[1] * inverse) / a,
+        0,
+        255
+      )
+      output[offset + 2] = clamp(
+        (source[offset + 2] - background[2] * inverse) / a,
+        0,
+        255
+      )
+    }
+  }
+
+  return output
+}
+
 /**
  * 从边缘像素聚类出候选背景色。数据为 RGBA Uint8ClampedArray。
  */
@@ -127,7 +246,7 @@ function removeBackground(imageData, options) {
     }
     const color = [source[offset], source[offset + 1], source[offset + 2]]
     for (let i = 0; i < backgrounds.length; i += 1) {
-      if (colorDistanceSq(color, backgrounds[i]) <= thresholdSq) {
+      if (perceptualColorDistanceSq(color, backgrounds[i]) <= thresholdSq) {
         return true
       }
     }
@@ -163,52 +282,17 @@ function removeBackground(imageData, options) {
     if (y + 1 < height) push(index + width)
   }
 
-  const output = new Uint8ClampedArray(source)
-  for (let index = 0; index < pixelCount; index += 1) {
-    if (visited[index]) {
-      output[index * 4 + 3] = 0
-    }
-  }
-
-  // 对紧邻透明区且与背景色接近的像素做轻度边缘柔化。
-  if (opts.feather !== false) {
-    const featherLimitSq = (tolerance + 18) * (tolerance + 18) * 3
-    const pending = []
-    for (let y = 1; y < height - 1; y += 1) {
-      for (let x = 1; x < width - 1; x += 1) {
-        const index = y * width + x
-        if (visited[index]) continue
-        const nearTransparent =
-          visited[index - 1] ||
-          visited[index + 1] ||
-          visited[index - width] ||
-          visited[index + width]
-        if (!nearTransparent) continue
-        const color = [
-          source[index * 4],
-          source[index * 4 + 1],
-          source[index * 4 + 2]
-        ]
-        let closest = Infinity
-        for (let i = 0; i < backgrounds.length; i += 1) {
-          closest = Math.min(
-            closest,
-            colorDistanceSq(color, backgrounds[i])
-          )
-        }
-        if (closest < featherLimitSq) {
-          const ratio = Math.sqrt(closest / featherLimitSq)
-          pending.push([index, Math.round(150 * ratio)])
-        }
-      }
-    }
-    pending.forEach(function soften(item) {
-      output[item[0] * 4 + 3] = Math.min(
-        output[item[0] * 4 + 3],
-        item[1]
-      )
-    })
-  }
+  const output = refineCutoutAlpha(
+    {
+      data: new Uint8ClampedArray(source),
+      width: width,
+      height: height
+    },
+    visited,
+    backgrounds,
+    tolerance,
+    opts.feather !== false ? opts.featherRadius : 0
+  )
 
   return {
     data: output,
@@ -348,6 +432,7 @@ module.exports = {
   centerCropRect,
   clamp,
   colorDistanceSq,
+  perceptualColorDistanceSq,
   estimateBorderColors,
   formatBytes,
   getCollageLayout,

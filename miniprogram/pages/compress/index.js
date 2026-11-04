@@ -20,21 +20,21 @@ Page({
         id: 'high',
         label: '高清',
         note: '1600px',
-        quality: 88,
+        quality: 90,
         maxSide: 1600
       },
       {
         id: 'balanced',
         label: '均衡',
-        note: '1080px',
-        quality: 74,
-        maxSide: 1080
+        note: '1280px',
+        quality: 82,
+        maxSide: 1280
       },
       {
         id: 'light',
         label: '轻量',
         note: '720px',
-        quality: 56,
+        quality: 64,
         maxSide: 720
       }
     ]

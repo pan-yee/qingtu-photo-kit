@@ -11,6 +11,7 @@ Page({
     resultSrc: '',
     processing: false,
     tolerance: 36,
+    feather: 3,
     backgroundKey: 'white',
     removedPercent: 0,
     backgrounds: [
@@ -100,7 +101,8 @@ Page({
 
     const cutout = processing.removeBackground(this._sourceImageData, {
       tolerance: this.data.tolerance,
-      feather: true
+      feather: true,
+      featherRadius: this.data.feather
     })
     const cutoutCanvas = canvasTools.createCanvas(width, height)
     const cutoutContext = cutoutCanvas.getContext('2d')
@@ -134,6 +136,12 @@ Page({
   onToleranceChange(event) {
     const tolerance = Number(event.detail.value)
     this.setData({ tolerance: tolerance })
+    this.scheduleRender()
+  },
+
+  onFeatherChange(event) {
+    const feather = Number(event.detail.value)
+    this.setData({ feather: feather })
     this.scheduleRender()
   },
 

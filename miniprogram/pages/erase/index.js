@@ -3,6 +3,10 @@ const canvasTools = require('../../utils/canvas')
 const media = require('../../utils/media')
 const rewarded = require('../../utils/rewarded')
 
+function clampChannel(value) {
+  return Math.min(255, Math.max(0, Math.round(value)))
+}
+
 Page({
   data: {
     hasImage: false,
@@ -117,6 +121,102 @@ Page({
     this.repairAt(event)
   },
 
+  collectRingSamples(centerX, centerY, radius) {
+    const width = this._workingData.width
+    const height = this._workingData.height
+    const pixels = this._workingData.data
+    const outer = radius + 5
+    const points = []
+    let r = 0
+    let g = 0
+    let b = 0
+    let a = 0
+    const samples = 64
+
+    for (let i = 0; i < samples; i += 1) {
+      const angle = (Math.PI * 2 * i) / samples
+      const x = Math.round(centerX + Math.cos(angle) * outer)
+      const y = Math.round(centerY + Math.sin(angle) * outer)
+      if (x < 0 || y < 0 || x >= width || y >= height) continue
+      const offset = (y * width + x) * 4
+      const point = {
+        x: x,
+        y: y,
+        r: pixels[offset],
+        g: pixels[offset + 1],
+        b: pixels[offset + 2],
+        a: pixels[offset + 3]
+      }
+      points.push(point)
+      r += point.r
+      g += point.g
+      b += point.b
+      a += point.a
+    }
+
+    const count = Math.max(1, points.length)
+    return {
+      points: points,
+      average: [
+        Math.round(r / count),
+        Math.round(g / count),
+        Math.round(b / count),
+        Math.round(a / count)
+      ]
+    }
+  },
+
+  fitPlane(points, channel) {
+    const count = points.length
+    if (count < 8) return null
+
+    let sx = 0
+    let sy = 0
+    let sxx = 0
+    let syy = 0
+    let sxy = 0
+    let sv = 0
+    let sxv = 0
+    let syv = 0
+
+    for (let i = 0; i < count; i += 1) {
+      const point = points[i]
+      const x = point.x
+      const y = point.y
+      const value = point[channel]
+      sx += x
+      sy += y
+      sxx += x * x
+      syy += y * y
+      sxy += x * y
+      sv += value
+      sxv += x * value
+      syv += y * value
+    }
+
+    const determinant =
+      sxx * (syy * count - sy * sy) -
+      sxy * (sxy * count - sx * sy) +
+      sx * (sxy * sy - sx * syy)
+    if (Math.abs(determinant) < 1e-6) return null
+
+    const inverse00 = (syy * count - sy * sy) / determinant
+    const inverse01 = (sx * sy - sxy * count) / determinant
+    const inverse02 = (sxy * sy - sx * syy) / determinant
+    const inverse10 = inverse01
+    const inverse11 = (sxx * count - sx * sx) / determinant
+    const inverse12 = (sxy * sx - sxx * sy) / determinant
+    const inverse20 = inverse02
+    const inverse21 = inverse12
+    const inverse22 = (sxx * syy - sxy * sxy) / determinant
+
+    return [
+      inverse00 * sxv + inverse01 * syv + inverse02 * sv,
+      inverse10 * sxv + inverse11 * syv + inverse12 * sv,
+      inverse20 * sxv + inverse21 * syv + inverse22 * sv
+    ]
+  },
+
   repairAt(event) {
     const point = this.getCanvasPoint(event)
     if (!point) return
@@ -147,36 +247,13 @@ Page({
     const pixels = this._workingData.data
     const cx = Math.round(centerX)
     const cy = Math.round(centerY)
-    const outer = radius + 5
-    let r = 0
-    let g = 0
-    let b = 0
-    let a = 0
-    let count = 0
-    const samples = 56
-
-    for (let i = 0; i < samples; i += 1) {
-      const angle = (Math.PI * 2 * i) / samples
-      const sx = Math.round(cx + Math.cos(angle) * outer)
-      const sy = Math.round(cy + Math.sin(angle) * outer)
-      if (sx < 0 || sy < 0 || sx >= width || sy >= height) continue
-      const offset = (sy * width + sx) * 4
-      r += pixels[offset]
-      g += pixels[offset + 1]
-      b += pixels[offset + 2]
-      a += pixels[offset + 3]
-      count += 1
-    }
-
-    if (!count) return
-    const average = [
-      Math.round(r / count),
-      Math.round(g / count),
-      Math.round(b / count),
-      Math.round(a / count)
-    ]
+    const ring = this.collectRingSamples(cx, cy, radius)
+    if (!ring.points.length) return
+    const average = ring.average
+    const redPlane = this.fitPlane(ring.points, 'r')
+    const greenPlane = this.fitPlane(ring.points, 'g')
+    const bluePlane = this.fitPlane(ring.points, 'b')
     const rInt = Math.ceil(radius)
-    const patchSide = rInt * 2 + 1
     const left = Math.max(0, cx - rInt)
     const top = Math.max(0, cy - rInt)
     const right = Math.min(width, cx + rInt + 1)
@@ -196,17 +273,37 @@ Page({
         const patchOffset = (y * patchWidth + x) * 4
         const feather = Math.min(1, (radius - distance) / (radius * 0.18))
         const blend = Math.max(0, feather)
+        const restored = [
+          redPlane
+            ? clampChannel(
+                redPlane[0] * imageX + redPlane[1] * imageY + redPlane[2]
+              )
+            : average[0],
+          greenPlane
+            ? clampChannel(
+                greenPlane[0] * imageX +
+                  greenPlane[1] * imageY +
+                  greenPlane[2]
+              )
+            : average[1],
+          bluePlane
+            ? clampChannel(
+                bluePlane[0] * imageX + bluePlane[1] * imageY + bluePlane[2]
+              )
+            : average[2]
+        ]
         const original = [
           pixels[sourceOffset],
           pixels[sourceOffset + 1],
           pixels[sourceOffset + 2],
           pixels[sourceOffset + 3]
         ]
-        const output = average.map(function mix(color, index) {
-          return Math.round(
-            original[index] * (1 - blend) + color * blend
-          )
-        })
+        const output = [
+          Math.round(original[0] * (1 - blend) + restored[0] * blend),
+          Math.round(original[1] * (1 - blend) + restored[1] * blend),
+          Math.round(original[2] * (1 - blend) + restored[2] * blend),
+          original[3]
+        ]
         pixels[sourceOffset] = output[0]
         pixels[sourceOffset + 1] = output[1]
         pixels[sourceOffset + 2] = output[2]
