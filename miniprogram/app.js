@@ -14,6 +14,16 @@ App({
     } catch (error) {
       this.globalData.envVersion = 'develop'
     }
+  },
+
+  onPageNotFound(result) {
+    console.warn('Page not found, redirecting to home:', result)
+    wx.reLaunch({
+      url: '/pages/home/index',
+      fail: function fallback(error) {
+        console.error('Unable to open the home page:', error)
+      }
+    })
   }
 })
 

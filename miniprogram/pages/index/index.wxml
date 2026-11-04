@@ -1,0 +1,5 @@
+<view class="route-page">
+  <text>正在打开轻图盒…</text>
+  <privacy-dialog />
+</view>
+

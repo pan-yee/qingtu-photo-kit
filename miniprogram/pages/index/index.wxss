@@ -1,0 +1,8 @@
+.route-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  color: #707872;
+  font-size: 26rpx;
+}

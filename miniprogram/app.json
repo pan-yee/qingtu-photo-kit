@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/home/index",
+    "pages/index/index",
     "pages/cutout/index",
     "pages/compress/index",
     "pages/erase/index",
