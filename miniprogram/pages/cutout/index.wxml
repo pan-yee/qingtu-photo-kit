@@ -1,0 +1,166 @@
+<view class="page-shell">
+  <view class="page-intro">
+    <text class="intro-index">01 / PORTRAIT BACKGROUND</text>
+    <text class="intro-title">一张清楚的人像，\n换好底色立刻可用。</text>
+    <text class="intro-desc">通过本地颜色与纹理分析识别与边缘连通的背景：白墙前的浅色衣服不会被误删，墙上的投影会一并清掉。</text>
+  </view>
+
+  <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="choosePhoto">
+    <view class="upload-plus">+</view>
+    <text class="upload-title">选择一张人像照片</text>
+    <text class="upload-tip">建议正面、光线均匀、背景颜色单一</text>
+  </button>
+
+  <view wx:else class="workspace">
+    <view class="preview-shell photo-preview">
+      <view wx:if="{{brushMode}}" class="brush-stage">
+        <canvas
+          type="2d"
+          id="brushCanvas"
+          class="brush-canvas"
+          disable-scroll="{{true}}"
+          bindtouchstart="onBrushTouchStart"
+          bindtouchmove="onBrushTouchMove"
+          bindtouchend="onBrushTouchEnd"
+        ></canvas>
+      </view>
+      <image
+        wx:elif="{{resultSrc}}"
+        class="preview-image"
+        src="{{resultSrc}}"
+        mode="widthFix"
+        bindtap="previewResult"
+      ></image>
+      <view wx:else class="preview-loading">正在识别人像边缘…</view>
+      <view class="preview-label">{{brushMode ? '涂抹修正：拖动手指' : '3:4 证件照预览'}}</view>
+    </view>
+
+    <view class="toolbar">
+      <text>已移除约 {{removedPercent}}% 的背景</text>
+      <button bindtap="changePhoto">换一张</button>
+    </view>
+
+    <view class="card setting-group color-group">
+      <view class="setting-head">
+        <text class="setting-label">背景颜色</text>
+        <text class="setting-value">{{backgroundKey === 'transparent' ? 'PNG 透明底' : '高清 900 × 1200'}}</text>
+      </view>
+      <view class="swatch-list">
+        <button
+          wx:for="{{backgrounds}}"
+          wx:key="id"
+          class="swatch-item {{backgroundKey === item.id ? 'active' : ''}}"
+          data-key="{{item.id}}"
+          bindtap="chooseBackground"
+        >
+          <view
+            class="swatch-color {{item.id === 'transparent' ? 'swatch-transparent' : ''}}"
+            style="{{item.id === 'transparent' ? '' : 'background:' + item.color}}"
+          >
+            <text wx:if="{{backgroundKey === item.id}}">✓</text>
+          </view>
+          <text class="swatch-label">{{item.label}}</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">识别容差</text>
+        <text class="setting-value">{{tolerance}}</text>
+      </view>
+      <slider
+        value="{{tolerance}}"
+        min="12"
+        max="82"
+        step="1"
+        activeColor="#1d6b4f"
+        backgroundColor="#e2e5de"
+        block-size="22"
+        bindchange="onToleranceChange"
+      />
+      <view class="range-labels">
+        <text>保留更多</text>
+        <text>清除更彻底</text>
+      </view>
+    </view>
+
+    <view class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">边缘柔化</text>
+        <text class="setting-value">{{feather}} px</text>
+      </view>
+      <slider
+        value="{{feather}}"
+        min="0"
+        max="8"
+        step="1"
+        activeColor="#1d6b4f"
+        backgroundColor="#e2e5de"
+        block-size="22"
+        bindchange="onFeatherChange"
+      />
+      <view class="range-labels">
+        <text>锐利</text>
+        <text>柔和</text>
+      </view>
+    </view>
+
+    <view class="card setting-group brush-group">
+      <view class="setting-head">
+        <text class="setting-label">手动修正</text>
+        <button class="brush-toggle {{brushMode ? 'active' : ''}}" bindtap="toggleBrush">
+          {{brushMode ? '完成' : '开始涂抹'}}
+        </button>
+      </view>
+      <block wx:if="{{brushMode}}">
+        <view class="brush-tools">
+          <button
+            wx:for="{{brushTools}}"
+            wx:key="id"
+            class="brush-tool {{brushTool === item.id ? 'active' : ''}}"
+            data-tool="{{item.id}}"
+            bindtap="chooseBrushTool"
+          >{{item.label}}</button>
+        </view>
+        <slider
+          value="{{brushSize}}"
+          min="12"
+          max="72"
+          step="4"
+          activeColor="#1d6b4f"
+          backgroundColor="#e2e5de"
+          block-size="22"
+          bindchange="onBrushSizeChange"
+        />
+        <view class="range-labels">
+          <text>细</text>
+          <text>粗</text>
+        </view>
+        <view class="button-row brush-actions">
+          <button
+            class="ghost-button"
+            disabled="{{!canUndoBrush}}"
+            bindtap="undoBrush"
+          >撤销涂改</button>
+          <button class="ghost-button" bindtap="resetBrush">清除涂改</button>
+        </view>
+      </block>
+      <text wx:else class="brush-intro">自动结果里多了或少了的地方，开始涂抹后在上方画布上拖一下就能修；涂改会跟容差一起保留。</text>
+    </view>
+
+    <view class="notice">
+      <view class="notice-dot"></view>
+      <text>纯色背景效果最好。墙面投影或背景残留时调高容差；浅色主体被吃掉时调低容差，或用「手动修正」找回。</text>
+    </view>
+
+    <button class="primary-button save-button" bindtap="saveResult">保存高清图片</button>
+  </view>
+
+  <view wx:if="{{processing}}" class="busy-mask">
+    <view class="busy-spinner"></view>
+    <text>正在处理图片…</text>
+  </view>
+  <privacy-dialog />
+</view>
+
