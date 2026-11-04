@@ -1,7 +1,7 @@
 <view class="page-shell">
   <view class="page-intro">
     <text class="intro-index">05 / GRID CUT</text>
-    <text class="intro-title">一张图，九宫格，\n发圈更有排面。</text>
+    <text class="intro-title">一张图，切成九宫格，\n保存到相册备用。</text>
     <text class="intro-desc">自动居中裁成正方形，再按 1–9 顺序切成 3 × 3 小图。</text>
   </view>
 
@@ -16,7 +16,7 @@
       <view class="setting-head">
         <view>
           <text class="setting-label">九宫格预览</text>
-          <text class="grid-subtitle">按编号依次发布</text>
+          <text class="grid-subtitle">按编号依次保存</text>
         </view>
         <button class="text-action" bindtap="chooseImage">换一张</button>
       </view>
@@ -42,7 +42,7 @@
       <view class="tip-number">01</view>
       <view class="tip-copy">
         <text class="tip-title">保存后按顺序选择</text>
-        <text class="tip-desc">微信朋友圈一次最多 9 张，按相册中的保存顺序选图即可。</text>
+        <text class="tip-desc">图片会按 1–9 的顺序写入相册，之后可在其他应用中自行选用。</text>
       </view>
     </view>
 

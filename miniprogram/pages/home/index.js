@@ -40,7 +40,7 @@ Page({
       {
         id: 'grid',
         title: '九宫格切图',
-        description: '一次切成 9 张，按顺序发布',
+        description: '一次切成 9 张，保存后按顺序使用',
         glyph: '切',
         badge: '',
         tone: 'purple',

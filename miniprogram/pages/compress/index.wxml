@@ -2,7 +2,7 @@
   <view class="page-intro">
     <text class="intro-index">02 / COMPRESS</text>
     <text class="intro-title">少一点体积，\n保留该有的清晰。</text>
-    <text class="intro-desc">在微信允许的范围内重新编码，几分钟内完成上传、分享前的瘦身。</text>
+    <text class="intro-desc">在微信允许的范围内重新编码，聊天发送或存档前先把体积压下来。</text>
   </view>
 
   <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="chooseImage">
@@ -57,8 +57,8 @@
       </view>
       <view class="preset-hint">
         <text wx:if="{{preset === 'high'}}">适合留存和打印，细节更完整。</text>
-        <text wx:if="{{preset === 'balanced'}}">适合朋友圈和聊天分享，推荐使用。</text>
-        <text wx:if="{{preset === 'light'}}">适合网页上传或对大小要求严格的场景。</text>
+        <text wx:if="{{preset === 'balanced'}}">适合聊天发送和长期保存，推荐使用。</text>
+        <text wx:if="{{preset === 'light'}}">适合对文件大小要求严格的场景。</text>
       </view>
     </view>
 

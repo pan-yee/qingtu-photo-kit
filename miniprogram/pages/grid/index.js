@@ -134,7 +134,7 @@ Page({
       wx.hideLoading()
       wx.showModal({
         title: '9 张图片已保存',
-        content: '已按 1 到 9 的顺序保存到相册，发布时请按顺序选择。',
+        content: '已按 1 到 9 的顺序保存到相册，可自行查看和选用。',
         showCancel: false,
         confirmText: '知道了'
       })
