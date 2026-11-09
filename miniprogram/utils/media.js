@@ -1,25 +1,34 @@
+const contentSecurity = require('./content-security')
+const feedback = require('./feedback')
+
 function ensurePrivacyAuthorization() {
-  return new Promise(function check(resolve) {
+  return new Promise(function check(resolve, reject) {
     if (!wx.getPrivacySetting) {
       resolve()
       return
     }
     wx.getPrivacySetting({
       success: function success(result) {
-        if (!result.needAuthorization || !wx.requirePrivacyAuthorize) {
+        if (!result.needAuthorization) {
           resolve()
+          return
+        }
+        if (!wx.requirePrivacyAuthorize) {
+          reject(new Error('请更新微信后再选择或保存图片'))
           return
         }
         wx.requirePrivacyAuthorize({
           success: resolve,
-          fail: function fail() {
-            resolve()
+          fail: function fail(error) {
+            const denied = new Error('请先同意隐私保护指引')
+            denied.code = 'PRIVACY_AUTH_DENIED'
+            denied.errMsg = (error && error.errMsg) || ''
+            reject(denied)
           }
         })
       },
-      fail: function fail() {
-        // 旧基础库没有隐私检查能力，继续交给原始 API 返回错误。
-        resolve()
+      fail: function fail(error) {
+        reject(explainPrivacyError(error))
       }
     })
   })
@@ -75,6 +84,9 @@ function chooseImages(count, sourceType) {
         }
       })
     })
+  }).then(async function checked(files) {
+    for (let i = 0; i < files.length; i += 1) await contentSecurity.ensureSafe(files[i].path)
+    return files
   })
 }
 
@@ -101,7 +113,8 @@ function getFileInfo(path) {
 }
 
 function saveImage(path) {
-  return ensurePrivacyAuthorization().then(function authorized() {
+  return ensurePrivacyAuthorization().then(async function authorized() {
+    await contentSecurity.ensureSafe(path)
     return new Promise(function save(resolve, reject) {
       wx.saveImageToPhotosAlbum({
         filePath: path,
@@ -134,11 +147,16 @@ function saveImage(path) {
   })
 }
 
-function previewImage(current, urls) {
-  wx.previewImage({
-    current: current,
-    urls: urls || [current]
-  })
+async function previewImage(current, urls) {
+  const targets = urls || [current]
+  try {
+    await ensurePrivacyAuthorization()
+    const checked = Array.from(new Set([current].concat(targets)))
+    for (let i = 0; i < checked.length; i += 1) await contentSecurity.ensureSafe(checked[i])
+    wx.previewImage({ current: current, urls: targets })
+  } catch (error) {
+    if (error.code !== 'CONTENT_SECURITY_CANCELLED') feedback.showError(error, '内容安全校验失败')
+  }
 }
 
 module.exports = {

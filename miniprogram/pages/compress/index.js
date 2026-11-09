@@ -1,4 +1,5 @@
 const config = require('../../config/index')
+const contentSecurity = require('../../utils/content-security')
 const exportImage = require('../../utils/export-image')
 const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
@@ -116,6 +117,7 @@ Page({
           quality: preset.quality
         })
       }
+      await contentSecurity.ensureSafe(result.tempFilePath)
       const fileInfo = await media.getFileInfo(result.tempFilePath)
       const sourceBytes = this._sourceBytes || 0
       const resultBytes = fileInfo.size

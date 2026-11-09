@@ -6,20 +6,53 @@ Component({
 
   lifetimes: {
     attached() {
-      this.checkPrivacySetting()
+      this.bindPrivacyAuthorization()
+    },
+    detached() {
+      this.resolvePrivacy(false)
+    }
+  },
+
+  pageLifetimes: {
+    show() {
+      this.bindPrivacyAuthorization()
+    },
+    hide() {
+      this.resolvePrivacy(false)
+      this.setData({ visible: false })
     }
   },
 
   methods: {
     noop() {},
 
+    bindPrivacyAuthorization() {
+      if (!wx.onNeedPrivacyAuthorization) return
+      if (!this._privacyResolves) this._privacyResolves = new Set()
+      wx.onNeedPrivacyAuthorization((resolve) => {
+        this._privacyResolves.add(resolve)
+        this.setData({ visible: true })
+        this.checkPrivacySetting()
+      })
+    },
+
+    resolvePrivacy(agreed) {
+      const resolves = this._privacyResolves
+      if (!resolves) return
+      this._privacyResolves = new Set()
+      resolves.forEach(function finish(resolve) {
+        resolve(agreed
+          ? { event: 'agree', buttonId: 'privacy-agree-button' }
+          : { event: 'disagree' })
+      })
+    },
+
     checkPrivacySetting() {
       if (!wx.getPrivacySetting) return
       wx.getPrivacySetting({
         success: (result) => {
-          if (!result.needAuthorization) return
+          if (!result.needAuthorization || !this._privacyResolves || !this._privacyResolves.size) return
           this.setData({
-            visible: true,
             contractName:
               result.privacyContractName || '《拾格图匣隐私保护指引》'
           })
@@ -48,20 +81,13 @@ Component({
     },
 
     agreePrivacy() {
+      this.resolvePrivacy(true)
       this.setData({ visible: false })
     },
 
     refusePrivacy() {
-      if (wx.exitMiniProgram) {
-        wx.exitMiniProgram()
-        return
-      }
+      this.resolvePrivacy(false)
       this.setData({ visible: false })
-      wx.showToast({
-        title: '你可以随时关闭小程序',
-        icon: 'none'
-      })
     }
   }
 })
-

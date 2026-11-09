@@ -1,3 +1,5 @@
+const contentSecurity = require('./content-security')
+
 function createCanvas(width, height) {
   const canvas = wx.createOffscreenCanvas({
     type: '2d',
@@ -87,6 +89,9 @@ function canvasToTempFile(canvas, fileType, quality) {
       },
       fail: reject
     })
+  }).then(async function checked(path) {
+    await contentSecurity.ensureSafe(path)
+    return path
   })
 }
 

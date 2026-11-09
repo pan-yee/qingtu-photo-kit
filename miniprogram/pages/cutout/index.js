@@ -5,6 +5,7 @@ const exportImage = require('../../utils/export-image')
 const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
 const processing = require('../../utils/image-processing')
+const portrait = require('../../utils/portrait-segmentation')
 
 Page({
   data: {
@@ -16,6 +17,17 @@ Page({
     feather: 3,
     backgroundKey: 'white',
     removedPercent: 0,
+    portraitMode: false,
+    engineNotice: '',
+    photoSizeKey: 'one-inch',
+    photoSizeLabel: '一寸',
+    photoWidth: 295,
+    photoHeight: 413,
+    photoSizes: [
+      { id: 'one-inch', label: '一寸', width: 295, height: 413 },
+      { id: 'two-inch', label: '二寸', width: 413, height: 579 },
+      { id: 'portrait', label: '3:4 高清', width: 900, height: 1200 }
+    ],
     brushMode: false,
     brushTool: 'erase',
     brushSize: 40,
@@ -34,6 +46,11 @@ Page({
   },
 
   onUnload() {
+    this._disposed = true
+    this._photoToken = (this._photoToken || 0) + 1
+    if (this._segmenter) this._segmenter.dispose()
+    this._segmenter = null
+    this._portraitMask = null
     clearTimeout(this._renderTimer)
     this._renderToken = (this._renderToken || 0) + 1
     this._sourceImageData = null
@@ -58,9 +75,10 @@ Page({
   },
 
   async choosePhoto() {
+    if (this.data.processing) return
     try {
       const files = await media.chooseImages(1)
-      if (!files.length) return
+      if (!files.length || this._disposed) return
       await this.preparePhoto(files[0].path)
     } catch (error) {
       feedback.showError(error, '读取图片失败，请重试')
@@ -68,20 +86,29 @@ Page({
   },
 
   async preparePhoto(path) {
+    clearTimeout(this._renderTimer)
+    this._renderToken = (this._renderToken || 0) + 1
+    const photoToken = (this._photoToken || 0) + 1
+    this._photoToken = photoToken
+    this._portraitMask = null
     this.setData({
       processing: true,
       sourceSrc: path,
       resultSrc: '',
+      engineNotice: '',
+      portraitMode: false,
       hasImage: true
     })
 
     try {
       const dimensions = await media.getImageInfo(path)
+      if (this._disposed || photoToken !== this._photoToken) return
       const width = config.limits.photoWidth
       const height = config.limits.photoHeight
       const sourceCanvas = canvasTools.createCanvas(width, height)
       const sourceContext = sourceCanvas.getContext('2d')
       const image = await canvasTools.loadImage(sourceCanvas, path)
+      if (this._disposed || photoToken !== this._photoToken) return
       const crop = processing.centerCropRect(
         dimensions.width,
         dimensions.height,
@@ -101,18 +128,39 @@ Page({
         height
       )
       this._sourceImageData = sourceContext.getImageData(0, 0, width, height)
-      // 边缘背景色和中间缓冲只与照片有关，滑杆重算时直接复用。
-      this._borderColors = processing.estimateBorderColors(
-        this._sourceImageData.data,
-        width,
-        height
-      )
-      this._cutoutWorkspace = processing.createCutoutWorkspace(width, height)
-      this._textureMap = processing.buildTextureMap(
-        this._sourceImageData.data,
-        width,
-        height
-      )
+      // 模型每张照片只推理一次，换底色、边缘调整和涂抹复用概率遮罩。
+      if (!this._segmenter) this._segmenter = portrait.createSegmenter()
+      try {
+        const mask = await this._segmenter.segment(this._sourceImageData)
+        if (this._disposed || photoToken !== this._photoToken) return
+        this._portraitMask = mask
+        this.setData({ portraitMode: true })
+      } catch (error) {
+        if (this._disposed || photoToken !== this._photoToken) return
+        if (error.code === 'NO_PORTRAIT') {
+          this.setData({ hasImage: false, resultSrc: '' })
+          throw error
+        }
+        this._segmenter.dispose()
+        this._segmenter = null
+        this.setData({
+          portraitMode: false,
+          engineNotice: '当前设备未能启用人像分割，已切换基础换底色；请使用纯色背景照片，或更新微信后重试。'
+        })
+      }
+      if (!this._portraitMask) {
+        this._borderColors = processing.estimateBorderColors(
+          this._sourceImageData.data, width, height
+        )
+        this._cutoutWorkspace = processing.createCutoutWorkspace(width, height)
+        this._textureMap = processing.buildTextureMap(
+          this._sourceImageData.data, width, height
+        )
+      } else {
+        this._borderColors = null
+        this._textureMap = null
+        this._cutoutWorkspace = null
+      }
       // 手动修正的遮罩与照片同尺寸，换照片时连同撤销栈一起重建。
       this._sourceCanvas = sourceCanvas
       this._brushMask = brushMask.createMask(width, height)
@@ -131,39 +179,55 @@ Page({
       this._outputContext = this._outputCanvas.getContext('2d')
       await this.renderResult()
     } finally {
-      this.setData({ processing: false })
+      if (!this._disposed && photoToken === this._photoToken) {
+        this.setData({ processing: false })
+      }
     }
   },
 
   async renderResult() {
-    if (!this._sourceImageData || !this._outputCanvas) return
+    if (this._disposed || !this._sourceImageData || !this._outputCanvas) return
     const width = config.limits.photoWidth
     const height = config.limits.photoHeight
     const token = (this._renderToken || 0) + 1
     this._renderToken = token
     const selected = this.currentBackground()
 
-    const cutout = processing.removeBackground(this._sourceImageData, {
-      tolerance: this.data.tolerance,
-      feather: true,
-      featherRadius: this.data.feather,
-      backgroundColors: this._borderColors,
-      texture: this._textureMap,
-      workspace: this._cutoutWorkspace,
-      // 直接写回复用的 ImageData，省掉一次整图拷贝。
-      output: this._cutoutImageData.data
-    })
+    const cutout = this._portraitMask
+      ? portrait.applyPortraitMask(this._sourceImageData, this._portraitMask, {
+          tolerance: this.data.tolerance,
+          featherRadius: this.data.feather,
+          output: this._cutoutImageData.data
+        })
+      : processing.removeBackground(this._sourceImageData, {
+          tolerance: this.data.tolerance,
+          feather: true,
+          featherRadius: this.data.feather,
+          backgroundColors: this._borderColors,
+          texture: this._textureMap,
+          workspace: this._cutoutWorkspace,
+          // 直接写回复用的 ImageData，省掉一次整图拷贝。
+          output: this._cutoutImageData.data
+        })
     this._cutoutWorkspace = cutout.workspace
     // 手动涂抹的修正叠加在自动结果之上，调容差或换底色都不会丢掉。
     brushMask.applyMask(this._cutoutImageData, this._brushMask)
     this._cutoutContext.putImageData(this._cutoutImageData, 0, 0)
 
-    this._outputContext.clearRect(0, 0, width, height)
+    const outputWidth = this.data.photoWidth
+    const outputHeight = this.data.photoHeight
+    if (this._outputCanvas.width !== outputWidth || this._outputCanvas.height !== outputHeight) {
+      this._outputCanvas.width = outputWidth
+      this._outputCanvas.height = outputHeight
+    }
+    this._outputContext.clearRect(0, 0, outputWidth, outputHeight)
     if (selected && selected.id !== 'transparent') {
       this._outputContext.fillStyle = selected.color
-      this._outputContext.fillRect(0, 0, width, height)
+      this._outputContext.fillRect(0, 0, outputWidth, outputHeight)
     }
-    this._outputContext.drawImage(this._cutoutCanvas, 0, 0)
+    const crop = processing.centerCropRect(width, height, outputWidth, outputHeight)
+    this._outputContext.drawImage(this._cutoutCanvas,
+      crop.sx, crop.sy, crop.sw, crop.sh, 0, 0, outputWidth, outputHeight)
 
     const resultSrc = await canvasTools.canvasToTempFile(
       this._outputCanvas,
@@ -171,7 +235,7 @@ Page({
       1
     )
     // 拖动滑块会并发多次渲染，只采纳最后一次发起的渲染结果。
-    if (token !== this._renderToken) return
+    if (this._disposed || token !== this._renderToken) return
     this.setData({
       resultSrc: resultSrc,
       removedPercent: Math.round(
@@ -206,7 +270,7 @@ Page({
           })
           .finally(
             function done() {
-              this.setData({ processing: false })
+              if (!this._disposed) this.setData({ processing: false })
             }.bind(this)
           )
       }.bind(this),
@@ -464,6 +528,24 @@ Page({
     }
   },
 
+  async choosePhotoSize(event) {
+    if (this.data.processing) return
+    const key = event.currentTarget.dataset.key
+    const size = this.data.photoSizes.find(function find(item) { return item.id === key })
+    if (!size || size.id === this.data.photoSizeKey) return
+    this.setData({
+      photoSizeKey: size.id, photoSizeLabel: size.label,
+      photoWidth: size.width, photoHeight: size.height, processing: true
+    })
+    try {
+      await this.renderResult()
+    } catch (error) {
+      feedback.showError(error, '切换照片尺寸失败')
+    } finally {
+      if (!this._disposed) this.setData({ processing: false })
+    }
+  },
+
   chooseBackground(event) {
     const key = event.currentTarget.dataset.key
     if (!key || key === this.data.backgroundKey) return
@@ -474,13 +556,13 @@ Page({
       })
       .finally(
         function done() {
-          this.setData({ processing: false })
+          if (!this._disposed) this.setData({ processing: false })
         }.bind(this)
       )
   },
 
   async saveResult() {
-    if (!this.data.resultSrc) return
+    if (this.data.processing || !this.data.resultSrc) return
     try {
       await exportImage.saveWithReward(this.data.resultSrc)
     } catch (error) {

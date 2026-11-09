@@ -126,7 +126,7 @@
   font-size: 20rpx;
 }
 
-/* 涂抹画布按 3:4 尺寸铺满预览区，与导出的照片比例保持一致。 */
+/* 涂抹始终使用 3:4 工作画布，尺寸模板的居中裁剪在导出时应用。 */
 .brush-stage {
   position: relative;
   width: 100%;
@@ -200,3 +200,21 @@
   margin-top: 4rpx;
 }
 
+.size-options {
+  display: flex;
+  gap: 16rpx;
+}
+
+.size-option {
+  flex: 1;
+  padding: 12rpx 8rpx;
+  font-size: 24rpx;
+  color: #56645d;
+  background: #f0f2ed;
+  border-radius: 12rpx;
+}
+
+.size-option.active {
+  color: #ffffff;
+  background: #1d6b4f;
+}

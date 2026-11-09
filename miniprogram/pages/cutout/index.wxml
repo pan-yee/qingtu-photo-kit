@@ -2,7 +2,7 @@
   <view class="page-intro">
     <text class="intro-index">01 / PORTRAIT BACKGROUND</text>
     <text class="intro-title">一张清楚的人像，\n换好底色立刻可用。</text>
-    <text class="intro-desc">通过本地颜色与纹理分析识别与边缘连通的背景：白墙前的浅色衣服不会被误删，墙上的投影会一并清掉。</text>
+    <text class="intro-desc">使用本机人像分割更换底色，选图与结果需临时上传供内容安全检测。建议选择单人正面半身照；复杂发丝和遮挡仍需手动修正。</text>
   </view>
 
   <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="choosePhoto">
@@ -32,7 +32,7 @@
         bindtap="previewResult"
       ></image>
       <view wx:else class="preview-loading">正在识别人像边缘…</view>
-      <view class="preview-label">{{brushMode ? '涂抹修正：拖动手指' : '3:4 证件照预览'}}</view>
+      <view class="preview-label">{{brushMode ? '涂抹修正：拖动手指' : photoSizeLabel + '照片预览'}}</view>
     </view>
 
     <view class="toolbar">
@@ -40,10 +40,27 @@
       <button bindtap="changePhoto">换一张</button>
     </view>
 
+    <view wx:if="{{engineNotice}}" class="notice">
+      <view class="notice-dot"></view>
+      <text>{{engineNotice}}</text>
+    </view>
+
+    <view class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">照片尺寸</text>
+        <text class="setting-value">{{photoWidth}} × {{photoHeight}} px</text>
+      </view>
+      <view class="size-options">
+        <button wx:for="{{photoSizes}}" wx:key="id"
+          class="size-option {{photoSizeKey === item.id ? 'active' : ''}}"
+          data-key="{{item.id}}" bindtap="choosePhotoSize">{{item.label}}</button>
+      </view>
+    </view>
+
     <view class="card setting-group color-group">
       <view class="setting-head">
         <text class="setting-label">背景颜色</text>
-        <text class="setting-value">{{backgroundKey === 'transparent' ? 'PNG 透明底' : '高清 900 × 1200'}}</text>
+        <text class="setting-value">{{photoWidth}} × {{photoHeight}} · PNG</text>
       </view>
       <view class="swatch-list">
         <button
@@ -66,7 +83,7 @@
 
     <view class="card setting-group">
       <view class="setting-head">
-        <text class="setting-label">识别容差</text>
+        <text class="setting-label">{{portraitMode ? '人像边缘范围' : '识别容差'}}</text>
         <text class="setting-value">{{tolerance}}</text>
       </view>
       <slider
@@ -88,7 +105,7 @@
     <view class="card setting-group">
       <view class="setting-head">
         <text class="setting-label">边缘柔化</text>
-        <text class="setting-value">{{feather}} px</text>
+        <text class="setting-value">{{feather}} 级</text>
       </view>
       <slider
         value="{{feather}}"
@@ -151,10 +168,10 @@
 
     <view class="notice">
       <view class="notice-dot"></view>
-      <text>纯色背景效果最好。墙面投影或背景残留时调高容差；浅色主体被吃掉时调低容差，或用「手动修正」找回。</text>
+      <text>边缘残留时向右调整识别范围；主体缺失时向左调整，或用「手动修正」找回。尺寸模板仅调整像素和比例，请按用途核对头部比例、背景色与文件大小要求。</text>
     </view>
 
-    <button class="primary-button save-button" bindtap="saveResult">保存高清图片</button>
+    <button class="primary-button save-button" disabled="{{processing || !resultSrc}}" bindtap="saveResult">保存照片</button>
   </view>
 
   <view wx:if="{{processing}}" class="busy-mask">

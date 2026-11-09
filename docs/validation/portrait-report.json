@@ -1,0 +1,20 @@
+{
+  "model_sha256": "403662d80804aada82782ed8a44d86b378a3044b9e64d13b545710a790fbe85c",
+  "image_sha256": "88431cd9653ccd539741b555fb0a46b61558b301d4110412b5bc28b5e3ea6cb5",
+  "image_count": 1,
+  "onnxruntime_version": "1.31.1",
+  "cpu_inference_mean_ms": 5.676388600022619,
+  "region_probes": {
+    "legacy": {
+      "face_alpha_mean": 1.0,
+      "suit_alpha_mean": 1.0,
+      "background_alpha_mean": 0.3410978055301943
+    },
+    "model": {
+      "face_alpha_mean": 1.0,
+      "suit_alpha_mean": 1.0,
+      "background_alpha_mean": 0.0
+    }
+  },
+  "scope": "One real-image regression and selected opaque-region probes; no full ground truth. Not a WeChat runtime or platform safety audit."
+}

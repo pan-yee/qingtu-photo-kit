@@ -6,8 +6,8 @@
   "scripts": {
     "test": "node tests/run-tests.js",
     "validate": "node scripts/validate.js",
-    "check": "node scripts/validate.js && node tests/run-tests.js"
+    "check": "node scripts/validate.js && node scripts/security-audit.js && node tests/run-tests.js",
+    "audit:local": "node scripts/security-audit.js"
   },
   "license": "MIT"
 }
-

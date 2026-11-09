@@ -1,0 +1,31 @@
+{
+  "name": "MediaPipe Selfie Segmentation (general)",
+  "license": "Apache-2.0",
+  "source": "@mediapipe/selfie_segmentation@0.1.1675465747/selfie_segmentation.tflite",
+  "sourceSha256": "8d13b7fae74af625c641226813616a2117bd6bca19eb3b75574621fc08557f27",
+  "sha256": "403662d80804aada82782ed8a44d86b378a3044b9e64d13b545710a790fbe85c",
+  "input": {
+    "name": "input_1",
+    "shape": [
+      1,
+      3,
+      256,
+      256
+    ],
+    "layout": "NCHW",
+    "range": [
+      0,
+      1
+    ]
+  },
+  "output": {
+    "name": "activation_10",
+    "shape": [
+      1,
+      1,
+      256,
+      256
+    ]
+  },
+  "conversion": "tf2onnx 1.17.0, opset 11; HardSwish expanded to elementary operators; final custom transpose convolution replaced with ConvTranspose; external inputs and outputs use NCHW"
+}

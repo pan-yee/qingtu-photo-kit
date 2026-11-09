@@ -1,7 +1,15 @@
 const harness = require('./harness')
 
 const assert = harness.assert
-const test = harness.test
+const contentSecurity = require('../miniprogram/utils/content-security')
+// 此文件隔离测试相册/页面行为；真实内容安全链路在 content-security.test.js 中覆盖。
+function test(name, fn) {
+  harness.test(name, async function () {
+    const saved = contentSecurity.ensureSafe
+    contentSecurity.ensureSafe = async function () {}
+    try { await fn() } finally { contentSecurity.ensureSafe = saved }
+  })
+}
 
 const media = require('../miniprogram/utils/media')
 const exportImage = require('../miniprogram/utils/export-image')

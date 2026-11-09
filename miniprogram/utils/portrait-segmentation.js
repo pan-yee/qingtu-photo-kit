@@ -1,0 +1,171 @@
+// MediaPipe Selfie Segmentation，Apache-2.0；模型随代码包分发，图片不离开设备。
+const MODEL_PATH = 'models/selfie-segmentation.onnx'
+const SIDE = 256
+
+function sample(data, width, height, x, y, channels, channel) {
+  const safeX = Math.max(0, Math.min(width - 1, x))
+  const safeY = Math.max(0, Math.min(height - 1, y))
+  const left = Math.floor(safeX)
+  const top = Math.floor(safeY)
+  const right = Math.min(width - 1, left + 1)
+  const bottom = Math.min(height - 1, top + 1)
+  const dx = safeX - left
+  const dy = safeY - top
+  const a = data[(top * width + left) * channels + channel]
+  const b = data[(top * width + right) * channels + channel]
+  const c = data[(bottom * width + left) * channels + channel]
+  const d = data[(bottom * width + right) * channels + channel]
+  return (a * (1 - dx) + b * dx) * (1 - dy) + (c * (1 - dx) + d * dx) * dy
+}
+
+function createInput(image) {
+  const input = new Float32Array(SIDE * SIDE * 3)
+  for (let y = 0; y < SIDE; y += 1) {
+    for (let x = 0; x < SIDE; x += 1) {
+      for (let channel = 0; channel < 3; channel += 1) {
+        input[channel * SIDE * SIDE + y * SIDE + x] = sample(
+          image.data, image.width, image.height,
+          (x + 0.5) * image.width / SIDE - 0.5,
+          (y + 0.5) * image.height / SIDE - 0.5, 4, channel
+        ) / 255
+      }
+    }
+  }
+  return input
+}
+
+function readMask(result) {
+  const tensor = result && result.activation_10
+  if (!tensor || tensor.type !== 'float32' ||
+      !Array.isArray(tensor.shape) || tensor.shape.join(',') !== '1,1,256,256') {
+    throw new Error('人像分割结果格式不正确')
+  }
+  const data = tensor.data instanceof Float32Array
+    ? tensor.data : new Float32Array(tensor.data)
+  if (data.length !== SIDE * SIDE) throw new Error('人像分割结果尺寸不正确')
+  let foreground = 0
+  for (let i = 0; i < data.length; i += 1) {
+    if (data[i] > 0.5) foreground += 1
+    if (!Number.isFinite(data[i]) || data[i] < -0.001 || data[i] > 1.001) {
+      throw new Error('人像分割结果无效')
+    }
+  }
+  if (foreground < SIDE * SIDE * 0.005) {
+    const error = new Error('未检测到清晰人像，请选择单人正面半身照')
+    error.code = 'NO_PORTRAIT'
+    throw error
+  }
+  // 引擎可能在下一次推理时复用输出缓冲。
+  return new Float32Array(data)
+}
+
+function applyPortraitMask(image, mask, options) {
+  if (!(mask instanceof Float32Array) || mask.length !== SIDE * SIDE) {
+    throw new Error('人像遮罩尺寸不正确')
+  }
+  const opts = options || {}
+  const output = opts.output && opts.output.length === image.data.length
+    ? opts.output : new Uint8ClampedArray(image.data.length)
+  output.set(image.data)
+  const tolerance = Number.isFinite(opts.tolerance) ? opts.tolerance : 36
+  const feather = Number.isFinite(opts.featherRadius) ? opts.featherRadius : 3
+  const midpoint = Math.max(0.2, Math.min(0.8, 0.5 + (tolerance - 36) / 150))
+  const softness = Math.max(0, Math.min(0.3, feather * 0.04))
+  let removedPixels = 0
+  for (let y = 0; y < image.height; y += 1) {
+    for (let x = 0; x < image.width; x += 1) {
+      const probability = sample(mask, SIDE, SIDE,
+        (x + 0.5) * SIDE / image.width - 0.5,
+        (y + 0.5) * SIDE / image.height - 0.5, 1, 0)
+      let alpha = probability >= midpoint ? 1 : 0
+      if (softness > 0) {
+        const t = Math.max(0, Math.min(1,
+          (probability - midpoint + softness) / (2 * softness)))
+        alpha = t * t * (3 - 2 * t)
+      }
+      const offset = (y * image.width + x) * 4 + 3
+      output[offset] = Math.round(image.data[offset] * alpha)
+      if (output[offset] === 0) removedPixels += 1
+    }
+  }
+  return { data: output, removedPixels: removedPixels }
+}
+
+function createSegmenter() {
+  let session = null
+  let loading = null
+  let rejectLoading = null
+  let disposed = false
+  let timer = null
+  let runTimer = null
+  let rejectRun = null
+
+  function dispose() {
+    disposed = true
+    clearTimeout(timer)
+    clearTimeout(runTimer)
+    if (rejectRun) rejectRun(new Error('人像处理已取消'))
+    rejectRun = null
+    if (rejectLoading) rejectLoading(new Error('人像处理已取消'))
+    rejectLoading = null
+    if (session) session.destroy()
+    session = null
+  }
+
+  function load() {
+    if (disposed) return Promise.reject(new Error('人像处理已取消'))
+    if (loading) return loading
+    loading = new Promise(function initialize(resolve, reject) {
+      rejectLoading = reject
+      if (typeof wx.createInferenceSession !== 'function') {
+        reject(new Error('当前微信版本不支持本机人像分割'))
+        return
+      }
+      session = wx.createInferenceSession({
+        model: MODEL_PATH, precisionLevel: 4, allowNPU: false, allowQuantize: false
+      })
+      timer = setTimeout(function timeout() {
+        reject(new Error('人像模型加载超时'))
+      }, 15000)
+      session.onError(function failed() {
+        clearTimeout(timer)
+        reject(new Error('当前设备无法加载人像模型'))
+      })
+      session.onLoad(function loaded() {
+        clearTimeout(timer)
+        rejectLoading = null
+        resolve(session)
+      })
+    })
+    return loading
+  }
+
+  async function segment(image) {
+    const engine = await load()
+    if (disposed) throw new Error('人像处理已取消')
+    const input = createInput(image)
+    let result
+    try {
+      result = await Promise.race([
+        engine.run({
+          input_1: { type: 'float32', shape: [1, 3, SIDE, SIDE], data: input.buffer }
+        }),
+        new Promise(function deadline(resolve, reject) {
+          rejectRun = reject
+          runTimer = setTimeout(function timedOut() {
+            reject(new Error('人像分割超时'))
+          }, 15000)
+        })
+      ])
+    } finally {
+      clearTimeout(runTimer)
+      rejectRun = null
+    }
+    if (disposed) throw new Error('人像处理已取消')
+    return readMask(result)
+  }
+
+  return { segment: segment, dispose: dispose }
+}
+
+module.exports = { applyPortraitMask, createInput, createSegmenter, readMask }

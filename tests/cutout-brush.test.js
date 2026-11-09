@@ -4,7 +4,15 @@ const Module = require('module')
 const harness = require('./harness')
 
 const assert = harness.assert
-const test = harness.test
+const contentSecurity = require('../miniprogram/utils/content-security')
+// 此文件隔离测试相册/页面行为；真实内容安全链路在 content-security.test.js 中覆盖。
+function test(name, fn) {
+  harness.test(name, async function () {
+    const saved = contentSecurity.ensureSafe
+    contentSecurity.ensureSafe = async function () {}
+    try { await fn() } finally { contentSecurity.ensureSafe = saved }
+  })
+}
 
 const PHOTO_WIDTH = 900
 const PHOTO_HEIGHT = 1200
@@ -264,4 +272,103 @@ test('找回主体：涂抹记录在换底色后仍然生效', async function ()
   } finally {
     restoreWx()
   }
+})
+
+test('人像分割每张照片只推理一次，换底色与尺寸复用遮罩', async function () {
+  const restoreWx = installWx()
+  let runs = 0
+  let destroyed = false
+  const mask = new Float32Array(256 * 256)
+  for (let y = 64; y < 192; y += 1) {
+    for (let x = 80; x < 176; x += 1) mask[y * 256 + x] = 1
+  }
+  wx.createInferenceSession = function () {
+    return {
+      onLoad: function (callback) { queueMicrotask(callback) },
+      onError: function () {},
+      run: async function () {
+        runs += 1
+        return { activation_10: { type: 'float32', shape: [1, 1, 256, 256], data: mask.buffer } }
+      },
+      destroy: function () { destroyed = true }
+    }
+  }
+  const page = createPageInstance(loadPage())
+  try {
+    await page.preparePhoto('tmp-source.png')
+    assert.strictEqual(page.data.portraitMode, true)
+    assert.strictEqual(page.data.engineNotice, '')
+    assert.strictEqual(alphaAt(page, 450, 600), 255)
+    assert.strictEqual(alphaAt(page, 20, 20), 0)
+    assert.strictEqual(page._outputCanvas.width, 295)
+    assert.strictEqual(page._outputCanvas.height, 413)
+    const cached = page._portraitMask
+    await page.choosePhotoSize({ currentTarget: { dataset: { key: 'two-inch' } } })
+    assert.strictEqual(page._outputCanvas.width, 413)
+    assert.strictEqual(page._outputCanvas.height, 579)
+    assert.strictEqual(page.data.photoSizeLabel, '二寸')
+    page.data.backgroundKey = 'red'
+    await page.renderResult()
+    assert.strictEqual(page._portraitMask, cached)
+    assert.strictEqual(runs, 1)
+    page.onUnload()
+    assert.strictEqual(destroyed, true)
+  } finally { page.onUnload(); restoreWx() }
+})
+
+test('人像模型不支持时明确提示基础换底色，不冒充模型结果', async function () {
+  const restoreWx = installWx()
+  const page = createPageInstance(loadPage())
+  try {
+    await page.preparePhoto('tmp-source.png')
+    assert.strictEqual(page.data.portraitMode, false)
+    assert(page.data.engineNotice.includes('基础换底色'))
+    assert.strictEqual(page.data.resultSrc, 'tmp-result.png')
+  } finally { page.onUnload(); restoreWx() }
+})
+
+test('模型加载期间离开页面会销毁会话，不再更新已销毁页面', async function () {
+  const restoreWx = installWx()
+  let startLoad
+  const started = new Promise(function (resolve) { startLoad = resolve })
+  let destroyed = false
+  wx.createInferenceSession = function () {
+    startLoad()
+    return {
+      onLoad: function () {}, onError: function () {},
+      destroy: function () { destroyed = true }
+    }
+  }
+  const page = createPageInstance(loadPage())
+  try {
+    const pending = page.preparePhoto('tmp-source.png')
+    await started
+    page.onUnload()
+    page.setData = function () { throw new Error('卸载后不应更新页面') }
+    await pending
+    assert.strictEqual(destroyed, true)
+    assert.strictEqual(page._portraitMask, null)
+  } finally { restoreWx() }
+})
+
+test('模型明确没有识别人像时提示重新选图，不偷偷改用颜色算法', async function () {
+  const restoreWx = installWx()
+  wx.createInferenceSession = function () {
+    return {
+      onLoad: function (callback) { queueMicrotask(callback) }, onError: function () {},
+      run: async function () {
+        return { activation_10: { type: 'float32', shape: [1, 1, 256, 256],
+          data: new Float32Array(256 * 256).buffer } }
+      },
+      destroy: function () {}
+    }
+  }
+  const page = createPageInstance(loadPage())
+  try {
+    await assert.rejects(page.preparePhoto('tmp-source.png'), { code: 'NO_PORTRAIT' })
+    assert.strictEqual(page.data.hasImage, false)
+    assert.strictEqual(page.data.processing, false)
+    assert.strictEqual(page.data.resultSrc, '')
+    assert.strictEqual(page.data.engineNotice, '')
+  } finally { page.onUnload(); restoreWx() }
 })

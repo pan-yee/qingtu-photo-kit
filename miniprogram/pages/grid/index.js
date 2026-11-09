@@ -1,4 +1,5 @@
 const config = require('../../config/index')
+const contentSecurity = require('../../utils/content-security')
 const canvasTools = require('../../utils/canvas')
 const exportImage = require('../../utils/export-image')
 const feedback = require('../../utils/feedback')
@@ -118,12 +119,13 @@ Page({
     if (this._saving) return
     this._saving = true
     try {
+      const cells = this.data.cells.slice()
+      for (let i = 0; i < cells.length; i += 1) await contentSecurity.ensureSafe(cells[i].path)
       const unlocked = await rewarded.unlockHighQuality()
       if (!unlocked) {
         wx.showToast({ title: '完整观看后可保存', icon: 'none' })
         return
       }
-      const cells = this.data.cells
       for (let i = 0; i < cells.length; i += 1) {
         wx.showLoading({
           title: '保存 ' + (i + 1) + ' / ' + cells.length,
