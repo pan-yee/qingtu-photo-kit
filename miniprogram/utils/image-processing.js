@@ -306,23 +306,44 @@ function buildTextureMap(data, width, height, target) {
     }
   }
 
+  // 按列维护纵向窗口，再横向滑动。每个采样点只进出窗口一次，
+  // 避免逐像素重复遍历 7×7 邻域；额外内存只随图像宽度增长。
+  const columnSum = new Float64Array(halfWidth)
+  const columnSq = new Float64Array(halfWidth)
+  function updateRow(y, direction) {
+    const row = y * halfWidth
+    for (let x = 0; x < halfWidth; x += 1) {
+      const value = luma[row + x]
+      columnSum[x] += direction * value
+      columnSq[x] += direction * value * value
+    }
+  }
+  for (let y = 0; y < Math.min(halfHeight, TEXTURE_RADIUS); y += 1) {
+    updateRow(y, 1)
+  }
   for (let y = 0; y < halfHeight; y += 1) {
+    if (y + TEXTURE_RADIUS < halfHeight) updateRow(y + TEXTURE_RADIUS, 1)
+    if (y > TEXTURE_RADIUS) updateRow(y - TEXTURE_RADIUS - 1, -1)
     const y0 = Math.max(0, y - TEXTURE_RADIUS)
     const y1 = Math.min(halfHeight - 1, y + TEXTURE_RADIUS)
     const halfRow = y * halfWidth
+    let sum = 0
+    let sumSq = 0
+    for (let x = 0; x < Math.min(halfWidth, TEXTURE_RADIUS); x += 1) {
+      sum += columnSum[x]
+      sumSq += columnSq[x]
+    }
     for (let x = 0; x < halfWidth; x += 1) {
+      if (x + TEXTURE_RADIUS < halfWidth) {
+        sum += columnSum[x + TEXTURE_RADIUS]
+        sumSq += columnSq[x + TEXTURE_RADIUS]
+      }
+      if (x > TEXTURE_RADIUS) {
+        sum -= columnSum[x - TEXTURE_RADIUS - 1]
+        sumSq -= columnSq[x - TEXTURE_RADIUS - 1]
+      }
       const x0 = Math.max(0, x - TEXTURE_RADIUS)
       const x1 = Math.min(halfWidth - 1, x + TEXTURE_RADIUS)
-      let sum = 0
-      let sumSq = 0
-      for (let yy = y0; yy <= y1; yy += 1) {
-        const row = yy * halfWidth
-        for (let xx = x0; xx <= x1; xx += 1) {
-          const value = luma[row + xx]
-          sum += value
-          sumSq += value * value
-        }
-      }
       const total = (x1 - x0 + 1) * (y1 - y0 + 1)
       const mean = sum / total
       const deviation = Math.sqrt(Math.max(0, sumSq / total - mean * mean))
