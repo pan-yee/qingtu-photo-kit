@@ -48,8 +48,11 @@ function createService(deps) {
     }
     if (event.action === 'status') return publicJob(job)
     if (event.action !== 'submit' || job.status !== 'reserved') throw new Error('Invalid action')
-    if (typeof event.fileId !== 'string' || !event.fileId.startsWith('cloud://') ||
-        event.fileId.slice(event.fileId.indexOf('/', 8) + 1) !== job.uploadPath) {
+    const validUpload = typeof event.fileId === 'string' && (files.isUploadForJob
+      ? files.isUploadForJob(event.fileId, job.uploadPath)
+      : event.fileId.startsWith('cloud://') &&
+        event.fileId.slice(event.fileId.indexOf('/', 8) + 1) === job.uploadPath)
+    if (!validUpload) {
       throw new Error('Invalid upload path')
     }
     // 原子状态转换，重复提交不会重复调用 API。

@@ -1,4 +1,5 @@
 const config = require('../config/index')
+const http = require('./moderation-http')
 const MAX_BYTES = 10 * 1024 * 1024
 const approved = new Map()
 const pending = new Map()
@@ -18,6 +19,10 @@ function unavailable() {
 
 function settings() {
   const value = config.contentSecurity
+  if (value && value.backend === 'http') {
+    try { http.validate() } catch (error) { throw unavailable() }
+    return value
+  }
   if (!value || !value.envId || !value.functionName || !wx.cloud ||
       typeof wx.cloud.callFunction !== 'function' || typeof wx.cloud.uploadFile !== 'function') {
     throw unavailable()
@@ -51,7 +56,7 @@ async function authorizeUpload() {
     consent = new Promise(function ask(resolve, reject) {
       wx.showModal({
         title: '图片内容安全检测',
-        content: '图片及处理结果需临时上传至微信云开发，交由微信内容安全服务检测，检测完成后删除。是否同意？',
+        content: '图片及处理结果需临时上传至运营者服务器，交由微信内容安全服务检测，检测完成后删除。是否同意？',
         confirmText: '同意检测', cancelText: '暂不使用',
         success: function (result) {
           if (result.confirm) resolve()
@@ -82,6 +87,7 @@ function fingerprint(path) {
 
 async function rpc(data) {
   const current = settings()
+  if (current.backend === 'http') return timed(http.rpc(data), 20000)
   const response = await timed(wx.cloud.callFunction({
     name: current.functionName, config: { env: current.envId }, data
   }), 20000)
@@ -98,9 +104,13 @@ async function perform(path, digest) {
   }
   let fileId
   try {
-    const result = await timed(wx.cloud.uploadFile({ cloudPath: allocation.uploadPath, filePath: path,
-      config: { env: settings().envId } }), 30000)
-    fileId = result.fileID
+    if (settings().backend === 'http') {
+      fileId = await timed(http.upload(allocation, path), 30000)
+    } else {
+      const result = await timed(wx.cloud.uploadFile({ cloudPath: allocation.uploadPath, filePath: path,
+        config: { env: settings().envId } }), 30000)
+      fileId = result.fileID
+    }
     let status = await rpc({ action: 'submit', jobId: allocation.jobId, fileId })
     const deadline = Date.now() + 60000
     while (true) {
@@ -123,7 +133,11 @@ async function perform(path, digest) {
       status = await rpc({ action: 'status', jobId: allocation.jobId })
     }
   } finally {
-    if (fileId && wx.cloud.deleteFile) {
+    if (settings().backend === 'http') {
+      try { await timed(http.remove(allocation.jobId), 5000) } catch (error) {
+        // 服务端按任务有效期独立清理，客户端断开不会永久保留图片。
+      }
+    } else if (fileId && wx.cloud.deleteFile) {
       try { await timed(wx.cloud.deleteFile({ fileList: [fileId], config: { env: settings().envId } }), 5000) } catch (error) {
         // 服务端还会删除上传文件；异常残留由云存储生命周期清理。
       }

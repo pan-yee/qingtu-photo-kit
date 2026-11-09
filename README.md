@@ -8,7 +8,7 @@
 - 多图拼接，支持宫格、横版、竖版和海报模板
 - 九宫格切图，一次切出 9 张可依次保存的图片
 
-图片加工在设备本机完成；按微信审核要求，选中图片和处理结果需经用户同意后临时上传至微信云开发，交由微信内容安全服务检测。检测通过后才能预览和保存。小程序端不依赖第三方 npm 包，内容安全云函数使用微信服务端 SDK。首次使用需要按[内容安全部署说明](./docs/内容安全部署.md)完成云端配置；未配置时图片操作保持拦截。
+图片加工在设备本机完成；按微信审核要求，选中图片和处理结果需经用户同意后临时上传至运营者服务器，交由微信内容安全服务检测。检测通过后才能预览和保存。默认使用独立的 Node.js / Express + MySQL 后端，不依赖腾讯云函数、云数据库或云存储；小程序端不依赖第三方 npm 包。首次使用需要按[自有服务器部署说明](./server/README.md)完成后端、合法域名和可信回调配置；服务未就绪时图片操作保持拦截。
 
 人像换底色使用随代码包分发的 MediaPipe Selfie Segmentation 预训练模型（Apache-2.0），通过微信本机推理接口运行；不提供生成式 AI、AI 对话或云端推理。应如实申报实际功能，并以微信后台的类目和校验要求为准。审核材料见[审核提交说明](./docs/审核说明.md)，模型来源与验证见[人像分割说明](./docs/人像分割.md)。
 
@@ -17,7 +17,7 @@
 1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)。
 2. 打开工具，选择“导入项目”，目录选择本仓库根目录。
 3. `project.config.json` 已配置正式 AppID `wx2b68d0818781b66d` 和基础库 `3.17.1`，直接导入即可进行真机预览；若使用其他小程序主体，请替换为对应 AppID。
-4. 按[内容安全部署说明](./docs/内容安全部署.md)部署云函数、配置可信回调和云存储清理，并填写 `contentSecurity.envId`。
+4. 按[自有服务器部署说明](./server/README.md)部署独立后端及 MySQL，配置 Nginx、微信 request 合法域名和可信回调。默认服务地址为 `https://www.ai-dreams.xyz/qingtu-api`，与已有解梦 `/api/` 服务分开。
 5. 在管理后台补充小程序名称、类目、隐私保护指引，真实联调通过后再提交审核。
 
 ## 功能边界
@@ -41,7 +41,8 @@ miniprogram/
   components/   隐私授权等公共组件
   config/       功能参数与广告配置
   models/       端侧人像分割模型、完整许可与校验清单
-cloudfunctions/ 内容安全云函数（与小程序代码包分离）
+server/         自有服务器后端、Docker Compose 与 Nginx 配置
+cloudfunctions/ 旧云开发入口及两种后端共用的纯业务/回调模块
 docs/           审核与发布说明
 tests/          核心算法、修复算法、校验规则与页面工具单元测试（tests/*.test.js）
 scripts/        静态校验：checks.js 存放纯文本规则，validate.js 负责遍历与报告
@@ -67,7 +68,7 @@ rewardedVideoAdUnitId: 'adunit-你的广告位ID'
 - 若出现 `chooseMedia:fail api scope is not declared in the privacy agreement`，按[隐私错误处理说明](./docs/审核说明.md#解决-choosmedia-隐私错误)补齐“收集你选中的照片或视频信息”和“使用你的相册（仅写入）权限”两项。
 - 以真机检查相册授权拒绝后的引导流程。
 - 使用自己的原创图片测试，不收集、不上传未经用户许可的素材。
-- 执行 `npm run check`（静态校验、本地安全约束检查、模型完整性检查和单元测试）。该命令不能替代微信后台安全校验；真实图片效果验证见[验证报告](./docs/验证报告.md)。
+- 首次执行 `cd server && npm ci && cd ..` 安装服务端测试依赖，再执行 `npm run check`（静态校验、本地安全约束检查、模型完整性检查和单元/本地 HTTP 集成测试）。该命令不能替代真实 MySQL、微信后台与真机联调；验证范围见[验证报告](./docs/验证报告.md)。
 - 项目只发布单端小程序。微信开发者工具若提示转换为「多端应用」，请选择不转换；`npm run check` 会拦截 `multiPlatform` 配置以及 `*.miniapp.json`、`miniapp/`、`i18n/` 产物。
 
 ## License

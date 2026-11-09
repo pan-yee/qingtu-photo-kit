@@ -3,7 +3,7 @@
     <view class="privacy-icon">✓</view>
     <text class="privacy-title">使用前请阅读隐私说明</text>
     <text class="privacy-copy">
-      拾格图匣需要使用你主动选择的图片，并在你确认后保存处理结果到相册。图片处理在本机完成；选图与处理结果需临时上传至微信云开发，交由微信内容安全服务检测，检测完成后删除。
+      拾格图匣需要使用你主动选择的图片，并在你确认后保存处理结果到相册。图片处理在本机完成；选图与处理结果需临时上传至运营者服务器，交由微信内容安全服务检测，检测完成后删除。微信身份标识用于关联你的检测任务。
     </text>
     <button class="privacy-link" bindtap="openPrivacyContract">
       查看 {{contractName}}

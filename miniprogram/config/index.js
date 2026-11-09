@@ -1,10 +1,10 @@
 module.exports = {
   appName: '拾格图匣',
 
-  // 部署内容安全云函数后填入环境 ID；未配置时图片处理与导出保持拦截。
+  // 独立自有服务器；完成部署、微信合法域名与可信回调配置后才可处理图片。
   contentSecurity: {
-    envId: 'photo-d0gn3yvetb21c4a41',
-    functionName: 'contentSecurity'
+    backend: 'http',
+    apiBaseUrl: 'https://www.ai-dreams.xyz/qingtu-api'
   },
 
   // 配置正式广告位 ID 后，保存高清图片前展示激励视频。

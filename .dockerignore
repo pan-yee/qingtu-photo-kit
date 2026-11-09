@@ -1,0 +1,10 @@
+.git
+**/node_modules
+**/.env
+**/.env.*
+**/data
+miniprogram
+tests
+docs
+minitest
+*.log

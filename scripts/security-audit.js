@@ -13,10 +13,11 @@ function walk(directory) {
   })
 }
 
-function auditSource(source) {
+function auditSource(source, options = {}) {
   const issues = []
   if (/\beval\s*\(|\bnew\s+Function\s*\(/.test(source)) issues.push('dynamic-code')
-  if (/\bwx\.(?:request|uploadFile|downloadFile|connectSocket)\s*\(/.test(source)) {
+  if (/\bwx\.(?:uploadFile|downloadFile|connectSocket)\s*\(/.test(source) ||
+      /\bwx\.request\s*\(/.test(source) && !options.allowModerationHttp) {
     issues.push('unapproved-network-api')
   }
   if (/\b(?:appsecret|access_token|client_secret)\s*[:=]\s*['"][^'"]{8,}['"]/i.test(source)) {
@@ -33,6 +34,11 @@ function audit() {
     try { new vm.Script(fs.readFileSync(file, 'utf8'), { filename: file }) }
     catch (error) { errors.push('Cloud function syntax: ' + error.message) }
   })
+  fs.readdirSync(path.join(root, 'server')).filter(name => name.endsWith('.js')).forEach(function (name) {
+    const file = path.join(root, 'server', name)
+    try { new vm.Script(fs.readFileSync(file, 'utf8'), { filename: file }) }
+    catch (error) { errors.push('Self-hosted server syntax: ' + error.message) }
+  })
   files.filter(function (file) { return file.endsWith('.js') }).forEach(function (file) {
     const source = fs.readFileSync(file, 'utf8')
     if (/wx\.cloud\.(?:callFunction|uploadFile|deleteFile)\s*\(/.test(source) &&
@@ -43,7 +49,7 @@ function audit() {
         file !== path.join(appRoot, 'utils/media.js')) {
       errors.push(path.relative(root, file) + ': image output must use guarded media helpers')
     }
-    auditSource(source).forEach(function (issue) {
+    auditSource(source, { allowModerationHttp: file === path.join(appRoot, 'utils/moderation-http.js') }).forEach(function (issue) {
       errors.push(path.relative(root, file) + ': ' + issue)
     })
   })
@@ -56,7 +62,13 @@ function audit() {
   if (errors.length) throw new Error(errors.join('\n'))
   console.log('Local security checks passed: no dynamic code, unapproved network APIs or embedded credentials detected; ' +
     'model checksum valid; raw main package ' + bytes + ' bytes. WeChat platform audit remains separate.')
-  if (!require('../miniprogram/config/index').contentSecurity.envId) {
+  const moderation = require('../miniprogram/config/index').contentSecurity
+  if (moderation.backend === 'http') {
+    if (!/^https:\/\/[a-z0-9.-]+(?:\/[a-z0-9_-]+)*$/i.test(moderation.apiBaseUrl || '')) {
+      throw new Error('Self-hosted moderation requires a fixed HTTPS base URL')
+    }
+    console.log('Self-hosted HTTPS moderation selected; backend deployment and real WeChat callback verification remain required.')
+  } else if (!moderation.envId) {
     console.log('Cloud moderation environment is not configured; image selection, preview and saving remain blocked.')
   }
 }
