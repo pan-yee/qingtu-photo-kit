@@ -3,7 +3,7 @@ module.exports = {
 
   // 部署内容安全云函数后填入环境 ID；未配置时图片处理与导出保持拦截。
   contentSecurity: {
-    envId: '',
+    envId: 'photo-d0gn3yvetb21c4a41',
     functionName: 'contentSecurity'
   },
 
