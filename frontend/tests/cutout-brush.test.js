@@ -8,9 +8,12 @@ const contentSecurity = require('../miniprogram/utils/content-security')
 // 此文件隔离测试相册/页面行为；真实内容安全链路在 content-security.test.js 中覆盖。
 function test(name, fn) {
   harness.test(name, async function () {
+    const config = require('../miniprogram/config/index')
+    const previousBackend = config.portraitBackend
+    config.portraitBackend = 'local'
     const saved = contentSecurity.ensureSafe
     contentSecurity.ensureSafe = async function () {}
-    try { await fn() } finally { contentSecurity.ensureSafe = saved }
+    try { await fn() } finally { contentSecurity.ensureSafe = saved; config.portraitBackend = previousBackend }
   })
 }
 
@@ -371,4 +374,42 @@ test('模型明确没有识别人像时提示重新选图，不偷偷改用颜�
     assert.strictEqual(page.data.resultSrc, '')
     assert.strictEqual(page.data.engineNotice, '')
   } finally { page.onUnload(); restoreWx() }
+})
+
+test('ECS 抠图失败时不降级为颜色抠除，也不输出破损照片', async function () {
+  const restoreWx = installWx()
+  const remote = require('../miniprogram/utils/portrait-remote')
+  const previous = remote.segment
+  require('../miniprogram/config/index').portraitBackend = 'ecs'
+  remote.segment = async function () { throw new Error('抠图服务暂不可用') }
+  const page = createPageInstance(loadPage())
+  try {
+    await assert.rejects(page.preparePhoto('tmp-source.png'), /暂不可用/)
+    assert.strictEqual(page.data.hasImage, false)
+    assert.strictEqual(page.data.resultSrc, '')
+    assert.strictEqual(page._portraitMask, null)
+    assert.strictEqual(page._borderColors, undefined)
+  } finally { page.onUnload(); remote.segment = previous; restoreWx() }
+})
+
+test('ECS 连续遮罩复用，换底色和尺寸不会重新上传人像', async function () {
+  const restoreWx = installWx()
+  const remote = require('../miniprogram/utils/portrait-remote')
+  const previous = remote.segment
+  require('../miniprogram/config/index').portraitBackend = 'ecs'
+  let runs = 0
+  remote.segment = async function () {
+    runs += 1
+    return { data: new Float32Array(32 * 32).fill(.75), width: 32, height: 32, matting: true }
+  }
+  const page = createPageInstance(loadPage())
+  try {
+    await page.preparePhoto('tmp-source.png')
+    assert.strictEqual(page.data.portraitMode, true)
+    assert(alphaAt(page, 450, 600) > 180 && alphaAt(page, 450, 600) < 255)
+    await page.choosePhotoSize({ currentTarget: { dataset: { key: 'two-inch' } } })
+    page.data.backgroundKey = 'red'
+    await page.renderResult()
+    assert.strictEqual(runs, 1)
+  } finally { page.onUnload(); remote.segment = previous; restoreWx() }
 })

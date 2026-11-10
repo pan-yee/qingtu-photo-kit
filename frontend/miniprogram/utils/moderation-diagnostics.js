@@ -3,7 +3,7 @@ const STAGES = [
   'configuration', 'cloud_init', 'cloud_allocate', 'cloud_submit', 'cloud_status',
   'cloud_upload', 'cloud_cleanup', 'wx_login', 'session', 'allocate', 'submit',
   'status', 'upload', 'cleanup', 'read_file', 'fingerprint', 'allocation_response',
-  'audit_response', 'file_binding', 'content_security', 'cloud_identity', 'cloud_configuration'
+  'audit_response', 'file_binding', 'content_security', 'cloud_identity', 'cloud_configuration', 'matting'
 ]
 const REASONS = [
   'invalid_configuration', 'unsupported_api', 'domain_not_allowed', 'tls_failed',

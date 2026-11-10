@@ -10,7 +10,7 @@
       </view>
       <view class="privacy-badge">
         <view class="privacy-dot"></view>
-        <text>本机处理 · 安全检测</text>
+        <text>图片处理 · 安全检测</text>
       </view>
     </view>
 
@@ -78,7 +78,7 @@
       </view>
       <view class="promise-copy">
         <text class="promise-title">图片处理与内容安全</text>
-        <text class="promise-desc">图片处理在本机完成；选图与处理结果需临时上传供微信内容安全检测。</text>
+        <text class="promise-desc">证件照使用服务器人像抠图，其他加工在本机完成；选图与处理结果需临时上传供微信内容安全检测。</text>
       </view>
     </view>
 

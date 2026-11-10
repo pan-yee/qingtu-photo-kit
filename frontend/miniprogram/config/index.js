@@ -1,5 +1,6 @@
 module.exports = {
   appName: '拾格图匣',
+  portraitBackend: 'ecs', // 'local' 可显式选择设备端轻量分割；服务失败不自动降级。
 
   // backend: 'cloud' 使用微信云开发；'http' 使用自有部署。修改后重新编译。
   // 两套参数同时保留，只启用选中的后端；服务异常时不会自动切换或跳过审核。

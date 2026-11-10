@@ -1,5 +1,7 @@
 # 拾格图匣后端
 
+证件照高清抠图使用独立 MODNet CPU 容器，部署与回滚步骤见 [人像抠图说明](./matting/README.md)。小程序安全检测仍可独立选择微信云环境，抠图不改变安全检测后端配置。
+
 参照 `dream-interpretation-ai` 的 Node.js / Express + MySQL + Docker 方式部署。本服务使用独立容器、数据库及 JWT 密钥；不修改解梦项目，不占用其 3000 端口或 `/api/` 路径。两个本地项目当前配置为同一个 AppID，须核对实际服务器配置后再决定凭据；同一 AppID 对应同一份 AppSecret，不同 AppID 不得混用。
 
 小程序默认地址：`https://www.ai-dreams.xyz/qingtu-api`。图片加工仍在手机本机完成；服务器完成微信身份校验、临时图片接收和微信内容检测。当前部署使用 `MODERATION_MODE=sync`，直接通过微信 `img_sec_check` 获取最终结果；不使用腾讯云函数、云数据库或云存储。异步模式仍可通过 `MODERATION_MODE=async` 显式启用，依赖 `media_check_async` 和可信结果回调。

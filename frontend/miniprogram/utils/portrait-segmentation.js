@@ -60,7 +60,11 @@ function readMask(result) {
 }
 
 function applyPortraitMask(image, mask, options) {
-  if (!(mask instanceof Float32Array) || mask.length !== SIDE * SIDE) {
+  const matting = mask && mask.matting === true
+  const values = matting ? mask.data : mask
+  const maskWidth = matting ? mask.width : SIDE
+  const maskHeight = matting ? mask.height : SIDE
+  if (!(values instanceof Float32Array) || values.length !== maskWidth * maskHeight) {
     throw new Error('人像遮罩尺寸不正确')
   }
   const opts = options || {}
@@ -74,14 +78,20 @@ function applyPortraitMask(image, mask, options) {
   let removedPixels = 0
   for (let y = 0; y < image.height; y += 1) {
     for (let x = 0; x < image.width; x += 1) {
-      const probability = sample(mask, SIDE, SIDE,
-        (x + 0.5) * SIDE / image.width - 0.5,
-        (y + 0.5) * SIDE / image.height - 0.5, 1, 0)
+      const probability = sample(values, maskWidth, maskHeight,
+        (x + 0.5) * maskWidth / image.width - 0.5,
+        (y + 0.5) * maskHeight / image.height - 0.5, 1, 0)
       let alpha = probability >= midpoint ? 1 : 0
       if (softness > 0) {
         const t = Math.max(0, Math.min(1,
           (probability - midpoint + softness) / (2 * softness)))
         alpha = t * t * (3 - 2 * t)
+      }
+      // MODNet already predicts alpha, not class confidence. Preserve hair transparency.
+      if (matting) {
+        alpha = Math.max(0, Math.min(1, probability + (36 - tolerance) / 150))
+        const blend = Math.max(0, Math.min(1, feather / 8))
+        alpha += (alpha * alpha * (3 - 2 * alpha) - alpha) * blend
       }
       const offset = (y * image.width + x) * 4 + 3
       output[offset] = Math.round(image.data[offset] * alpha)

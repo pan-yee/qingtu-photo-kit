@@ -1,0 +1,23 @@
+services:
+  app:
+    environment:
+      MATTING_URL: http://matting:3002/matte
+  matting:
+    build:
+      context: ./matting
+      args:
+        PYTHON_PACKAGE_INDEX: ${PYTHON_PACKAGE_INDEX:-https://pypi.org/simple}
+    container_name: qingtu-matting
+    restart: unless-stopped
+    mem_limit: 700m
+    cpus: 2
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - ./matting/models:/models:ro
+    logging:
+      driver: json-file
+      options:
+        max-size: 5m
+        max-file: '2'

@@ -1,0 +1,28 @@
+{
+  "model_sha256": "07c308cf0fc7e6e8b2065a12ed7fc07e1de8febb7dc7839d7b7f15dd66584df9",
+  "fixture": "tests/fixtures/astronaut.png, center crop to 900x1200",
+  "ecs_public_https_smoke": {
+    "request_origin": "same ECS instance; this does not validate external-device reachability",
+    "ok": true,
+    "engine": "modnet",
+    "width": 512,
+    "height": 672,
+    "elapsed_ms": 2763,
+    "alpha_min": 0,
+    "alpha_max": 255,
+    "mask_sha256": "8a0c47d3c40b11953bf22815fc9eb4da75dff605ba7434998ee20209e41940356",
+    "worker_memory_mib_after_request": 280.2,
+    "worker_memory_limit_mib": 700,
+    "unauthenticated_request_status": 401
+  },
+  "external_domain_check": {
+    "ok": false,
+    "domain": "www.ai-dreams.xyz",
+    "http_status": 403,
+    "http_error_text": "Non-compliance ICP Filing",
+    "https_result": "TLS connection closed before HTTP request with domain SNI",
+    "requires": "Resolve website ICP filing or Alibaba Cloud access filing before device testing"
+  },
+  "local_tests": { "frontend": 154, "backend": 31 },
+  "scope": "One public-image model test and authenticated public HTTPS request with a server-signed short-lived test JWT. No real-device wx.login, user-photo quality, or platform audit verification. Local preview example uses local ONNX Runtime; slight numerical differences from ECS are possible."
+}

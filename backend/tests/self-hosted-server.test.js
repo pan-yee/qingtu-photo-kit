@@ -32,6 +32,40 @@ function fixture() {
     }
   }
 }
+
+test('高清抠图需要登录、限制每用户次数，服务错误不输出图片结果', async function () {
+  const http = require('http')
+  const previous = process.env.MATTING_URL
+  let calls = 0
+  const worker = http.createServer((req, res) => {
+    calls += 1; req.resume()
+    res.setHeader('Content-Type', 'application/json')
+    res.end(JSON.stringify({ ok: true, engine: 'modnet', width: 32, height: 32, png: 'test-mask' }))
+  }).listen(0, '127.0.0.1')
+  await new Promise(resolve => worker.once('listening', resolve))
+  process.env.MATTING_URL = 'http://127.0.0.1:' + worker.address().port + '/matte'
+  try {
+    await withServer(async ({ call, login }) => {
+      assert.strictEqual((await call('/jobs/matte', 'POST', Buffer.from('image'))).status, 401)
+      assert.strictEqual(calls, 0)
+      const token = await login()
+      for (let i = 0; i < 6; i += 1) {
+        const response = await call('/jobs/matte', 'POST', Buffer.from('image'), token)
+        assert.strictEqual(response.status, 200)
+        assert.strictEqual((await response.json()).engine, 'modnet')
+      }
+      assert.strictEqual((await call('/jobs/matte', 'POST', Buffer.from('image'), token)).status, 503)
+      assert.strictEqual(calls, 6)
+      delete process.env.MATTING_URL
+      const response = await call('/jobs/matte', 'POST', Buffer.from('image'), token)
+      assert.deepStrictEqual(await response.json(), { ok: false, code: 'MATTING_UNAVAILABLE' })
+    })
+  } finally {
+    if (previous === undefined) delete process.env.MATTING_URL
+    else process.env.MATTING_URL = previous
+    worker.closeAllConnections(); await new Promise(resolve => worker.close(resolve))
+  }
+})
 async function withServer(body, isReady, moderationMode = 'async', syncCheck = async () => ({ errcode: 0 })) {
   const dataDir = await fs.mkdtemp(path.join(os.tmpdir(), 'qingtu-server-test-'))
   const config = { dataDir, appId: 'wx2b68d0818781b66d', jwtSecret: 'j'.repeat(40),

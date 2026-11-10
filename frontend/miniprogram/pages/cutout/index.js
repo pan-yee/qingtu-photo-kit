@@ -6,6 +6,7 @@ const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
 const processing = require('../../utils/image-processing')
 const portrait = require('../../utils/portrait-segmentation')
+const remotePortrait = require('../../utils/portrait-remote')
 
 Page({
   data: {
@@ -129,14 +130,20 @@ Page({
       )
       this._sourceImageData = sourceContext.getImageData(0, 0, width, height)
       // 模型每张照片只推理一次，换底色、边缘调整和涂抹复用概率遮罩。
-      if (!this._segmenter) this._segmenter = portrait.createSegmenter()
+      if (config.portraitBackend !== 'ecs' && !this._segmenter) this._segmenter = portrait.createSegmenter()
       try {
-        const mask = await this._segmenter.segment(this._sourceImageData)
+        const mask = config.portraitBackend === 'ecs'
+          ? await remotePortrait.segment(await canvasTools.canvasToTempFile(sourceCanvas, 'png', 1))
+          : await this._segmenter.segment(this._sourceImageData)
         if (this._disposed || photoToken !== this._photoToken) return
         this._portraitMask = mask
         this.setData({ portraitMode: true })
       } catch (error) {
         if (this._disposed || photoToken !== this._photoToken) return
+        if (config.portraitBackend === 'ecs') {
+          this.setData({ hasImage: false, resultSrc: '' })
+          throw new Error(error.message || '高清人像抠图暂不可用，请稍后重试')
+        }
         if (error.code === 'NO_PORTRAIT') {
           this.setData({ hasImage: false, resultSrc: '' })
           throw error

@@ -97,6 +97,18 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
       next()
     } catch (error) { res.status(401).json(unavailable(res)) }
   })
+  app.post('/jobs/matte', express.raw({ type: 'application/octet-stream', limit: MAX_BYTES }), async function (req, res) {
+    try {
+      if (!process.env.MATTING_URL || !Buffer.isBuffer(req.body) || !req.body.length) throw new Error('Matting unavailable')
+      await store.rateLimit('matte:' + req.openid, Math.floor(Date.now() / 60000), 6)
+      const response = await fetch(process.env.MATTING_URL, { method: 'POST', body: req.body,
+        headers: { 'Content-Type': 'application/octet-stream' }, signal: AbortSignal.timeout(45000) })
+      if (!response.ok) throw new Error('Matting unavailable')
+      const result = await response.json()
+      if (result.ok !== true || result.engine !== 'modnet' || typeof result.png !== 'string' || result.png.length > 2000000) throw new Error('Invalid matte')
+      res.json(result)
+    } catch (error) { res.status(503).json({ ok: false, code: 'MATTING_UNAVAILABLE' }) }
+  })
   app.post('/jobs', express.json({ limit: '2kb' }), async function (req, res) {
     try { res.json(await service.call({ action: 'allocate' }, req.openid)) }
     catch (error) { res.status(503).json(unavailable(res)) }

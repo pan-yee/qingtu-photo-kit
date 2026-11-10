@@ -11,12 +11,12 @@ function validate() {
 }
 function request(path, method, data, token, binary) {
   const baseUrl = validate()
-  const stage = path === '/session' ? 'session' : path === '/jobs' ? 'allocate'
+  const stage = path === '/jobs/matte' ? 'matting' : path === '/session' ? 'session' : path === '/jobs' ? 'allocate'
     : path.endsWith('/submit') ? 'submit' : path.endsWith('/status') ? 'status'
       : method === 'DELETE' ? 'cleanup' : 'upload'
   return new Promise(function (resolve, reject) {
     wx.request({ url: baseUrl + path, method, data,
-      timeout: binary ? 30000 : path.endsWith('/submit') ? 55000 : 20000,
+      timeout: path === '/jobs/matte' ? 55000 : binary ? 30000 : path.endsWith('/submit') ? 55000 : 20000,
       header: Object.assign({ 'Content-Type': binary ? 'application/octet-stream' : 'application/json' },
         token ? { Authorization: 'Bearer ' + token } : {}),
       success: function (response) {
@@ -67,6 +67,7 @@ function taskPath(id) {
 }
 module.exports = {
   validate,
+  matte(bytes) { return authenticated('/jobs/matte', 'POST', bytes, true) },
   rpc(data) {
     if (data.action === 'allocate') return authenticated('/jobs', 'POST', {})
     if (data.action === 'status') return authenticated(taskPath(data.jobId) + '/status', 'GET')

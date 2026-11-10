@@ -14,6 +14,8 @@ i18n/
 .env.*
 !.env.example
 backend/data/
+backend/matting/models/
+__pycache__/
 backend/backups/
 # Qoder 自动生成的项目知识库缓存
 .qoder/

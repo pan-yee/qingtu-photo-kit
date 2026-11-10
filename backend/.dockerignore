@@ -7,6 +7,7 @@
 **/__pycache__
 tests
 docs
+matting
 *.log
 
 # Never include code-upload or SSH private keys in an application image.

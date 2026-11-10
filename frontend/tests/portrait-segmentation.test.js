@@ -6,6 +6,13 @@ function tensor(mask) {
   return { activation_10: { type: 'float32', shape: [1, 1, 256, 256], data: mask.buffer } }
 }
 
+test('高清抠图直接保留连续透明度和原始颜色，不把发丝半透明值二值化', function () {
+  const source = makeImage(4, 1, function () { return [90, 80, 70, 255] })
+  const mask = { matting: true, width: 4, height: 1, data: new Float32Array([0, .25, .75, 1]) }
+  const result = portrait.applyPortraitMask(source, mask, { featherRadius: 0 })
+  assert.deepStrictEqual(Array.from(result.data), [90,80,70,0,90,80,70,64,90,80,70,191,90,80,70,255])
+})
+
 test('人像模型输入为 RGB NCHW 0..1，透明度不进入颜色通道', function () {
   const input = portrait.createInput(makeImage(1, 1, function () { return [255, 0, 128, 0] }))
   assert.strictEqual(input.length, 256 * 256 * 3)
