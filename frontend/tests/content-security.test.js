@@ -59,7 +59,7 @@ async function withClient(options, body) {
         if (value.data.action === 'allocate') return { result: { ok: true, jobId: id, uploadPath: 'moderation-inbox/user/' + id } }
         if (options.mutate) files.set(currentPath, Buffer.from('changed-image'))
         return { result: { ok: options.ok !== false, jobId: id, status: typeof options.status === 'function' ? options.status(currentPath) : options.status || 'pass',
-          sha1: options.wrongHash ? '0'.repeat(40) : digest, expiresAt: Date.now() + 60000 } }
+          diagnostic: options.diagnostic, sha1: options.wrongHash ? '0'.repeat(40) : digest, expiresAt: Date.now() + 60000 } }
       }
     },
     chooseMedia: value => value.success({ tempFiles: [{ tempFilePath: 'input.png', size: 20 }] }),
@@ -117,7 +117,7 @@ test('云能力不可用或 backend 参数无效时不偷偷切换另一后端',
 test('云调用失败只记录固定阶段与数字错误码，不输出接口原始错误', async function () {
   const originalWarn = console.warn
   const lines = []
-  console.warn = value => lines.push(value)
+  console.warn = (label, value) => lines.push({ label, value })
   const error = new Error('sensitive-image-url-and-token')
   error.errCode = -502001
   try {
@@ -125,10 +125,11 @@ test('云调用失败只记录固定阶段与数字错误码，不输出接口�
       await assert.rejects(f.client.ensureSafe('input.png'), { code: 'CONTENT_SECURITY_UNAVAILABLE' })
       assert.strictEqual(f.uploads(), 0)
     })
-    assert.deepStrictEqual(JSON.parse(lines[0]), {
-      event: 'content_security_client', stage: 'cloud_rpc_failed', code: -502001, action: 'allocate'
+    assert.strictEqual(lines[0].label, '[content-security]')
+    assert.deepStrictEqual(JSON.parse(lines[0].value), {
+      stage: 'cloud_allocate', reason: 'unknown', platformCode: -502001
     })
-    assert(!lines.join('').includes('sensitive-image-url-and-token'))
+    assert(!JSON.stringify(lines).includes('sensitive-image-url-and-token'))
   } finally { console.warn = originalWarn }
 })
 
@@ -229,4 +230,23 @@ test('九宫格全部通过后保存 9 张，保存阶段复用逐张摘要结�
     assert.strictEqual(f.saved(), 9)
     assert.strictEqual(f.uploads(), 9)
   })
+})
+
+
+test('云函数返回安全配置诊断时保留原因，不将服务失败视为通过', async function () {
+  const previousWarn = console.warn
+  const logs = []
+  console.warn = (...values) => logs.push(values)
+  try {
+    await withClient({ ok: false, diagnostic: { stage: 'cloud_configuration', reason: 'callback_config_missing',
+      token: 'must-not-log-this', openid: 'must-not-log-user' } }, async function (f) {
+      await assert.rejects(f.client.ensureSafe('input.png'), function (error) {
+        assert.deepStrictEqual(error.diagnostic, { stage: 'cloud_configuration', reason: 'callback_config_missing' })
+        return true
+      })
+    })
+    const logged = JSON.stringify(logs)
+    assert(logged.includes('callback_config_missing'))
+    assert(!logged.includes('must-not-log'))
+  } finally { console.warn = previousWarn }
 })

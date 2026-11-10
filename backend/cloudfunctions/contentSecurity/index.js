@@ -98,20 +98,33 @@ exports.main = async function (event) {
       return { statusCode: 403, headers: { 'Content-Type': 'text/plain' }, body: 'invalid callback' }
     }
   }
+  const stages = { allocate: 'cloud_allocate', submit: 'cloud_submit', status: 'cloud_status' }
+  let stage = 'cloud_identity'
+  function failed(reason, error) {
+    reportFailure(stage, error)
+    const diagnostic = { stage, reason }
+    if (error && Number.isInteger(error.errCode) && Math.abs(error.errCode) <= 999999999) {
+      diagnostic.platformCode = error.errCode
+    }
+    return { ok: false, code: 'CONTENT_SECURITY_UNAVAILABLE', diagnostic }
+  }
   try {
     const context = cloud.getWXContext()
-    if (context.APPID !== APP_ID || !process.env.CONTENT_SECURITY_CALLBACK_TOKEN ||
-        !/^[A-Za-z0-9+/]{43}$/.test(process.env.CONTENT_SECURITY_CALLBACK_AES_KEY || '')) {
-      throw new Error('Content security not configured')
+    if (context.APPID !== APP_ID) return failed('appid_mismatch')
+    stage = 'cloud_configuration'
+    if (!process.env.CONTENT_SECURITY_CALLBACK_TOKEN || !process.env.CONTENT_SECURITY_CALLBACK_AES_KEY) {
+      return failed('callback_config_missing')
     }
+    if (!/^[A-Za-z0-9+/]{43}$/.test(process.env.CONTENT_SECURITY_CALLBACK_AES_KEY)) {
+      return failed('callback_config_invalid')
+    }
+    stage = stages[event && event.action] || 'content_security'
     const result = await service.call(event || {}, context.OPENID)
     const action = ['allocate', 'submit', 'status'].includes(event && event.action) ? event.action : 'unknown'
     console.log(JSON.stringify({ event: 'content_security_action', action, ok: true }))
     return result
   } catch (error) {
-    const action = ['allocate', 'submit', 'status'].includes(event && event.action) ? event.action : 'unknown'
-    reportFailure(action, error)
-    // 不把微信安全标签、图片 URL、用户身份或服务端异常发送给用户。
-    return { ok: false, code: 'CONTENT_SECURITY_UNAVAILABLE' }
+    // 只返回固定阶段和数字错误码，不返回原始错误、身份、URL 或微信安全标签。
+    return failed('service_rejected', error)
   }
 }
