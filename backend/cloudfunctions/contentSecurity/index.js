@@ -88,7 +88,7 @@ function reportFailure(stage, error) {
           : /Missing user identity/i.test(message) ? 'identity_missing' : 'unknown'
   console.error(JSON.stringify({ event: 'content_security_failure', stage, code, reason }))
 }
-const AUDIT_MODE = process.env.CONTENT_SECURITY_AUDIT_MODE || 'async'
+const AUDIT_MODE = process.env.CONTENT_SECURITY_AUDIT_MODE || 'sync'
 const service = createService({ store, files, check: input => cloud.openapi.security.mediaCheckAsync(input),
   checkImmediate: AUDIT_MODE === 'sync' ? createCloudImageCheck(cloud) : undefined, onFailure: reportFailure })
 

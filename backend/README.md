@@ -130,7 +130,7 @@ npm run check
 
 上线后用自己的合规图片完成一次：静默登录 → 上传 → 获得 traceId/pending → 收到微信可信 pass → 预览与保存；再验证拒绝、超时、断网、回调丢失和九宫格整批拦截。保留无图片、无密钥的时间、traceId、状态和操作路径作为审核证据。
 
-本项目同时提供 `cloudfunctions/contentSecurity` 云开发入口和独立 Express / MySQL 部署。前端默认配置 `backend: 'cloud'`，使用原云环境 `photo-d0gn3yvetb21c4a41`；设为 `'http'` 时调用自建服务。云函数默认异步检测并需要配置回调；设置 `CONTENT_SECURITY_AUDIT_MODE=sync` 可启用同步检测。云开发部署步骤见 [云开发部署](./docs/云开发部署.md)。切换前确保目标环境的权限与清理策略就绪；选择后端不会自动部署、停用或删除另一套资源。自建服务的 `MODERATION_MODE` 只控制其内部同步/异步检测方式，不代替前端后端选择参数。
+本项目同时提供 `cloudfunctions/contentSecurity` 云开发入口和独立 Express / MySQL 部署。前端默认配置 `backend: 'cloud'`，使用原云环境 `photo-d0gn3yvetb21c4a41`；设为 `'http'` 时调用自建服务。云函数默认同步检测；设置 `CONTENT_SECURITY_AUDIT_MODE=async` 可启用原异步检测并配置回调。云开发部署步骤见 [云开发部署](./docs/云开发部署.md)。切换前确保目标环境的权限与清理策略就绪；选择后端不会自动部署、停用或删除另一套资源。自建服务的 `MODERATION_MODE` 只控制其内部同步/异步检测方式，不代替前端后端选择参数。
 
 
 ## 从旧目录升级
