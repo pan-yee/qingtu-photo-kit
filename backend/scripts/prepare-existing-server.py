@@ -17,7 +17,7 @@ def main():
     root = Path(__file__).resolve().parents[1]
     env_path = root / '.env'
     if env_path.exists():
-        raise RuntimeError('Existing server/.env preserved; preparation is already complete or needs manual review')
+        raise RuntimeError('Existing backend .env preserved; preparation is already complete or needs manual review')
     inspected = json.loads(subprocess.check_output(['docker', 'inspect', 'dream-ai-server']))[0]
     source = dict(item.split('=', 1) for item in inspected['Config']['Env'] if '=' in item)
     if source.get('WX_APPID') != 'wx2b68d0818781b66d' or not source.get('WX_SECRET'):

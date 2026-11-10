@@ -6,16 +6,17 @@ import shutil
 import subprocess
 import sys
 
-root = Path(__file__).resolve().parents[2]
+root = Path(__file__).resolve().parents[1]
 target = Path('/etc/nginx/conf.d/www.ai-dreams.xyz.ssl.conf')
-include = '    include ' + str(root / 'server/nginx-location.conf') + ';'
+include = '    include ' + str(root / 'nginx-location.conf') + ';'
 original = target.read_text()
-updated = original
+legacy_include = '    include ' + str(root.parent / 'server/nginx-location.conf') + ';'
+updated = original.replace(legacy_include, include)
 if not re.search(r'listen\s+443\s+ssl', original):
     raise SystemExit('Expected HTTPS virtual host not found; no change')
-if include not in original:
+if include not in updated:
     pattern = r'(server_name\s+www\.ai-dreams\.xyz\s*;)'
-    updated, count = re.subn(pattern, lambda match: match[0] + '\n' + include, original)
+    updated, count = re.subn(pattern, lambda match: match[0] + '\n' + include, updated)
     if count != 1:
         raise SystemExit('Virtual host is ambiguous; no change')
 changes = {target: (original, updated)}

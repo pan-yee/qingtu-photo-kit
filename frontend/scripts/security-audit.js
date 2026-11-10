@@ -2,7 +2,6 @@
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
-const vm = require('vm')
 const root = path.resolve(__dirname, '..')
 const appRoot = path.join(root, 'miniprogram')
 
@@ -29,16 +28,6 @@ function auditSource(source, options = {}) {
 function audit() {
   const errors = []
   const files = walk(appRoot)
-  ;['index.js', 'service.js', 'callback.js'].forEach(function (name) {
-    const file = path.join(root, 'cloudfunctions/contentSecurity', name)
-    try { new vm.Script(fs.readFileSync(file, 'utf8'), { filename: file }) }
-    catch (error) { errors.push('Cloud function syntax: ' + error.message) }
-  })
-  fs.readdirSync(path.join(root, 'server')).filter(name => name.endsWith('.js')).forEach(function (name) {
-    const file = path.join(root, 'server', name)
-    try { new vm.Script(fs.readFileSync(file, 'utf8'), { filename: file }) }
-    catch (error) { errors.push('Self-hosted server syntax: ' + error.message) }
-  })
   files.filter(function (file) { return file.endsWith('.js') }).forEach(function (file) {
     const source = fs.readFileSync(file, 'utf8')
     if (/wx\.cloud\.(?:callFunction|uploadFile|deleteFile)\s*\(/.test(source) &&

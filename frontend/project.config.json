@@ -41,6 +41,5 @@
   },
   "libVersion": "3.17.1",
   "editorSetting": {},
-  "condition": {},
-  "cloudfunctionRoot": "cloudfunctions/"
+  "condition": {}
 }

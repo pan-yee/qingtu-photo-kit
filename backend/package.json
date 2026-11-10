@@ -1,0 +1,19 @@
+{
+  "name": "qingtu-photo-backend",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node tests/run-tests.js",
+    "validate": "node scripts/validate.js",
+    "check": "node scripts/validate.js && node tests/run-tests.js"
+  },
+  "dependencies": {
+    "express": "5.2.1",
+    "jsonwebtoken": "9.0.3",
+    "mysql2": "3.23.3"
+  }
+}

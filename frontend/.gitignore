@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+project.private.config.json
+*.miniapp.json
+miniapp/
+i18n/
+*.log
+.env
+.env.*
+!.env.example
+.idea/
+.vscode/
+.qoder/
+__pycache__/

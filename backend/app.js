@@ -1,7 +1,7 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
-const { createService } = require('../cloudfunctions/contentSecurity/service')
-const { readCallback } = require('../cloudfunctions/contentSecurity/callback')
+const { createService } = require('./cloudfunctions/contentSecurity/service')
+const { readCallback } = require('./cloudfunctions/contentSecurity/callback')
 const MAX_BYTES = 10 * 1024 * 1024
 const unavailable = { ok: false, code: 'CONTENT_SECURITY_UNAVAILABLE' }
 

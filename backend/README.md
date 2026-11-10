@@ -1,8 +1,10 @@
-# 自有服务器图片内容安全服务
+# 拾格图匣后端
 
 参照 `dream-interpretation-ai` 的 Node.js / Express + MySQL + Docker 方式部署。本服务使用独立容器、数据库及 JWT 密钥；不修改解梦项目，不占用其 3000 端口或 `/api/` 路径。两个本地项目当前配置为同一个 AppID，须核对实际服务器配置后再决定凭据；同一 AppID 对应同一份 AppSecret，不同 AppID 不得混用。
 
 小程序默认地址：`https://www.ai-dreams.xyz/qingtu-api`。图片加工仍在手机本机完成；服务器只完成微信身份校验、临时图片接收、微信 `media_check_async` 调用和可信结果回调。默认链路不使用腾讯云函数、云数据库或云存储。
+
+本目录可独立复制为后端仓库，包含服务端源码、内容安全模块、测试、锁文件、Docker 与运维脚本；不读取前端或外层仓库文件。
 
 ## 部署前准备
 
@@ -13,14 +15,14 @@
 
 ## 在服务器安装
 
-将此仓库单独部署到例如 `/opt/qingtu-photo-kit`，不要覆盖解梦项目的部署目录。
+将此后端项目单独部署到例如 `/opt/qingtu-backend`，不要覆盖解梦项目的部署目录。
 
 ```sh
-cd /opt/qingtu-photo-kit
-cp server/.env.example server/.env
+cd /opt/qingtu-backend
+cp .env.example .env
 ```
 
-编辑 `server/.env`：
+编辑后端根目录 `.env`：
 
 - `WX_SECRET`：图片小程序的 AppSecret。
 - `JWT_SECRET`、`MEDIA_SIGNING_SECRET`：分别生成至少 32 字符的独立随机值，例如各执行一次 `openssl rand -hex 32`，不要共用。
@@ -30,9 +32,9 @@ cp server/.env.example server/.env
 - `PUBLIC_BASE_URL`：保持 `https://www.ai-dreams.xyz/qingtu-api`，它用于生成微信抓取图片所需的带签名 HTTPS 地址。
 
 ```sh
-chmod 600 server/.env
-docker compose --env-file server/.env -f server/docker-compose.yml up -d --build
-docker compose --env-file server/.env -f server/docker-compose.yml ps
+chmod 600 .env
+docker compose --env-file .env -f docker-compose.yml up -d --build
+docker compose --env-file .env -f docker-compose.yml ps
 curl -f http://127.0.0.1:3001/health
 ```
 
@@ -42,12 +44,12 @@ curl -f http://127.0.0.1:3001/health
 
 ### 本次现有服务器部署
 
-服务器 `47.116.65.136` 已有宿主机 MySQL 8，使用 `docker-compose.host-db.yml` 连接独立 `qingtu_photo` 数据库和专用普通用户，不另启 MySQL 容器。部署目录为 `/opt/qingtu-photo-kit`，后续操作使用：
+服务器 `47.116.65.136` 已有宿主机 MySQL 8，使用 `docker-compose.host-db.yml` 连接独立 `qingtu_photo` 数据库和专用普通用户，不另启 MySQL 容器。此前部署目录为 `/opt/qingtu-photo-kit`。本次仅重构代码，未自动改动远程 `.env`、容器和数据库；同仓库升级后，后端工作目录应为 `/opt/qingtu-photo-kit/backend`。先按下方升级步骤保留配置，再使用：
 
 ```sh
-cd /opt/qingtu-photo-kit
-docker compose --env-file server/.env -f server/docker-compose.host-db.yml up -d --build
-docker exec qingtu-photo-server node server/scripts/verify-store.js
+cd /opt/qingtu-photo-kit/backend
+docker compose --env-file .env -f docker-compose.host-db.yml up -d --build
+docker exec qingtu-photo-server node scripts/verify-store.js
 ```
 
 按用户明确要求，原 `dream-ai-server` 已停止并将重启策略设为 `no`；旧 HTTPS 根路径改为 410，HTTP 入口跳转 HTTPS，原数据库保留。Nginx 变更前的配置备份保存在部署目录 `backups/`。不要执行原解梦 Compose 的 `up`，否则会人为重新启用旧服务。
@@ -85,10 +87,10 @@ curl -f https://www.ai-dreams.xyz/qingtu-api/health
 
 ## 验证和限制
 
-仓库根目录先安装服务端锁定依赖，再执行完整本地检查：
+在本后端项目根目录安装锁定依赖，并执行独立检查：
 
 ```sh
-cd server && npm ci && cd ..
+npm ci
 npm run check
 ```
 
@@ -97,3 +99,24 @@ npm run check
 上线后用自己的合规图片完成一次：静默登录 → 上传 → 获得 traceId/pending → 收到微信可信 pass → 预览与保存；再验证拒绝、超时、断网、回调丢失和九宫格整批拦截。保留无图片、无密钥的时间、traceId、状态和操作路径作为审核证据。
 
 旧 `cloudfunctions/contentSecurity` 云开发入口仍保留，便于回滚与复用其已测试的纯业务模块；默认配置 `backend: 'http'` 不会调用该云函数。确认自有服务器链路可用后，再由你决定停用云环境或清理旧资源，迁移代码不会自动删除任何腾讯云资源。
+
+
+## 从旧目录升级
+
+如果现有服务器检出旧布局，更新代码后原来的 `server/.env` 可能仍作为本机文件保留。先确认并安全复制到 `backend/.env`，不得覆盖已有目标配置；不要重新运行一次性建库脚本。数据库、普通用户和密钥继续复用，Compose 的项目名、容器名和命名卷保持不变。
+
+```sh
+# 在同仓库根目录，仅在 backend/.env 不存在时执行。
+test ! -e backend/.env && install -m 600 server/.env backend/.env
+cd backend
+npm ci
+npm run check
+# 确认 .env、现有卷和 Nginx 路径后再更新线上容器。
+docker compose --env-file .env -f docker-compose.host-db.yml up -d --build
+```
+
+新容器的代码目录是 `/app`，运维探针命令改为 `node scripts/verify-store.js` 和 `node scripts/verify-wechat.js`。临时图片卷仍是原来的 `photo_temp`，容器内挂载点改为 `/app/data`，不会创建新的逻辑数据卷。
+
+现有 Nginx 若仍 include 旧 `server/nginx-location.conf`，需要替换为新 `backend/nginx-location.conf` 后执行 `nginx -t`。`scripts/configure-nginx.py` 支持替换本仓库旧 include 路径，会备份并在验证失败时回滚；不要在其他站点上运行此专用脚本。历史备份目录继续保留。
+
+API 约定见[前后端接口](./docs/后端接口.md)。此项目不需要微信开发者工具或前端代码；启动仍需要配置真实 MySQL 与服务端环境变量。

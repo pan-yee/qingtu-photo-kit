@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 const fs = require('fs/promises')
 const path = require('path')
-const { imageType } = require('../cloudfunctions/contentSecurity/service')
+const { imageType } = require('./cloudfunctions/contentSecurity/service')
 const TTL = 10 * 60000
 
 async function createFiles(config) {

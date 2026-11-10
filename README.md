@@ -1,77 +1,40 @@
 # 拾格图匣
 
-一个微信小程序图片处理工具，功能包括：
+项目已拆分为两个可独立复制、安装、测试和部署的项目。当前仍在同一 Git 仓库中管理；没有创建新的远程仓库，也没有重新部署线上服务。
 
-- 本机人像分割换底色（白、蓝、红、灰、透明），支持一寸、二寸和 3:4 尺寸
-- 图片压缩，支持三档尺寸与质量
-- 纯色背景局部擦除（适合文字、小面积水印）
-- 多图拼接，支持宫格、横版、竖版和海报模板
-- 九宫格切图，一次切出 9 张可依次保存的图片
+| 项目 | 目录 | 用途 | 独立检查 |
+| --- | --- | --- | --- |
+| 前端 | [frontend](./frontend/README.md) | 微信小程序、端侧图片处理、HTTPS 内容安全客户端 | `cd frontend && npm run check` |
+| 后端 | [backend](./backend/README.md) | Express / MySQL 内容安全服务、微信登录与回调、Docker 部署 | `cd backend && npm ci && npm run check` |
 
-图片加工在设备本机完成；按微信审核要求，选中图片和处理结果需经用户同意后临时上传至运营者服务器，交由微信内容安全服务检测。检测通过后才能预览和保存。默认使用独立的 Node.js / Express + MySQL 后端，不依赖腾讯云函数、云数据库或云存储；小程序端不依赖第三方 npm 包。首次使用需要按[自有服务器部署说明](./server/README.md)完成后端、合法域名和可信回调配置；服务未就绪时图片操作保持拦截。
+前端不依赖后端源码或 Node.js 服务端依赖。后端的 Docker 构建只读取 `backend/`，不需要小程序源码、模型或外层仓库。两端通过固定的 HTTPS API 协议交互，默认地址保持 `https://www.ai-dreams.xyz/qingtu-api`，未修改业务接口或凭据。
 
-人像换底色使用随代码包分发的 MediaPipe Selfie Segmentation 预训练模型（Apache-2.0），通过微信本机推理接口运行；不提供生成式 AI、AI 对话或云端推理。应如实申报实际功能，并以微信后台的类目和校验要求为准。审核材料见[审核提交说明](./docs/审核说明.md)，模型来源与验证见[人像分割说明](./docs/人像分割.md)。
+## 开发
 
-## 快速开始
+在微信开发者工具中导入 **`frontend/`**，不要再导入仓库根目录。前端 API 配置在 `frontend/miniprogram/config/index.js`，AppID 和基础库配置在 `frontend/project.config.json`。
 
-1. 安装[微信开发者工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)。
-2. 打开工具，选择“导入项目”，目录选择本仓库根目录。
-3. `project.config.json` 已配置正式 AppID `wx2b68d0818781b66d` 和基础库 `3.17.1`，直接导入即可进行真机预览；若使用其他小程序主体，请替换为对应 AppID。
-4. 按[自有服务器部署说明](./server/README.md)部署独立后端及 MySQL，配置 Nginx、微信 request 合法域名和可信回调。默认服务地址为 `https://www.ai-dreams.xyz/qingtu-api`，与已有解梦 `/api/` 服务分开。
-5. 在管理后台补充小程序名称、类目、隐私保护指引，真实联调通过后再提交审核。
+后端配置使用 `backend/.env.example`，真实密钥仅保存在后端 `.env`。后端启动、MySQL、Nginx、回调与现有服务器升级步骤见[后端说明](./backend/README.md)。拆分不会自动搬迁线上 `server/.env` 或更新 Nginx include 路径，升级现有服务器前需保留配置及数据。
 
-## 功能边界
+在仓库根目录仍可统一验证：
 
-“人像换底色”优先使用本机人像分割模型，每张照片只推理一次。设备不支持或加载失败时会明确提示切换为纯色背景算法；未识别人像时提示重新选图。细发丝、透明物体、遮挡和多人照片仍可能处理不好，可使用手动修正。尺寸模板分别为一寸 295×413、二寸 413×579 和 3:4 900×1200 像素，仅调整比例与像素，不提供人脸定位、头部比例检测、打印 DPI 元数据或各类证件的官方合规保证。
-
-“局部擦除”通过采样笔刷周边像素进行平坦区域修复，适合纯色证件、表格或海报上的小水印。它不能还原大面积遮挡下的未知内容。不要用此工具移除他人作品中的版权标识，也不得用于伪造证件或规避版权保护。
-
-## 目录结构
-
-```text
-miniprogram/
-  pages/
-    home/       首页
-    cutout/     证件照换底色
-    compress/   图片压缩
-    erase/      局部擦除
-    collage/    图片拼接
-    grid/       九宫格切图
-  utils/        图片算法、画笔修复、画布、媒体与保存链路
-  components/   隐私授权等公共组件
-  config/       功能参数与广告配置
-  models/       端侧人像分割模型、完整许可与校验清单
-server/         自有服务器后端、Docker Compose 与 Nginx 配置
-cloudfunctions/ 旧云开发入口及两种后端共用的纯业务/回调模块
-docs/           审核与发布说明
-tests/          核心算法、修复算法、校验规则与页面工具单元测试（tests/*.test.js）
-scripts/        静态校验：checks.js 存放纯文本规则，validate.js 负责遍历与报告
+```sh
+npm ci --prefix backend
+npm run check
 ```
 
-## 商业化配置
+也可分别运行 `npm run check:frontend`、`npm run check:backend`。原有 157 项测试按归属分为前端 142 项、后端 15 项，没有减少验证范围。
 
-打开 `miniprogram/config/index.js`：
+## 独立分发
 
-```js
-enableRewardedAds: true,
-rewardedVideoAdUnitId: 'adunit-你的广告位ID'
-```
+单独复制 `frontend/` 或 `backend/` 即为完整项目，各自包含 README、LICENSE、package.json、测试及所需配置。后端包含 package-lock.json，前端无第三方 npm 依赖。无需 npm workspace、根目录 node_modules 或跨项目软链接。
 
-保存高清图片前会调用激励视频。未配置广告位时自动直接允许导出，便于开发调试。上线前还需在小程序后台开通流量主并审核广告位。
+接口说明分别保存在两个项目的 `docs/后端接口.md`，单独分发后仍可查阅。旧云开发备用实现归后端 `cloudfunctions/` 管理，默认仍使用自有 HTTPS 服务，不会自动删除腾讯云资源。
 
-首次上线建议保持激励广告关闭。待小程序审核通过并完成相应资质和广告位审核后，再开启广告配置。
 
-## 发布前检查
+## 本次拆分验证
 
-- 确认 `project.config.json` 中的 AppID 与本次提交的小程序主体一致。
-- 在“用户隐私保护指引”中声明选择图片、保存相册及临时上传图片供微信内容安全检测的用途与清理策略。
-- 若出现 `chooseMedia:fail api scope is not declared in the privacy agreement`，按[隐私错误处理说明](./docs/审核说明.md#解决-choosmedia-隐私错误)补齐“收集你选中的照片或视频信息”和“使用你的相册（仅写入）权限”两项。
-- 以真机检查相册授权拒绝后的引导流程。
-- 使用自己的原创图片测试，不收集、不上传未经用户许可的素材。
-- 首次执行 `cd server && npm ci && cd ..` 安装服务端测试依赖，再执行 `npm run check`（静态校验、本地安全约束检查、模型完整性检查和单元/本地 HTTP 集成测试）。该命令不能替代真实 MySQL、微信后台与真机联调；验证范围见[验证报告](./docs/验证报告.md)。
-- 项目只发布单端小程序。微信开发者工具若提示转换为「多端应用」，请选择不转换；`npm run check` 会拦截 `multiPlatform` 配置以及 `*.miniapp.json`、`miniapp/`、`i18n/` 产物。
-
-## License
-
-[MIT](./LICENSE)
-
+- 分别复制两个项目到独立临时目录：前端 142 项、后端 15 项测试全部通过；后端副本重新执行 `npm ci` 成功。
+- 从只有后端文件的目录构建 Docker 镜像成功；容器以非 root 用户加载实际业务模块，HTTP `/health` 检查通过（使用模拟存储，不代表真实 MySQL 或微信联调）。
+- 两种 Compose 配置均通过结构检查；真实环境文件和数据库未用于测试。
+- 前端模型转换对照及真实样本处理脚本在新目录下重新运行成功。
+- 此次未部署线上服务、未改动真实密钥或数据库，也未创建新的 GitHub 仓库。
