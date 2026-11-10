@@ -56,7 +56,7 @@ function audit() {
     if (!/^https:\/\/[a-z0-9.-]+(?:\/[a-z0-9_-]+)*$/i.test(moderation.apiBaseUrl || '')) {
       throw new Error('Self-hosted moderation requires a fixed HTTPS base URL')
     }
-    console.log('Self-hosted HTTPS moderation selected; backend deployment and real WeChat callback verification remain required.')
+    console.log('Self-hosted HTTPS moderation selected; backend deployment and real WeChat image-check verification remain required.')
   } else if (!moderation.envId) {
     console.log('Cloud moderation environment is not configured; image selection, preview and saving remain blocked.')
   }

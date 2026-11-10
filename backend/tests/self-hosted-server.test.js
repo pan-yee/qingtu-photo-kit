@@ -32,17 +32,19 @@ function fixture() {
     }
   }
 }
-async function withServer(body, isReady) {
+async function withServer(body, isReady, moderationMode = 'async', syncCheck = async () => ({ errcode: 0 })) {
   const dataDir = await fs.mkdtemp(path.join(os.tmpdir(), 'qingtu-server-test-'))
   const config = { dataDir, appId: 'wx2b68d0818781b66d', jwtSecret: 'j'.repeat(40),
     mediaSecret: 'm'.repeat(40), callbackToken: 'callbackToken', callbackAesKey: Buffer.alloc(32, 1).toString('base64').slice(0, 43),
-    publicBaseUrl: 'https://photos.example/qingtu-api' }
+    publicBaseUrl: 'https://photos.example/qingtu-api', moderationMode }
   const store = fixture()
+  const reports = []
   const files = await createFiles(config)
   let apiCalls = 0
   let mediaUrl
-  const app = createApp({ config, store, files, isReady, wechat: {
+  const app = createApp({ config, store, files, isReady, report: entry => reports.push(entry), wechat: {
     login: async code => code === 'second-user-code' ? 'openid_second_user' : 'openid_first_user',
+    checkImage: syncCheck,
     check: async input => { apiCalls += 1; mediaUrl = input.mediaUrl; return { errcode: 0, trace_id: 'trace_id_12345678' } }
   } })
   const server = app.listen(0, '127.0.0.1')
@@ -57,7 +59,7 @@ async function withServer(body, isReady) {
   }
   async function login(code = 'first-user-code') { return (await (await call('/session', 'POST', { code })).json()).token }
   try { await body({ call, login, config, store, files, apiCalls: () => apiCalls,
-    mediaUrl: () => mediaUrl, base }) } finally {
+    mediaUrl: () => mediaUrl, base, reports }) } finally {
     server.closeAllConnections()
     await new Promise(resolve => server.close(resolve))
     assert.strictEqual(path.dirname(path.resolve(dataDir)), path.resolve(os.tmpdir()))
@@ -79,6 +81,22 @@ function encryptedCallback(config, message) {
   return { route: '/wechat/callback?timestamp=' + timestamp + '&nonce=' + nonce + '&msg_signature=' + signature,
     body: { Encrypt: encrypted } }
 }
+
+test('审核诊断仅记录固定路由和状态，不泄露查询、请求体或登录凭据', async function () {
+  await withServer(async function (f) {
+    const secret = 'sensitive-marker-do-not-log'
+    await f.call('/wechat/callback?signature=' + secret + '&timestamp=bad&nonce=' + secret,
+      'POST', { Encrypt: secret, token: secret })
+    await f.login()
+    const logged = JSON.stringify(f.reports)
+    assert(!logged.includes(secret))
+    assert(!logged.includes('first-user-code'))
+    assert(!logged.includes('openid_first_user'))
+    assert(f.reports.some(entry => entry.event === 'callback_rejected'))
+    assert(f.reports.some(entry => entry.route === 'callback' && entry.status === 403))
+    assert(f.reports.some(entry => entry.route === 'session' && entry.status === 200))
+  })
+})
 
 test('自有后端端到端：JWT 身份、真实字节上传、pending、可信加密回调及文件清理', async function () {
   await withServer(async function (f) {
@@ -142,6 +160,64 @@ test('自有后端限流阻止第 21 个图片任务', async function () {
     for (let n = 0; n < 20; n += 1) assert.strictEqual((await f.call('/jobs', 'POST', {}, token)).status, 200)
     assert.strictEqual((await f.call('/jobs', 'POST', {}, token)).status, 503)
   })
+})
+
+test('同步 HTTP 审核提交直接返回可信最终状态，无需回调且不保留上传', async function () {
+  for (const [code, status] of [[0, 'pass'], [87014, 'reject']]) {
+    await withServer(async function (f) {
+      const token = await f.login()
+      const job = await (await f.call('/jobs', 'POST', {}, token)).json()
+      const bytes = Buffer.from([255, 216, 255, 1, 2, 3])
+      await f.call('/jobs/' + job.jobId + '/image', 'POST', bytes, token)
+      const response = await f.call('/jobs/' + job.jobId + '/submit', 'POST',
+        { fileId: job.uploadPath, status: 'pass' }, token)
+      const value = await response.json()
+      assert.strictEqual(response.status, 200)
+      assert.strictEqual(value.status, status)
+      assert.strictEqual(value.sha1, crypto.createHash('sha1').update(bytes).digest('hex'))
+      assert.strictEqual(f.apiCalls(), 0)
+      await assert.rejects(f.files.read(job.uploadPath), { code: 'ENOENT' })
+    }, undefined, 'sync', async () => ({ errcode: code }))
+  }
+})
+
+test('同步图片适配器上传 JPEG 检测副本，失效 token 仅刷新重试一次', async function () {
+  let tokens = 0; let calls = 0; let preparations = 0
+  const report = []
+  const wechat = createWechat({ appId: 'wx2b68d0818781b66d', appSecret: 'test-secret' }, async (url, options) => {
+    if (String(url).includes('stable_token')) {
+      tokens += 1
+      return { ok: true, json: async () => ({ access_token: 'test-token-' + tokens, expires_in: 7200 }) }
+    }
+    calls += 1
+    assert(String(url).includes('/wxa/img_sec_check?'))
+    assert(options.body instanceof FormData)
+    const image = options.body.get('media')
+    assert.strictEqual(image.type, 'image/jpeg')
+    assert.deepStrictEqual(Buffer.from(await image.arrayBuffer()), Buffer.from('server-audit-copy'))
+    return { ok: true, json: async () => ({ errcode: calls === 1 ? 40001 : 0 }) }
+  }, entry => report.push(entry), async bytes => {
+    preparations += 1; assert.strictEqual(bytes.toString(), 'original')
+    return Buffer.from('server-audit-copy')
+  })
+  assert.strictEqual((await wechat.checkImage(Buffer.from('original'))).errcode, 0)
+  assert.strictEqual(tokens, 2); assert.strictEqual(calls, 2); assert.strictEqual(preparations, 1)
+  assert(!JSON.stringify(report).includes('test-token'))
+})
+
+test('检测副本保留完整画面并限制尺寸体积，拒绝损坏图片', async function () {
+  const sharp = require('sharp')
+  const { prepareAuditImage } = require('../audit-image')
+  const original = await sharp({ create: { width: 1800, height: 2400, channels: 4,
+    background: { r: 40, g: 120, b: 80, alpha: 0.7 } } }).png().toBuffer()
+  const copy = await prepareAuditImage(original)
+  const metadata = await sharp(copy).metadata()
+  assert.strictEqual(metadata.format, 'jpeg')
+  assert(metadata.width <= 750 && metadata.height <= 1334)
+  assert(Math.abs(metadata.width / metadata.height - 1800 / 2400) < 0.002)
+  assert.strictEqual(metadata.hasAlpha, false)
+  assert(copy.length < 1024 * 1024)
+  await assert.rejects(prepareAuditImage(Buffer.from([255, 216, 255, 1, 2])))
 })
 test('自有后端清理异常时健康检查失败并暂停新任务', async function () {
   await withServer(async function (f) {

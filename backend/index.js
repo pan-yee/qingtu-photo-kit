@@ -11,13 +11,15 @@ function configuration(env) {
     mediaSecret: env.MEDIA_SIGNING_SECRET, callbackToken: env.CONTENT_SECURITY_CALLBACK_TOKEN,
     callbackAesKey: env.CONTENT_SECURITY_CALLBACK_AES_KEY,
     publicBaseUrl: (env.PUBLIC_BASE_URL || '').replace(/\/$/, ''),
-    dataDir: path.resolve(env.DATA_DIR || path.join(__dirname, 'data'))
+    dataDir: path.resolve(env.DATA_DIR || path.join(__dirname, 'data')),
+    moderationMode: env.MODERATION_MODE || 'async'
   }
   if (!/^wx[a-z0-9]{16}$/i.test(config.appId || '') || !config.appSecret ||
       !/^[A-Za-z0-9+/]{43}$/.test(config.callbackAesKey || '') ||
       !/^[a-zA-Z0-9]{3,32}$/.test(config.callbackToken || '') ||
       [config.jwtSecret, config.mediaSecret].some(value => typeof value !== 'string' || value.length < 32) ||
       config.jwtSecret === config.mediaSecret) throw new Error('Missing or invalid server configuration')
+  if (!['sync', 'async'].includes(config.moderationMode)) throw new Error('Invalid moderation mode')
   const url = new URL(config.publicBaseUrl)
   if (url.protocol !== 'https:' || url.username || url.password || url.search || url.hash) {
     throw new Error('PUBLIC_BASE_URL must be a public HTTPS base URL')
@@ -33,7 +35,10 @@ async function main() {
   const store = await createStore(pool)
   const files = await createFiles(config)
   let cleanupReady = false
-  const app = createApp({ config, store, files, wechat: createWechat(config), isReady: () => cleanupReady })
+  // Only fixed route names, booleans, status/error codes; never request bodies or URLs.
+  const report = entry => console.info(JSON.stringify({ time: new Date().toISOString(), ...entry }))
+  const app = createApp({ config, store, files, wechat: createWechat(config, fetch, report),
+    isReady: () => cleanupReady, report })
   let cleaning = false
   async function cleanup() {
     if (cleaning) return

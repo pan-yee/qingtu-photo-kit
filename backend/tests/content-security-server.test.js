@@ -3,7 +3,7 @@ const { assert, test } = require('./harness')
 const { createService } = require('../cloudfunctions/contentSecurity/service')
 const { readCallback } = require('../cloudfunctions/contentSecurity/callback')
 
-function fixture(checkOverride) {
+function fixture(checkOverride, checkImmediate) {
   const rows = new Map()
   const receipts = new Map()
   const data = new Map()
@@ -33,7 +33,7 @@ function fixture(checkOverride) {
     async remove(ids) { removed.push(...ids); ids.forEach(id => data.delete(id)) }
   }
   let random = 0
-  const service = createService({ store, files,
+  const service = createService({ store, files, checkImmediate,
     now: () => currentTime, randomId: () => (++random).toString(16).padStart(32, '0'),
     check: async function (input) {
       apiCalls += 1
@@ -74,6 +74,39 @@ test('图片异步接口受理后保持 pending，只有可信 pass 才放行并
   assert(f.removed.includes(privateId))
 })
 
+test('同步审核仅凭服务器检测结果放行或拒绝，绑定原图摘要并清理上传', async function () {
+  for (const [code, status] of [[0, 'pass'], [87014, 'reject']]) {
+    const f = fixture(undefined, async bytes => {
+      assert(Buffer.isBuffer(bytes))
+      return { errcode: code }
+    })
+    const job = await f.allocate()
+    const digest = crypto.createHash('sha1').update(f.data.get(job.fileId)).digest('hex')
+    const response = await f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId,
+      status: 'pass' }, 'openid_user_123456')
+    assert.strictEqual(response.status, status)
+    assert.strictEqual(response.sha1, digest)
+    assert.strictEqual(f.apiCalls(), 0)
+    assert.strictEqual(f.data.size, 0)
+    assert.strictEqual(f.rows.get(job.jobId).traceId, undefined)
+  }
+})
+
+test('同步接口未知、错误、缺失或字符串成功码均不放行，过期结果不放行', async function () {
+  for (const code of [undefined, null, '0', 40001, -1]) {
+    const f = fixture(undefined, async () => ({ errcode: code }))
+    const job = await f.allocate()
+    await assert.rejects(f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId },
+      'openid_user_123456'), /unavailable/)
+    assert.strictEqual(f.rows.get(job.jobId).status, 'error')
+    assert.strictEqual(f.data.size, 0)
+  }
+  const f = fixture(undefined, async () => { f.expire(); return { errcode: 0 } })
+  const job = await f.allocate()
+  assert.strictEqual((await f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId },
+    'openid_user_123456')).status, 'expired')
+})
+
 test('review、risky、未知结果及缺少错误码都不会通过', async function () {
   for (const [suggest, extra, expected] of [
     ['review', {}, 'reject'], ['risky', {}, 'reject'], ['unknown', {}, 'error'],
@@ -96,6 +129,17 @@ test('不能查询他人任务、伪造回调动作、替换上传路径或重�
   await f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId }, 'openid_user_123456')
   await assert.rejects(f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId }, 'openid_user_123456'), /action/)
   assert.strictEqual(f.apiCalls(), 1)
+})
+
+test('可信回调服务错误保留数字诊断码，但不放行或向客户端暴露内部字段', async function () {
+  const f = fixture(); const job = await f.allocate()
+  await f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId }, 'openid_user_123456')
+  await f.service.receive(result('pass', { errcode: -1008 }))
+  assert.strictEqual(f.rows.get(job.jobId).auditErrcode, -1008)
+  const response = await f.service.call({ action: 'status', jobId: job.jobId }, 'openid_user_123456')
+  assert.strictEqual(response.status, 'error')
+  assert.strictEqual(response.auditErrcode, undefined)
+  assert.strictEqual(response.auditSuggest, undefined)
 })
 
 test('回调先于 API 应答落库时不会丢失；过期结果仍不放行', async function () {
@@ -152,6 +196,27 @@ test('微信安全回调必须验签解密，拒绝伪造、错误 AppID、旧�
   assert.throws(() => readCallback(f.event, Object.assign({}, f.options, { now: Date.now() + 600000 })), /Invalid/)
   const other = signedMessage({ Event: 'different_event' })
   assert.throws(() => readCallback(other.event, other.options), /Invalid/)
+})
+
+test('v2 加密回调缺少顶层错误码时，仅完整成功明细和明确 pass 可兼容', function () {
+  const detail = [{ errcode: 0, suggest: 'pass' }]
+  const valid = signedMessage({ errcode: undefined, version: 2, detail })
+  assert.strictEqual(readCallback(valid.event, valid.options).message.errcode, 0)
+  for (const changes of [
+    { detail: [] }, { detail: [{ suggest: 'pass' }] },
+    { detail: [{ errcode: -1008, suggest: 'pass' }] },
+    { detail: [{ errcode: 0, suggest: 'review' }] },
+    { detail: [null] }, { version: 1 }, { errcode: null }, { errcode: -1008 },
+    { result: { suggest: 'unknown' } }
+  ]) {
+    const f = signedMessage({ errcode: undefined, version: 2, detail, ...changes })
+    assert.notStrictEqual(readCallback(f.event, f.options).message.errcode, 0)
+  }
+  const forged = signedMessage({ errcode: undefined, version: 2, detail: [] })
+  const wrapper = JSON.parse(forged.event.body)
+  wrapper.errcode = 0; wrapper.detail = detail; wrapper.result = { suggest: 'pass' }
+  forged.event.body = JSON.stringify(wrapper)
+  assert.strictEqual(readCallback(forged.event, forged.options).message.errcode, undefined)
 })
 
 

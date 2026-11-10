@@ -10,7 +10,7 @@ function imageType(buffer) {
 }
 
 function createService(deps) {
-  const { store, files, check, now = Date.now, randomId = () => crypto.randomBytes(16).toString('hex') } = deps
+  const { store, files, check, checkImmediate, now = Date.now, randomId = () => crypto.randomBytes(16).toString('hex') } = deps
 
   async function cleanup(ids) {
     const targets = ids.filter(Boolean)
@@ -65,6 +65,16 @@ function createService(deps) {
       if (!Buffer.isBuffer(buffer) || !buffer.length || buffer.length > MAX_BYTES) throw new Error('Invalid image size')
       const type = imageType(buffer)
       const sha1 = crypto.createHash('sha1').update(buffer).digest('hex')
+      if (checkImmediate) {
+        // Only a trusted server adapter can select this branch; client status is ignored.
+        const response = await checkImmediate(buffer)
+        const code = response && response.errcode
+        if (code !== 0 && code !== 87014) throw new Error('Immediate audit unavailable')
+        const status = job.expiresAt <= now() ? 'expired' : code === 0 ? 'pass' : 'reject'
+        await store.update(job.id, { sha1, status, completedAt: now(), auditErrcode: code,
+          auditSuggest: status === 'pass' ? 'pass' : status === 'reject' ? 'risky' : 'unknown' })
+        return publicJob(await store.get(job.id))
+      }
       // 校验服务端不可变副本，避免用户在异步检测期间覆盖原上传文件。
       privateId = await files.write('moderation-private/' + randomId() + '.' + type, buffer)
       const url = await files.url(privateId)
@@ -107,7 +117,9 @@ function createService(deps) {
     const status = !validCode ? 'error'
       : result.suggest === 'pass' ? 'pass'
         : result.suggest === 'risky' || result.suggest === 'review' ? 'reject' : 'error'
-    await store.transition(job.id, 'pending', { status: job.expiresAt > now() ? status : 'expired', completedAt: now() })
+    await store.transition(job.id, 'pending', { status: job.expiresAt > now() ? status : 'expired', completedAt: now(),
+      auditErrcode: /^-?\d{1,9}$/.test(String(message.errcode)) ? Number(message.errcode) : null,
+      auditSuggest: ['pass', 'review', 'risky'].includes(result.suggest) ? result.suggest : 'unknown' })
     await cleanup([job.fileId, job.originalId])
   }
 

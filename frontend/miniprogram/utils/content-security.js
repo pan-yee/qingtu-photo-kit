@@ -87,7 +87,7 @@ function fingerprint(path) {
 
 async function rpc(data) {
   const current = settings()
-  if (current.backend === 'http') return timed(http.rpc(data), 20000)
+  if (current.backend === 'http') return timed(http.rpc(data), data.action === 'submit' ? 60000 : 20000)
   const response = await timed(wx.cloud.callFunction({
     name: current.functionName, config: { env: current.envId }, data
   }), 20000)

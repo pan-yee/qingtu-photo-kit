@@ -7,7 +7,7 @@
 | 前端 | [frontend](./frontend/README.md) | 微信小程序、端侧图片处理、HTTPS 内容安全客户端 | `cd frontend && npm run check` |
 | 后端 | [backend](./backend/README.md) | Express / MySQL 内容安全服务、微信登录与回调、Docker 部署 | `cd backend && npm ci && npm run check` |
 
-前端不依赖后端源码或 Node.js 服务端依赖。后端的 Docker 构建只读取 `backend/`，不需要小程序源码、模型或外层仓库。两端通过固定的 HTTPS API 协议交互，默认地址保持 `https://www.ai-dreams.xyz/qingtu-api`，未修改业务接口或凭据。
+前端不依赖后端源码或 Node.js 服务端依赖。后端的 Docker 构建只读取 `backend/`，不需要小程序源码、模型或外层仓库。两端通过固定的 HTTPS API 协议交互，默认地址保持 `https://www.ai-dreams.xyz/qingtu-api`，未修改业务接口或凭据。已合并远程最新的同步图片检测能力：当前服务支持 `MODERATION_MODE=sync`，明确通过后直接返回，异步模式仍支持可信回调。
 
 ## 开发
 
@@ -22,7 +22,7 @@ npm ci --prefix backend
 npm run check
 ```
 
-也可分别运行 `npm run check:frontend`、`npm run check:backend`。原有 157 项测试按归属分为前端 142 项、后端 15 项，没有减少验证范围。
+也可分别运行 `npm run check:frontend`、`npm run check:backend`。当前 165 项测试按归属分为前端 142 项、后端 23 项，保留原有验证并合入最新图片检测和回调测试。
 
 ## 独立分发
 
@@ -33,7 +33,7 @@ npm run check
 
 ## 本次拆分验证
 
-- 分别复制两个项目到独立临时目录：前端 142 项、后端 15 项测试全部通过；后端副本重新执行 `npm ci` 成功。
+- 分别复制两个项目到独立临时目录：前端 142 项、后端 23 项测试全部通过；后端副本重新执行 `npm ci` 成功。
 - 从只有后端文件的目录构建 Docker 镜像成功；容器以非 root 用户加载实际业务模块，HTTP `/health` 检查通过（使用模拟存储，不代表真实 MySQL 或微信联调）。
 - 两种 Compose 配置均通过结构检查；真实环境文件和数据库未用于测试。
 - 前端模型转换对照及真实样本处理脚本在新目录下重新运行成功。

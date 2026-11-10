@@ -23,6 +23,10 @@ def main():
     if source.get('WX_APPID') != 'wx2b68d0818781b66d' or not source.get('WX_SECRET'):
         raise RuntimeError('Source AppID differs or its AppSecret is missing; no credentials copied')
     password = secrets.token_hex(32)
+    # 生成仅含英文/数字的规范 Base64 值，兼容后台表单；解码后仍为 32 字节密钥。
+    aes_key = base64.b64encode(secrets.token_bytes(32)).decode().rstrip('=')
+    while not aes_key.isalnum():
+        aes_key = base64.b64encode(secrets.token_bytes(32)).decode().rstrip('=')
     provision = r'''
 const mysql = require('mysql2/promise');
 (async function () {
@@ -51,10 +55,10 @@ const mysql = require('mysql2/promise');
         raise RuntimeError('Independent database preparation did not succeed; no environment file written')
     values = {
         'WX_APPID': source['WX_APPID'], 'WX_SECRET': source['WX_SECRET'],
-        'PUBLIC_BASE_URL': 'https://www.ai-dreams.xyz/qingtu-api',
+        'PUBLIC_BASE_URL': 'https://www.ai-dreams.xyz/qingtu-api', 'MODERATION_MODE': 'sync',
         'JWT_SECRET': secrets.token_hex(32), 'MEDIA_SIGNING_SECRET': secrets.token_hex(32),
         'CONTENT_SECURITY_CALLBACK_TOKEN': secrets.token_hex(16),
-        'CONTENT_SECURITY_CALLBACK_AES_KEY': base64.b64encode(secrets.token_bytes(32)).decode().rstrip('='),
+        'CONTENT_SECURITY_CALLBACK_AES_KEY': aes_key,
         'DB_HOST': 'host.docker.internal', 'DB_PORT': source.get('DB_PORT', '3306'),
         'DB_NAME': 'qingtu_photo', 'DB_USER': 'qingtu_photo', 'DB_PASS': password, 'PORT': '3001',
     }
