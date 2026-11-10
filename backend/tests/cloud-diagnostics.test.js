@@ -31,7 +31,7 @@ async function invoke(context, env) {
 
 test('云函数缺少回调配置或身份不匹配时返回有限诊断，不暴露配置值且不放行', async function () {
   const context = { APPID: 'wx2b68d0818781b66d', OPENID: 'private-user-identity' }
-  const missing = await invoke(context, { CONTENT_SECURITY_AUDIT_MODE: 'async' })
+  const missing = await invoke(context, {})
   assert.strictEqual(missing.ok, false)
   assert.deepStrictEqual(missing.diagnostic, { stage: 'cloud_configuration', reason: 'callback_config_missing' })
   const invalid = await invoke(context, {
@@ -44,8 +44,8 @@ test('云函数缺少回调配置或身份不匹配时返回有限诊断，不�
   assert(!JSON.stringify(wrongApp).includes('private-user-identity'))
 })
 
-test('默认同步云模式不依赖回调配置，但数据库异常仍不放行', async function () {
-  const result = await invoke({ APPID: 'wx2b68d0818781b66d', OPENID: 'openid_user_123456' }, {})
+test('显式同步云模式不依赖回调配置，但数据库异常仍不放行', async function () {
+  const result = await invoke({ APPID: 'wx2b68d0818781b66d', OPENID: 'openid_user_123456' }, { CONTENT_SECURITY_AUDIT_MODE: 'sync' })
   assert.strictEqual(result.ok, false)
   assert.deepStrictEqual(result.diagnostic, { stage: 'cloud_allocate', reason: 'service_rejected' })
 })
