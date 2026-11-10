@@ -70,9 +70,11 @@ rewardedVideoAdUnitId: 'adunit-你的广告位ID'
 - 若出现 `chooseMedia:fail api scope is not declared in the privacy agreement`，按[隐私错误处理说明](./docs/审核说明.md#解决-choosmedia-隐私错误)补齐“收集你选中的照片或视频信息”和“使用你的相册（仅写入）权限”两项。
 - 以真机检查相册授权拒绝后的引导流程。
 - 使用自己的原创图片测试，不收集、不上传未经用户许可的素材。
-- 在前端项目目录执行 `npm run check`：无需安装后端依赖，检查静态配置、安全约束、模型完整性和 142 项前端测试。后端 HTTP 集成测试由独立后端项目运行；微信后台和真机仍需联调。
+- 在前端项目目录执行 `npm run check`：无需安装后端依赖，检查静态配置、安全约束、模型完整性和 148 项前端测试。后端 HTTP 集成测试由独立后端项目运行；微信后台和真机仍需联调。
 - 项目只发布单端小程序。微信开发者工具若提示转换为「多端应用」，请选择不转换；`npm run check` 会拦截 `multiPlatform` 配置以及 `*.miniapp.json`、`miniapp/`、`i18n/` 产物。
 
 ## License
 
 [MIT](./LICENSE)
+
+遇到“内容安全校验暂不可用”时，按[分阶段故障排查](./docs/内容安全故障排查.md)查看安全诊断日志。当前默认云开发，不能仅凭 ECS 是否可达判断检测失败原因。

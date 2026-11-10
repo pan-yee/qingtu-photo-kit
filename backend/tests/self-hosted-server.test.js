@@ -256,3 +256,19 @@ test('自有后端启动拒绝缺失密钥、共用签名密钥和非 HTTPS 外�
     assert.throws(() => configuration({ ...env, ...patch }))
   }
 })
+
+test('服务错误返回可关联的随机请求号，不返回身份或异常详情', async function () {
+  await withServer(async function (f) {
+    const response = await f.call('/jobs', 'POST', {})
+    const body = await response.json()
+    const id = response.headers.get('x-request-id')
+    assert.strictEqual(response.status, 401)
+    assert.match(id, /^[a-f0-9]{16}$/)
+    assert.strictEqual(body.requestId, id)
+    assert.strictEqual(body.code, 'CONTENT_SECURITY_UNAVAILABLE')
+    assert(f.reports.some(entry => entry.requestId === id && entry.route === 'allocate'))
+    assert(!JSON.stringify(body).includes('openid'))
+    const next = await f.call('/jobs', 'POST', {})
+    assert.notStrictEqual(next.headers.get('x-request-id'), id)
+  })
+})

@@ -1,15 +1,19 @@
 const config = require('../config/index')
+const diagnostics = require('./moderation-diagnostics')
 let session = null
 let signingIn = null
 
 function validate() {
   const baseUrl = config.contentSecurity && config.contentSecurity.apiBaseUrl
   if (typeof baseUrl !== 'string' || !/^https:\/\/[a-z0-9.-]+(?::443)?(?:\/[a-z0-9_-]+)*$/i.test(baseUrl) ||
-      typeof wx.request !== 'function' || typeof wx.login !== 'function') throw new Error('Moderation server unavailable')
+      typeof wx.request !== 'function' || typeof wx.login !== 'function') throw diagnostics.error(null, 'configuration', 'invalid_configuration')
   return baseUrl
 }
 function request(path, method, data, token, binary) {
   const baseUrl = validate()
+  const stage = path === '/session' ? 'session' : path === '/jobs' ? 'allocate'
+    : path.endsWith('/submit') ? 'submit' : path.endsWith('/status') ? 'status'
+      : method === 'DELETE' ? 'cleanup' : 'upload'
   return new Promise(function (resolve, reject) {
     wx.request({ url: baseUrl + path, method, data,
       timeout: binary ? 30000 : path.endsWith('/submit') ? 55000 : 20000,
@@ -19,11 +23,12 @@ function request(path, method, data, token, binary) {
         if (response.statusCode >= 200 && response.statusCode < 300 && response.data && response.data.ok === true) {
           resolve(response.data)
         } else {
-          const error = new Error('Moderation server unavailable')
-          error.statusCode = response.statusCode
-          reject(error)
+          const responseId = response.header && (response.header['X-Request-ID'] || response.header['x-request-id']) ||
+            response.data && response.data.requestId
+          reject(diagnostics.error({ statusCode: response.statusCode, diagnostic: { requestId: responseId } },
+            stage, response.statusCode >= 200 && response.statusCode < 300 ? 'invalid_response' : 'http_error'))
         }
-      }, fail: reject
+      }, fail: function (error) { reject(diagnostics.error(error, stage)) }
     })
   })
 }
@@ -33,14 +38,14 @@ async function login() {
   if (!signingIn) signingIn = (async function () {
     const code = await new Promise(function (resolve, reject) {
       wx.login({ timeout: 10000, success: function (value) {
-        if (!value.code) reject(new Error('Login unavailable'))
+        if (!value.code) reject(diagnostics.error(null, 'wx_login', 'invalid_response'))
         else resolve(value.code)
-      }, fail: reject })
+      }, fail: function (error) { reject(diagnostics.error(error, 'wx_login')) } })
     })
     const result = await request('/session', 'POST', { code })
     if (typeof result.token !== 'string' || result.token.length > 4096 || !result.token ||
         !Number.isFinite(result.expiresIn) || result.expiresIn < 120 || result.expiresIn > 3600) {
-      throw new Error('Invalid login response')
+      throw diagnostics.error(null, 'session', 'invalid_response')
     }
     // 不持久化登录凭据；仅用于当前小程序会话中的图片检测。
     session = { baseUrl, token: result.token, expiresAt: Date.now() + (result.expiresIn - 60) * 1000 }
@@ -70,10 +75,10 @@ module.exports = {
   },
   async upload(allocation, filePath) {
     const bytes = await new Promise(function (resolve, reject) {
-      wx.getFileSystemManager().readFile({ filePath, success: function (value) { resolve(value.data) }, fail: reject })
+      wx.getFileSystemManager().readFile({ filePath, success: function (value) { resolve(value.data) }, fail: function (error) { reject(diagnostics.error(error, 'read_file')) } })
     })
     const result = await authenticated(taskPath(allocation.jobId) + '/image', 'POST', bytes, true)
-    if (result.fileId !== allocation.uploadPath) throw new Error('Invalid upload response')
+    if (result.fileId !== allocation.uploadPath) throw diagnostics.error(null, 'upload', 'invalid_response')
     return result.fileId
   },
   remove(jobId) { return authenticated(taskPath(jobId) + '/image', 'DELETE') }

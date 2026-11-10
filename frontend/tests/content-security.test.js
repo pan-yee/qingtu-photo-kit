@@ -59,7 +59,7 @@ async function withClient(options, body) {
         if (value.data.action === 'allocate') return { result: { ok: true, jobId: id, uploadPath: 'moderation-inbox/user/' + id } }
         if (options.mutate) files.set(currentPath, Buffer.from('changed-image'))
         return { result: { ok: options.ok !== false, jobId: id, status: typeof options.status === 'function' ? options.status(currentPath) : options.status || 'pass',
-          sha1: options.wrongHash ? '0'.repeat(40) : digest, expiresAt: Date.now() + 60000 } }
+          diagnostic: options.diagnostic, sha1: options.wrongHash ? '0'.repeat(40) : digest, expiresAt: Date.now() + 60000 } }
       }
     },
     chooseMedia: value => value.success({ tempFiles: [{ tempFilePath: 'input.png', size: 20 }] }),
@@ -211,4 +211,23 @@ test('九宫格全部通过后保存 9 张，保存阶段复用逐张摘要结�
     assert.strictEqual(f.saved(), 9)
     assert.strictEqual(f.uploads(), 9)
   })
+})
+
+
+test('云函数返回安全配置诊断时保留原因，不将服务失败视为通过', async function () {
+  const previousWarn = console.warn
+  const logs = []
+  console.warn = (...values) => logs.push(values)
+  try {
+    await withClient({ ok: false, diagnostic: { stage: 'cloud_configuration', reason: 'callback_config_missing',
+      token: 'must-not-log-this', openid: 'must-not-log-user' } }, async function (f) {
+      await assert.rejects(f.client.ensureSafe('input.png'), function (error) {
+        assert.deepStrictEqual(error.diagnostic, { stage: 'cloud_configuration', reason: 'callback_config_missing' })
+        return true
+      })
+    })
+    const logged = JSON.stringify(logs)
+    assert(logged.includes('callback_config_missing'))
+    assert(!logged.includes('must-not-log'))
+  } finally { console.warn = previousWarn }
 })

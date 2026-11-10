@@ -4,7 +4,9 @@ const crypto = require('crypto')
 const { createService } = require('./cloudfunctions/contentSecurity/service')
 const { readCallback } = require('./cloudfunctions/contentSecurity/callback')
 const MAX_BYTES = 10 * 1024 * 1024
-const unavailable = { ok: false, code: 'CONTENT_SECURITY_UNAVAILABLE' }
+function unavailable(res) {
+  return { ok: false, code: 'CONTENT_SECURITY_UNAVAILABLE', requestId: res.locals.requestId }
+}
 
 function createApp({ config, store, files, wechat, isReady = () => true, report = () => {} }) {
   const app = express()
@@ -14,7 +16,9 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
   const service = createService({ store, files, check: wechat.check,
     checkImmediate: config.moderationMode === 'sync' ? wechat.checkImage : undefined })
   app.use(function (req, res, next) {
-    res.set({ 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' })
+    res.locals.requestId = crypto.randomBytes(8).toString('hex')
+    res.set({ 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff',
+      'X-Request-ID': res.locals.requestId })
     const route = req.path === '/session' ? 'session'
       : req.path === '/wechat/callback' ? 'callback'
         : /^\/media\/[a-f0-9]{32}\.(jpg|png)$/.test(req.path) ? 'media'
@@ -22,7 +26,7 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
           : /^\/jobs\/[a-f0-9]{32}\/(image|submit|status)$/.test(req.path)
             ? 'job_' + req.path.split('/').pop() : null
     if (route) res.once('finish', () => report({ event: 'http', route,
-      method: req.method, status: res.statusCode }))
+      method: req.method, status: res.statusCode, requestId: res.locals.requestId }))
     next()
   })
   app.get('/health', async function (req, res) {
@@ -70,17 +74,17 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
   app.post('/session', express.json({ limit: '2kb' }), async function (req, res) {
     try {
       const code = req.body && req.body.code
-      if (typeof code !== 'string' || !/^[\w-]{8,256}$/.test(code)) return res.status(400).json(unavailable)
+      if (typeof code !== 'string' || !/^[\w-]{8,256}$/.test(code)) return res.status(400).json(unavailable(res))
       await store.rateLimit('login:' + req.ip, Math.floor(Date.now() / 60000), 30)
       const openid = await wechat.login(code)
       const token = jwt.sign({ openid, appid: config.appId }, config.jwtSecret, {
         algorithm: 'HS256', expiresIn: '1h', issuer: 'qingtu-moderation', audience: 'qingtu-photo-kit'
       })
       res.json({ ok: true, token, expiresIn: 3600 })
-    } catch (error) { res.status(503).json(unavailable) }
+    } catch (error) { res.status(503).json(unavailable(res)) }
   })
   app.use('/jobs', function (req, res, next) {
-    if (!isReady()) return res.status(503).json(unavailable)
+    if (!isReady()) return res.status(503).json(unavailable(res))
     try {
       const match = String(req.headers.authorization || '').match(/^Bearer ([\w.-]+)$/)
       if (!match) throw new Error('Missing session')
@@ -91,11 +95,11 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
       }
       req.openid = value.openid
       next()
-    } catch (error) { res.status(401).json(unavailable) }
+    } catch (error) { res.status(401).json(unavailable(res)) }
   })
   app.post('/jobs', express.json({ limit: '2kb' }), async function (req, res) {
     try { res.json(await service.call({ action: 'allocate' }, req.openid)) }
-    catch (error) { res.status(503).json(unavailable) }
+    catch (error) { res.status(503).json(unavailable(res)) }
   })
   async function owned(req) {
     if (!/^[a-f0-9]{32}$/.test(req.params.id)) throw new Error('Invalid task')
@@ -111,25 +115,25 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
       }
       await files.upload(job.uploadPath, req.body)
       res.json({ ok: true, fileId: job.uploadPath })
-    } catch (error) { res.status(400).json(unavailable) }
+    } catch (error) { res.status(400).json(unavailable(res)) }
   })
   app.delete('/jobs/:id/image', async function (req, res) {
     try { const job = await owned(req); await files.remove([job.uploadPath]); res.json({ ok: true }) }
-    catch (error) { res.status(400).json(unavailable) }
+    catch (error) { res.status(400).json(unavailable(res)) }
   })
   app.post('/jobs/:id/submit', express.json({ limit: '2kb' }), async function (req, res) {
     try {
       res.json(await service.call({ action: 'submit', jobId: req.params.id,
         fileId: req.body && req.body.fileId }, req.openid))
-    } catch (error) { res.status(503).json(unavailable) }
+    } catch (error) { res.status(503).json(unavailable(res)) }
   })
   app.get('/jobs/:id/status', async function (req, res) {
     try { res.json(await service.call({ action: 'status', jobId: req.params.id }, req.openid)) }
-    catch (error) { res.status(503).json(unavailable) }
+    catch (error) { res.status(503).json(unavailable(res)) }
   })
-  app.use(function (req, res) { res.status(404).json(unavailable) })
+  app.use(function (req, res) { res.status(404).json(unavailable(res)) })
   app.use(function (error, req, res, next) {
-    if (!res.headersSent) res.status(error.type === 'entity.too.large' ? 413 : 400).json(unavailable)
+    if (!res.headersSent) res.status(error.type === 'entity.too.large' ? 413 : 400).json(unavailable(res))
     else next(error)
   })
   return app

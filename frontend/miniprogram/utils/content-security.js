@@ -1,5 +1,6 @@
 const config = require('../config/index')
 const http = require('./moderation-http')
+const diagnostics = require('./moderation-diagnostics')
 const MAX_BYTES = 10 * 1024 * 1024
 const approved = new Map()
 const pending = new Map()
@@ -13,35 +14,40 @@ function failure(code, message) {
   return error
 }
 
-function unavailable() {
-  return failure('CONTENT_SECURITY_UNAVAILABLE', '内容安全校验暂不可用，请稍后重试')
+function unavailable(cause, stage, reason) {
+  const error = failure('CONTENT_SECURITY_UNAVAILABLE', '内容安全校验暂不可用，请稍后重试')
+  error.diagnostic = diagnostics.metadata(cause, stage, reason)
+  return error
 }
 
 function settings() {
   const value = config.contentSecurity
   const backend = value && (value.backend === undefined ? 'cloud' : value.backend)
-  if (backend !== 'cloud' && backend !== 'http') throw unavailable()
+  if (backend !== 'cloud' && backend !== 'http') throw unavailable(null, 'configuration', 'invalid_configuration')
   if (backend === 'http') {
-    try { http.validate() } catch (error) { throw unavailable() }
+    try { http.validate() } catch (error) { throw unavailable(error, 'configuration') }
     return value
   }
   if (typeof value.envId !== 'string' || !value.envId.trim() ||
-      typeof value.functionName !== 'string' || !value.functionName.trim() || !wx.cloud ||
-      typeof wx.cloud.callFunction !== 'function' || typeof wx.cloud.uploadFile !== 'function') {
-    throw unavailable()
+      typeof value.functionName !== 'string' || !value.functionName.trim()) {
+    throw unavailable(null, 'configuration', 'invalid_configuration')
+  }
+  if (!wx.cloud || typeof wx.cloud.callFunction !== 'function' || typeof wx.cloud.uploadFile !== 'function') {
+    throw unavailable(null, 'cloud_init', 'unsupported_api')
   }
   if (initializedEnv !== value.envId) {
-    if (typeof wx.cloud.init !== 'function') throw unavailable()
-    wx.cloud.init({ env: value.envId, traceUser: false })
+    if (typeof wx.cloud.init !== 'function') throw unavailable(null, 'cloud_init', 'unsupported_api')
+    try { wx.cloud.init({ env: value.envId, traceUser: false }) }
+    catch (error) { throw unavailable(error, 'cloud_init') }
     initializedEnv = value.envId
   }
   return value
 }
 
-function timed(promise, milliseconds) {
+function timed(promise, milliseconds, stage) {
   let timer
   return Promise.race([promise, new Promise(function (resolve, reject) {
-    timer = setTimeout(function () { reject(unavailable()) }, milliseconds)
+    timer = setTimeout(function () { reject(unavailable(null, stage, 'timeout')) }, milliseconds)
   })]).finally(function () { clearTimeout(timer) })
 }
 
@@ -84,46 +90,54 @@ function fingerprint(path) {
         }
         resolve({ digest: result.digest.toLowerCase(), size: result.size })
       },
-      fail: function () { reject(unavailable()) }
+      fail: function (error) { reject(unavailable(error, 'fingerprint')) }
     })
   })
 }
 
 async function rpc(data) {
   const current = settings()
-  if (current.backend === 'http') return timed(http.rpc(data), data.action === 'submit' ? 60000 : 20000)
-  const response = await timed(wx.cloud.callFunction({
-    name: current.functionName, config: { env: current.envId }, data
-  }), 20000)
-  const result = response && response.result
-  if (!result || result.ok !== true) throw unavailable()
-  return result
+  if (current.backend === 'http') return timed(http.rpc(data), data.action === 'submit' ? 60000 : 20000, data.action)
+  try {
+    const response = await timed(wx.cloud.callFunction({
+      name: current.functionName, config: { env: current.envId }, data
+    }), 20000, 'cloud_' + data.action)
+    const result = response && response.result
+    if (!result || result.ok !== true) {
+      throw unavailable({ diagnostic: result && result.diagnostic }, 'cloud_' + data.action, 'service_rejected')
+    }
+    return result
+  } catch (error) { throw unavailable(error, 'cloud_' + data.action) }
 }
 
 async function perform(path, digest) {
   const allocation = await rpc({ action: 'allocate' })
   if (!/^[a-f0-9]{32}$/.test(allocation.jobId || '') ||
       typeof allocation.uploadPath !== 'string' || !allocation.uploadPath.startsWith('moderation-inbox/')) {
-    throw unavailable()
+    throw unavailable(null, 'allocation_response', 'invalid_response')
   }
   let fileId
   try {
     if (settings().backend === 'http') {
-      fileId = await timed(http.upload(allocation, path), 30000)
+      fileId = await timed(http.upload(allocation, path), 30000, 'upload')
     } else {
-      const result = await timed(wx.cloud.uploadFile({ cloudPath: allocation.uploadPath, filePath: path,
-        config: { env: settings().envId } }), 30000)
+      let result
+      try {
+        result = await timed(wx.cloud.uploadFile({ cloudPath: allocation.uploadPath, filePath: path,
+          config: { env: settings().envId } }), 30000, 'cloud_upload')
+      } catch (error) { throw unavailable(error, 'cloud_upload') }
       fileId = result.fileID
     }
     let status = await rpc({ action: 'submit', jobId: allocation.jobId, fileId })
     const deadline = Date.now() + 60000
     while (true) {
-      if (status.jobId !== allocation.jobId || status.sha1 !== digest) throw unavailable()
+      if (status.jobId !== allocation.jobId) throw unavailable(null, 'audit_response', 'invalid_response')
+      if (status.sha1 !== digest) throw unavailable(null, 'file_binding', 'digest_mismatch')
       if (status.status === 'pass') {
         const expires = Math.min(Number(status.expiresAt), Date.now() + 5 * 60000)
-        if (!Number.isFinite(expires) || expires <= Date.now()) throw unavailable()
+        if (!Number.isFinite(expires) || expires <= Date.now()) throw unavailable(null, 'audit_response', 'invalid_expiry')
         const current = await fingerprint(path)
-        if (current.digest !== digest) throw unavailable()
+        if (current.digest !== digest) throw unavailable(null, 'file_binding', 'file_changed')
         if (approved.size >= 100) approved.delete(approved.keys().next().value)
         approved.set(digest, expires)
         return
@@ -131,7 +145,7 @@ async function perform(path, digest) {
       if (status.status === 'reject') {
         throw failure('CONTENT_SECURITY_REJECTED', '所发布内容含违规信息')
       }
-      if (status.status !== 'pending') throw unavailable()
+      if (status.status !== 'pending') throw unavailable(null, 'audit_response', 'invalid_status')
       if (Date.now() >= deadline) throw failure('CONTENT_SECURITY_PENDING', '安全校验暂未完成，请稍后重试')
       await new Promise(function (resolve) { setTimeout(resolve, 1500) })
       status = await rpc({ action: 'status', jobId: allocation.jobId })
@@ -149,7 +163,7 @@ async function perform(path, digest) {
   }
 }
 
-async function ensureSafe(path) {
+async function ensureSafeInternal(path) {
   settings()
   await authorizeUpload()
   const current = await fingerprint(path)
@@ -161,10 +175,19 @@ async function ensureSafe(path) {
   }
   try { await operation } catch (error) {
     if (error && /^CONTENT_SECURITY_/.test(error.code || '')) throw error
-    throw unavailable()
+    throw unavailable(error)
   } finally { pending.delete(current.digest) }
   // 同内容不同路径的并发调用也必须检查本地文件没有被替换。
-  if ((await fingerprint(path)).digest !== current.digest) throw unavailable()
+  if ((await fingerprint(path)).digest !== current.digest) throw unavailable(null, 'file_binding', 'file_changed')
+}
+
+async function ensureSafe(path) {
+  try { await ensureSafeInternal(path) } catch (error) {
+    if (error && (error.code === 'CONTENT_SECURITY_CANCELLED' || error.code === 'CONTENT_SECURITY_REJECTED')) throw error
+    const wrapped = error && /^CONTENT_SECURITY_/.test(error.code || '') ? error : unavailable(error)
+    diagnostics.report(wrapped)
+    throw wrapped
+  }
 }
 
 module.exports = { ensureSafe }

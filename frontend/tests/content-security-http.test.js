@@ -18,6 +18,9 @@ function fresh(name, transport) {
 async function withHttp(options, body) {
   const previousWx = global.wx
   const previousConfig = config.contentSecurity
+  const previousWarn = console.warn
+  const diagnostics = []
+  console.warn = (...values) => diagnostics.push(values)
   let bytes = Buffer.from([255, 216, 255, 1, 2])
   let digest = ''
   let logins = 0
@@ -40,6 +43,13 @@ async function withHttp(options, body) {
     request(value) {
       requests += 1
       assert(value.url.startsWith('https://photos.example/qingtu-api/'))
+      if (options.nativeError) { value.fail(options.nativeError); return }
+      if (options.httpStatus && value.url.endsWith(options.failAt || '/session')) {
+        value.success({ statusCode: options.httpStatus, header: { 'X-Request-ID': '0123456789abcdef' }, data: { ok: false } }); return
+      }
+      if (options.badResponse && value.url.endsWith('/session')) {
+        value.success({ statusCode: 200, data: '<html>unexpected page</html>' }); return
+      }
       if (options.networkError) { value.fail(new Error('offline')); return }
       if (value.url.endsWith('/session')) {
         assert.deepStrictEqual(value.data, { code: 'wx-code-123456' })
@@ -64,8 +74,8 @@ async function withHttp(options, body) {
   const transport = fresh('moderation-http')
   const client = fresh('content-security', transport)
   try { await body({ client, transport, logins: () => logins, uploads: () => uploads,
-    requests: () => requests, cleanup: () => cleanup }) }
-  finally { global.wx = previousWx; config.contentSecurity = previousConfig }
+    requests: () => requests, cleanup: () => cleanup, diagnostics }) }
+  finally { global.wx = previousWx; config.contentSecurity = previousConfig; console.warn = previousWarn }
 }
 
 test('自有服务器：无 wx.cloud 也能登录、上传真实字节、核验摘要并复用通过结果', async function () {
@@ -108,5 +118,45 @@ test('自有服务器：拒绝非 HTTPS、用户信息和查询参数形式的�
       await assert.rejects(f.client.ensureSafe('test.jpg'), { code: 'CONTENT_SECURITY_UNAVAILABLE' })
     }
     assert.strictEqual(f.requests(), 0)
+  })
+})
+
+
+test('诊断区分合法域名、TLS 和超时，不打印原始 URL、登录 code 或身份', async function () {
+  for (const [message, reason] of [
+    ['request:fail url not in domain list https://private.example/?token=secret', 'domain_not_allowed'],
+    ['request:fail ssl certificate error user-secret', 'tls_failed'],
+    ['request:fail timeout private-file.jpg', 'timeout']
+  ]) {
+    await withHttp({ nativeError: { errMsg: message, errCode: 600001 } }, async function (f) {
+      await assert.rejects(f.client.ensureSafe('test.jpg'), function (error) {
+        assert.strictEqual(error.message, '内容安全校验暂不可用，请稍后重试')
+        assert.deepStrictEqual(error.diagnostic, { stage: 'session', reason, platformCode: 600001 })
+        return true
+      })
+      const logged = JSON.stringify(f.diagnostics)
+      assert(logged.includes('[content-security]'))
+      for (const secret of ['private.example', 'user-secret', 'private-file', 'wx-code', 'signed-session']) assert(!logged.includes(secret))
+    })
+  }
+})
+
+test('HTTP 诊断保留失败阶段、状态码与受限请求号，成功 HTML 响应也不放行', async function () {
+  for (const [failAt, stage] of [['/session', 'session'], ['/jobs', 'allocate'], ['/submit', 'submit']]) {
+    await withHttp({ httpStatus: 503, failAt }, async function (f) {
+      await assert.rejects(f.client.ensureSafe('test.jpg'), function (error) {
+        assert.strictEqual(error.diagnostic.stage, stage)
+        assert.strictEqual(error.diagnostic.httpStatus, 503)
+        assert.strictEqual(error.diagnostic.requestId, '0123456789abcdef')
+        return true
+      })
+    })
+  }
+  await withHttp({ badResponse: true }, async function (f) {
+    await assert.rejects(f.client.ensureSafe('test.jpg'), function (error) {
+      assert.strictEqual(error.diagnostic.reason, 'invalid_response')
+      assert.strictEqual(error.diagnostic.stage, 'session')
+      return true
+    })
   })
 })

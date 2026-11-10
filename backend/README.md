@@ -152,3 +152,8 @@ docker compose --env-file .env -f docker-compose.host-db.yml up -d --build
 现有 Nginx 若仍 include 旧 `server/nginx-location.conf`，需要替换为新 `backend/nginx-location.conf` 后执行 `nginx -t`。`scripts/configure-nginx.py` 支持替换本仓库旧 include 路径，会备份并在验证失败时回滚；不要在其他站点上运行此专用脚本。历史备份目录继续保留。
 
 API 约定见[前后端接口](./docs/后端接口.md)。此项目不需要微信开发者工具或前端代码；启动仍需要配置真实 MySQL 与服务端环境变量。
+
+
+## 内容安全故障关联
+
+HTTP 错误响应与响应头 `X-Request-ID` 会给出同一个 16 位随机请求号，后端固定路由日志也携带该编号，可关联客户端的失败阶段；不记录用户身份、登录 code 或请求体。云开发备用入口仅返回固定阶段、原因枚举和数字平台错误码，便于识别回调配置缺失、格式错误或 AppID 不匹配，不向客户端返回密钥或原始异常。此能力需部署更新后的对应后端才生效。
