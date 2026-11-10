@@ -19,11 +19,14 @@ function unavailable() {
 
 function settings() {
   const value = config.contentSecurity
-  if (value && value.backend === 'http') {
+  const backend = value && (value.backend === undefined ? 'cloud' : value.backend)
+  if (backend !== 'cloud' && backend !== 'http') throw unavailable()
+  if (backend === 'http') {
     try { http.validate() } catch (error) { throw unavailable() }
     return value
   }
-  if (!value || !value.envId || !value.functionName || !wx.cloud ||
+  if (typeof value.envId !== 'string' || !value.envId.trim() ||
+      typeof value.functionName !== 'string' || !value.functionName.trim() || !wx.cloud ||
       typeof wx.cloud.callFunction !== 'function' || typeof wx.cloud.uploadFile !== 'function') {
     throw unavailable()
   }
@@ -53,10 +56,11 @@ async function checkWithProgress(path, digest) {
 
 async function authorizeUpload() {
   if (!consent) {
+    const destination = settings().backend === 'http' ? '运营者服务器' : '本小程序的微信云开发环境'
     consent = new Promise(function ask(resolve, reject) {
       wx.showModal({
         title: '图片内容安全检测',
-        content: '图片及处理结果需临时上传至运营者服务器，交由微信内容安全服务检测，检测完成后删除。是否同意？',
+        content: '图片及处理结果需临时上传至' + destination + '，交由微信内容安全服务检测，检测完成后删除。是否同意？',
         confirmText: '同意检测', cancelText: '暂不使用',
         success: function (result) {
           if (result.confirm) resolve()

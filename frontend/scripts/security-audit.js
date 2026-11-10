@@ -57,8 +57,13 @@ function audit() {
       throw new Error('Self-hosted moderation requires a fixed HTTPS base URL')
     }
     console.log('Self-hosted HTTPS moderation selected; backend deployment and real WeChat image-check verification remain required.')
-  } else if (!moderation.envId) {
-    console.log('Cloud moderation environment is not configured; image selection, preview and saving remain blocked.')
+  } else if (moderation.backend === 'cloud' || moderation.backend === undefined) {
+    if (!moderation.envId || !moderation.functionName) {
+      throw new Error('Cloud moderation requires an environment ID and function name')
+    }
+    console.log('Cloud moderation selected; deployed function, permissions, cleanup and real WeChat verification remain required.')
+  } else {
+    throw new Error('Moderation backend must be cloud or http')
   }
 }
 

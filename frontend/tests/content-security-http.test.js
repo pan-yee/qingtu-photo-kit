@@ -27,7 +27,8 @@ async function withHttp(options, body) {
   let denied = false
   const id = 'b'.repeat(32)
   const uploadPath = 'moderation-inbox/openid_user_123456/' + id
-  config.contentSecurity = { backend: 'http', apiBaseUrl: 'https://photos.example/qingtu-api' }
+  config.contentSecurity = { backend: 'http', envId: 'test-env', functionName: 'contentSecurity',
+    apiBaseUrl: 'https://photos.example/qingtu-api' }
   global.wx = {
     showModal: value => value.success({ confirm: !options.refuse }),
     showLoading() {}, hideLoading() {},

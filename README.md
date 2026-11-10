@@ -7,7 +7,7 @@
 | 前端 | [frontend](./frontend/README.md) | 微信小程序、端侧图片处理、HTTPS 内容安全客户端 | `cd frontend && npm run check` |
 | 后端 | [backend](./backend/README.md) | Express / MySQL 内容安全服务、微信登录与回调、Docker 部署 | `cd backend && npm ci && npm run check` |
 
-前端不依赖后端源码或 Node.js 服务端依赖。后端的 Docker 构建只读取 `backend/`，不需要小程序源码、模型或外层仓库。两端通过固定的 HTTPS API 协议交互，默认地址保持 `https://www.ai-dreams.xyz/qingtu-api`，未修改业务接口或凭据。已合并远程最新的同步图片检测能力：当前服务支持 `MODERATION_MODE=sync`，明确通过后直接返回，异步模式仍支持可信回调。
+前端不依赖后端源码或 Node.js 服务端依赖。后端同时保留微信云开发和独立自有部署：在 `frontend/miniprogram/config/index.js` 设置 `contentSecurity.backend`，默认 `'cloud'` 使用原云环境 `photo-d0gn3yvetb21c4a41` 的 `contentSecurity`；改为 `'http'` 调用保留的 `https://www.ai-dreams.xyz/qingtu-api`。修改参数后重新编译，不在异常时自动切换。两套后端分别部署和验证；自有服务仍支持 `MODERATION_MODE=sync`，该参数不影响云模式。
 
 ## 开发
 

@@ -27,12 +27,17 @@ async function withClient(options, body) {
   let saved = 0
   let previews = 0
   let rpcCalls = 0
+  let httpCalls = 0
+  let initializations = 0
+  let consentText = ''
   let digest
   let currentPath
   const id = 'a'.repeat(32)
-  config.contentSecurity = { envId: 'test-env', functionName: 'contentSecurity' }
+  config.contentSecurity = { backend: options.backend === undefined ? 'cloud' : options.backend,
+    envId: 'test-env', functionName: 'contentSecurity', apiBaseUrl: 'https://photos.example/qingtu-api' }
   global.wx = {
-    showModal: value => { if (value.success) value.success({ confirm: options.consent !== false }) },
+    showModal: value => { consentText = value.content; if (value.success) value.success({ confirm: options.consent !== false }) },
+    request: value => { httpCalls += 1; value.fail(new Error('Unexpected HTTP backend request')) },
     showToast: function () {},
     showLoading: function () {},
     hideLoading: function () {},
@@ -41,7 +46,7 @@ async function withClient(options, body) {
       value.success({ digest: crypto.createHash('sha1').update(bytes).digest('hex'), size: bytes.length })
     } }),
     cloud: {
-      init: function () {},
+      init: function () { initializations += 1 },
       uploadFile: async value => {
         uploads += 1; currentPath = value.filePath
         digest = crypto.createHash('sha1').update(files.get(value.filePath)).digest('hex')
@@ -62,6 +67,7 @@ async function withClient(options, body) {
     saveImageToPhotosAlbum: value => { saved += 1; value.success({}) },
     previewImage: () => { previews += 1 }
   }
+  if (options.noCloud) delete global.wx.cloud
   if (options.advanceClock) {
     // 让轮询立即运行；Date.now 在该测试体内递增，验证超时而不实际等待一分钟。
     global.setTimeout = function (callback, delay) {
@@ -72,7 +78,8 @@ async function withClient(options, body) {
   const client = fresh()
   shared.ensureSafe = client.ensureSafe
   try { await body({ client, files, uploads: () => uploads, saved: () => saved,
-    previews: () => previews, rpcCalls: () => rpcCalls }) } finally {
+    previews: () => previews, rpcCalls: () => rpcCalls, httpCalls: () => httpCalls,
+    initializations: () => initializations, consentText: () => consentText }) } finally {
     global.wx = previousWx; config.contentSecurity = previousConfig
     shared.ensureSafe = previousEnsure; global.setTimeout = previousTimeout
   }
@@ -84,6 +91,27 @@ test('未配置云端时保持拦截，不能自动跳过检测', async function
     await assert.rejects(f.client.ensureSafe('input.png'), { code: 'CONTENT_SECURITY_UNAVAILABLE' })
     assert.strictEqual(f.uploads(), 0)
   })
+})
+
+test('同时配置两套后端时 cloud 只调用云函数并告知正确上传目的地', async function () {
+  await withClient({}, async function (f) {
+    await f.client.ensureSafe('input.png')
+    assert(f.rpcCalls() > 0)
+    assert.strictEqual(f.initializations(), 1)
+    assert.strictEqual(f.httpCalls(), 0)
+    assert(f.consentText().includes('微信云开发环境'))
+  })
+})
+
+test('云能力不可用或 backend 参数无效时不偷偷切换另一后端', async function () {
+  for (const options of [{ noCloud: true }, { backend: 'unknown' }]) {
+    await withClient(options, async function (f) {
+      await assert.rejects(f.client.ensureSafe('input.png'), { code: 'CONTENT_SECURITY_UNAVAILABLE' })
+      assert.strictEqual(f.rpcCalls(), 0)
+      assert.strictEqual(f.httpCalls(), 0)
+      assert.strictEqual(f.uploads(), 0)
+    })
+  }
 })
 
 test('用户拒绝检测时不上传图片', async function () {

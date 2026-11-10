@@ -1,9 +1,12 @@
 module.exports = {
   appName: '拾格图匣',
 
-  // 独立自有服务器；完成部署、微信合法域名与可信回调配置后才可处理图片。
+  // backend: 'cloud' 使用微信云开发；'http' 使用自有部署。修改后重新编译。
+  // 两套参数同时保留，只启用选中的后端；服务异常时不会自动切换或跳过审核。
   contentSecurity: {
-    backend: 'http',
+    backend: 'cloud',
+    envId: 'photo-d0gn3yvetb21c4a41',
+    functionName: 'contentSecurity',
     apiBaseUrl: 'https://www.ai-dreams.xyz/qingtu-api'
   },
 
