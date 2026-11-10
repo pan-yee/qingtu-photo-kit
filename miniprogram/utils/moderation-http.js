@@ -11,7 +11,8 @@ function validate() {
 function request(path, method, data, token, binary) {
   const baseUrl = validate()
   return new Promise(function (resolve, reject) {
-    wx.request({ url: baseUrl + path, method, data, timeout: binary ? 30000 : 20000,
+    wx.request({ url: baseUrl + path, method, data,
+      timeout: binary ? 30000 : path.endsWith('/submit') ? 55000 : 20000,
       header: Object.assign({ 'Content-Type': binary ? 'application/octet-stream' : 'application/json' },
         token ? { Authorization: 'Bearer ' + token } : {}),
       success: function (response) {

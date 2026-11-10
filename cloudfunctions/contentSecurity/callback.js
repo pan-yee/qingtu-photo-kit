@@ -79,6 +79,15 @@ function readCallback(event, options) {
       typeof message.trace_id !== 'string' || !/^[\w-]{8,128}$/.test(message.trace_id)) {
     throw new Error('Invalid audit event')
   }
+  // Some v2 encrypted payloads omit the outer errcode. Only derive success from
+  // authenticated, explicit successful detail codes and an unambiguous pass.
+  // Never use unencrypted wrapper fields to fill in missing audit results.
+  if (message.errcode === undefined && message.version === 2 &&
+      message.result && message.result.suggest === 'pass' &&
+      Array.isArray(message.detail) && message.detail.length > 0 && message.detail.length <= 32 &&
+      message.detail.every(item => item && item.errcode === 0 && item.suggest === 'pass')) {
+    message.errcode = 0
+  }
   return { message }
 }
 
