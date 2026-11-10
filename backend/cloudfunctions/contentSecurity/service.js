@@ -33,11 +33,13 @@ function createService(deps) {
     if (typeof openid !== 'string' || !/^[\w-]{10,128}$/.test(openid)) throw new Error('Missing user identity')
     if (event.action === 'allocate') {
       // 服务端限流；客户端不能通过换 jobId 绕过。
-      await store.rateLimit(openid, Math.floor(now() / 60000), 20)
+      try { await store.rateLimit(openid, Math.floor(now() / 60000), 20) }
+      catch (error) { onFailure('rate_limit', error); throw error }
       const id = randomId()
       const job = { id, openid, uploadPath: 'moderation-inbox/' + openid + '/' + id,
         status: 'reserved', createdAt: now(), expiresAt: now() + JOB_TTL }
-      await store.add(job)
+      try { await store.add(job) }
+      catch (error) { onFailure('create_job', error); throw error }
       return Object.assign(publicJob(job), { uploadPath: job.uploadPath })
     }
     const job = await owned(event.jobId, openid)
@@ -68,6 +70,7 @@ function createService(deps) {
       const sha1 = crypto.createHash('sha1').update(buffer).digest('hex')
       if (checkImmediate) {
         // Only a trusted server adapter can select this branch; client status is ignored.
+        stage = 'wechat_sync'
         const response = await checkImmediate(buffer)
         const code = response && response.errcode
         if (code !== 0 && code !== 87014) throw new Error('Immediate audit unavailable')

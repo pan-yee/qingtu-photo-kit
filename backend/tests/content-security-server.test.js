@@ -49,13 +49,24 @@ function fixture(checkOverride, checkImmediate, onFailure) {
     data.set(fileId, Buffer.from([255, 216, 255, 0, 10, 20, 30]))
     return Object.assign(job, { fileId })
   }
-  return { service, allocate, rows, data, removed, apiCalls: () => apiCalls,
+  return { service, allocate, rows, data, removed, store, apiCalls: () => apiCalls,
     expire: () => { currentTime += 11 * 60000 } }
 }
 
 function result(suggest, extra) {
   return Object.assign({ trace_id: 'trace_id_1234567890', errcode: 0, result: { suggest } }, extra)
 }
+
+test('分配任务的限流和建单失败会分别记录阶段并继续拦截', async function () {
+  for (const [method, expected] of [['rateLimit', 'rate_limit'], ['add', 'create_job']]) {
+    const failures = []
+    const f = fixture(undefined, undefined, (stage, error) => failures.push({ stage, code: error.errCode }))
+    f.store[method] = async () => { const error = new Error('private details'); error.errCode = -502005; throw error }
+    await assert.rejects(f.service.call({ action: 'allocate' }, 'openid_user_123456'))
+    assert.deepStrictEqual(failures, [{ stage: expected, code: -502005 }])
+    assert.strictEqual(f.rows.size, 0)
+  }
+})
 
 test('图片异步接口受理后保持 pending，只有可信 pass 才放行并删除临时图片', async function () {
   const f = fixture()

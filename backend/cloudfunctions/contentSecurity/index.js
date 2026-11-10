@@ -2,6 +2,7 @@ const cloud = require('wx-server-sdk')
 const crypto = require('crypto')
 const { createService, COLLECTION } = require('./service')
 const { readCallback } = require('./callback')
+const { createCloudImageCheck } = require('./cloud-image-check')
 cloud.init({ env: cloud.DYNAMIC_CURRENT_ENV })
 const db = cloud.database({ throwOnNotFound: false })
 const APP_ID = process.env.CONTENT_SECURITY_APP_ID || 'wx2b68d0818781b66d'
@@ -77,11 +78,19 @@ const files = {
 }
 function reportFailure(stage, error) {
   const value = error && (error.errCode === undefined ? error.code : error.errCode)
-  const code = /^-?\d{1,10}$/.test(String(value)) ? Number(value) : null
-  console.error(JSON.stringify({ event: 'content_security_failure', stage, code }))
+  const code = (typeof value === 'number' || typeof value === 'string') &&
+    /^-?\d{1,10}$/.test(String(value)) ? Number(value) : null
+  const message = String(error && (error.errMsg || error.message) || '')
+  const reason = /collection.*(?:not.*exist|not.*found)|集合.*不存在/i.test(message) ? 'collection_missing'
+    : /document.*(?:not.*exist|not.*found)|document_not_found|记录.*不存在/i.test(message) ? 'document_missing'
+      : /permission|unauthorized|权限/i.test(message) ? 'permission_denied'
+        : /transaction.*(?:not.*support|not.*available)/i.test(message) ? 'transaction_unavailable'
+          : /Missing user identity/i.test(message) ? 'identity_missing' : 'unknown'
+  console.error(JSON.stringify({ event: 'content_security_failure', stage, code, reason }))
 }
+const AUDIT_MODE = process.env.CONTENT_SECURITY_AUDIT_MODE || 'sync'
 const service = createService({ store, files, check: input => cloud.openapi.security.mediaCheckAsync(input),
-  onFailure: reportFailure })
+  checkImmediate: AUDIT_MODE === 'sync' ? createCloudImageCheck(cloud) : undefined, onFailure: reportFailure })
 
 exports.main = async function (event) {
   if (event && event.httpMethod) {
@@ -112,10 +121,11 @@ exports.main = async function (event) {
     const context = cloud.getWXContext()
     if (context.APPID !== APP_ID) return failed('appid_mismatch')
     stage = 'cloud_configuration'
-    if (!process.env.CONTENT_SECURITY_CALLBACK_TOKEN || !process.env.CONTENT_SECURITY_CALLBACK_AES_KEY) {
+    if (AUDIT_MODE !== 'sync' && AUDIT_MODE !== 'async') return failed('invalid_configuration')
+    if (AUDIT_MODE === 'async' && (!process.env.CONTENT_SECURITY_CALLBACK_TOKEN || !process.env.CONTENT_SECURITY_CALLBACK_AES_KEY)) {
       return failed('callback_config_missing')
     }
-    if (!/^[A-Za-z0-9+/]{43}$/.test(process.env.CONTENT_SECURITY_CALLBACK_AES_KEY)) {
+    if (AUDIT_MODE === 'async' && !/^[A-Za-z0-9+/]{43}$/.test(process.env.CONTENT_SECURITY_CALLBACK_AES_KEY)) {
       return failed('callback_config_invalid')
     }
     stage = stages[event && event.action] || 'content_security'

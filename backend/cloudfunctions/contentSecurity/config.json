@@ -1,5 +1,5 @@
 {
   "permissions": {
-    "openapi": ["security.mediaCheckAsync"]
+    "openapi": ["security.mediaCheckAsync", "security.imgSecCheck"]
   }
 }
