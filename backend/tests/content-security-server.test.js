@@ -3,7 +3,7 @@ const { assert, test } = require('./harness')
 const { createService } = require('../cloudfunctions/contentSecurity/service')
 const { readCallback } = require('../cloudfunctions/contentSecurity/callback')
 
-function fixture(checkOverride, checkImmediate) {
+function fixture(checkOverride, checkImmediate, onFailure) {
   const rows = new Map()
   const receipts = new Map()
   const data = new Map()
@@ -33,7 +33,7 @@ function fixture(checkOverride, checkImmediate) {
     async remove(ids) { removed.push(...ids); ids.forEach(id => data.delete(id)) }
   }
   let random = 0
-  const service = createService({ store, files, checkImmediate,
+  const service = createService({ store, files, checkImmediate, onFailure,
     now: () => currentTime, randomId: () => (++random).toString(16).padStart(32, '0'),
     check: async function (input) {
       apiCalls += 1
@@ -165,6 +165,18 @@ test('不支持的文件和 API 失败不会形成通过记录', async function 
   assert.strictEqual(bad.rows.get(second.jobId).status, 'error')
 })
 
+test('微信接口拒绝时记录安全阶段及数字码，同时保持拦截和清理', async function () {
+  const failures = []
+  const f = fixture(async () => ({ errcode: 40001 }), undefined,
+    (stage, error) => failures.push({ stage, code: error.errCode }))
+  const job = await f.allocate()
+  await assert.rejects(f.service.call({ action: 'submit', jobId: job.jobId, fileId: job.fileId },
+    'openid_user_123456'), /unavailable/)
+  assert.deepStrictEqual(failures, [{ stage: 'wechat_check', code: 40001 }])
+  assert.strictEqual(f.rows.get(job.jobId).status, 'error')
+  assert.strictEqual(f.data.size, 0)
+})
+
 function signedMessage(overrides) {
   const key = crypto.randomBytes(32)
   const token = crypto.randomBytes(20).toString('hex')
@@ -198,10 +210,10 @@ test('微信安全回调必须验签解密，拒绝伪造、错误 AppID、旧�
   assert.throws(() => readCallback(other.event, other.options), /Invalid/)
 })
 
-test('v2 加密回调缺少顶层错误码时，仅完整成功明细和明确 pass 可兼容', function () {
+test('v2 加密回调缺少顶层错误码时不能通过，即使明细全部成功', function () {
   const detail = [{ errcode: 0, suggest: 'pass' }]
   const valid = signedMessage({ errcode: undefined, version: 2, detail })
-  assert.strictEqual(readCallback(valid.event, valid.options).message.errcode, 0)
+  assert.strictEqual(readCallback(valid.event, valid.options).message.errcode, undefined)
   for (const changes of [
     { detail: [] }, { detail: [{ suggest: 'pass' }] },
     { detail: [{ errcode: -1008, suggest: 'pass' }] },

@@ -55,7 +55,7 @@ async function withClient(options, body) {
       deleteFile: async function () {},
       callFunction: async value => {
         rpcCalls += 1
-        if (options.networkError) throw new Error('network failure')
+        if (options.networkError) throw options.injectedError || new Error('network failure')
         if (value.data.action === 'allocate') return { result: { ok: true, jobId: id, uploadPath: 'moderation-inbox/user/' + id } }
         if (options.mutate) files.set(currentPath, Buffer.from('changed-image'))
         return { result: { ok: options.ok !== false, jobId: id, status: typeof options.status === 'function' ? options.status(currentPath) : options.status || 'pass',
@@ -112,6 +112,24 @@ test('云能力不可用或 backend 参数无效时不偷偷切换另一后端',
       assert.strictEqual(f.uploads(), 0)
     })
   }
+})
+
+test('云调用失败只记录固定阶段与数字错误码，不输出接口原始错误', async function () {
+  const originalWarn = console.warn
+  const lines = []
+  console.warn = value => lines.push(value)
+  const error = new Error('sensitive-image-url-and-token')
+  error.errCode = -502001
+  try {
+    await withClient({ networkError: true, injectedError: error }, async function (f) {
+      await assert.rejects(f.client.ensureSafe('input.png'), { code: 'CONTENT_SECURITY_UNAVAILABLE' })
+      assert.strictEqual(f.uploads(), 0)
+    })
+    assert.deepStrictEqual(JSON.parse(lines[0]), {
+      event: 'content_security_client', stage: 'cloud_rpc_failed', code: -502001, action: 'allocate'
+    })
+    assert(!lines.join('').includes('sensitive-image-url-and-token'))
+  } finally { console.warn = originalWarn }
 })
 
 test('用户拒绝检测时不上传图片', async function () {

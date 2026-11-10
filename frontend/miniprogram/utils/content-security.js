@@ -17,22 +17,37 @@ function unavailable() {
   return failure('CONTENT_SECURITY_UNAVAILABLE', '内容安全校验暂不可用，请稍后重试')
 }
 
+// 只记录固定阶段和数字错误码，避免输出图片路径、身份或接口原始错误。
+function diagnose(stage, error, action) {
+  const value = error && (error.errCode === undefined ? error.code : error.errCode)
+  const code = (typeof value === 'number' || typeof value === 'string') &&
+    /^-?\d{1,10}$/.test(String(value)) ? Number(value) : null
+  const entry = { event: 'content_security_client', stage, code }
+  if (['allocate', 'submit', 'status'].includes(action)) entry.action = action
+  console.warn(JSON.stringify(entry))
+}
+
 function settings() {
   const value = config.contentSecurity
   const backend = value && (value.backend === undefined ? 'cloud' : value.backend)
-  if (backend !== 'cloud' && backend !== 'http') throw unavailable()
+  if (backend !== 'cloud' && backend !== 'http') { diagnose('invalid_backend'); throw unavailable() }
   if (backend === 'http') {
     try { http.validate() } catch (error) { throw unavailable() }
     return value
   }
   if (typeof value.envId !== 'string' || !value.envId.trim() ||
-      typeof value.functionName !== 'string' || !value.functionName.trim() || !wx.cloud ||
+      typeof value.functionName !== 'string' || !value.functionName.trim()) {
+    diagnose('cloud_config_missing'); throw unavailable()
+  }
+  if (!wx.cloud ||
       typeof wx.cloud.callFunction !== 'function' || typeof wx.cloud.uploadFile !== 'function') {
+    diagnose('cloud_api_unavailable')
     throw unavailable()
   }
   if (initializedEnv !== value.envId) {
-    if (typeof wx.cloud.init !== 'function') throw unavailable()
-    wx.cloud.init({ env: value.envId, traceUser: false })
+    if (typeof wx.cloud.init !== 'function') { diagnose('cloud_init_unavailable'); throw unavailable() }
+    try { wx.cloud.init({ env: value.envId, traceUser: false }) }
+    catch (error) { diagnose('cloud_init_failed', error); throw unavailable() }
     initializedEnv = value.envId
   }
   return value
@@ -92,11 +107,14 @@ function fingerprint(path) {
 async function rpc(data) {
   const current = settings()
   if (current.backend === 'http') return timed(http.rpc(data), data.action === 'submit' ? 60000 : 20000)
-  const response = await timed(wx.cloud.callFunction({
-    name: current.functionName, config: { env: current.envId }, data
-  }), 20000)
+  let response
+  try {
+    response = await timed(wx.cloud.callFunction({
+      name: current.functionName, config: { env: current.envId }, data
+    }), 20000)
+  } catch (error) { diagnose('cloud_rpc_failed', error, data.action); throw unavailable() }
   const result = response && response.result
-  if (!result || result.ok !== true) throw unavailable()
+  if (!result || result.ok !== true) { diagnose('cloud_rpc_rejected', null, data.action); throw unavailable() }
   return result
 }
 
@@ -111,8 +129,11 @@ async function perform(path, digest) {
     if (settings().backend === 'http') {
       fileId = await timed(http.upload(allocation, path), 30000)
     } else {
-      const result = await timed(wx.cloud.uploadFile({ cloudPath: allocation.uploadPath, filePath: path,
-        config: { env: settings().envId } }), 30000)
+      let result
+      try {
+        result = await timed(wx.cloud.uploadFile({ cloudPath: allocation.uploadPath, filePath: path,
+          config: { env: settings().envId } }), 30000)
+      } catch (error) { diagnose('cloud_upload_failed', error); throw unavailable() }
       fileId = result.fileID
     }
     let status = await rpc({ action: 'submit', jobId: allocation.jobId, fileId })

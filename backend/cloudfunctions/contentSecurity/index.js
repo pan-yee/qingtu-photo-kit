@@ -75,7 +75,13 @@ const files = {
   },
   async remove(fileList) { await cloud.deleteFile({ fileList: Array.from(new Set(fileList)) }) }
 }
-const service = createService({ store, files, check: input => cloud.openapi.security.mediaCheckAsync(input) })
+function reportFailure(stage, error) {
+  const value = error && (error.errCode === undefined ? error.code : error.errCode)
+  const code = /^-?\d{1,10}$/.test(String(value)) ? Number(value) : null
+  console.error(JSON.stringify({ event: 'content_security_failure', stage, code }))
+}
+const service = createService({ store, files, check: input => cloud.openapi.security.mediaCheckAsync(input),
+  onFailure: reportFailure })
 
 exports.main = async function (event) {
   if (event && event.httpMethod) {
@@ -98,8 +104,13 @@ exports.main = async function (event) {
         !/^[A-Za-z0-9+/]{43}$/.test(process.env.CONTENT_SECURITY_CALLBACK_AES_KEY || '')) {
       throw new Error('Content security not configured')
     }
-    return await service.call(event || {}, context.OPENID)
+    const result = await service.call(event || {}, context.OPENID)
+    const action = ['allocate', 'submit', 'status'].includes(event && event.action) ? event.action : 'unknown'
+    console.log(JSON.stringify({ event: 'content_security_action', action, ok: true }))
+    return result
   } catch (error) {
+    const action = ['allocate', 'submit', 'status'].includes(event && event.action) ? event.action : 'unknown'
+    reportFailure(action, error)
     // 不把微信安全标签、图片 URL、用户身份或服务端异常发送给用户。
     return { ok: false, code: 'CONTENT_SECURITY_UNAVAILABLE' }
   }

@@ -10,7 +10,7 @@ function imageType(buffer) {
 }
 
 function createService(deps) {
-  const { store, files, check, checkImmediate, now = Date.now, randomId = () => crypto.randomBytes(16).toString('hex') } = deps
+  const { store, files, check, checkImmediate, onFailure = () => {}, now = Date.now, randomId = () => crypto.randomBytes(16).toString('hex') } = deps
 
   async function cleanup(ids) {
     const targets = ids.filter(Boolean)
@@ -60,6 +60,7 @@ function createService(deps) {
       throw new Error('Duplicate submission')
     }
     let privateId
+    let stage = 'read_upload'
     try {
       const buffer = await files.read(event.fileId)
       if (!Buffer.isBuffer(buffer) || !buffer.length || buffer.length > MAX_BYTES) throw new Error('Invalid image size')
@@ -76,15 +77,23 @@ function createService(deps) {
         return publicJob(await store.get(job.id))
       }
       // 校验服务端不可变副本，避免用户在异步检测期间覆盖原上传文件。
+      stage = 'write_copy'
       privateId = await files.write('moderation-private/' + randomId() + '.' + type, buffer)
+      stage = 'temporary_url'
       const url = await files.url(privateId)
       if (typeof url !== 'string' || !url.startsWith('https://')) throw new Error('Invalid temporary URL')
       await store.update(job.id, { fileId: privateId, sha1 })
+      stage = 'wechat_check'
       const response = await check({ mediaUrl: url, mediaType: 2, version: 2, scene: 2, openid })
       const traceId = response && (response.traceId || response.trace_id)
       const errcode = response && (response.errCode === undefined ? response.errcode : response.errCode)
       if (!response || errcode !== undefined && errcode !== 0 ||
-          typeof traceId !== 'string' || !/^[\w-]{8,128}$/.test(traceId)) throw new Error('Audit was not accepted')
+          typeof traceId !== 'string' || !/^[\w-]{8,128}$/.test(traceId)) {
+        const error = new Error('Audit was not accepted')
+        if (typeof errcode === 'number' && Number.isInteger(errcode)) error.errCode = errcode
+        throw error
+      }
+      stage = 'save_pending'
       await store.update(job.id, { status: 'pending', traceId })
       // 回调有可能早于 API 应答落库；消费已验签的短期收件箱。
       const early = await store.takeReceipt(traceId)
@@ -92,6 +101,7 @@ function createService(deps) {
       const updated = await store.get(job.id)
       return publicJob(updated)
     } catch (error) {
+      onFailure(stage, error)
       await store.update(job.id, { status: 'error' })
       await cleanup([privateId])
       throw new Error('Content audit unavailable')
