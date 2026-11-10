@@ -8,3 +8,10 @@
 tests
 docs
 *.log
+
+# Never include code-upload or SSH private keys in an application image.
+**/*.key
+**/*.pem
+**/*.ppk
+**/id_rsa
+**/id_ed25519

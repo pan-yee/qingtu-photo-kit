@@ -18,3 +18,8 @@ backend/backups/
 # Qoder 自动生成的项目知识库缓存
 .qoder/
 
+
+# Deployment credentials are mounted outside the repository.
+private.*.key
+*.pem
+*.ppk

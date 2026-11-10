@@ -7,3 +7,8 @@ backups/
 *.log
 __pycache__/
 .DS_Store
+
+# Deployment credentials are mounted outside the repository.
+private.*.key
+*.pem
+*.ppk
