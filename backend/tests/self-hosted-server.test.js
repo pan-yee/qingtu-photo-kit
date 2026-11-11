@@ -37,9 +37,11 @@ test('高清抠图需要登录、限制每用户次数，服务错误不输出�
   const http = require('http')
   const previous = process.env.MATTING_URL
   let calls = 0
+  let busy = false
   const worker = http.createServer((req, res) => {
     calls += 1; req.resume()
     res.setHeader('Content-Type', 'application/json')
+    if (busy) { res.statusCode = 429; return res.end(JSON.stringify({ ok: false })) }
     res.end(JSON.stringify({ ok: true, engine: 'modnet', width: 32, height: 32, png: 'test-mask' }))
   }).listen(0, '127.0.0.1')
   await new Promise(resolve => worker.once('listening', resolve))
@@ -59,6 +61,13 @@ test('高清抠图需要登录、限制每用户次数，服务错误不输出�
       delete process.env.MATTING_URL
       const response = await call('/jobs/matte', 'POST', Buffer.from('image'), token)
       assert.deepStrictEqual(await response.json(), { ok: false, code: 'MATTING_UNAVAILABLE' })
+    })
+    process.env.MATTING_URL = 'http://127.0.0.1:' + worker.address().port + '/matte'
+    busy = true
+    await withServer(async ({ call, login }) => {
+      const response = await call('/jobs/matte', 'POST', Buffer.from('image'), await login())
+      assert.strictEqual(response.status, 429)
+      assert.deepStrictEqual(await response.json(), { ok: false, code: 'MATTING_BUSY' })
     })
   } finally {
     if (previous === undefined) delete process.env.MATTING_URL

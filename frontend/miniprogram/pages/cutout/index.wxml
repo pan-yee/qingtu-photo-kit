@@ -45,6 +45,14 @@
       <text>{{engineNotice}}</text>
     </view>
 
+    <view wx:if="{{portraitMode}}" class="card setting-group">
+      <view class="setting-head">
+        <text class="setting-label">减少边缘残色</text>
+        <switch checked="{{edgeCleanup}}" bindchange="onEdgeCleanupChange" color="#1d6b4f" />
+      </view>
+      <text>用于发丝附近的旧背景残色，颜色不自然时可关闭。</text>
+    </view>
+
     <view class="card setting-group">
       <view class="setting-head">
         <text class="setting-label">照片尺寸</text>

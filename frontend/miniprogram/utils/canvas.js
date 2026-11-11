@@ -77,7 +77,7 @@ function roundedRectPath(context, x, y, width, height, radius) {
   context.closePath()
 }
 
-function canvasToTempFile(canvas, fileType, quality) {
+function exportCanvas(canvas, fileType, quality) {
   return new Promise(function exportFile(resolve, reject) {
     wx.canvasToTempFilePath({
       canvas: canvas,
@@ -89,14 +89,27 @@ function canvasToTempFile(canvas, fileType, quality) {
       },
       fail: reject
     })
-  }).then(async function checked(path) {
+  })
+}
+
+function canvasToTempFile(canvas, fileType, quality) {
+  return exportCanvas(canvas, fileType, quality).then(async function checked(path) {
     await contentSecurity.ensureSafe(path)
     return path
   })
 }
 
+// Internal derivative only: the original must pass moderation before processing.
+// Never use this path for a preview, sharing or saving; those use canvasToTempFile.
+async function canvasToProcessingFile(canvas, approvedSource) {
+  if (!approvedSource) throw new Error('缺少待校验原图')
+  await contentSecurity.ensureSafe(approvedSource)
+  return exportCanvas(canvas, 'jpg', 0.95)
+}
+
 module.exports = {
   canvasToTempFile,
+  canvasToProcessingFile,
   createCanvas,
   drawImageCover,
   loadImage,

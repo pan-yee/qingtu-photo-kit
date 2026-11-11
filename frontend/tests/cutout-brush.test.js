@@ -150,6 +150,7 @@ function installWx() {
       }, 0)
     },
     showToast: function showToast() {},
+    getFileSystemManager: function () { return { unlink() {} } },
     getImageInfo: function getImageInfo(options) {
       options.success({ width: PHOTO_WIDTH, height: PHOTO_HEIGHT })
     }
@@ -412,4 +413,33 @@ test('ECS 连续遮罩复用，换底色和尺寸不会重新上传人像', asyn
     await page.renderResult()
     assert.strictEqual(runs, 1)
   } finally { page.onUnload(); remote.segment = previous; restoreWx() }
+})
+
+test('ECS 完整宽幅图先推理，内部 JPEG 不额外审核，最终 PNG 必须审核', async function () {
+  const restoreWx = installWx()
+  const remote = require('../miniprogram/utils/portrait-remote')
+  const previous = remote.segment
+  const previousCheck = contentSecurity.ensureSafe
+  const checked = [], canvases = [], exports = []
+  const createCanvas = wx.createOffscreenCanvas
+  const exportCanvas = wx.canvasToTempFilePath
+  require('../miniprogram/config/index').portraitBackend = 'ecs'
+  wx.getImageInfo = options => options.success({ width: 2000, height: 1000 })
+  wx.createOffscreenCanvas = options => { canvases.push([options.width, options.height]); return createCanvas(options) }
+  wx.canvasToTempFilePath = options => { exports.push(options.fileType); exportCanvas(options) }
+  contentSecurity.ensureSafe = async path => { checked.push(path) }
+  remote.segment = async () => ({ matting: true, width: 32, height: 32,
+    data: new Float32Array(1024).fill(1), face: { x: .1, y: .2, width: .1, height: .2 } })
+  const page = createPageInstance(loadPage())
+  try {
+    await page.preparePhoto('tmp-source.png')
+    assert(canvases.some(size => size[0] === 1600 && size[1] === 800))
+    assert.deepStrictEqual(exports, ['jpg', 'png'])
+    assert.deepStrictEqual(checked, ['tmp-source.png', 'tmp-result.png'])
+    assert(page.data.engineNotice.includes('辅助构图'))
+    assert.strictEqual(page.data.resultSrc, 'tmp-result.png')
+  } finally {
+    page.onUnload(); remote.segment = previous
+    contentSecurity.ensureSafe = previousCheck; restoreWx()
+  }
 })

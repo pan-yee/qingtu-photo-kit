@@ -103,6 +103,7 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
       await store.rateLimit('matte:' + req.openid, Math.floor(Date.now() / 60000), 6)
       const response = await fetch(process.env.MATTING_URL, { method: 'POST', body: req.body,
         headers: { 'Content-Type': 'application/octet-stream' }, signal: AbortSignal.timeout(45000) })
+      if (response.status === 429) return res.status(429).json({ ok: false, code: 'MATTING_BUSY' })
       if (!response.ok) throw new Error('Matting unavailable')
       const result = await response.json()
       if (result.ok !== true || result.engine !== 'modnet' || typeof result.png !== 'string' || result.png.length > 2000000) throw new Error('Invalid matte')

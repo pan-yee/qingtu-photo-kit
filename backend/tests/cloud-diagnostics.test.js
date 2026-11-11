@@ -73,7 +73,7 @@ test('云同步审核仅接受微信明确数字成功码，并将明确违规�
 })
 
 test('云检测副本保持画面比例，符合尺寸体积限制并拒绝损坏图片', async function () {
-  const sharp = require('../cloudfunctions/contentSecurity/node_modules/sharp')
+  const sharp = require('sharp')
   const { prepareAuditImage } = require('../cloudfunctions/contentSecurity/audit-image')
   const image = await sharp({ create: { width: 1800, height: 2400, channels: 4,
     background: { r: 40, g: 120, b: 80, alpha: 0.7 } } }).png().toBuffer()

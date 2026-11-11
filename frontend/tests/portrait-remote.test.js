@@ -58,5 +58,17 @@ test('高清抠图区分合法域名和登录错误，不向用户显示模糊�
     await assert.rejects(remote.segment('source.png'), /连接超时/)
     http.matte = async () => { throw { diagnostic: { stage: 'session', reason: 'network_failed' } } }
     await assert.rejects(remote.segment('source.png'), /无法连接图片服务/)
+    http.matte = async () => { throw { statusCode: 429 } }
+    await assert.rejects(remote.segment('source.png'), /繁忙/)
+  })
+})
+
+test('高清抠图接收合法人脸位置，拒绝多张主要人脸，并兼容旧服务', async function () {
+  await scenario(true, async remote => {
+    const face = { x: .2, y: .2, width: .3, height: .3 }
+    http.matte = async () => ({ engine: 'modnet', width: 32, height: 32, png: 'mask', faces: [face] })
+    assert.deepStrictEqual((await remote.segment('source.png')).face, face)
+    http.matte = async () => ({ engine: 'modnet', width: 32, height: 32, png: 'mask', faces: [face, face] })
+    await assert.rejects(remote.segment('source.png'), /多个人脸/)
   })
 })

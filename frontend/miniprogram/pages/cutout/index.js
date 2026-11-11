@@ -7,6 +7,7 @@ const media = require('../../utils/media')
 const processing = require('../../utils/image-processing')
 const portrait = require('../../utils/portrait-segmentation')
 const remotePortrait = require('../../utils/portrait-remote')
+const framing = require('../../utils/portrait-framing')
 
 Page({
   data: {
@@ -16,6 +17,7 @@ Page({
     processing: false,
     tolerance: 36,
     feather: 3,
+    edgeCleanup: true,
     backgroundKey: 'white',
     removedPercent: 0,
     portraitMode: false,
@@ -110,7 +112,7 @@ Page({
       const sourceContext = sourceCanvas.getContext('2d')
       const image = await canvasTools.loadImage(sourceCanvas, path)
       if (this._disposed || photoToken !== this._photoToken) return
-      const crop = processing.centerCropRect(
+      let crop = processing.centerCropRect(
         dimensions.width,
         dimensions.height,
         width,
@@ -132,9 +134,27 @@ Page({
       // 模型每张照片只推理一次，换底色、边缘调整和涂抹复用概率遮罩。
       if (config.portraitBackend !== 'ecs' && !this._segmenter) this._segmenter = portrait.createSegmenter()
       try {
-        const mask = config.portraitBackend === 'ecs'
-          ? await remotePortrait.segment(await canvasTools.canvasToTempFile(sourceCanvas, 'png', 1))
-          : await this._segmenter.segment(this._sourceImageData)
+        let mask
+        if (config.portraitBackend === 'ecs') {
+          // Send the complete photo; locate the face before the final ID crop.
+          const input = framing.fitSize(dimensions.width, dimensions.height, config.limits.maxImageSide)
+          const fullCanvas = canvasTools.createCanvas(input.width, input.height)
+          fullCanvas.getContext('2d').drawImage(image, 0, 0, input.width, input.height)
+          const processingPath = await canvasTools.canvasToProcessingFile(fullCanvas, path)
+          try { mask = await remotePortrait.segment(processingPath) }
+          finally { wx.getFileSystemManager().unlink({ filePath: processingPath, fail() {} }) }
+          if (this._disposed || photoToken !== this._photoToken) return
+          crop = framing.portraitCrop(dimensions.width, dimensions.height, mask.face, mask, width, height)
+          sourceContext.clearRect(0, 0, width, height)
+          sourceContext.drawImage(image, crop.sx, crop.sy, crop.sw, crop.sh, 0, 0, width, height)
+          this._sourceImageData = sourceContext.getImageData(0, 0, width, height)
+          this.setData({ engineNotice: crop.faceAligned
+            ? '已按人脸辅助构图，请核对头顶留白与办理机构的照片要求。'
+            : '未识别到清晰正面人脸，当前使用居中构图；建议换一张单人正面半身照。' })
+          mask = framing.cropMask(mask, crop, dimensions.width, dimensions.height)
+        } else {
+          mask = await this._segmenter.segment(this._sourceImageData)
+        }
         if (this._disposed || photoToken !== this._photoToken) return
         this._portraitMask = mask
         this.setData({ portraitMode: true })
@@ -204,6 +224,7 @@ Page({
       ? portrait.applyPortraitMask(this._sourceImageData, this._portraitMask, {
           tolerance: this.data.tolerance,
           featherRadius: this.data.feather,
+          edgeCleanup: this.data.edgeCleanup,
           output: this._cutoutImageData.data
         })
       : processing.removeBackground(this._sourceImageData, {
@@ -262,6 +283,11 @@ Page({
   onFeatherChange(event) {
     const feather = Number(event.detail.value)
     this.setData({ feather: feather })
+    this.scheduleRender()
+  },
+
+  onEdgeCleanupChange(event) {
+    this.setData({ edgeCleanup: !!event.detail.value })
     this.scheduleRender()
   },
 

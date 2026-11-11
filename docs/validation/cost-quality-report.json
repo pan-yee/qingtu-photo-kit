@@ -1,0 +1,330 @@
+{
+  "scope": "Offline CPU test. No ground-truth masks, human quality scores, real-device or production concurrency verification.",
+  "onnxruntime": "1.23.2",
+  "source_images": 1,
+  "derived_stress_cases": 6,
+  "images": 7,
+  "models": [
+    {
+      "name": "MODNet",
+      "sha256": "07c308cf0fc7e6e8b2065a12ed7fc07e1de8febb7dc7839d7b7f15dd66584df9",
+      "samples": [
+        {
+          "image": "astronaut.png",
+          "faces": 1,
+          "crop": {
+            "sx": 124.10455246913591,
+            "sy": -7.664351851851652,
+            "sw": 200.79089506172818,
+            "sh": 267.7211934156376,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            1320.1,
+            801.03,
+            907.19
+          ]
+        },
+        {
+          "image": "wide-left.png",
+          "faces": 1,
+          "crop": {
+            "sx": 122.9004629629629,
+            "sy": -8.247222222222327,
+            "sw": 202.1990740740742,
+            "sh": 269.5987654320989,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            410.82,
+            832.81,
+            365.89
+          ]
+        },
+        {
+          "image": "wide-right.png",
+          "faces": 1,
+          "crop": {
+            "sx": 634.9004629629629,
+            "sy": -8.247222222222327,
+            "sw": 202.1990740740742,
+            "sh": 269.5987654320989,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            613.12,
+            419.14,
+            294.61
+          ]
+        },
+        {
+          "image": "low-light.png",
+          "faces": 1,
+          "crop": {
+            "sx": 123.8167438271604,
+            "sy": -7.30787037037053,
+            "sw": 200.3665123456792,
+            "sh": 267.15534979423893,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            996.12,
+            592.1,
+            627.44
+          ]
+        },
+        {
+          "image": "low-contrast.png",
+          "faces": 1,
+          "crop": {
+            "sx": 124.9364390432099,
+            "sy": -7.266782407407366,
+            "sw": 199.1271219135802,
+            "sh": 265.5028292181069,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            429.93,
+            444.71,
+            431.05
+          ]
+        },
+        {
+          "image": "tilted.png",
+          "faces": 1,
+          "crop": {
+            "sx": 101.64438657407403,
+            "sy": -3.4774305555556246,
+            "sw": 207.71122685185193,
+            "sh": 276.9483024691359,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            422.38,
+            428.22,
+            416.41
+          ]
+        },
+        {
+          "image": "low-resolution.png",
+          "faces": 1,
+          "crop": {
+            "sx": 61.53846153846155,
+            "sy": 5.51923076923077,
+            "sw": 101.9230769230769,
+            "sh": 135.89743589743588,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            417.54,
+            414.09,
+            414.74
+          ]
+        }
+      ],
+      "input_shape": [
+        "batch_size",
+        3,
+        "height",
+        "width"
+      ]
+    },
+    {
+      "name": "Hivision-MODNet",
+      "sha256": "7e0cb9a2a841b426dd0daf1a788ec398dab059bc039041d62b15636c0783bc56",
+      "samples": [
+        {
+          "image": "astronaut.png",
+          "faces": 1,
+          "crop": {
+            "sx": 125.20529513888889,
+            "sy": -5.815104166666664,
+            "sw": 198.58940972222223,
+            "sh": 264.7858796296296,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            260.19,
+            243.23,
+            232.66
+          ]
+        },
+        {
+          "image": "wide-left.png",
+          "faces": 1,
+          "crop": {
+            "sx": 124.52083333333334,
+            "sy": -5.525000000000006,
+            "sw": 198.95833333333331,
+            "sh": 265.27777777777777,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            240.09,
+            237.62,
+            249.37
+          ]
+        },
+        {
+          "image": "wide-right.png",
+          "faces": 1,
+          "crop": {
+            "sx": 636.5208333333334,
+            "sy": -5.525000000000006,
+            "sw": 198.95833333333331,
+            "sh": 265.27777777777777,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            223.16,
+            228.22,
+            229.69
+          ]
+        },
+        {
+          "image": "low-light.png",
+          "faces": 1,
+          "crop": {
+            "sx": 124.80837673611111,
+            "sy": -5.641927083333332,
+            "sw": 198.38324652777777,
+            "sh": 264.5109953703704,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            244.13,
+            239.61,
+            239.8
+          ]
+        },
+        {
+          "image": "low-contrast.png",
+          "faces": 1,
+          "crop": {
+            "sx": 125.86990017361111,
+            "sy": -5.698567708333329,
+            "sw": 197.26019965277777,
+            "sh": 263.013599537037,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            279.91,
+            251.44,
+            239.63
+          ]
+        },
+        {
+          "image": "tilted.png",
+          "faces": 1,
+          "crop": {
+            "sx": 102.23122829861111,
+            "sy": -2.491536458333332,
+            "sw": 206.53754340277777,
+            "sh": 275.3833912037037,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            276.86,
+            235.82,
+            238.38
+          ]
+        },
+        {
+          "image": "low-resolution.png",
+          "faces": 1,
+          "crop": {
+            "sx": 60.305447048611114,
+            "sy": -3.686848958333332,
+            "sw": 104.38910590277777,
+            "sh": 139.18547453703704,
+            "faceAligned": true
+          },
+          "inference_ms": [
+            240.17,
+            242.94,
+            238.91
+          ]
+        }
+      ],
+      "input_shape": [
+        1,
+        3,
+        512,
+        512
+      ]
+    }
+  ],
+  "date": "2026-11-11",
+  "tests": {
+    "frontend_js": 166,
+    "backend_js": 31,
+    "worker_python": 4,
+    "status": "passed"
+  },
+  "worker_smoke": {
+    "ok": true,
+    "engine": "modnet",
+    "width": 512,
+    "height": 576,
+    "faces": [
+      {
+        "x": 0.345703125,
+        "y": 0.12890625,
+        "width": 0.185546875,
+        "height": 0.185546875
+      }
+    ],
+    "region": {
+      "x": 0.16015625,
+      "y": 0.0,
+      "width": 0.556640625,
+      "height": 0.6484375
+    },
+    "worker_processing_ms": 475.58,
+    "process_peak_rss_mib": 293.82,
+    "scope": "Local single image, pinned production dependencies; not ECS or device measurement."
+  },
+  "decision": "Keep current checksum-pinned MODNet on CPU; no quality ranking established from one independent subject.",
+  "cost_scope": "No billed cloud API count or monthly cost measured. Internal derivative no longer separately moderated; original and user-visible output remain guarded.",
+  "deployment": "Local changes and offline verification only; no ECS deployment, mini-program upload, real-device or WeChat platform audit.",
+  "model_sources": [
+    "https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/modnet_photographic_portrait_matting.onnx",
+    "https://github.com/Zeyi-Lin/HivisionIDPhotos/releases/download/pretrained-model/hivision_modnet.onnx"
+  ],
+  "previews": {
+    "modnet_original": "modnet-optimized-comparison.png",
+    "modnet_wide_left": "modnet-wide-comparison.png",
+    "hivision_original": "hivision-comparison.png"
+  },
+  "docker_smoke": {
+    "ok": true,
+    "engine": "modnet",
+    "width": 512,
+    "height": 576,
+    "faces": [
+      {
+        "x": 0.345703125,
+        "y": 0.12890625,
+        "width": 0.185546875,
+        "height": 0.185546875
+      }
+    ],
+    "region": {
+      "x": 0.16015625,
+      "y": 0.0,
+      "width": 0.556640625,
+      "height": 0.6484375
+    },
+    "http_status": 200,
+    "elapsed_ms": 1402.12,
+    "uid": 65534,
+    "scope": "Local Docker loopback HTTP succeeded as non-root on a read-only root filesystem. Not ECS public routing, device verification or enforced resource-limit verification.",
+    "configured_memory_bytes": 734003200,
+    "configured_cpus": 2,
+    "worker_peak_rss_mib": 342.01,
+    "observed_cgroup_memory_max_bytes": 34359738368,
+    "observed_cgroup_cpu_max": "400000 100000",
+    "resource_limit_verified": false,
+    "resource_limit_note": "Nested runtime exposes the shared outer cgroup despite Docker HostConfig requesting 700 MiB and 2 CPUs. Docker stats is not worker-specific here."
+  }
+}

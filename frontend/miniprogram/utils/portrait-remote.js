@@ -1,6 +1,7 @@
 const http = require('./moderation-http')
 const canvasTools = require('./canvas')
 const diagnostics = require('./moderation-diagnostics')
+const framing = require('./portrait-framing')
 let consent = null
 
 async function segment(path) {
@@ -19,7 +20,8 @@ async function segment(path) {
   try { result = await http.matte(bytes) } catch (cause) {
     const diagnostic = diagnostics.metadata(cause, 'matting')
     console.warn('[portrait-matting]', JSON.stringify(diagnostic))
-    const message = diagnostic.reason === 'domain_not_allowed'
+    const message = diagnostic.httpStatus === 429 ? '图片处理繁忙，请稍后重试'
+      : diagnostic.reason === 'domain_not_allowed'
       ? '图片服务域名未配置，请添加 request 合法域名'
       : diagnostic.reason === 'timeout' ? '图片服务连接超时，请切换网络后重试'
         : diagnostic.reason === 'tls_failed' ? '图片服务安全连接失败，请检查网络'
@@ -34,6 +36,7 @@ async function segment(path) {
   if (result.engine !== 'modnet' || !Number.isInteger(result.width) || !Number.isInteger(result.height) ||
       result.width < 32 || result.height < 32 || result.width > 1024 || result.height > 1024 ||
       typeof result.png !== 'string' || result.png.length > 2000000) throw new Error('人像抠图结果无效')
+  if (result.region != null && !framing.validFace(result.region)) throw new Error('人像抠图区域无效')
   const target = wx.env.USER_DATA_PATH + '/portrait-matte-' + Date.now() + '.png'
   try {
     await new Promise((resolve, reject) => fs.writeFile({ filePath: target, data: result.png,
@@ -44,7 +47,11 @@ async function segment(path) {
     const pixels = context.getImageData(0, 0, result.width, result.height).data
     const data = new Float32Array(result.width * result.height)
     for (let i = 0; i < data.length; i += 1) data[i] = pixels[i * 4] / 255
-    return { data, width: result.width, height: result.height, matting: true }
+    // Old workers omit faces; preserve compatibility without inventing a face.
+    const faces = Array.isArray(result.faces) ? result.faces.filter(framing.validFace) : []
+    if (faces.length > 1) throw new Error('检测到多个人脸，请选择单人正面照片')
+    return { data, width: result.width, height: result.height, matting: true,
+      face: faces[0] || null, region: result.region || null }
   } finally { fs.unlink({ filePath: target, fail() {} }) }
 }
 module.exports = { segment }

@@ -22,13 +22,13 @@ npm ci --prefix backend
 npm run check
 ```
 
-也可分别运行 `npm run check:frontend`、`npm run check:backend`。当前 173 项测试按归属分为前端 148 项、后端 25 项，保留原有验证并合入最新图片检测和回调测试。
+也可分别运行 `npm run check:frontend`、`npm run check:backend`。当前 JavaScript 测试为前端 166 项、后端 31 项。抠图 worker 另有 4 项 Python 回归，安装其独立依赖并提供模型后执行，见[成本与质量优化及验证](docs/cost-quality-optimization.md)。
 
 ## 独立分发
 
 单独复制 `frontend/` 或 `backend/` 即为完整项目，各自包含 README、LICENSE、package.json、测试及所需配置。后端包含 package-lock.json，前端无第三方 npm 依赖。无需 npm workspace、根目录 node_modules 或跨项目软链接。
 
-接口说明分别保存在两个项目的 `docs/后端接口.md`，单独分发后仍可查阅。旧云开发备用实现归后端 `cloudfunctions/` 管理，默认仍使用自有 HTTPS 服务，不会自动删除腾讯云资源。
+接口说明分别保存在两个项目的 `docs/后端接口.md`，单独分发后仍可查阅。云开发实现归后端 `cloudfunctions/` 管理，当前默认云审核、ECS 抠图，不会自动删除腾讯云资源。
 
 
 ## 本次拆分验证

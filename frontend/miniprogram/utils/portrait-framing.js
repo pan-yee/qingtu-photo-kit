@@ -1,0 +1,75 @@
+// Geometry only. Keep identity pixels intact; this is not an ID eligibility check.
+function fitSize(width, height, maxSide) {
+  const scale = Math.min(1, maxSide / Math.max(width, height))
+  return { width: Math.max(1, Math.round(width * scale)), height: Math.max(1, Math.round(height * scale)) }
+}
+
+function validFace(face) {
+  return face && ['x', 'y', 'width', 'height'].every(key => Number.isFinite(face[key])) &&
+    face.x >= 0 && face.y >= 0 && face.width > 0 && face.height > 0 &&
+    face.x + face.width <= 1.001 && face.y + face.height <= 1.001
+}
+
+function maskInfo(mask) {
+  return mask.matting ? mask : { data: mask, width: 256, height: 256 }
+}
+
+function sample(mask, x, y) {
+  if (mask.region) {
+    x = (x - mask.region.x) / mask.region.width
+    y = (y - mask.region.y) / mask.region.height
+  }
+  if (x < 0 || y < 0 || x > 1 || y > 1) return 0
+  const mx = Math.max(0, Math.min(mask.width - 1, x * mask.width - .5))
+  const my = Math.max(0, Math.min(mask.height - 1, y * mask.height - .5))
+  const x0 = Math.floor(mx), y0 = Math.floor(my)
+  const x1 = Math.min(mask.width - 1, x0 + 1), y1 = Math.min(mask.height - 1, y0 + 1)
+  const tx = mx - x0, ty = my - y0
+  return (mask.data[y0 * mask.width + x0] * (1 - tx) + mask.data[y0 * mask.width + x1] * tx) * (1 - ty) +
+    (mask.data[y1 * mask.width + x0] * (1 - tx) + mask.data[y1 * mask.width + x1] * tx) * ty
+}
+
+function portraitCrop(width, height, face, mask, targetWidth, targetHeight) {
+  const ratio = targetWidth / targetHeight
+  if (!validFace(face)) {
+    const sh = Math.min(height, width / ratio)
+    const sw = sh * ratio
+    return { sx: (width - sw) / 2, sy: (height - sh) / 2, sw, sh, faceAligned: false }
+  }
+  const info = maskInfo(mask)
+  // Walk up from the forehead within the main face column to include hair.
+  let headTop = Math.max(0, face.y - face.height * .25)
+  let emptyRows = 0
+  const rowStep = (info.region ? info.region.height : 1) / info.height
+  for (let y = face.y; y >= Math.max(0, face.y - face.height * .8); y -= rowStep) {
+    let occupied = 0
+    for (let step = 0; step < 9; step += 1) {
+      if (sample(info, face.x + face.width * (.15 + step * .0875), y) > .5) occupied += 1
+    }
+    if (occupied >= 2) { headTop = y; emptyRows = 0 }
+    else if (++emptyRows >= 3) break
+  }
+  const headHeight = (face.y + face.height - headTop) * height
+  const sh = Math.min(height * 2, Math.max(headHeight / .54, face.width * width / (.52 * ratio)))
+  const sw = sh * ratio
+  // Allow transparent padding instead of shifting the head to fit image bounds.
+  return { sx: (face.x + face.width / 2) * width - sw / 2,
+    sy: headTop * height - sh * .09, sw, sh, faceAligned: true }
+}
+
+function cropMask(mask, crop, sourceWidth, sourceHeight) {
+  const info = maskInfo(mask)
+  const width = mask.matting ? 450 : 256
+  const height = mask.matting ? 600 : 256
+  const data = new Float32Array(width * height)
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      data[y * width + x] = sample(info,
+        (crop.sx + (x + .5) * crop.sw / width) / sourceWidth,
+        (crop.sy + (y + .5) * crop.sh / height) / sourceHeight)
+    }
+  }
+  return mask.matting ? { data, width, height, matting: true } : data
+}
+
+module.exports = { fitSize, validFace, portraitCrop, cropMask }

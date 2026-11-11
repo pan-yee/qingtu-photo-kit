@@ -9,6 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import numpy as np
 import onnxruntime as ort
 from PIL import Image, ImageOps
+from framing import detect_faces, portrait_region
 
 Image.MAX_IMAGE_PIXELS = 24000000
 options = ort.SessionOptions()
@@ -20,6 +21,7 @@ with open(model_path, 'rb') as model_file:
         raise RuntimeError('MODNet checksum mismatch')
 session = ort.InferenceSession(model_path, sess_options=options, providers=['CPUExecutionProvider'])
 gate = threading.BoundedSemaphore(1)
+admission = threading.BoundedSemaphore(3)  # One processing + at most two waiting.
 
 def matte_image(raw):
     with Image.open(io.BytesIO(raw)) as source:
@@ -28,6 +30,8 @@ def matte_image(raw):
         if source.width * source.height > 24000000:
             raise ValueError('Image too large')
         image = ImageOps.exif_transpose(source).convert('RGB')
+    faces = detect_faces(image)
+    image, region = portrait_region(image, faces)
     width, height = image.size
     # Official MODNet preprocessing: RGB [-1,1], aspect ratio, multiple of 32.
     scale = min(512 / min(width, height), 1024 / max(width, height))
@@ -42,7 +46,7 @@ def matte_image(raw):
     result = io.BytesIO()
     mask.save(result, format='PNG')
     return {'ok': True, 'engine': 'modnet', 'width': size[0], 'height': size[1],
-            'png': base64.b64encode(result.getvalue()).decode('ascii')}
+            'png': base64.b64encode(result.getvalue()).decode('ascii'), 'faces': faces, 'region': region}
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args):
@@ -63,9 +67,13 @@ class Handler(BaseHTTPRequestHandler):
     def do_POST(self):
         if self.path != '/matte':
             return self.reply(404, {'ok': False})
-        if not gate.acquire(blocking=False):
-            return self.reply(429, {'ok': False})
+        if not admission.acquire(blocking=False):
+            return self.reply(429, {'ok': False, 'code': 'MATTING_BUSY'})
+        acquired = False
         try:
+            acquired = gate.acquire(timeout=12)
+            if not acquired:
+                return self.reply(429, {'ok': False, 'code': 'MATTING_BUSY'})
             self.connection.settimeout(30)
             length = int(self.headers.get('Content-Length', 0))
             if not 0 < length <= 10 * 1024 * 1024:
@@ -77,7 +85,9 @@ class Handler(BaseHTTPRequestHandler):
         except Exception:
             self.reply(422, {'ok': False})
         finally:
-            gate.release()
+            if acquired:
+                gate.release()
+            admission.release()
 
 if __name__ == '__main__':
     ThreadingHTTPServer(('0.0.0.0', 3002), Handler).serve_forever()

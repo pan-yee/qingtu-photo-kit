@@ -89,16 +89,66 @@ function applyPortraitMask(image, mask, options) {
       }
       // MODNet already predicts alpha, not class confidence. Preserve hair transparency.
       if (matting) {
-        alpha = Math.max(0, Math.min(1, probability + (36 - tolerance) / 150))
-        const blend = Math.max(0, Math.min(1, feather / 8))
-        alpha += (alpha * alpha * (3 - 2 * alpha) - alpha) * blend
+        // Keep the historical default neutral; extra feathering is a spatial
+        // blur, rather than a nonlinear remap that hardens translucent hair.
+        let matte = probability
+        if (feather > 3) {
+          const mx = (x + .5) * maskWidth / image.width - .5
+          const my = (y + .5) * maskHeight / image.height - .5
+          const radius = Math.min(3, (feather - 3) * .5)
+          matte = probability * .5 + .125 * (
+            sample(values, maskWidth, maskHeight, mx - radius, my, 1, 0) +
+            sample(values, maskWidth, maskHeight, mx + radius, my, 1, 0) +
+            sample(values, maskWidth, maskHeight, mx, my - radius, 1, 0) +
+            sample(values, maskWidth, maskHeight, mx, my + radius, 1, 0))
+        }
+        alpha = Math.max(0, Math.min(1, matte + (36 - tolerance) / 150))
       }
       const offset = (y * image.width + x) * 4 + 3
       output[offset] = Math.round(image.data[offset] * alpha)
       if (output[offset] === 0) removedPixels += 1
     }
   }
+  if (matting && opts.edgeCleanup) cleanEdgeColors(image, output)
   return { data: output, removedPixels: removedPixels }
+}
+
+function cleanEdgeColors(image, output) {
+  const width = image.width, height = image.height
+  let hasBackground = false
+  for (let offset = 3; offset < output.length; offset += 4) {
+    if (output[offset] <= 5 && image.data[offset] >= 250) { hasBackground = true; break }
+  }
+  if (!hasBackground) return
+  // Only use nearby, confidently removed background. Do not alter opaque
+  // face/clothing pixels or guess a global background for complex scenes.
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const offset = (y * width + x) * 4
+      const alpha = output[offset + 3] / 255
+      if (alpha < .15 || alpha > .95 || image.data[offset + 3] < 250) continue
+      let background = -1
+      for (let distance = 2; distance <= 8 && background < 0; distance *= 2) {
+        for (let direction = 0; direction < 4; direction += 1) {
+          const nx = x + (direction === 0 ? -distance : direction === 1 ? distance : 0)
+          const ny = y + (direction === 2 ? -distance : direction === 3 ? distance : 0)
+          if (nx < 0 || nx >= width || ny < 0 || ny >= height) continue
+          const candidate = (ny * width + nx) * 4
+          if (output[candidate + 3] <= 5 && image.data[candidate + 3] >= 250) {
+            background = candidate
+            break
+          }
+        }
+      }
+      if (background < 0) continue
+      for (let channel = 0; channel < 3; channel += 1) {
+        const color = image.data[offset + channel]
+        const foreground = (color - (1 - alpha) * image.data[background + channel]) / alpha
+        // Conservative correction cap; users can disable it for unusual edges.
+        output[offset + channel] = Math.round(color + Math.max(-32, Math.min(32, foreground - color)) * .6)
+      }
+    }
+  }
 }
 
 function createSegmenter() {
