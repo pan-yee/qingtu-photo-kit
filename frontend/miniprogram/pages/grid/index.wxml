@@ -2,16 +2,29 @@
   <view class="page-intro">
     <text class="intro-index">05 / GRID CUT</text>
     <text class="intro-title">一张图，切成九宫格，\n保存到相册备用。</text>
-    <text class="intro-desc">自动居中裁成正方形，再按 1–9 顺序切成 3 × 3 小图。</text>
+    <text class="intro-desc">支持完整留白或调整裁切位置，按 1–9 顺序切成小图。</text>
   </view>
 
   <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="chooseImage">
     <view class="upload-plus">+</view>
     <text class="upload-title">选择一张完整图片</text>
-    <text class="upload-tip">会自动居中裁切，重要内容请放在中间</text>
+    <text class="upload-tip">默认完整显示，保留边缘内容</text>
   </button>
 
   <view wx:else class="grid-workspace">
+    <view class="card fit-card">
+      <view class="setting-head"><text class="setting-label">图片显示方式</text></view>
+      <view class="button-row">
+        <button class="{{fit === 'contain' ? 'secondary-button' : 'ghost-button'}}" data-fit="contain" bindtap="selectFit" disabled="{{saving}}">完整显示</button>
+        <button class="{{fit === 'cover' ? 'secondary-button' : 'ghost-button'}}" data-fit="cover" bindtap="selectFit" disabled="{{saving}}">铺满裁切</button>
+      </view>
+      <text class="fit-hint">{{fit === 'contain' ? '保留全部内容，空余区域留白。' : '填满画面，超出区域会被裁去。'}}</text>
+      <view wx:if="{{fit === 'cover'}}">
+        <text class="fit-hint">裁切位置：左 / 上 → 右 / 下</text>
+        <slider value="{{position}}" min="0" max="100" bindchange="changePosition" disabled="{{saving}}" activeColor="#286b51" />
+      </view>
+    </view>
+
     <view class="card grid-card">
       <view class="setting-head">
         <view>
@@ -22,19 +35,14 @@
       </view>
 
       <view wx:if="{{cells.length === 9}}" class="nine-grid">
-        <image
-          wx:for="{{cells}}"
-          wx:key="index"
-          class="grid-cell"
-          src="{{item.path}}"
-          mode="aspectFill"
-          data-index="{{index}}"
-          bindtap="previewCell"
-        ></image>
+        <view wx:for="{{cells}}" wx:key="index" class="grid-tile" data-index="{{index}}" bindtap="previewCell">
+          <image class="grid-cell" src="{{item.path}}" mode="aspectFill"></image>
+          <text class="cell-number">{{item.index}}</text>
+        </view>
       </view>
       <view wx:else class="grid-placeholder">
         <view class="placeholder-spinner"></view>
-        <text>正在切图…</text>
+        <text>{{busy ? '正在切图 ' + progress + ' / 9' : '生成失败，请点击重新生成'}}</text>
       </view>
     </view>
 
@@ -47,14 +55,14 @@
     </view>
 
     <view class="button-row">
-      <button class="secondary-button" bindtap="generateGrid" disabled="{{busy}}">重新生成</button>
-      <button class="primary-button" bindtap="saveAll" disabled="{{busy || cells.length !== 9}}">保存全部 9 张</button>
+      <button class="secondary-button" bindtap="generateGrid" disabled="{{busy || saving}}">重新生成</button>
+      <button class="primary-button" bindtap="saveAll" disabled="{{busy || saving || cells.length !== 9}}">{{savedCount > 0 ? '继续保存剩余图片' : '保存全部 9 张'}}</button>
     </view>
   </view>
 
   <view wx:if="{{busy}}" class="busy-mask">
     <view class="busy-spinner"></view>
-    <text>正在切图…</text>
+    <text>{{busy ? '正在切图 ' + progress + ' / 9' : '生成失败，请点击重新生成'}}</text>
   </view>
   <privacy-dialog />
 </view>

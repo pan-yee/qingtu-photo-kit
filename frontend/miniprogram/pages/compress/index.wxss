@@ -95,7 +95,7 @@
 
 .preset-list {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12rpx;
 }
 
@@ -143,3 +143,8 @@
   margin-top: 2rpx;
 }
 
+
+.preset-item { width: 100%; min-width: 0; }
+.format-heading { margin-top: 24rpx; }
+
+.preset-list .preset-item { width: 100%; margin: 0; }

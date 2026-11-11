@@ -1,5 +1,7 @@
 const config = require('../../config/index')
 const contentSecurity = require('../../utils/content-security')
+const canvasTools = require('../../utils/canvas')
+const layout = require('../../utils/photo-layout')
 const exportImage = require('../../utils/export-image')
 const feedback = require('../../utils/feedback')
 const media = require('../../utils/media')
@@ -16,9 +18,25 @@ Page({
     savedPercent: 0,
     width: 0,
     height: 0,
+    outputWidth: 0,
+    outputHeight: 0,
+    resultNotice: '',
     preset: 'balanced',
-    presets: [
-      {
+    format: 'auto',
+    formats: [{
+      id: 'auto',
+      label: '自动',
+      note: 'PNG 保留透明'
+    }, {
+      id: 'jpg',
+      label: 'JPG',
+      note: '透明区域转白底'
+    }, {
+      id: 'png',
+      label: 'PNG',
+      note: '保留透明度'
+    }],
+    presets: [{
         id: 'high',
         label: '高清',
         note: '1600px',
@@ -41,144 +59,183 @@ Page({
       }
     ]
   },
-
+  onUnload() {
+    this._disposed = true;
+    this._compressToken = (this._compressToken || 0) + 1
+  },
   async chooseImage() {
+    if (this._choosing) return
+    this._choosing = true
     try {
-      const files = await media.chooseImages(1)
-      if (!files.length) return
-      await this.prepareImage(files[0])
+      const files = await media.chooseImages(1);
+      if (files.length && !this._disposed) await this.prepareImage(files[0])
     } catch (error) {
-      feedback.showError(error, '读取图片失败，请重试')
+      if (!this._disposed) feedback.showError(error, '读取图片失败，请重试')
+    } finally {
+      this._choosing = false
     }
   },
-
   async prepareImage(file) {
-    this.setData({ busy: true })
+    const token = (this._compressToken || 0) + 1;
+    this._compressToken = token
+    this.setData({
+      busy: true,
+      resultSrc: '',
+      resultSizeText: '—',
+      savedPercent: 0,
+      resultNotice: ''
+    })
     try {
-      const info = await media.getImageInfo(file.path)
-      const fileInfo = await media.getFileInfo(file.path)
-      this._sourcePath = file.path
-      this._sourceWidth = info.width
+      const [info, stat] = await Promise.all([media.getImageInfo(file.path), media.getFileInfo(file.path)])
+      if (this._disposed || token !== this._compressToken) return
+      this._sourcePath = file.path;
+      this._sourceWidth = info.width;
       this._sourceHeight = info.height
-      this._sourceBytes = fileInfo.size || file.size || 0
+      this._sourceType = String(info.type || '').toLowerCase();
+      this._sourceBytes = stat.size || file.size || 0
       this.setData({
         hasImage: true,
         sourceSrc: file.path,
-        resultSrc: '',
         width: info.width,
         height: info.height,
-        sourceSizeText: processing.formatBytes(this._sourceBytes)
+        sourceSizeText: this._sourceBytes ? processing.formatBytes(this._sourceBytes) : '未知大小'
       })
       await this.compressImage()
     } catch (error) {
-      feedback.showError(error, '读取图片失败，请重试')
-    } finally {
-      this.setData({ busy: false })
-    }
-  },
-
-  getPreset() {
-    const presetId = this.data.preset
-    return (
-      this.data.presets.find(function find(item) {
-        return item.id === presetId
-      }) || this.data.presets[1]
-    )
-  },
-
-  async compressImage() {
-    if (!this._sourcePath) return
-    const token = (this._compressToken || 0) + 1
-    this._compressToken = token
-    const preset = this.getPreset()
-    const maxSide = Math.min(preset.maxSide, config.limits.maxImageSide)
-    const ratio = Math.min(
-      1,
-      maxSide / Math.max(this._sourceWidth, this._sourceHeight)
-    )
-    const options = {
-      src: this._sourcePath,
-      quality: preset.quality
-    }
-    if (ratio < 1) {
-      options.compressedWidth = Math.round(this._sourceWidth * ratio)
-      options.compressedHeight = Math.round(this._sourceHeight * ratio)
-    }
-
-    this.setData({ busy: true })
-    try {
-      let result
-      try {
-        result = await this.callCompress(options)
-      } catch (error) {
-        // 部分旧基础库只支持 quality，不接受尺寸参数。
-        result = await this.callCompress({
-          src: this._sourcePath,
-          quality: preset.quality
-        })
+      if (!this._disposed && token === this._compressToken) {
+        this.setData({
+          busy: false
+        });
+        feedback.showError(error, '读取图片失败，请重试')
       }
-      await contentSecurity.ensureSafe(result.tempFilePath)
-      const fileInfo = await media.getFileInfo(result.tempFilePath)
-      const sourceBytes = this._sourceBytes || 0
-      const resultBytes = fileInfo.size
-      const saved =
-        sourceBytes > 0
-          ? Math.max(0, Math.round((1 - resultBytes / sourceBytes) * 100))
-          : 0
-      // 快速切换清晰度档位时只保留最后一次压缩的结果。
-      if (token !== this._compressToken) return
-      this._resultPath = result.tempFilePath
+    }
+  },
+  getPreset() {
+    return this.data.presets.find(item => item.id === this.data.preset) || this.data.presets[1]
+  },
+  callCompress(options) {
+    return new Promise((resolve, reject) => wx.compressImage({
+      ...options,
+      success: resolve,
+      fail: reject
+    }))
+  },
+  async compressImage() {
+    if (!this._sourcePath || this._disposed) return
+    const token = (this._compressToken || 0) + 1;
+    this._compressToken = token
+    const current = () => !this._disposed && token === this._compressToken
+    const source = this._sourcePath,
+      sw = this._sourceWidth,
+      sh = this._sourceHeight,
+      bytes = this._sourceBytes
+    const preset = this.getPreset(),
+      format = this.data.format
+    const type = format === 'auto' ? (this._sourceType === 'png' ? 'png' : 'jpg') : format
+    const size = layout.fitInside(sw, sh, Math.min(preset.maxSide, config.limits.maxImageSide))
+    this.setData({
+      busy: true,
+      resultSrc: '',
+      resultSizeText: '—',
+      savedPercent: 0,
+      resultNotice: ''
+    })
+    try {
+      let path, info
+      if (type === 'jpg' && this._sourceType !== 'png') {
+        try {
+          const result = await this.callCompress({
+            src: source,
+            quality: preset.quality,
+            compressedWidth: size.width,
+            compressedHeight: size.height
+          })
+          if (!current()) return
+          info = await media.getImageInfo(result.tempFilePath)
+          if (info.width > size.width || info.height > size.height || info.type && !/^(jpg|jpeg)$/i.test(info.type)) throw new Error('需要画布压缩')
+          path = result.tempFilePath
+        } catch (error) {
+          if (!current()) return
+        }
+      }
+      if (!path) {
+        const canvas = canvasTools.createCanvas(size.width, size.height)
+        try {
+          const context = canvas.getContext('2d'),
+            image = await canvasTools.loadImage(canvas, source)
+          if (!current()) return
+          if (type === 'jpg') {
+            context.fillStyle = '#ffffff';
+            context.fillRect(0, 0, size.width, size.height)
+          }
+          context.drawImage(image, 0, 0, size.width, size.height)
+          path = await canvasTools.canvasToTempFile(canvas, type, preset.quality / 100)
+          info = size
+        } finally {
+          canvas.width = 1;
+          canvas.height = 1
+        }
+      }
+      if (!current()) return
+      const stat = await media.getFileInfo(path)
+      if (!current()) return
+      let resultBytes = stat.size,
+        notice = type === 'png' ? 'PNG 保留透明度，体积取决于原图内容。' : ''
+      if (format === 'auto' && bytes > 0 && resultBytes >= bytes && sw <= size.width && sh <= size.height) {
+        path = source;
+        resultBytes = bytes;
+        info = {
+          width: sw,
+          height: sh
+        };
+        notice = '原图已经更小，已保留原图，避免重复编码。'
+      }
+      await contentSecurity.ensureSafe(path)
+      if (!current()) return
       this.setData({
-        resultSrc: result.tempFilePath,
-        resultSizeText: processing.formatBytes(resultBytes),
-        savedPercent: saved
+        resultSrc: path,
+        outputWidth: info.width,
+        outputHeight: info.height,
+        resultSizeText: resultBytes > 0 ? processing.formatBytes(resultBytes) : '未知大小',
+        savedPercent: bytes > 0 && resultBytes > 0 ? Math.max(0, Math.round((1 - resultBytes / bytes) * 100)) : 0,
+        resultNotice: notice || (resultBytes > bytes && bytes > 0 ? '转换后的文件更大，可尝试自动格式或轻量档。' : '')
       })
     } catch (error) {
-      if (token === this._compressToken) {
-        feedback.showError(error, '压缩失败，请重试')
-      }
+      if (current()) feedback.showError(error, '压缩失败，请重试')
     } finally {
-      if (token === this._compressToken) {
-        this.setData({ busy: false })
-      }
+      if (current()) this.setData({
+        busy: false
+      })
     }
   },
-
-  callCompress(options) {
-    return new Promise(function compress(resolve, reject) {
-      wx.compressImage({
-        ...options,
-        success: resolve,
-        fail: reject
-      })
-    })
-  },
-
   selectPreset(event) {
-    const preset = event.currentTarget.dataset.id
-    if (!preset || preset === this.data.preset) return
-    this.setData({ preset: preset })
+    const id = event.currentTarget.dataset.id;
+    if (!this.data.presets.some(p => p.id === id) || id === this.data.preset) return;
+    this.setData({
+      preset: id
+    });
     this.compressImage()
   },
-
+  selectFormat(event) {
+    const id = event.currentTarget.dataset.id;
+    if (!this.data.formats.some(p => p.id === id) || id === this.data.format) return;
+    this.setData({
+      format: id
+    });
+    this.compressImage()
+  },
   changeImage() {
     this.chooseImage()
   },
-
   previewResult() {
-    if (!this.data.resultSrc) return
-    media.previewImage(this.data.resultSrc)
+    if (!this.data.busy && this.data.resultSrc) media.previewImage(this.data.resultSrc)
   },
-
   async saveResult() {
-    if (!this.data.resultSrc) return
+    if (this.data.busy || !this.data.resultSrc) return;
     try {
       await exportImage.saveWithReward(this.data.resultSrc)
     } catch (error) {
-      if (!exportImage.isCancelled(error)) {
-        feedback.showError(error, '保存失败，请重试')
-      }
+      if (!exportImage.isCancelled(error)) feedback.showError(error, '保存失败，请重试')
     }
   }
 })
-

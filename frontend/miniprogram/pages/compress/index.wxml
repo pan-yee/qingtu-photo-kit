@@ -30,16 +30,24 @@
           mode="widthFix"
           bindtap="previewResult"
         ></image>
-        <text wx:else class="loading-text">正在压缩图片…</text>
+        <text wx:else class="loading-text">{{busy ? '正在压缩图片…' : '压缩失败，请调整设置或换图重试'}}</text>
       </view>
       <view class="file-meta">
-        <text>{{width}} × {{height}} px</text>
+        <text>原图 {{width}} × {{height}} px</text>
         <text>原图 {{sourceSizeText}}</text>
       </view>
+      <view wx:if="{{resultSrc}}" class="file-meta"><text>输出 {{outputWidth}} × {{outputHeight}} px</text></view>
+      <view wx:if="{{resultNotice}}" class="preset-hint">{{resultNotice}}</view>
     </view>
 
     <view class="card preset-card">
-      <view class="setting-head">
+      <view class="setting-head"><text class="setting-label">输出格式</text></view>
+      <view class="preset-list">
+        <button wx:for="{{formats}}" wx:key="id" class="preset-item {{format === item.id ? 'active' : ''}}" data-id="{{item.id}}" bindtap="selectFormat">
+          <text class="preset-label">{{item.label}}</text><text class="preset-note">{{item.note}}</text>
+        </button>
+      </view>
+      <view class="setting-head format-heading">
         <text class="setting-label">选择清晰度</text>
         <text class="setting-value">按用途选一档</text>
       </view>
@@ -64,13 +72,13 @@
 
     <view class="button-row">
       <button class="ghost-button" bindtap="changeImage">换一张</button>
-      <button class="primary-button" bindtap="saveResult">保存图片</button>
+      <button class="primary-button" bindtap="saveResult" disabled="{{busy || !resultSrc}}">保存图片</button>
     </view>
   </view>
 
   <view wx:if="{{busy}}" class="busy-mask">
     <view class="busy-spinner"></view>
-    <text>正在压缩图片…</text>
+    <text>{{busy ? '正在压缩图片…' : '压缩失败，请调整设置或换图重试'}}</text>
   </view>
   <privacy-dialog />
 </view>

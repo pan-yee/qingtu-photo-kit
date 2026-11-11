@@ -2,7 +2,7 @@
   <view class="page-intro">
     <text class="intro-index">03 / LOCAL ERASE</text>
     <text class="intro-title">用手指轻轻一抹，\n让画面恢复干净。</text>
-    <text class="intro-desc">适合纯色背景上的文字、小图标和轻水印。输出会裁成正方形。</text>
+    <text class="intro-desc">适合纯色背景上的文字、小图标和轻水印。保留原图比例，不裁掉边缘内容。</text>
   </view>
 
   <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="chooseImage">
@@ -18,24 +18,31 @@
           id="eraserCanvas"
           type="2d"
           class="eraser-canvas"
+          style="width: {{canvasWidth}}%; height: {{canvasHeight}}%;"
           bindtouchstart="onTouchStart"
           catchtouchmove="onTouchMove"
+          bindtouchend="onTouchEnd"
+          bindtouchcancel="onTouchEnd"
         ></canvas>
         <view wx:if="{{!dirty}}" class="brush-tip">按住图片并涂抹</view>
       </view>
       <view class="canvas-actions">
-        <button bindtap="chooseImage">换一张</button>
+        <button bindtap="chooseImage" disabled="{{busy || comparing}}">换一张</button>
         <view class="action-right">
-          <button bindtap="undo" disabled="{{!canUndo}}">撤销</button>
-          <button bindtap="reset" disabled="{{!dirty}}">重置</button>
+          <button bindtap="undo" disabled="{{busy || comparing || !canUndo}}">撤销</button>
+          <button bindtap="redo" disabled="{{busy || comparing || !canRedo}}">重做</button>
+          <button bindtap="reset" disabled="{{busy || comparing || !dirty}}">重置</button>
         </view>
+      </view>
+      <view class="compare-row"><text>{{outputWidth}} × {{outputHeight}} px</text>
+        <button bindtouchstart="startCompare" bindtouchend="endCompare" bindtouchcancel="endCompare" disabled="{{busy}}">按住看原图</button>
       </view>
     </view>
 
     <view class="card setting-group">
       <view class="setting-head">
         <text class="setting-label">修复笔刷</text>
-        <text class="setting-value">{{brushSize}} px</text>
+        <text class="setting-value">直径 {{brushSize}} px</text>
       </view>
       <slider
         value="{{brushSize}}"
@@ -58,7 +65,7 @@
       <text>修复时会采样笔刷周围的颜色，因此复杂纹理上可能留下模糊色块。请只在拥有处理权限的图片上使用。</text>
     </view>
 
-    <button class="primary-button" bindtap="saveResult">保存处理结果</button>
+    <button class="primary-button" bindtap="saveResult" disabled="{{busy || comparing || !dirty}}">保存处理结果</button>
   </view>
 
   <view wx:if="{{busy}}" class="busy-mask">

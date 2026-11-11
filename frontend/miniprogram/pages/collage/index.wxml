@@ -2,16 +2,25 @@
   <view class="page-intro">
     <text class="intro-index">04 / COLLAGE</text>
     <text class="intro-title">不用排版软件，\n也能把故事拼在一起。</text>
-    <text class="intro-desc">最多选择 9 张图片，挑一个版式，自动裁切并生成高清拼接图。</text>
+    <text class="intro-desc">最多选择 9 张图片，支持调整顺序、完整显示或铺满裁切，生成高清拼接图。</text>
   </view>
 
   <button wx:if="{{!images.length}}" class="empty-upload" bindtap="addImages">
     <view class="upload-plus">+</view>
-    <text class="upload-title">选择 2–9 张图片</text>
+    <text class="upload-title">选择 1–9 张图片</text>
     <text class="upload-tip">可以一次多选，也可以分次添加</text>
   </button>
 
   <view wx:else class="collage-workspace">
+    <view class="card fit-card">
+      <view class="setting-head"><text class="setting-label">图片显示方式</text></view>
+      <view class="button-row">
+        <button class="{{fit === 'contain' ? 'secondary-button' : 'ghost-button'}}" data-fit="contain" bindtap="selectFit" disabled="{{saving}}">完整显示</button>
+        <button class="{{fit === 'cover' ? 'secondary-button' : 'ghost-button'}}" data-fit="cover" bindtap="selectFit" disabled="{{saving}}">铺满裁切</button>
+      </view>
+      <text class="fit-hint">{{fit === 'contain' ? '保留全部内容，空余区域留白。' : '填满画面，超出区域会被裁去。'}}</text>
+    </view>
+
     <view class="card photo-picker-card">
       <view class="setting-head">
         <view>
@@ -33,6 +42,10 @@
             catchtap="removeImage"
           >×</button>
           <text class="thumbnail-index">{{index + 1}}</text>
+          <view class="thumbnail-order">
+            <button data-index="{{index}}" data-direction="-1" catchtap="moveImage" disabled="{{index === 0}}">前移</button>
+            <button data-index="{{index}}" data-direction="1" catchtap="moveImage" disabled="{{index === images.length - 1}}">后移</button>
+          </view>
         </view>
         <button
           wx:if="{{images.length < 9}}"
