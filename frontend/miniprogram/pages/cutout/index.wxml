@@ -2,13 +2,13 @@
   <view class="page-intro">
     <text class="intro-index">01 / PORTRAIT BACKGROUND</text>
     <text class="intro-title">一张清楚的人像，\n换好底色立刻可用。</text>
-    <text class="intro-desc">使用高清人像抠图更换底色，照片需临时上传供抠图与内容安全检测。建议选择单人正面半身照；复杂发丝和遮挡仍可手动修正。</text>
+    <text class="intro-desc">使用高清人像抠图更换底色，照片需临时上传供抠图与内容安全检测。请使用头顶完整、面部无遮挡的单人正面半身照；发丝边缘仍可手动修正。</text>
   </view>
 
   <button wx:if="{{!hasImage}}" class="empty-upload" bindtap="choosePhoto">
     <view class="upload-plus">+</view>
     <text class="upload-title">选择一张人像照片</text>
-    <text class="upload-tip">建议正面、光线均匀、背景颜色单一</text>
+    <text class="upload-tip">头顶完整、正面无遮挡、光线均匀</text>
   </button>
 
   <view wx:else class="workspace">

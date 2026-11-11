@@ -25,8 +25,14 @@ function request(path, method, data, token, binary) {
         } else {
           const responseId = response.header && (response.header['X-Request-ID'] || response.header['x-request-id']) ||
             response.data && response.data.requestId
-          reject(diagnostics.error({ statusCode: response.statusCode, diagnostic: { requestId: responseId } },
-            stage, response.statusCode >= 200 && response.statusCode < 300 ? 'invalid_response' : 'http_error'))
+          const error = diagnostics.error({ statusCode: response.statusCode, diagnostic: { requestId: responseId } },
+            stage, response.statusCode >= 200 && response.statusCode < 300 ? 'invalid_response' : 'http_error')
+          const inputCodes = ['MATTING_NO_FACE', 'MATTING_MULTIPLE_FACES', 'MATTING_FACE_POSE',
+            'MATTING_INCOMPLETE_HEAD', 'MATTING_INCOMPLETE_SUBJECT', 'MATTING_IMAGE_TOO_SMALL']
+          if (path === '/jobs/matte' && response.statusCode === 422 && response.data && inputCodes.includes(response.data.code)) {
+            error.code = response.data.code
+          }
+          reject(error)
         }
       }, fail: function (error) { reject(diagnostics.error(error, stage)) }
     })

@@ -20,7 +20,15 @@ async function segment(path) {
   try { result = await http.matte(bytes) } catch (cause) {
     const diagnostic = diagnostics.metadata(cause, 'matting')
     console.warn('[portrait-matting]', JSON.stringify(diagnostic))
-    const message = diagnostic.httpStatus === 429 ? '图片处理繁忙，请稍后重试'
+    const inputMessages = {
+      MATTING_NO_FACE: '未检测到清晰人脸，请选择单人正面半身照',
+      MATTING_MULTIPLE_FACES: '检测到多个人脸，请选择单人正面照片',
+      MATTING_FACE_POSE: '请使用头部端正、面部无遮挡的正面照片',
+      MATTING_INCOMPLETE_HEAD: '头部不完整，请换一张包含完整头顶和脸部的照片',
+      MATTING_INCOMPLETE_SUBJECT: '人像抠图不完整，请换一张背景更清晰的照片',
+      MATTING_IMAGE_TOO_SMALL: '人脸过小，请选择更清晰的正面半身照'
+    }
+    const message = inputMessages[cause && cause.code] || (diagnostic.httpStatus === 429 ? '图片处理繁忙，请稍后重试'
       : diagnostic.reason === 'domain_not_allowed'
       ? '图片服务域名未配置，请添加 request 合法域名'
       : diagnostic.reason === 'timeout' ? '图片服务连接超时，请切换网络后重试'
@@ -28,7 +36,7 @@ async function segment(path) {
           : diagnostic.reason === 'network_failed' ? '无法连接图片服务，请切换网络后重试'
             : diagnostic.stage === 'wx_login' ? '微信登录失败，请重新打开小程序后重试'
               : diagnostic.stage === 'session' ? '图片服务登录失败，请联系管理员检查登录接口'
-                : '高清人像抠图服务暂不可用，请稍后重试'
+                : '高清人像抠图服务暂不可用，请稍后重试')
     const error = new Error(message)
     error.diagnostic = diagnostic
     throw error
@@ -37,6 +45,10 @@ async function segment(path) {
       result.width < 32 || result.height < 32 || result.width > 1024 || result.height > 1024 ||
       typeof result.png !== 'string' || result.png.length > 2000000) throw new Error('人像抠图结果无效')
   if (result.region != null && !framing.validFace(result.region)) throw new Error('人像抠图区域无效')
+  if (result.protocol !== 2 || result.faceDetector !== 'yunet-2023mar') throw new Error('图片服务需要更新，请联系管理员')
+  if (!Array.isArray(result.faces) || result.faces.length !== 1 || !framing.validFace(result.faces[0])) {
+    throw new Error('未检测到清晰的单人正面人脸，请更换照片')
+  }
   const target = wx.env.USER_DATA_PATH + '/portrait-matte-' + Date.now() + '.png'
   try {
     await new Promise((resolve, reject) => fs.writeFile({ filePath: target, data: result.png,
@@ -47,9 +59,7 @@ async function segment(path) {
     const pixels = context.getImageData(0, 0, result.width, result.height).data
     const data = new Float32Array(result.width * result.height)
     for (let i = 0; i < data.length; i += 1) data[i] = pixels[i * 4] / 255
-    // Old workers omit faces; preserve compatibility without inventing a face.
-    const faces = Array.isArray(result.faces) ? result.faces.filter(framing.validFace) : []
-    if (faces.length > 1) throw new Error('检测到多个人脸，请选择单人正面照片')
+    const faces = result.faces
     return { data, width: result.width, height: result.height, matting: true,
       face: faces[0] || null, region: result.region || null }
   } finally { fs.unlink({ filePath: target, fail() {} }) }

@@ -9,11 +9,56 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from PIL import Image
+import numpy as np
 import server
-from framing import detect_faces, portrait_region
+from framing import detect_faces, portrait_region, validate_face, validate_matte, PortraitInputError
 
 
 class WorkerTests(unittest.TestCase):
+    def face(self):
+        return {'x': .3, 'y': .25, 'width': .3, 'height': .35, 'clipped': False,
+                'landmarks': [[.38,.38],[.52,.38],[.45,.46],[.4,.53],[.5,.53]]}
+
+    def test_bad_inputs_are_rejected_before_matting(self):
+        image = Image.new('RGB', (1000,1000), 'white')
+        validate_face(image, [self.face()])
+        for faces, code in [([], 'MATTING_NO_FACE'), ([self.face(),self.face()], 'MATTING_MULTIPLE_FACES'),
+                            ([dict(self.face(), y=.01)], 'MATTING_INCOMPLETE_HEAD'),
+                            ([dict(self.face(), landmarks=[[.38,.38],[.52,.38],[.7,.46],[.4,.53],[.5,.53]])], 'MATTING_FACE_POSE')]:
+            with self.assertRaises(PortraitInputError) as error:
+                validate_face(image, faces)
+            self.assertEqual(error.exception.code, code)
+        with patch.object(server, 'session') as model:
+            raw = io.BytesIO(); image.save(raw, format='PNG')
+            with self.assertRaises(PortraitInputError):
+                server.matte_image(raw.getvalue())
+            model.run.assert_not_called()
+
+    def test_missing_face_alpha_and_truncated_head_do_not_generate(self):
+        mask = np.ones((100,100), dtype=np.float32); mask[:10] = 0
+        validate_matte(mask, self.face(), None)
+        mask[25:65,25:65] = 0
+        with self.assertRaises(PortraitInputError) as error:
+            validate_matte(mask, self.face(), None)
+        self.assertEqual(error.exception.code, 'MATTING_INCOMPLETE_SUBJECT')
+        with self.assertRaises(PortraitInputError) as error:
+            validate_matte(np.ones((100,100),dtype=np.float32), self.face(), None)
+        self.assertEqual(error.exception.code, 'MATTING_INCOMPLETE_HEAD')
+
+    def test_clipped_detector_box_is_not_silently_treated_as_complete_head(self):
+        import framing
+        row = np.array([[-5,20,200,220,50,80,120,80,85,120,60,160,110,160,.99]],dtype=np.float32)
+        image = Image.new('RGB',(640,640),'white')
+        with patch.object(framing,'detector') as model:
+            model.detect.return_value=(None,row)
+            faces=detect_faces(image)
+        self.assertEqual(len(faces), 1)
+        self.assertEqual(len(faces[0]['landmarks']), 5)
+        self.assertTrue(faces[0]['clipped'])
+        with self.assertRaises(PortraitInputError) as error:
+            validate_face(image, faces)
+        self.assertEqual(error.exception.code,'MATTING_INCOMPLETE_HEAD')
+
     def test_blank_has_no_face(self):
         self.assertEqual(detect_faces(Image.new('RGB', (640, 480), 'white')), [])
 

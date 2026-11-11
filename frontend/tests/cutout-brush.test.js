@@ -401,7 +401,8 @@ test('ECS 连续遮罩复用，换底色和尺寸不会重新上传人像', asyn
   let runs = 0
   remote.segment = async function () {
     runs += 1
-    return { data: new Float32Array(32 * 32).fill(.75), width: 32, height: 32, matting: true }
+    return { data: new Float32Array(32 * 32).fill(.75), width: 32, height: 32, matting: true,
+      face: { x: .3, y: .2, width: .3, height: .3 } }
   }
   const page = createPageInstance(loadPage())
   try {
@@ -442,4 +443,18 @@ test('ECS 完整宽幅图先推理，内部 JPEG 不额外审核，最终 PNG �
     page.onUnload(); remote.segment = previous
     contentSecurity.ensureSafe = previousCheck; restoreWx()
   }
+})
+
+test('ECS 缺少可信人脸时停止生成，不退回居中裁切', async function () {
+  const restoreWx = installWx()
+  const remote = require('../miniprogram/utils/portrait-remote')
+  const previous = remote.segment
+  require('../miniprogram/config/index').portraitBackend = 'ecs'
+  remote.segment = async () => ({ matting: true, width: 32, height: 32, data: new Float32Array(1024).fill(1), face: null })
+  const page = createPageInstance(loadPage())
+  try {
+    await assert.rejects(page.preparePhoto('tmp-source.png'), /单人正面人脸/)
+    assert.strictEqual(page.data.resultSrc, '')
+    assert.strictEqual(page.data.hasImage, false)
+  } finally { page.onUnload(); remote.segment = previous; restoreWx() }
 })

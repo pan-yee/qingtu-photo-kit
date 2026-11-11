@@ -1,11 +1,26 @@
-"""Low-cost frontal face hints, not biometric or ID-standard certification."""
+"""Small YuNet face detector and conservative portrait-input checks.
+
+Landmarks only guide crop/pose checks; never identify a person or certify an ID.
+"""
+import hashlib
+from pathlib import Path
+import threading
 import cv2
 import numpy as np
 
 cv2.setNumThreads(1)
-detector = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-if detector.empty():
-    raise RuntimeError('Face detector unavailable')
+FACE_DETECTOR = 'yunet-2023mar'
+model = Path(__file__).parent / 'assets/face_detection_yunet_2023mar.onnx'
+if hashlib.sha256(model.read_bytes()).hexdigest() != '8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4':
+    raise RuntimeError('Face detector checksum mismatch')
+detector = cv2.FaceDetectorYN.create(str(model), '', (640, 640), .9, .3, 5000)
+detect_lock = threading.Lock()
+
+
+class PortraitInputError(ValueError):
+    def __init__(self, code):
+        super().__init__(code)
+        self.code = code
 
 
 def detect_faces(image):
@@ -13,16 +28,64 @@ def detect_faces(image):
     width, height = image.size
     scale = min(1, 640 / max(width, height))
     size = (max(1, round(width * scale)), max(1, round(height * scale)))
-    gray = cv2.cvtColor(np.asarray(image.resize(size)), cv2.COLOR_RGB2GRAY)
-    faces = detector.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=6, minSize=(32, 32))
-    boxes = sorted(faces, key=lambda box: int(box[2]) * int(box[3]), reverse=True)
+    pixels = cv2.cvtColor(np.asarray(image.resize(size)), cv2.COLOR_RGB2BGR)
+    with detect_lock:
+        detector.setInputSize(size)
+        _, faces = detector.detect(pixels)
+    boxes = sorted([] if faces is None else faces, key=lambda box: float(box[2] * box[3]), reverse=True)
     # Ignore tiny background detections relative to the main subject.
     if len(boxes):
-        largest = int(boxes[0][2]) * int(boxes[0][3])
-        boxes = [box for box in boxes if int(box[2]) * int(box[3]) >= largest * .3]
-    return [{'x': float(x / size[0]), 'y': float(y / size[1]),
-             'width': float(w / size[0]), 'height': float(h / size[1])}
-            for x, y, w, h in boxes]
+        largest = float(boxes[0][2] * boxes[0][3])
+        boxes = [box for box in boxes if float(box[2] * box[3]) >= largest * .3]
+    return [{'x': max(0., float(box[0] / size[0])), 'y': max(0., float(box[1] / size[1])),
+             'width': min(1., float((box[0] + box[2]) / size[0])) - max(0., float(box[0] / size[0])),
+             'height': min(1., float((box[1] + box[3]) / size[1])) - max(0., float(box[1] / size[1])),
+             'confidence': float(box[14]),
+             'clipped': bool(box[0] < 0 or box[1] < 0 or box[0] + box[2] > size[0] or box[1] + box[3] > size[1]),
+             'landmarks': [[float(box[i] / size[0]), float(box[i + 1] / size[1])] for i in range(4, 14, 2)]}
+            for box in boxes]
+
+
+def validate_face(image, faces):
+    if not faces:
+        raise PortraitInputError('MATTING_NO_FACE')
+    if len(faces) != 1:
+        raise PortraitInputError('MATTING_MULTIPLE_FACES')
+    face = faces[0]
+    if face['clipped'] or face['y'] < face['height'] * .2:
+        raise PortraitInputError('MATTING_INCOMPLETE_HEAD')
+    if min(face['width'] * image.width, face['height'] * image.height) < 80:
+        raise PortraitInputError('MATTING_IMAGE_TOO_SMALL')
+    points = face['landmarks']
+    left, right = sorted(points[:2], key=lambda point: point[0])
+    eye_width = right[0] - left[0]
+    nose_ratio = (points[2][0] - left[0]) / max(eye_width, .00001)
+    tilt = abs(right[1] - left[1]) * image.height / max(eye_width * image.width, .00001)
+    # Geometry gates reject strong yaw/roll, not a biometric pose estimator.
+    if eye_width < face['width'] * .2 or not .05 <= nose_ratio <= .95 or tilt > .35:
+        raise PortraitInputError('MATTING_FACE_POSE')
+
+
+def validate_matte(mask, face, region):
+    def local(x, y):
+        if region:
+            x = (x - region['x']) / region['width']
+            y = (y - region['y']) / region['height']
+        return round(x * (mask.shape[1] - 1)), round(y * (mask.shape[0] - 1))
+
+    # Inspect inner face, excluding hair/background. Never paint missing pixels back.
+    x0, y0 = local(face['x'] + face['width'] * .2, face['y'] + face['height'] * .2)
+    x1, y1 = local(face['x'] + face['width'] * .8, face['y'] + face['height'] * .8)
+    inner = mask[max(0, y0):min(mask.shape[0], y1 + 1), max(0, x0):min(mask.shape[1], x1 + 1)]
+    if not inner.size or float(inner.mean()) < .85 or float((inner > .5).mean()) < .95:
+        raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
+    # An opaque head intersecting the original top edge cannot be recovered by padding.
+    if not region or region['y'] <= 0:
+        x0, _ = local(face['x'], 0)
+        x1, _ = local(face['x'] + face['width'], 0)
+        top = mask[:2, max(0, x0):min(mask.shape[1], x1 + 1)]
+        if top.size and float((top > .5).mean()) > .3:
+            raise PortraitInputError('MATTING_INCOMPLETE_HEAD')
 
 
 def portrait_region(image, faces):

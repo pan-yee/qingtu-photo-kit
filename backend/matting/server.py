@@ -9,7 +9,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import numpy as np
 import onnxruntime as ort
 from PIL import Image, ImageOps
-from framing import detect_faces, portrait_region
+from framing import detect_faces, portrait_region, validate_face, validate_matte, PortraitInputError, FACE_DETECTOR
 
 Image.MAX_IMAGE_PIXELS = 24000000
 options = ort.SessionOptions()
@@ -31,6 +31,7 @@ def matte_image(raw):
             raise ValueError('Image too large')
         image = ImageOps.exif_transpose(source).convert('RGB')
     faces = detect_faces(image)
+    validate_face(image, faces)
     image, region = portrait_region(image, faces)
     width, height = image.size
     # Official MODNet preprocessing: RGB [-1,1], aspect ratio, multiple of 32.
@@ -40,13 +41,15 @@ def matte_image(raw):
     tensor = values.transpose(2, 0, 1)[None]
     output = session.run(None, {session.get_inputs()[0].name: tensor})[0].squeeze()
     if not np.isfinite(output).all() or (output > .5).mean() < .005:
-        raise ValueError('No portrait')
+        raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
+    validate_matte(output, faces[0], region)
     mask = Image.fromarray(np.rint(np.clip(output, 0, 1) * 255).astype(np.uint8))
     # Return inference-resolution matte; client interpolates continuously, without binarizing.
     result = io.BytesIO()
     mask.save(result, format='PNG')
     return {'ok': True, 'engine': 'modnet', 'width': size[0], 'height': size[1],
-            'png': base64.b64encode(result.getvalue()).decode('ascii'), 'faces': faces, 'region': region}
+            'png': base64.b64encode(result.getvalue()).decode('ascii'), 'faces': faces, 'region': region,
+            'protocol': 2, 'faceDetector': FACE_DETECTOR}
 
 class Handler(BaseHTTPRequestHandler):
     def log_message(self, *args):
@@ -82,6 +85,8 @@ class Handler(BaseHTTPRequestHandler):
             if len(raw) != length:
                 raise ValueError('Incomplete image')
             self.reply(200, matte_image(raw))
+        except PortraitInputError as error:
+            self.reply(422, {'ok': False, 'code': error.code})
         except Exception:
             self.reply(422, {'ok': False})
         finally:

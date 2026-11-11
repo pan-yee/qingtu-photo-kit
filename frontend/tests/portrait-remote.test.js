@@ -8,7 +8,8 @@ async function scenario(accepted, body) {
   let removed = 0
   http.matte = async function () {
     uploads += 1
-    return { ok: true, engine: 'modnet', width: 32, height: 32, png: 'base64-mask' }
+    return { ok: true, engine: 'modnet', width: 32, height: 32, png: 'base64-mask',
+      protocol: 2, faceDetector: 'yunet-2023mar', faces: [{ x: .2, y: .2, width: .3, height: .3 }] }
   }
   global.wx = { env: { USER_DATA_PATH: '/private' },
     showModal: options => options.success({ confirm: accepted }),
@@ -63,12 +64,19 @@ test('高清抠图区分合法域名和登录错误，不向用户显示模糊�
   })
 })
 
-test('高清抠图接收合法人脸位置，拒绝多张主要人脸，并兼容旧服务', async function () {
+test('高清抠图接收已验证人脸，拒绝缺失人脸、多脸和旧版检测服务', async function () {
   await scenario(true, async remote => {
     const face = { x: .2, y: .2, width: .3, height: .3 }
-    http.matte = async () => ({ engine: 'modnet', width: 32, height: 32, png: 'mask', faces: [face] })
+    const response = { engine: 'modnet', width: 32, height: 32, png: 'mask', protocol: 2, faceDetector: 'yunet-2023mar' }
+    http.matte = async () => ({ ...response, faces: [face] })
     assert.deepStrictEqual((await remote.segment('source.png')).face, face)
-    http.matte = async () => ({ engine: 'modnet', width: 32, height: 32, png: 'mask', faces: [face, face] })
-    await assert.rejects(remote.segment('source.png'), /多个人脸/)
+    http.matte = async () => ({ ...response, faces: [face, face] })
+    await assert.rejects(remote.segment('source.png'), /单人正面人脸/)
+    http.matte = async () => ({ ...response, faces: [] })
+    await assert.rejects(remote.segment('source.png'), /单人正面人脸/)
+    http.matte = async () => ({ ...response, protocol: 1, faces: [face] })
+    await assert.rejects(remote.segment('source.png'), /需要更新/)
+    http.matte = async () => { throw { code: 'MATTING_INCOMPLETE_HEAD', statusCode: 422 } }
+    await assert.rejects(remote.segment('source.png'), /头部不完整/)
   })
 })

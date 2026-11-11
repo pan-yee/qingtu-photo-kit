@@ -104,6 +104,12 @@ function createApp({ config, store, files, wechat, isReady = () => true, report 
       const response = await fetch(process.env.MATTING_URL, { method: 'POST', body: req.body,
         headers: { 'Content-Type': 'application/octet-stream' }, signal: AbortSignal.timeout(45000) })
       if (response.status === 429) return res.status(429).json({ ok: false, code: 'MATTING_BUSY' })
+      if (response.status === 422) {
+        const input = await response.json()
+        const allowed = ['MATTING_NO_FACE', 'MATTING_MULTIPLE_FACES', 'MATTING_FACE_POSE',
+          'MATTING_INCOMPLETE_HEAD', 'MATTING_INCOMPLETE_SUBJECT', 'MATTING_IMAGE_TOO_SMALL']
+        if (allowed.includes(input.code)) return res.status(422).json({ ok: false, code: input.code })
+      }
       if (!response.ok) throw new Error('Matting unavailable')
       const result = await response.json()
       if (result.ok !== true || result.engine !== 'modnet' || typeof result.png !== 'string' || result.png.length > 2000000) throw new Error('Invalid matte')

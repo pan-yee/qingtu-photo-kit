@@ -50,7 +50,10 @@ function portraitCrop(width, height, face, mask, targetWidth, targetHeight) {
     else if (++emptyRows >= 3) break
   }
   const headHeight = (face.y + face.height - headTop) * height
-  const sh = Math.min(height * 2, Math.max(headHeight / .54, face.width * width / (.52 * ratio)))
+  // Fit the lower edge inside the source. Padding below a cropped torso creates
+  // a visible background stripe and cannot invent the missing shoulders.
+  const sh = Math.min(height * 2, (height - headTop * height) / .91,
+    Math.max(headHeight / .54, face.width * width / (.52 * ratio)))
   const sw = sh * ratio
   // Allow transparent padding instead of shifting the head to fit image bounds.
   return { sx: (face.x + face.width / 2) * width - sw / 2,
@@ -72,4 +75,14 @@ function cropMask(mask, crop, sourceWidth, sourceHeight) {
   return mask.matting ? { data, width, height, matting: true } : data
 }
 
-module.exports = { fitSize, validFace, portraitCrop, cropMask }
+function validPortraitCrop(width, height, face, crop) {
+  if (!validFace(face) || !crop || crop.faceAligned !== true ||
+      !['sx', 'sy', 'sw', 'sh'].every(key => Number.isFinite(crop[key])) ||
+      crop.sw <= 0 || crop.sh <= 0 || crop.sw > width * 1.5 || crop.sh > height * 1.5) return false
+  const left = face.x * width, top = face.y * height
+  const right = (face.x + face.width) * width, bottom = (face.y + face.height) * height
+  return left >= crop.sx + crop.sw * .02 && right <= crop.sx + crop.sw * .98 &&
+    top >= crop.sy + crop.sh * .02 && bottom <= crop.sy + crop.sh * .98
+}
+
+module.exports = { fitSize, validFace, portraitCrop, cropMask, validPortraitCrop }

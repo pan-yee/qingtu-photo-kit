@@ -1,0 +1,1159 @@
+{
+  "summary": {
+    "photos_downloaded": 30,
+    "photos_evaluated": 30,
+    "single_face": 15,
+    "no_face": 14,
+    "multiple_faces": 1,
+    "mean_alpha_mae": 0.01580304350160683,
+    "median_alpha_mae": 0.007381952367722988,
+    "mean_boundary_mae": 0.11051842880745728,
+    "inference_median_ms": 613.695,
+    "inference_p95_ms": 1141.4085,
+    "heuristic_flagged": 17
+  },
+  "model_sha256": "07c308cf0fc7e6e8b2065a12ed7fc07e1de8febb7dc7839d7b7f15dd66584df9",
+  "run_folder": "run-pinned",
+  "runtime_versions": {
+    "onnxruntime": "1.23.2",
+    "numpy": "2.2.6",
+    "opencv": "4.12.0"
+  },
+  "metric_scope": "Alpha metrics on the actual app final 900x1200 crop, using the same source crop for prediction and ground truth. This does not score crop suitability, RGB edge colors, or accuracy over the original full body. All 30 retained, including app-rejected multi-face cases.",
+  "thresholds": "Heuristics fixed before scoring: foreground alpha loss >5%, background opacity leak >3%, boundary alpha MAE >0.20. Flags are review aids, not benchmark pass/fail or certification.",
+  "runtime_scope": "Local Windows CPU, warm ONNX inference only, 3 timed runs per photo; no network/cloud moderation/phone/ECS load tests. Offline previews are for evaluation only.",
+  "samples": [
+    {
+      "id": "p3m-np-000",
+      "row_index": 0,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=0",
+      "image_sha256": "33bcc476421718673730a44b30d136b911dc97c8f086fc58fea55d63666d308b",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "2768edd89c41eecea3cd982cec09f0e3535b9cf241338ef1f72a2bdf08dd1aad",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 100.55925139864678,
+        "sy": -63.07291666666703,
+        "sw": 783.4201388888893,
+        "sh": 1044.5601851851857,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.008750077337026596,
+      "boundary_mae": 0.11103539168834686,
+      "foreground_loss_fraction": 0.004917257160951345,
+      "background_leak_fraction": 0.0,
+      "inference_ms": [
+        302.31,
+        296.74,
+        322.98
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "头发和花纹衣服基本保留，细发丝略软。原图为转身姿态，不能据此认定符合证件照要求。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-017",
+      "row_index": 17,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=17",
+      "image_sha256": "d654cc0c8b5432ce6305e6823294351aeee9c7de9c37cc4dc3060a6de9f06000",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "d0fb07451c13696471c94d961cddbf1ac8045a3b5be22d024978ce906cffb131",
+      "mask_size": [
+        1080,
+        1920
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 262.0341435185185,
+        "sy": 77.51736111111107,
+        "sw": 505.93171296296305,
+        "sh": 674.5756172839507,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.0028355340473353863,
+      "boundary_mae": 0.05217163264751434,
+      "foreground_loss_fraction": 7.222503097342674e-05,
+      "background_leak_fraction": 2.5301476827739762e-05,
+      "inference_ms": [
+        264.31,
+        265.17,
+        270.57
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "脸部、短发和黑色衣服完整；蓝白底下未见大块误删。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-034",
+      "row_index": 34,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=34",
+      "image_sha256": "fac8c23ea767ed5cb8a56281b7cd678b4a9e2c218d53da2fa415763caf0f1d58",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "3418ca55fcde5215c8895b065b3234fc800676bdb42c9209964b6b92afcd1de9",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.02362976409494877,
+      "boundary_mae": 0.11948275566101074,
+      "foreground_loss_fraction": 0.0009231706879862332,
+      "background_leak_fraction": 0.02364196482615712,
+      "inference_ms": [
+        344.15,
+        335.85,
+        347.98
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "背影举手且无人脸；岩石背景有残留，当前仍退回居中输出，不适合直接作为证件照。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-052",
+      "row_index": 52,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=52",
+      "image_sha256": "8a66e14fed6419abb30be0b74e2532e41525d3c8aee5f49a0dfbc1295beb7db1",
+      "image_size": [
+        1080,
+        1548
+      ],
+      "mask_sha256": "e40254da01b7cd612e0eac521edb8aac12d6439c057f53fbafb1e858752b56c8",
+      "mask_size": [
+        1080,
+        1548
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 54,
+        "sw": 1080,
+        "sh": 1440,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.0076163411140441895,
+      "boundary_mae": 0.10631223767995834,
+      "foreground_loss_fraction": 0.001090757964258547,
+      "background_leak_fraction": 0.0026499570727456785,
+      "inference_ms": [
+        310.86,
+        332.59,
+        341.49
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "可见戴眼镜的人脸但检测为零，退回居中构图；人物抠图总体完整。",
+      "manual_status": "需复核"
+    },
+    {
+      "id": "p3m-np-069",
+      "row_index": 69,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=69",
+      "image_sha256": "cf57a40117245b194a6203ed56a6aad70bb97a38a065133ca9ea080fefb18072",
+      "image_size": [
+        1613,
+        1080
+      ],
+      "mask_sha256": "0a5df20867e86c2d825b1340a6981865903ffbad194fb2631a223392f4f77a48",
+      "mask_size": [
+        1613,
+        1080
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 126.73076923076917,
+        "sy": -182.25903127246582,
+        "sw": 1524.0384615384614,
+        "sh": 2032.051282051282,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.0023100802209228277,
+      "boundary_mae": 0.05894232913851738,
+      "foreground_loss_fraction": 9.668209788778052e-05,
+      "background_leak_fraction": 0.000152740662866956,
+      "inference_ms": [
+        334.98,
+        336.93,
+        358.84
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "原图发顶已被截断，输出出现明显矩形照片边界及大片补底。不能靠抠图恢复缺失内容。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-086",
+      "row_index": 86,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=86",
+      "image_sha256": "bfc0458b5678ce1922eeb88a2abf7433e11bd39639278666b5bc4aab5b2b2c34",
+      "image_size": [
+        1080,
+        1622
+      ],
+      "mask_sha256": "8b2682b6954535611f3d3c28220e188eee681a7608c6bf4761ce8c66a8170b79",
+      "mask_size": [
+        1080,
+        1622
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 269.8076923076923,
+        "sy": 289.3100961538464,
+        "sw": 427.88461538461536,
+        "sh": 570.5128205128204,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.006067481357604265,
+      "boundary_mae": 0.15071825683116913,
+      "foreground_loss_fraction": 0.0001590767058136043,
+      "background_leak_fraction": 0.004484853336179448,
+      "inference_ms": [
+        272.52,
+        264.86,
+        251.77
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "脸部和衣服轮廓基本完整，嘴部姿态并非标准证件照姿态。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-103",
+      "row_index": 103,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=103",
+      "image_sha256": "a133b877c709942bcf04561e711545342dd465421a93175f6b925cbacc4a4ef1",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "3850bd85d1b5e76691a0d50537bc425400c1db1b905f840d68638497b21d59ff",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 2,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.0028345820028334856,
+      "boundary_mae": 0.04861469939351082,
+      "foreground_loss_fraction": 6.728249942611986e-05,
+      "background_leak_fraction": 0.00022442202131886567,
+      "inference_ms": [
+        349.07,
+        338.03,
+        371.86
+      ],
+      "flags": [
+        "multiple_faces_rejected"
+      ],
+      "app_policy": "reject_multiple_faces",
+      "manual_notes": "单人照片的衣摆区域被误检为第二个人脸，正式页面会错误拒绝生成。已查看人脸框确认位置；离线预览不代表产品放行。",
+      "manual_status": "需复核"
+    },
+    {
+      "id": "p3m-np-120",
+      "row_index": 120,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=120",
+      "image_sha256": "3d203eb9fc7c73abba8ce3978f1e5e6b76a4df42459ec48452a3e6e2665cdfd4",
+      "image_size": [
+        1080,
+        1613
+      ],
+      "mask_sha256": "7978f7f43c5a6bfb42e37d2b0602706e638b0ab8f000d4be0505be293e4b00f4",
+      "mask_size": [
+        1080,
+        1613
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 86,
+        "sw": 1071,
+        "sh": 1428,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.004736329894512892,
+      "boundary_mae": 0.08223062008619308,
+      "foreground_loss_fraction": 0.00044508984970349823,
+      "background_leak_fraction": 0.0008134275760212412,
+      "inference_ms": [
+        340.82,
+        340.4,
+        428.21
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "背影视角，人物和手势基本保留，但没有适合证件照的正面人脸。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-138",
+      "row_index": 138,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=138",
+      "image_sha256": "5cc9325d15e4b43316a44fdfb6b8cdb199af5fa228ca36b3fe95fddb06da57af",
+      "image_size": [
+        1080,
+        1088
+      ],
+      "mask_sha256": "83f563b15511dac51ec182d414178864f9c376b1e17d776db7bc31c569b20dff",
+      "mask_size": [
+        1080,
+        1088
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 265.6515186035776,
+        "sy": -2.3761574074071135,
+        "sw": 535.0906635802465,
+        "sh": 713.4542181069954,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.00399470841512084,
+      "boundary_mae": 0.0628233477473259,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 0.0,
+      "inference_ms": [
+        236.22,
+        265.02,
+        272.19
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "长发及黑衣主体完整；零散细发丝不完全等同人工标注。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-155",
+      "row_index": 155,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=155",
+      "image_sha256": "23c8a610fa2dce7143f90a9ca3e52937ead31e47a2dd0605588419e9155e1cc1",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "a22330a7c2c5c6a11657e0e9f9f5ff2a8cb5e2175db02a7c950f2a28d5cbe75f",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.01890234649181366,
+      "boundary_mae": 0.21181771159172058,
+      "foreground_loss_fraction": 6.669751426701516e-05,
+      "background_leak_fraction": 0.02474279800596587,
+      "inference_ms": [
+        345.66,
+        332.19,
+        334.96
+      ],
+      "flags": [
+        "no_face_center_crop_fallback",
+        "boundary_mae_over_0.20"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "背影非正面素材；衣服左下轮廓与人工标注不同，有偏软及背景残留。",
+      "manual_status": "需复核"
+    },
+    {
+      "id": "p3m-np-172",
+      "row_index": 172,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=172",
+      "image_sha256": "e0081ac2f977173b285b3400536b657e3b673ef6e9aea382db98b4bb8a2af630",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "b22f442f9e581ef5af9f75f2a46de48476361e4a001dafcad06733b9f79b2759",
+      "mask_size": [
+        1728,
+        1080
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 746.7307692307693,
+        "sy": -77.25961538461537,
+        "sw": 649.0384615384615,
+        "sh": 865.3846153846154,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.010654413141310215,
+      "boundary_mae": 0.10316139459609985,
+      "foreground_loss_fraction": 0.000841691143509009,
+      "background_leak_fraction": 0.0,
+      "inference_ms": [
+        233.29,
+        223.96,
+        223.14
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "卷发主体基本保留，但原图上缘已截发，输出上边缘有平直截断，不能当成完整证件照。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-189",
+      "row_index": 189,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=189",
+      "image_sha256": "fcb4941a62d1c3a50963753bedd48f4fd48f7a573f1f3162ed3989c5192a5e93",
+      "image_size": [
+        1080,
+        1669
+      ],
+      "mask_sha256": "798a0d2e099de6a97acb491c763085a532e11fabd9a6b220ff427f7a57448d08",
+      "mask_size": [
+        1080,
+        1669
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": -61.73076923076928,
+        "sy": 37.88461538461419,
+        "sw": 1163.4615384615386,
+        "sh": 1551.2820512820513,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.00883747823536396,
+      "boundary_mae": 0.1144043430685997,
+      "foreground_loss_fraction": 0.00016143097743960484,
+      "background_leak_fraction": 0.0009197077373190297,
+      "inference_ms": [
+        358.26,
+        409.56,
+        1239.39
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "脸部、长发和深色衣服总体保留，发丝边缘仍有细小差异。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-206",
+      "row_index": 206,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=206",
+      "image_sha256": "2dbc855e970f3f812f2cc7f2d2860fceb0c75e72dc1f06d2a4bcd757fb1e32e9",
+      "image_size": [
+        1080,
+        1618
+      ],
+      "mask_sha256": "fd8163d6e298bf895214f62e125c73e3251e077600e5508f4509a9f0aea209f6",
+      "mask_size": [
+        1080,
+        1618
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88,
+        "sw": 1068,
+        "sh": 1424,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.008298098109662533,
+      "boundary_mae": 0.08780211955308914,
+      "foreground_loss_fraction": 0.0011340755891224245,
+      "background_leak_fraction": 2.2698040402511918e-05,
+      "inference_ms": [
+        1155.3,
+        1281.29,
+        1124.43
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "头发遮挡脸部，无人脸检测；主要发丝和衣服基本保留，但素材不适合正面证件照。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-224",
+      "row_index": 224,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=224",
+      "image_sha256": "60b77f8e498537dd9eb77a959bd9f64a1212329891a0e7ea553f0b55c12800a9",
+      "image_size": [
+        1080,
+        1617
+      ],
+      "mask_sha256": "8a13eae6cb8329bcb0e269e3f393200a96de017ab5dac42d356299ecc5eaf7d6",
+      "mask_size": [
+        1080,
+        1617
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 87.33333333333337,
+        "sw": 1069,
+        "sh": 1425.3333333333333,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.002245914889499545,
+      "boundary_mae": 0.07021059840917587,
+      "foreground_loss_fraction": 9.837758958509251e-05,
+      "background_leak_fraction": 0.00046687251023185206,
+      "inference_ms": [
+        711.59,
+        710.65,
+        694.87
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "侧面素材，无人脸对齐；人物轮廓基本保留。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-241",
+      "row_index": 241,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=241",
+      "image_sha256": "1b489ee09813375766a1aa6128f5c0ce82fd425611d39bb6bd36458dfeebe3cc",
+      "image_size": [
+        1620,
+        1080
+      ],
+      "mask_sha256": "edf00e8f18c8989095a7781cbc66829ce2f15cb2aad349be0858ab00e95f5925",
+      "mask_size": [
+        1620,
+        1080
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 488.47618259863714,
+        "sy": -72.36680480337628,
+        "sw": 865.5476348027257,
+        "sh": 1154.063513070301,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.014837093651294708,
+      "boundary_mae": 0.11439940333366394,
+      "foreground_loss_fraction": 0.001243193515502623,
+      "background_leak_fraction": 3.709405196876681e-06,
+      "inference_ms": [
+        817.48,
+        581.94,
+        626.68
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "白衣没有大块误删；浅色发丝在蓝底可见软边及少量旧背景残色。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-258",
+      "row_index": 258,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=258",
+      "image_sha256": "f162ba3807792029da9d92d0d24a341f6b886fc33c0c71922e382393c54a2b58",
+      "image_size": [
+        1620,
+        1080
+      ],
+      "mask_sha256": "f4dca6c414644a426aa2f1d12158d51cf14af3eccb3b0a80ab5009180f43e12f",
+      "mask_size": [
+        1620,
+        1080
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 399.875,
+        "sy": 0,
+        "sw": 800.25,
+        "sh": 1067,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.004036023281514645,
+      "boundary_mae": 0.11824093759059906,
+      "foreground_loss_fraction": 0.0006849493979120653,
+      "background_leak_fraction": 0.0006375574830053226,
+      "inference_ms": [
+        715.75,
+        713.47,
+        717.63
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "帽子遮挡且为背侧视角；居中裁切截帽，不能生成合适的正面证件照。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-275",
+      "row_index": 275,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=275",
+      "image_sha256": "052b5b971b22709c140956c3f79ab47768316241931a8155c0e455f39c049881",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "a29b3b66b1f769d9824bd2a70f56c99f84f967cda14d845012dbbbcb64dd0b25",
+      "mask_size": [
+        1080,
+        1920
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": -14.65939153439166,
+        "sy": -96.02777777777786,
+        "sw": 801.8187830687833,
+        "sh": 1069.0917107583778,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.027181286364793777,
+      "boundary_mae": 0.11013615131378174,
+      "foreground_loss_fraction": 0.002322104022657146,
+      "background_leak_fraction": 0.05510486673161618,
+      "inference_ms": [
+        739.33,
+        625.07,
+        630.8
+      ],
+      "flags": [
+        "background_leak_over_3pct"
+      ],
+      "app_policy": "render",
+      "manual_notes": "白衣附近存在块状背景残留，背景泄漏指标超过预设复核阈值；素材另有闭眼和抬手。",
+      "manual_status": "背景/边缘问题"
+    },
+    {
+      "id": "p3m-np-293",
+      "row_index": 293,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=293",
+      "image_sha256": "b39d01b2ea0a827696ca12563bf091148f53cd583e17bf0afe05d02bafffac25",
+      "image_size": [
+        1080,
+        1471
+      ],
+      "mask_sha256": "4015e2de7b53c274d6373ca2bab22f9231cea8907d4fa1538aef52c9c105430f",
+      "mask_size": [
+        1080,
+        1471
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 15.5,
+        "sw": 1080,
+        "sh": 1440,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.11595921218395233,
+      "boundary_mae": 0.27033770084381104,
+      "foreground_loss_fraction": 0.3203564951168312,
+      "background_leak_fraction": 2.6196564466106738e-05,
+      "inference_ms": [
+        736.74,
+        673.22,
+        649.1
+      ],
+      "flags": [
+        "no_face_center_crop_fallback",
+        "foreground_loss_over_5pct",
+        "boundary_mae_over_0.20"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "书本遮挡区域及其后的头部被大块抠除，只剩身体和手。原素材本身也不适合证件照。",
+      "manual_status": "严重主体缺失"
+    },
+    {
+      "id": "p3m-np-310",
+      "row_index": 310,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=310",
+      "image_sha256": "6626575a7b51ffe514255d3f930d9cb06102db367fe85c075967a61173276dbf",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "5e9b88d57e530765a7d5aeaebee7ad84bf974f5d3ed6530d3e6e0fd48118bb4a",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 141.7768663533314,
+        "sy": 1002.727430555564,
+        "sw": 586.0387731481381,
+        "sh": 781.3850308641842,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.006730789318680763,
+      "boundary_mae": 0.1098795011639595,
+      "foreground_loss_fraction": 0.004194561395262429,
+      "background_leak_fraction": 0.0007188933866633214,
+      "inference_ms": [
+        556.19,
+        539.31,
+        587.23
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "Haar 检测框落在下半身区域，自动构图只留下牛仔裤，头部完全被截掉。",
+      "manual_status": "严重构图错误"
+    },
+    {
+      "id": "p3m-np-327",
+      "row_index": 327,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=327",
+      "image_sha256": "ba5c8014f641150960dacafa80a9199057d1c51c61d08c054ff63c219ab82606",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "db5b881fb1863c42ffa83f13674c98c4f78557aa4ceb3780a6ae65c6023219f7",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.02567562274634838,
+      "boundary_mae": 0.1562357395887375,
+      "foreground_loss_fraction": 0.02009684649271253,
+      "background_leak_fraction": 0.004110689152953027,
+      "inference_ms": [
+        800.37,
+        759.91,
+        865.92
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "侧后视角且脸部遮挡；发型与衣服基本保留，仍不适合正面证件照。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-344",
+      "row_index": 344,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=344",
+      "image_sha256": "3d4d5afb990c4824228550c73959383f4e8f4f9c303cafaec00ea26166fd6058",
+      "image_size": [
+        1080,
+        1619
+      ],
+      "mask_sha256": "6128e656bde73645eee4fee0b6be45953de2eddc800ea6f4aa6bd4dd059d4e80",
+      "mask_size": [
+        1080,
+        1619
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 304.08827238335437,
+        "sy": 556.6116900233175,
+        "sw": 273.9101062871555,
+        "sh": 365.21347504954065,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.09644889831542969,
+      "boundary_mae": 0.12438379228115082,
+      "foreground_loss_fraction": 0.11076970179548261,
+      "background_leak_fraction": 0.0,
+      "inference_ms": [
+        1055.11,
+        1052.31,
+        794.63
+      ],
+      "flags": [
+        "foreground_loss_over_5pct"
+      ],
+      "app_policy": "render",
+      "manual_notes": "检测框落在衣服区域，自动构图只留下肩部和上衣，头部被截掉。",
+      "manual_status": "严重构图错误"
+    },
+    {
+      "id": "p3m-np-361",
+      "row_index": 361,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=361",
+      "image_sha256": "9f8a2b8fb25fac9ae82aa7e11cd379591e714a2314d4637472348ed857351634",
+      "image_size": [
+        1080,
+        1373
+      ],
+      "mask_sha256": "7b1ef19c3a7016cc4071122bdb396fa74a1a35bac58fa1426db54e2a4eb922b7",
+      "mask_size": [
+        1080,
+        1373
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 281.60269154304945,
+        "sy": -65.40588998062904,
+        "sw": 553.2956109496865,
+        "sh": 737.7274812662487,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.002653042785823345,
+      "boundary_mae": 0.07703312486410141,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 1.549967063199907e-05,
+      "inference_ms": [
+        572.74,
+        852.18,
+        724.05
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "脸部与黑衣抠图较完整，但源照片上缘已截发，结果头顶出现平直边界。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-379",
+      "row_index": 379,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=379",
+      "image_sha256": "ea619bbd7c31e2525fc0fd7494a42a8d00eb0328f5d470bf56bbae973ab243fa",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "0c85b31d81a62449b764c31cfb61f64fd1820337256f17c65dc2029bf3c8d214",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.002190748229622841,
+      "boundary_mae": 0.06992828100919724,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 0.00015801507270305743,
+      "inference_ms": [
+        898.09,
+        1029.3,
+        778.33
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "带帽背影，没有正面人脸；人物抠图主体基本完整。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-396",
+      "row_index": 396,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=396",
+      "image_sha256": "28378f1679d2efc8aea0b9454c213e64840133398f1a7cedafb602c89661d751",
+      "image_size": [
+        1080,
+        1440
+      ],
+      "mask_sha256": "bdc5c44bdfc7bf32d54119644716f2aaf0d51c7361efe70ff8965754c8798895",
+      "mask_size": [
+        1080,
+        1440
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": -5.538461538461547,
+        "sy": 47.29326923076923,
+        "sw": 341.8269230769231,
+        "sh": 455.7692307692308,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.0177630465477705,
+      "boundary_mae": 0.1568373590707779,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 0.012071078336204072,
+      "inference_ms": [
+        766.09,
+        641.56,
+        572.71
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "错误的人脸框落在左上头发区域，自动构图变为头发局部，实际人脸被截掉。",
+      "manual_status": "严重构图错误"
+    },
+    {
+      "id": "p3m-np-413",
+      "row_index": 413,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=413",
+      "image_sha256": "4eb772af98df0e67bb05871224f8a9e5eeff28cc62f181c1e7e8d406044efdb3",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "a728951be4df20dce4856bf82c4787e125baf5c156e0aebf1c9f7692ca0dd3cb",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.0036857295781373978,
+      "boundary_mae": 0.09041731804609299,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 0.0003980872275056294,
+      "inference_ms": [
+        979.49,
+        1301.66,
+        1278.19
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "相机遮挡人脸，检测为零；居中输出仍为全身小人像，不是证件照构图。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-430",
+      "row_index": 430,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=430",
+      "image_sha256": "aad2d04f2dc2b2f15d51e59882af3d66f57668b9ac0d663595e3ba2800764924",
+      "image_size": [
+        1620,
+        1080
+      ],
+      "mask_sha256": "01545e09132058e4807e98a2954ec2c1682798cb431cd8c02b6e51d90e6f6b29",
+      "mask_size": [
+        1620,
+        1080
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 486.53846153846155,
+        "sy": -90.5740846947622,
+        "sw": 764.4230769230769,
+        "sh": 1019.2307692307692,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.0017120734555646777,
+      "boundary_mae": 0.04860119894146919,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 9.241965400660692e-05,
+      "inference_ms": [
+        966.32,
+        743.26,
+        602.32
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "脸部和衣服保留，但原图头顶被截，结果出现明显平直头顶边界。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-447",
+      "row_index": 447,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=447",
+      "image_sha256": "b2dbf5e124aea3552b75fc1e2cf5697e6a36cb1442a928c0a0a2868ec6e74233",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "04c5962677e016e5f89eb83c27fa5c598ef17ba7aa581da71349898498cca35a",
+      "mask_size": [
+        1080,
+        1620
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 0,
+        "sy": 88.66666666666663,
+        "sw": 1067,
+        "sh": 1422.6666666666667,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.007147563621401787,
+      "boundary_mae": 0.07700590789318085,
+      "foreground_loss_fraction": 0.0022980995617839562,
+      "background_leak_fraction": 0.0009962858013750438,
+      "inference_ms": [
+        684.4,
+        672.66,
+        746.65
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "原图没有头部；无人脸时仍输出下半身。此类素材应明确拒绝证件照生成。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-465",
+      "row_index": 465,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=465",
+      "image_sha256": "693a3f9a22d8d1541a5d4c0a42edf57891fec2ed1ef55ac4737fb8f81c77b9d7",
+      "image_size": [
+        1080,
+        1117
+      ],
+      "mask_sha256": "7bc6f5ea2cfad8344e45f6251463fe52029c3598dc80ce12d7d28b5ce2f7a34f",
+      "mask_size": [
+        1080,
+        1117
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 121.125,
+        "sy": 0,
+        "sw": 837.75,
+        "sh": 1117,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.02057751640677452,
+      "boundary_mae": 0.16058990359306335,
+      "foreground_loss_fraction": 0.000989395139508913,
+      "background_leak_fraction": 0.0004781354066002889,
+      "inference_ms": [
+        488.7,
+        549.69,
+        539.12
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "背影且头发遮挡；部分细发丝与人工标注有差异，主体衣服仍保留。",
+      "manual_status": "输入受限"
+    },
+    {
+      "id": "p3m-np-482",
+      "row_index": 482,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=482",
+      "image_sha256": "edee199dc6bb47b7cf6ee50d62aa134ab747d8f989ba88410ab54dd78d208ed1",
+      "image_size": [
+        1080,
+        1580
+      ],
+      "mask_sha256": "dff34ed4f8517736e02bd1d78d0d847460dbe7be62c20d2bb5084ad066440172",
+      "mask_size": [
+        1080,
+        1580
+      ],
+      "faces_detected": 1,
+      "crop": {
+        "sx": 61.21457489878537,
+        "sy": -84.40730065129432,
+        "sw": 1021.8271431086077,
+        "sh": 1362.436190811477,
+        "faceAligned": true
+      },
+      "alpha_mae": 0.004756380803883076,
+      "boundary_mae": 0.104803666472435,
+      "foreground_loss_fraction": 0.0002394107439391727,
+      "background_leak_fraction": 0.000672394010552679,
+      "inference_ms": [
+        707.25,
+        712.25,
+        697.08
+      ],
+      "flags": [],
+      "app_policy": "render",
+      "manual_notes": "短发、脸部和外套基本完整，未见明显大块误删。",
+      "manual_status": "未见明显主体破损"
+    },
+    {
+      "id": "p3m-np-499",
+      "row_index": 499,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=499",
+      "image_sha256": "f7ca55ee0ce9704deb6d408bc5262b0f11aeb1119810114d8c0d8ad56b8c8d54",
+      "image_size": [
+        1505,
+        1080
+      ],
+      "mask_sha256": "b0aeaaf8a983b5cdefbbaf4e31ef2fbf0b2832fb86a359872451283488d2b3f5",
+      "mask_size": [
+        1505,
+        1080
+      ],
+      "faces_detected": 0,
+      "crop": {
+        "sx": 347.5,
+        "sy": 0,
+        "sw": 810,
+        "sh": 1080,
+        "faceAligned": false
+      },
+      "alpha_mae": 0.011023128405213356,
+      "boundary_mae": 0.1469954401254654,
+      "foreground_loss_fraction": 0.0,
+      "background_leak_fraction": 0.000558604605694974,
+      "inference_ms": [
+        664.66,
+        653.71,
+        694.61
+      ],
+      "flags": [
+        "no_face_center_crop_fallback"
+      ],
+      "app_policy": "render_with_crop_warning",
+      "manual_notes": "头发遮住面部，未检出人脸；头发和衣服主体仍保留，但应提示更换正面照片。",
+      "manual_status": "输入受限"
+    }
+  ],
+  "manual_review": {
+    "scope": "Assistant visual review of all 30 original / blue / white / ground-truth contact panels. Not independent blinded human scoring or ID-photo eligibility certification.",
+    "severe_framing_errors": [
+      "p3m-np-310",
+      "p3m-np-344",
+      "p3m-np-396"
+    ],
+    "severe_subject_loss": [
+      "p3m-np-293"
+    ],
+    "confirmed_false_multiple_face_rejections": [
+      "p3m-np-103"
+    ],
+    "key_caveat": "Low alpha MAE within a wrong crop does not prove a usable ID photo; ground truth and prediction share the same crop. Numerous inputs are back/side views or occluded and are unsuitable for ID photos."
+  }
+}

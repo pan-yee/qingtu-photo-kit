@@ -38,10 +38,12 @@ test('高清抠图需要登录、限制每用户次数，服务错误不输出�
   const previous = process.env.MATTING_URL
   let calls = 0
   let busy = false
+  let inputCode = null
   const worker = http.createServer((req, res) => {
     calls += 1; req.resume()
     res.setHeader('Content-Type', 'application/json')
     if (busy) { res.statusCode = 429; return res.end(JSON.stringify({ ok: false })) }
+    if (inputCode) { res.statusCode = 422; return res.end(JSON.stringify({ ok: false, code: inputCode })) }
     res.end(JSON.stringify({ ok: true, engine: 'modnet', width: 32, height: 32, png: 'test-mask' }))
   }).listen(0, '127.0.0.1')
   await new Promise(resolve => worker.once('listening', resolve))
@@ -68,6 +70,18 @@ test('高清抠图需要登录、限制每用户次数，服务错误不输出�
       const response = await call('/jobs/matte', 'POST', Buffer.from('image'), await login())
       assert.strictEqual(response.status, 429)
       assert.deepStrictEqual(await response.json(), { ok: false, code: 'MATTING_BUSY' })
+    })
+    busy = false
+    await withServer(async ({ call, login }) => {
+      const token = await login()
+      inputCode = 'MATTING_NO_FACE'
+      const response = await call('/jobs/matte', 'POST', Buffer.from('image'), token)
+      assert.strictEqual(response.status, 422)
+      assert.deepStrictEqual(await response.json(), { ok: false, code: 'MATTING_NO_FACE' })
+      inputCode = 'internal-must-not-leak'
+      const unknown = await call('/jobs/matte', 'POST', Buffer.from('image'), token)
+      assert.strictEqual(unknown.status, 503)
+      assert.deepStrictEqual(await unknown.json(), { ok: false, code: 'MATTING_UNAVAILABLE' })
     })
   } finally {
     if (previous === undefined) delete process.env.MATTING_URL

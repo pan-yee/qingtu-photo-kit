@@ -12,7 +12,8 @@ if (mode === 'frame') {
   const crop = framing.portraitCrop(metadata.width, metadata.height, metadata.face, mask, 900, 1200)
   const cropped = framing.cropMask(mask, crop, metadata.width, metadata.height)
   fs.writeFileSync(metadata.output + '.f32', Buffer.from(cropped.data.buffer))
-  fs.writeFileSync(metadata.output + '.json', JSON.stringify({ crop, width: cropped.width, height: cropped.height }))
+  fs.writeFileSync(metadata.output + '.json', JSON.stringify({ crop, width: cropped.width, height: cropped.height,
+    validCrop: framing.validPortraitCrop(metadata.width, metadata.height, metadata.face, crop) }))
 } else if (mode === 'render') {
   const image = { width: 900, height: 1200, data: new Uint8ClampedArray(fs.readFileSync(metadata.imagePath)) }
   const output = portrait.applyPortraitMask(image, mask, { edgeCleanup: true })

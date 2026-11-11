@@ -144,13 +144,15 @@ Page({
           try { mask = await remotePortrait.segment(processingPath) }
           finally { wx.getFileSystemManager().unlink({ filePath: processingPath, fail() {} }) }
           if (this._disposed || photoToken !== this._photoToken) return
+          if (!framing.validFace(mask.face)) throw new Error('未检测到清晰的单人正面人脸，请更换照片')
           crop = framing.portraitCrop(dimensions.width, dimensions.height, mask.face, mask, width, height)
+          if (!framing.validPortraitCrop(dimensions.width, dimensions.height, mask.face, crop)) {
+            throw new Error('无法保留完整头部构图，请换一张单人正面半身照')
+          }
           sourceContext.clearRect(0, 0, width, height)
           sourceContext.drawImage(image, crop.sx, crop.sy, crop.sw, crop.sh, 0, 0, width, height)
           this._sourceImageData = sourceContext.getImageData(0, 0, width, height)
-          this.setData({ engineNotice: crop.faceAligned
-            ? '已按人脸辅助构图，请核对头顶留白与办理机构的照片要求。'
-            : '未识别到清晰正面人脸，当前使用居中构图；建议换一张单人正面半身照。' })
+          this.setData({ engineNotice: '已按人脸辅助构图，请核对头顶留白与办理机构的照片要求。' })
           mask = framing.cropMask(mask, crop, dimensions.width, dimensions.height)
         } else {
           mask = await this._segmenter.segment(this._sourceImageData)

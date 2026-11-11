@@ -45,7 +45,8 @@ async function withHttp(options, body) {
       assert(value.url.startsWith('https://photos.example/qingtu-api/'))
       if (options.nativeError) { value.fail(options.nativeError); return }
       if (options.httpStatus && value.url.endsWith(options.failAt || '/session')) {
-        value.success({ statusCode: options.httpStatus, header: { 'X-Request-ID': '0123456789abcdef' }, data: { ok: false } }); return
+        value.success({ statusCode: options.httpStatus, header: { 'X-Request-ID': '0123456789abcdef' },
+          data: { ok: false, ...(options.inputCode ? { code: options.inputCode } : {}) } }); return
       }
       if (options.badResponse && value.url.endsWith('/session')) {
         value.success({ statusCode: 200, data: '<html>unexpected page</html>' }); return
@@ -85,6 +86,15 @@ test('自有服务器：无 wx.cloud 也能登录、上传真实字节、核验�
     assert.strictEqual(f.logins(), 1)
     assert.strictEqual(f.uploads(), 1)
     assert.strictEqual(f.cleanup(), 1)
+  })
+})
+
+test('抠图传输保留已知素材拒绝码，未知服务器代码不向页面透传', async function () {
+  await withHttp({ httpStatus: 422, failAt: '/jobs/matte', inputCode: 'MATTING_NO_FACE' }, async f => {
+    await assert.rejects(f.transport.matte(new ArrayBuffer(8)), error => error.code === 'MATTING_NO_FACE' && error.statusCode === 422)
+  })
+  await withHttp({ httpStatus: 422, failAt: '/jobs/matte', inputCode: 'arbitrary-internal-code' }, async f => {
+    await assert.rejects(f.transport.matte(new ArrayBuffer(8)), error => error.code === undefined && !error.message.includes('arbitrary-internal-code'))
   })
 })
 test('自有服务器：拒绝上传同意时不登录、不上传', async function () {

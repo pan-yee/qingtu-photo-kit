@@ -45,3 +45,22 @@ test('局部推理的遮罩按原图坐标还原，不把局部人像拉满整�
   assert.strictEqual(result.data[300 * 450 + 225], 1)
   assert.strictEqual(result.data[599 * 450 + 449], 0)
 })
+
+test('最终构图必须包含完整人脸，不接受无脸回退、裁掉脸部或过大补边', function () {
+  const face = { x: .3, y: .2, width: .3, height: .3 }
+  const good = { sx: 100, sy: 50, sw: 600, sh: 800, faceAligned: true }
+  assert.strictEqual(framing.validPortraitCrop(1000,1000,face,good), true)
+  assert.strictEqual(framing.validPortraitCrop(1000,1000,null,good), false)
+  assert.strictEqual(framing.validPortraitCrop(1000,1000,face,{ ...good, sy: 400 }), false)
+  assert.strictEqual(framing.validPortraitCrop(1000,1000,face,{ ...good, sh: 1600 }), false)
+  assert.strictEqual(framing.validPortraitCrop(1000,1000,face,{ ...good, faceAligned: false }), false)
+})
+
+test('短横幅人像的最终裁切下沿不越过原图，不生成身体下方的空白底色条', function () {
+  const face = { x: .4, y: .1, width: .2, height: .5 }
+  const mask = { matting: true, width: 100, height: 100, data: new Float32Array(10000) }
+  for (let y=4;y<100;y+=1) for(let x=30;x<70;x+=1) mask.data[y*100+x]=1
+  const crop=framing.portraitCrop(1600,700,face,mask,900,1200)
+  assert(crop.sy+crop.sh<=700+1e-6)
+  assert.strictEqual(framing.validPortraitCrop(1600,700,face,crop),true)
+})
