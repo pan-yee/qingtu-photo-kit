@@ -1,9 +1,10 @@
 // Test bridge: execute the same framing and alpha/color processing as the app.
 const fs = require('fs')
-const framing = require('../miniprogram/utils/portrait-framing')
+const defaultFraming = require('../miniprogram/utils/portrait-framing')
 const portrait = require('../miniprogram/utils/portrait-segmentation')
 const [mode, metadataPath] = process.argv.slice(2)
 const metadata = JSON.parse(fs.readFileSync(metadataPath, 'utf8'))
+const framing = metadata.framingPath ? require(metadata.framingPath) : defaultFraming
 const bytes = fs.readFileSync(metadata.maskPath)
 const mask = { matting: true, width: metadata.maskWidth, height: metadata.maskHeight,
   region: metadata.region || null,
