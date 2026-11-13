@@ -64,3 +64,19 @@ test('短横幅人像的最终裁切下沿不越过原图，不生成身体下�
   assert(crop.sy+crop.sh<=700+1e-6)
   assert.strictEqual(framing.validPortraitCrop(1600,700,face,crop),true)
 })
+
+test('高清裁切直接采样到输出网格，保留单像素发丝而不经过半分辨率遮罩', function () {
+  const width = 900, height = 1200
+  const data = new Float32Array(width * height)
+  for (let y = 0; y < height; y++) data[y * width + 451] = .75
+  const mask = { matting: true, width, height, data }
+  const result = framing.cropMask(mask, { sx: 0, sy: 0, sw: width, sh: height }, width, height, width, height)
+  assert.strictEqual(result.width, width)
+  assert.strictEqual(result.height, height)
+  for (const y of [0, 600, 1199]) {
+    assert(Math.abs(result.data[y * width + 451] - .75) < 1e-6)
+    assert(result.data[y * width + 450] < 1e-6)
+    assert(result.data[y * width + 452] < 1e-6)
+  }
+  assert.throws(() => framing.cropMask(mask, {}, width, height, 100000, height), /尺寸/)
+})

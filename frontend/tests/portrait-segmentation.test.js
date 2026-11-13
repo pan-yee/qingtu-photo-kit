@@ -159,3 +159,20 @@ test('没有识别到人像时返回明确错误，不输出空白证件照', fu
     portrait.readMask(tensor(new Float32Array(256 * 256)))
   }, { code: 'NO_PORTRAIT' })
 })
+
+test('去残色能使用对角线的可靠背景，且不修改遮罩透明度', function () {
+  const source = makeImage(5, 5, (x, y) => x === 0 && y === 0 ? [255, 255, 255, 255] : [160, 170, 180, 255])
+  const data = new Float32Array(25).fill(1)
+  data[0] = 0
+  data[12] = .5
+  const result = portrait.applyPortraitMask(source, { matting: true, width: 5, height: 5, data }, { edgeCleanup: true })
+  assert(result.data[48] < 160)
+  assert.strictEqual(result.data[51], 128)
+})
+
+test('复杂背景多方向颜色不一致时不猜测前景颜色，避免单侧背景染色', function () {
+  const source = makeImage(5, 1, x => x === 0 ? [255, 0, 0, 255] : x === 4 ? [0, 0, 255, 255] : [120, 130, 140, 255])
+  const mask = { matting: true, width: 5, height: 1, data: new Float32Array([0, 1, .5, 1, 0]) }
+  const result = portrait.applyPortraitMask(source, mask, { edgeCleanup: true })
+  assert.deepStrictEqual(Array.from(result.data.slice(8, 12)), [120, 130, 140, 128])
+})

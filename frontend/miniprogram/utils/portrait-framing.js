@@ -60,10 +60,15 @@ function portraitCrop(width, height, face, mask, targetWidth, targetHeight) {
     sy: headTop * height - sh * .09, sw, sh, faceAligned: true }
 }
 
-function cropMask(mask, crop, sourceWidth, sourceHeight) {
+function cropMask(mask, crop, sourceWidth, sourceHeight, targetWidth, targetHeight) {
   const info = maskInfo(mask)
-  const width = mask.matting ? 450 : 256
-  const height = mask.matting ? 600 : 256
+  // Sample directly onto the render grid; an intermediate 450x600 grid
+  // discards fine alpha detail and adds a second interpolation on export.
+  const width = mask.matting ? (targetWidth || 450) : 256
+  const height = mask.matting ? (targetHeight || 600) : 256
+  if (![width, height].every(value => Number.isInteger(value) && value > 0 && value <= 2048)) {
+    throw new Error('人像遮罩目标尺寸不正确')
+  }
   const data = new Float32Array(width * height)
   for (let y = 0; y < height; y += 1) {
     for (let x = 0; x < width; x += 1) {

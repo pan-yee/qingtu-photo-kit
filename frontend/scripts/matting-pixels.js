@@ -10,7 +10,7 @@ const mask = { matting: true, width: metadata.maskWidth, height: metadata.maskHe
   data: new Float32Array(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength)) }
 if (mode === 'frame') {
   const crop = framing.portraitCrop(metadata.width, metadata.height, metadata.face, mask, 900, 1200)
-  const cropped = framing.cropMask(mask, crop, metadata.width, metadata.height)
+  const cropped = framing.cropMask(mask, crop, metadata.width, metadata.height, 900, 1200)
   fs.writeFileSync(metadata.output + '.f32', Buffer.from(cropped.data.buffer))
   fs.writeFileSync(metadata.output + '.json', JSON.stringify({ crop, width: cropped.width, height: cropped.height,
     validCrop: framing.validPortraitCrop(metadata.width, metadata.height, metadata.face, crop) }))

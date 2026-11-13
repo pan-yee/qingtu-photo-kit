@@ -131,23 +131,36 @@ function cleanEdgeColors(image, output) {
       const offset = (y * width + x) * 4
       const alpha = output[offset + 3] / 255
       if (alpha < .15 || alpha > .95 || image.data[offset + 3] < 250) continue
-      let background = -1
-      for (let distance = 2; distance <= 8 && background < 0; distance *= 2) {
-        for (let direction = 0; direction < 4; direction += 1) {
-          const nx = x + (direction === 0 ? -distance : direction === 1 ? distance : 0)
-          const ny = y + (direction === 2 ? -distance : direction === 3 ? distance : 0)
-          if (nx < 0 || nx >= width || ny < 0 || ny >= height) continue
-          const candidate = (ny * width + nx) * 4
-          if (output[candidate + 3] <= 5 && image.data[candidate + 3] >= 250) {
-            background = candidate
+      // Estimate local background from eight rays, rather than accepting the
+      // first cardinal pixel. Disagreement indicates clutter: leave RGB intact.
+      const colors = [0, 0, 0]
+      const squares = [0, 0, 0]
+      let weightSum = 0
+      for (let dy = -1; dy <= 1; dy += 1) {
+        for (let dx = -1; dx <= 1; dx += 1) {
+          if (dx === 0 && dy === 0) continue
+          for (let distance = 2; distance <= 8; distance *= 2) {
+            const nx = x + dx * distance, ny = y + dy * distance
+            if (nx < 0 || nx >= width || ny < 0 || ny >= height) break
+            const candidate = (ny * width + nx) * 4
+            if (output[candidate + 3] > 5 || image.data[candidate + 3] < 250) continue
+            const weight = 1 / (distance * Math.hypot(dx, dy))
+            weightSum += weight
+            for (let channel = 0; channel < 3; channel += 1) {
+              const color = image.data[candidate + channel]
+              colors[channel] += color * weight
+              squares[channel] += color * color * weight
+            }
             break
           }
         }
       }
-      if (background < 0) continue
+      if (!weightSum) continue
+      const background = colors.map(color => color / weightSum)
+      if (background.some((color, channel) => squares[channel] / weightSum - color * color > 24 * 24)) continue
       for (let channel = 0; channel < 3; channel += 1) {
         const color = image.data[offset + channel]
-        const foreground = (color - (1 - alpha) * image.data[background + channel]) / alpha
+        const foreground = (color - (1 - alpha) * background[channel]) / alpha
         // Conservative correction cap; users can disable it for unusual edges.
         output[offset + channel] = Math.round(color + Math.max(-32, Math.min(32, foreground - color)) * .6)
       }

@@ -161,7 +161,7 @@ Page({
           sourceContext.drawImage(image, crop.sx, crop.sy, crop.sw, crop.sh, 0, 0, width, height)
           this._sourceImageData = sourceContext.getImageData(0, 0, width, height)
           this.setData({ engineNotice: '已按人脸辅助构图，请核对头顶留白与办理机构的照片要求。' })
-          mask = framing.cropMask(mask, crop, dimensions.width, dimensions.height)
+          mask = framing.cropMask(mask, crop, dimensions.width, dimensions.height, width, height)
         } else {
           mask = await this._segmenter.segment(this._sourceImageData)
         }
