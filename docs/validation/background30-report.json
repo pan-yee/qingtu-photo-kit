@@ -1,0 +1,3984 @@
+{
+  "sample_count": 30,
+  "accepted_input_count": 30,
+  "summary": {
+    "12": {
+      "before": {
+        "alpha_mae": 0.07352100126445293,
+        "background_opacity": 0.1652918592095375,
+        "foreground_opacity_loss": 0.0011158285134418597,
+        "opaque_background_fraction": 0.004688636586017379
+      },
+      "after": {
+        "alpha_mae": 0.010024757132244606,
+        "background_opacity": 0.006887340484051189,
+        "foreground_opacity_loss": 0.0019121603463039113,
+        "opaque_background_fraction": 0.0047188834363508314
+      }
+    },
+    "36": {
+      "before": {
+        "alpha_mae": 0.008391752233728766,
+        "background_opacity": 0.005848818386584753,
+        "foreground_opacity_loss": 0.0027493139916259677,
+        "opaque_background_fraction": 0.004303626167353534
+      },
+      "after": {
+        "alpha_mae": 0.008368424916019043,
+        "background_opacity": 0.0056150304879944695,
+        "foreground_opacity_loss": 0.0027494103447073333,
+        "opaque_background_fraction": 0.004302665624531575
+      }
+    },
+    "82": {
+      "before": {
+        "alpha_mae": 0.1832729493578275,
+        "background_opacity": 0.002814767788042142,
+        "foreground_opacity_loss": 0.3091634819904963,
+        "opaque_background_fraction": 0.0038843816768830437
+      },
+      "after": {
+        "alpha_mae": 0.013090510557716092,
+        "background_opacity": 0.004281097329840122,
+        "foreground_opacity_loss": 0.005909636218711966,
+        "opaque_background_fraction": 0.003908803299611919
+      }
+    }
+  },
+  "rendered_before": 30,
+  "rendered_after": 30,
+  "scope": "Offline development regression. Selected on existing input suitability gates, not mask quality. Source-region alpha metrics, paired same images; before/after each use actual frontend framing and render. No ECS/phone/network/cloud moderation verification.",
+  "samples": [
+    {
+      "id": "p3m-np-035",
+      "row_index": 35,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=35",
+      "image_sha256": "868c6fe5ea0ec38af21cd6b28636cde8974df895ddb7b8772aa0addd0b9af38f",
+      "image_size": [
+        1080,
+        1484
+      ],
+      "mask_sha256": "88b8578ff815667bee9b1c19bd274848f095fb787887d44d7c40bd64f2ee0614",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.2544807195663452,
+          "y": 0.1811390370130539,
+          "width": 0.5492501258850098,
+          "height": 0.5316901952028275,
+          "confidence": 0.9457341432571411,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.41131332516670227,
+              0.38067081570625305
+            ],
+            [
+              0.6691264510154724,
+              0.3844085931777954
+            ],
+            [
+              0.5409500598907471,
+              0.48920169472694397
+            ],
+            [
+              0.4061807096004486,
+              0.5535362958908081
+            ],
+            [
+              0.6592302322387695,
+              0.5570932030677795
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1484
+      ],
+      "region_size": [
+        1080,
+        1484
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 310.53,
+      "cleanup_ms": 7.989,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.05769241973757744,
+            "background_opacity": 0.16612878441810608,
+            "foreground_opacity_loss": 4.5792174205416813e-05,
+            "opaque_background_fraction": 0.0009370474486753556
+          },
+          "after": {
+            "alpha_mae": 0.009621979668736458,
+            "background_opacity": 0.009459098801016808,
+            "foreground_opacity_loss": 0.00129129143897444,
+            "opaque_background_fraction": 0.0009938382031405286
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.007208690978586674,
+            "background_opacity": 0.006128761917352676,
+            "foreground_opacity_loss": 0.002476760186254978,
+            "opaque_background_fraction": 3.7860502976782044e-05
+          },
+          "after": {
+            "alpha_mae": 0.006948559079319239,
+            "background_opacity": 0.005281020421534777,
+            "foreground_opacity_loss": 0.002476760186254978,
+            "opaque_background_fraction": 3.7860502976782044e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.2108674943447113,
+            "background_opacity": 8.926170994527638e-05,
+            "foreground_opacity_loss": 0.30914345383644104,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.00996098667383194,
+            "background_opacity": 0.0015562499174848199,
+            "foreground_opacity_loss": 0.007771361153572798,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -4.863008629161868,
+            "sy": -52.79267663658689,
+            "sw": 1152.59450747744,
+            "sh": 1536.7926766365867,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -4.863008629161868,
+            "sy": -52.79267663658689,
+            "sw": 1152.59450747744,
+            "sh": 1536.7926766365867,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-065",
+      "row_index": 65,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=65",
+      "image_sha256": "32c868438a7c99ef96851cdc65287e10f109312c002c644e3d0b4afe91d15549",
+      "image_size": [
+        1080,
+        1430
+      ],
+      "mask_sha256": "eeaf99068e9a830967804e435bc9e711e3504a773e9f710f728ba22f680ec7f5",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.32457640767097473,
+          "y": 0.20359623432159424,
+          "width": 0.4304356873035431,
+          "height": 0.4370594024658203,
+          "confidence": 0.9546992182731628,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.44606196880340576,
+              0.3748799264431
+            ],
+            [
+              0.6482226848602295,
+              0.37921178340911865
+            ],
+            [
+              0.545033872127533,
+              0.46735429763793945
+            ],
+            [
+              0.44440826773643494,
+              0.5148661732673645
+            ],
+            [
+              0.6334108710289001,
+              0.5209688544273376
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1430
+      ],
+      "region_size": [
+        1080,
+        1430
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 273.94,
+      "cleanup_ms": 3.323,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.05120772495865822,
+            "background_opacity": 0.16150084137916565,
+            "foreground_opacity_loss": 0.00021085285698063672,
+            "opaque_background_fraction": 0.0005638631391388682
+          },
+          "after": {
+            "alpha_mae": 0.007183880545198917,
+            "background_opacity": 0.0019581420347094536,
+            "foreground_opacity_loss": 0.0009335206705145538,
+            "opaque_background_fraction": 0.0005751404019216456
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.006024300120770931,
+            "background_opacity": 0.001584654557518661,
+            "foreground_opacity_loss": 0.0017288364470005035,
+            "opaque_background_fraction": 0.0005638631391388682
+          },
+          "after": {
+            "alpha_mae": 0.0060444176197052,
+            "background_opacity": 0.0012912687379866838,
+            "foreground_opacity_loss": 0.0017288364470005035,
+            "opaque_background_fraction": 0.0005638631391388682
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.22231337428092957,
+            "background_opacity": 0.00038381607737392187,
+            "foreground_opacity_loss": 0.30839550495147705,
+            "opaque_background_fraction": 0.0005525858763560909
+          },
+          "after": {
+            "alpha_mae": 0.015470987185835838,
+            "background_opacity": 0.000746651494409889,
+            "foreground_opacity_loss": 0.004913270939141512,
+            "opaque_background_fraction": 0.0005525858763560909
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 18.08488359256694,
+            "sy": -76.38108756266408,
+            "sw": 1129.785815671998,
+            "sh": 1506.381087562664,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 18.08488359256694,
+            "sy": -76.38108756266408,
+            "sw": 1129.785815671998,
+            "sh": 1506.381087562664,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-095",
+      "row_index": 95,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=95",
+      "image_sha256": "e8563a31e398e3a11988c9e017eb72930ceb41c584d3ca5f3e34f0421d0fbe9c",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "e278fddf8e6a9ad94e054bb59169d53c83a7e2ff2ae745faf87be0f00c2e949a",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.26672351360321045,
+          "y": 0.10987962782382965,
+          "width": 0.3624191880226135,
+          "height": 0.3214416652917862,
+          "confidence": 0.9456700086593628,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.35563433170318604,
+              0.22799596190452576
+            ],
+            [
+              0.5160128474235535,
+              0.24268321692943573
+            ],
+            [
+              0.4099276661872864,
+              0.3041253685951233
+            ],
+            [
+              0.3410739302635193,
+              0.34132063388824463
+            ],
+            [
+              0.47734466195106506,
+              0.3540100157260895
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1067,
+        1600
+      ],
+      "region_size": [
+        1067,
+        1600
+      ],
+      "mask_size": [
+        512,
+        736
+      ],
+      "inference_ms": 333.75,
+      "cleanup_ms": 5.128,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.05416267737746239,
+            "background_opacity": 0.1605215072631836,
+            "foreground_opacity_loss": 0.0006621405482292175,
+            "opaque_background_fraction": 0.0002905914003693323
+          },
+          "after": {
+            "alpha_mae": 0.006864922121167183,
+            "background_opacity": 0.0007007966632954776,
+            "foreground_opacity_loss": 0.001454217010177672,
+            "opaque_background_fraction": 0.0003562088133559557
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.009038415737450123,
+            "background_opacity": 0.0005215206765569746,
+            "foreground_opacity_loss": 0.002549641067162156,
+            "opaque_background_fraction": 2.812174842283861e-05
+          },
+          "after": {
+            "alpha_mae": 0.00906672328710556,
+            "background_opacity": 0.00043057522270828485,
+            "foreground_opacity_loss": 0.002549641067162156,
+            "opaque_background_fraction": 2.812174842283861e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.21496212482452393,
+            "background_opacity": 3.6098765122005716e-05,
+            "foreground_opacity_loss": 0.3092155456542969,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.018459798768162727,
+            "background_opacity": 0.00014227587962523103,
+            "foreground_opacity_loss": 0.006313640624284744,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 19.639876949758218,
+            "sy": -79.83790912489991,
+            "sw": 916.6094977498633,
+            "sh": 1222.1459969998177,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 19.639876949758218,
+            "sy": -79.83790912489991,
+            "sw": 916.6094977498633,
+            "sh": 1222.1459969998177,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-110",
+      "row_index": 110,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=110",
+      "image_sha256": "679f70836be51fae9e2b0969e70c42fd58d09dc411d8b47fc66b0efa671d49ba",
+      "image_size": [
+        1080,
+        1627
+      ],
+      "mask_sha256": "8832ee0ae377c02530d450e9e4ca19b7b3f50e729333db05599837d794075ef3",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.3190905749797821,
+          "y": 0.23755744099617004,
+          "width": 0.4600818455219269,
+          "height": 0.38308921456336975,
+          "confidence": 0.9516050219535828,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.49735161662101746,
+              0.3952152132987976
+            ],
+            [
+              0.691409707069397,
+              0.38635677099227905
+            ],
+            [
+              0.6421639919281006,
+              0.47900596261024475
+            ],
+            [
+              0.5232165455818176,
+              0.5362330079078674
+            ],
+            [
+              0.6804391741752625,
+              0.5305188894271851
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1062,
+        1600
+      ],
+      "region_size": [
+        1062,
+        1600
+      ],
+      "mask_size": [
+        512,
+        768
+      ],
+      "inference_ms": 314.58,
+      "cleanup_ms": 5.486,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.060361120849847794,
+            "background_opacity": 0.16199088096618652,
+            "foreground_opacity_loss": 0.00014554416702594608,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.01076476275920868,
+            "background_opacity": 0.0019774949178099632,
+            "foreground_opacity_loss": 0.001016542431898415,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.00645371014252305,
+            "background_opacity": 0.001990876393392682,
+            "foreground_opacity_loss": 0.0019218502566218376,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.006182083394378424,
+            "background_opacity": 0.0010388519149273634,
+            "foreground_opacity_loss": 0.0019218502566218376,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.2096080183982849,
+            "background_opacity": 3.516375386425352e-07,
+            "foreground_opacity_loss": 0.30858850479125977,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.014280244708061218,
+            "background_opacity": 0.0002870387106668204,
+            "foreground_opacity_loss": 0.005902102682739496,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -16.088143358628713,
+            "sy": -13.731884956361057,
+            "sw": 1198.531587918601,
+            "sh": 1598.0421172248011,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -16.088143358628713,
+            "sy": -13.731884956361057,
+            "sw": 1198.531587918601,
+            "sh": 1598.0421172248011,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-140",
+      "row_index": 140,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=140",
+      "image_sha256": "04f83d2187fbd0d3a3e24352c5d6e31e534408af5575d9f5c3aff687a4164d05",
+      "image_size": [
+        1080,
+        1622
+      ],
+      "mask_sha256": "f857a5457f6d4e71a1c3c161f6b47115c4b29c35cdd9fb9f0e394033d12038ea",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.14593574404716492,
+          "y": 0.26370006799697876,
+          "width": 0.43986740708351135,
+          "height": 0.40871500968933105,
+          "confidence": 0.9391871690750122,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.19225844740867615,
+              0.435786634683609
+            ],
+            [
+              0.3792349100112915,
+              0.4255477786064148
+            ],
+            [
+              0.2431233674287796,
+              0.5135143995285034
+            ],
+            [
+              0.23448729515075684,
+              0.587406575679779
+            ],
+            [
+              0.38045477867126465,
+              0.5770312547683716
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1065,
+        1600
+      ],
+      "region_size": [
+        1065,
+        1600
+      ],
+      "mask_size": [
+        512,
+        768
+      ],
+      "inference_ms": 334.55,
+      "cleanup_ms": 5.558,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.08543575555086136,
+            "background_opacity": 0.16410502791404724,
+            "foreground_opacity_loss": 6.660146755166352e-05,
+            "opaque_background_fraction": 0.0012777652326689322
+          },
+          "after": {
+            "alpha_mae": 0.012085173279047012,
+            "background_opacity": 0.006333372090011835,
+            "foreground_opacity_loss": 0.0014759639743715525,
+            "opaque_background_fraction": 0.0013108108852379562
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.008195754140615463,
+            "background_opacity": 0.0041050477884709835,
+            "foreground_opacity_loss": 0.002830533077940345,
+            "opaque_background_fraction": 0.0005177152235813777
+          },
+          "after": {
+            "alpha_mae": 0.007979867048561573,
+            "background_opacity": 0.003637074027210474,
+            "foreground_opacity_loss": 0.002830533077940345,
+            "opaque_background_fraction": 0.0005177152235813777
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.16125942766666412,
+            "background_opacity": 0.0002281748311361298,
+            "foreground_opacity_loss": 0.3094971776008606,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010239499621093273,
+            "background_opacity": 0.0011316550662741065,
+            "foreground_opacity_loss": 0.008907840587198734,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -251.21300447363808,
+            "sy": -108.97057641556941,
+            "sw": 1281.727932311677,
+            "sh": 1708.9705764155694,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -251.21300447363808,
+            "sy": -108.97057641556941,
+            "sw": 1281.727932311677,
+            "sh": 1708.9705764155694,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-215",
+      "row_index": 215,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=215",
+      "image_sha256": "e70cf291e4e8ceaf837003035cc1aa76483379fdcfaa0f736cc93b6c9e725564",
+      "image_size": [
+        1080,
+        1514
+      ],
+      "mask_sha256": "7b0f7203a154cee7bf52377aa04606dfed5d33b0ad61c2425beb3ff71e51310c",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.29896000027656555,
+          "y": 0.24201230704784393,
+          "width": 0.4804501235485077,
+          "height": 0.46653778851032257,
+          "confidence": 0.9486530423164368,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.43816518783569336,
+              0.4392092227935791
+            ],
+            [
+              0.6509640216827393,
+              0.4275093972682953
+            ],
+            [
+              0.5676256418228149,
+              0.5246950387954712
+            ],
+            [
+              0.47238779067993164,
+              0.5969019532203674
+            ],
+            [
+              0.6517411470413208,
+              0.5874837040901184
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1514
+      ],
+      "region_size": [
+        1080,
+        1514
+      ],
+      "mask_size": [
+        512,
+        704
+      ],
+      "inference_ms": 623.49,
+      "cleanup_ms": 6.858,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.04562768712639809,
+            "background_opacity": 0.16037319600582123,
+            "foreground_opacity_loss": 0.0,
+            "opaque_background_fraction": 0.00013933398355858994
+          },
+          "after": {
+            "alpha_mae": 0.00739678181707859,
+            "background_opacity": 0.00018778520461637527,
+            "foreground_opacity_loss": 1.5477868146263063e-05,
+            "opaque_background_fraction": 0.00013933398355858994
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.009475136175751686,
+            "background_opacity": 0.00037319655530154705,
+            "foreground_opacity_loss": 3.0494864404317923e-05,
+            "opaque_background_fraction": 7.600035466832179e-05
+          },
+          "after": {
+            "alpha_mae": 0.009781008586287498,
+            "background_opacity": 0.00012448163761291653,
+            "foreground_opacity_loss": 3.0494864404317923e-05,
+            "opaque_background_fraction": 7.600035466832179e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.2286900132894516,
+            "background_opacity": 2.9694780096178874e-05,
+            "foreground_opacity_loss": 0.3066972494125366,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.01902438886463642,
+            "background_opacity": 4.6952609409345314e-05,
+            "foreground_opacity_loss": 0.00010680199920898303,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -41.24742338566034,
+            "sy": -148.84610773478747,
+            "sw": 1247.1345808010906,
+            "sh": 1662.8461077347874,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -41.24742338566034,
+            "sy": -148.84610773478747,
+            "sw": 1247.1345808010906,
+            "sh": 1662.8461077347874,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-230",
+      "row_index": 230,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=230",
+      "image_sha256": "9b04ce396303628f4a7c9fa7a23ebeb0a22ad4c036316e86eeee6ace65b9371e",
+      "image_size": [
+        1622,
+        1080
+      ],
+      "mask_sha256": "092f5ff42808fe7317045128c1b99e3656509f3f6a9386ec10d06e8d8f946425",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.29587557911872864,
+          "y": 0.18411150574684143,
+          "width": 0.06333944201469421,
+          "height": 0.12586742639541626,
+          "confidence": 0.9302904605865479,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.30882659554481506,
+              0.2317514568567276
+            ],
+            [
+              0.338230699300766,
+              0.23199394345283508
+            ],
+            [
+              0.3214479386806488,
+              0.25586095452308655
+            ],
+            [
+              0.31137824058532715,
+              0.2735615074634552
+            ],
+            [
+              0.33616092801094055,
+              0.27397051453590393
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.2175,
+        "y": 0.0835680751173709,
+        "width": 0.22,
+        "height": 0.4403755868544601
+      },
+      "input_size": [
+        1600,
+        1065
+      ],
+      "region_size": [
+        352,
+        469
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 600.93,
+      "cleanup_ms": 4.259,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.06866764277219772,
+            "background_opacity": 0.16020269691944122,
+            "foreground_opacity_loss": 6.190219210111536e-06,
+            "opaque_background_fraction": 1.4754376516934336e-05
+          },
+          "after": {
+            "alpha_mae": 0.003963713068515062,
+            "background_opacity": 0.0003486495406832546,
+            "foreground_opacity_loss": 5.133466038387269e-05,
+            "opaque_background_fraction": 1.4754376516934336e-05
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.0028519209008663893,
+            "background_opacity": 0.00020271357789169997,
+            "foreground_opacity_loss": 9.738369408296421e-05,
+            "opaque_background_fraction": 7.377188258467168e-06
+          },
+          "after": {
+            "alpha_mae": 0.002848649863153696,
+            "background_opacity": 0.00018685984832700342,
+            "foreground_opacity_loss": 9.738369408296421e-05,
+            "opaque_background_fraction": 7.377188258467168e-06
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.18124665319919586,
+            "background_opacity": 3.1360284538095584e-06,
+            "foreground_opacity_loss": 0.3067640960216522,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.0038752921391278505,
+            "background_opacity": 5.319463161868043e-05,
+            "foreground_opacity_loss": 0.00029769036336801946,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 394.148538689371,
+            "sy": 111.8553409907561,
+            "sw": 259.8478830247004,
+            "sh": 346.4638440329339,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 394.148538689371,
+            "sy": 111.8553409907561,
+            "sw": 259.8478830247004,
+            "sh": 346.4638440329339,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-260",
+      "row_index": 260,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=260",
+      "image_sha256": "cdd2d6b6cd897cecd80755afa6d0f654f3f9cbd40e4fe52c7adfc5c07d21bcc1",
+      "image_size": [
+        1080,
+        1384
+      ],
+      "mask_sha256": "49f605a48dc4fdd8297da04c4f996b98b2e2a8782168d23fad2bc538859f7cc8",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.44562828540802,
+          "y": 0.10262695699930191,
+          "width": 0.12873321771621704,
+          "height": 0.13101042062044144,
+          "confidence": 0.9259759187698364,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5023525357246399,
+              0.15306589007377625
+            ],
+            [
+              0.5534575581550598,
+              0.15283341705799103
+            ],
+            [
+              0.5405692458152771,
+              0.17980602383613586
+            ],
+            [
+              0.506104052066803,
+              0.1967451423406601
+            ],
+            [
+              0.5484191179275513,
+              0.20035895705223083
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.2898148148148148,
+        "y": 0.0,
+        "width": 0.44074074074074077,
+        "height": 0.4588150289017341
+      },
+      "input_size": [
+        1080,
+        1384
+      ],
+      "region_size": [
+        476,
+        635
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 597.55,
+      "cleanup_ms": 6.005,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.07329776138067245,
+            "background_opacity": 0.16103845834732056,
+            "foreground_opacity_loss": 0.00011193656973773614,
+            "opaque_background_fraction": 0.00018627883872392097
+          },
+          "after": {
+            "alpha_mae": 0.005146583542227745,
+            "background_opacity": 0.0018288342980667949,
+            "foreground_opacity_loss": 0.0002466625883243978,
+            "opaque_background_fraction": 0.00020007727122198918
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.0034432269167155027,
+            "background_opacity": 0.001038453890942037,
+            "foreground_opacity_loss": 0.0004180333635304123,
+            "opaque_background_fraction": 6.89921624903411e-05
+          },
+          "after": {
+            "alpha_mae": 0.0034355337265878916,
+            "background_opacity": 0.0010148342698812485,
+            "foreground_opacity_loss": 0.0004180333635304123,
+            "opaque_background_fraction": 6.89921624903411e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.17430809140205383,
+            "background_opacity": 2.9653103410964832e-05,
+            "foreground_opacity_loss": 0.30707868933677673,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.004114993382245302,
+            "background_opacity": 0.0002997347037307918,
+            "foreground_opacity_loss": 0.001068400451913476,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 375.66326507618476,
+            "sy": 29.13367979725154,
+            "sw": 350.26244146246813,
+            "sh": 467.0165886166242,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 375.66326507618476,
+            "sy": 29.13367979725154,
+            "sw": 350.26244146246813,
+            "sh": 467.0165886166242,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-290",
+      "row_index": 290,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=290",
+      "image_sha256": "584744fdc3625aa4d821ab27e05709d14fd9f5b1dc4b5e5e47ca81344541d3a0",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "4d6961dced3972873e2ac0ad00f35f05edfd7654dd24da1946af3b389574d804",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.4591633379459381,
+          "y": 0.27999353408813477,
+          "width": 0.16776564717292786,
+          "height": 0.13121142983436584,
+          "confidence": 0.9040889739990234,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.4805219769477844,
+              0.3301129639148712
+            ],
+            [
+              0.559431254863739,
+              0.3326607346534729
+            ],
+            [
+              0.496815949678421,
+              0.357991486787796
+            ],
+            [
+              0.4767788052558899,
+              0.3779141306877136
+            ],
+            [
+              0.539707601070404,
+              0.3787742853164673
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.23666666666666666,
+        "y": 0.175,
+        "width": 0.6122222222222222,
+        "height": 0.459375
+      },
+      "input_size": [
+        900,
+        1600
+      ],
+      "region_size": [
+        551,
+        735
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 599.86,
+      "cleanup_ms": 4.462,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.10432740300893784,
+            "background_opacity": 0.1605510115623474,
+            "foreground_opacity_loss": 0.00020627444609999657,
+            "opaque_background_fraction": 0.00022623544224110797
+          },
+          "after": {
+            "alpha_mae": 0.007016968913376331,
+            "background_opacity": 0.0005802785744890571,
+            "foreground_opacity_loss": 0.0005481350235641003,
+            "opaque_background_fraction": 0.00023115360402895815
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.004764195065945387,
+            "background_opacity": 0.0005635828129015863,
+            "foreground_opacity_loss": 0.0009774659993126988,
+            "opaque_background_fraction": 0.00017705382436260624
+          },
+          "after": {
+            "alpha_mae": 0.004676797427237034,
+            "background_opacity": 0.0003745325084310025,
+            "foreground_opacity_loss": 0.0009774659993126988,
+            "opaque_background_fraction": 0.00017705382436260624
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.11919841170310974,
+            "background_opacity": 9.861782746156678e-05,
+            "foreground_opacity_loss": 0.30764368176460266,
+            "opaque_background_fraction": 0.00010819955933270381
+          },
+          "after": {
+            "alpha_mae": 0.00897522084414959,
+            "background_opacity": 0.00018198344332631677,
+            "foreground_opacity_loss": 0.0026528032030910254,
+            "opaque_background_fraction": 0.00010819955933270381
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 310.29047750764477,
+            "sy": 358.1301482518523,
+            "sw": 356.90213574303414,
+            "sh": 475.86951432404555,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 310.29047750764477,
+            "sy": 358.1301482518523,
+            "sw": 356.90213574303414,
+            "sh": 475.86951432404555,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-410",
+      "row_index": 410,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=410",
+      "image_sha256": "280c59896db898835138a5ea81ffcaeb75bf7cbc5fae29004f07a145af2b33a5",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "49d81eaf5b4912138077f8bbe8eb3f0b146e4fed0143dd30b5542e5df1b4d12f",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.2207777202129364,
+          "y": 0.2017204314470291,
+          "width": 0.4270458519458771,
+          "height": 0.257069393992424,
+          "confidence": 0.9160221219062805,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.30136638879776,
+              0.3084818422794342
+            ],
+            [
+              0.46403834223747253,
+              0.3017405867576599
+            ],
+            [
+              0.3658877909183502,
+              0.3740261197090149
+            ],
+            [
+              0.3440462052822113,
+              0.4056273102760315
+            ],
+            [
+              0.46847736835479736,
+              0.4006808400154114
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 0.9
+      },
+      "input_size": [
+        900,
+        1600
+      ],
+      "region_size": [
+        900,
+        1440
+      ],
+      "mask_size": [
+        512,
+        800
+      ],
+      "inference_ms": 751.74,
+      "cleanup_ms": 5.034,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.060945142060518265,
+            "background_opacity": 0.16671377420425415,
+            "foreground_opacity_loss": 0.000380917452275753,
+            "opaque_background_fraction": 0.0016421469384082423
+          },
+          "after": {
+            "alpha_mae": 0.010483230464160442,
+            "background_opacity": 0.010880321264266968,
+            "foreground_opacity_loss": 0.0016757289413362741,
+            "opaque_background_fraction": 0.0017696195318006628
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.008144215680658817,
+            "background_opacity": 0.006713791750371456,
+            "foreground_opacity_loss": 0.0030588707886636257,
+            "opaque_background_fraction": 0.0004798968221832306
+          },
+          "after": {
+            "alpha_mae": 0.007988032884895802,
+            "background_opacity": 0.006234101485460997,
+            "foreground_opacity_loss": 0.0030588707886636257,
+            "opaque_background_fraction": 0.0004798968221832306
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.20618514716625214,
+            "background_opacity": 0.00026974198408424854,
+            "foreground_opacity_loss": 0.3097100257873535,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010268802754580975,
+            "background_opacity": 0.0019166968995705247,
+            "foreground_opacity_loss": 0.008828687481582165,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -51.012078424293804,
+            "sy": -8.299148082731605,
+            "sw": 883.7653199831625,
+            "sh": 1178.35375997755,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -51.012078424293804,
+            "sy": -8.299148082731605,
+            "sw": 883.7653199831625,
+            "sh": 1178.35375997755,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-470",
+      "row_index": 470,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=470",
+      "image_sha256": "adbd29e621cf2e12a61a15b8b6138054a617a48e7ef375bebf7eb5e89fabba39",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "39ee7edd62ba8f0696f99436a042108f9b9f4598e43bd94e68dff4521d4d757e",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.484732061624527,
+          "y": 0.08313770592212677,
+          "width": 0.1988060176372528,
+          "height": 0.1461402326822281,
+          "confidence": 0.9391264319419861,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5388497710227966,
+              0.13469073176383972
+            ],
+            [
+              0.6245255470275879,
+              0.13557343184947968
+            ],
+            [
+              0.5780584812164307,
+              0.16305077075958252
+            ],
+            [
+              0.5429432392120361,
+              0.18396277725696564
+            ],
+            [
+              0.6183552742004395,
+              0.18715927004814148
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.24333333333333335,
+        "y": 0.0,
+        "width": 0.6822222222222222,
+        "height": 0.51125
+      },
+      "input_size": [
+        900,
+        1600
+      ],
+      "region_size": [
+        614,
+        818
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 627.73,
+      "cleanup_ms": 13.275,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.0815039798617363,
+            "background_opacity": 0.1607622653245926,
+            "foreground_opacity_loss": 0.00017916536307893693,
+            "opaque_background_fraction": 0.000596046430173468
+          },
+          "after": {
+            "alpha_mae": 0.004986257292330265,
+            "background_opacity": 0.0011357772164046764,
+            "foreground_opacity_loss": 0.00028148494311608374,
+            "opaque_background_fraction": 0.000596046430173468
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.003704200265929103,
+            "background_opacity": 0.0007901983335614204,
+            "foreground_opacity_loss": 0.0004048859409522265,
+            "opaque_background_fraction": 0.00042399179053576584
+          },
+          "after": {
+            "alpha_mae": 0.0036995389964431524,
+            "background_opacity": 0.0007770170923322439,
+            "foreground_opacity_loss": 0.0004048859409522265,
+            "opaque_background_fraction": 0.00042399179053576584
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.15817485749721527,
+            "background_opacity": 0.0002343847299925983,
+            "foreground_opacity_loss": 0.3070381283760071,
+            "opaque_background_fraction": 0.0002519371508980638
+          },
+          "after": {
+            "alpha_mae": 0.004152688197791576,
+            "background_opacity": 0.0004004377406090498,
+            "foreground_opacity_loss": 0.0008874668856151402,
+            "opaque_background_fraction": 0.0002580819594565531
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 311.77896028630965,
+            "sy": 7.421128537920033,
+            "sw": 427.8852062250568,
+            "sh": 570.5136083000757,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 311.77896028630965,
+            "sy": 7.421128537920033,
+            "sw": 427.8852062250568,
+            "sh": 570.5136083000757,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-011",
+      "row_index": 11,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=11",
+      "image_sha256": "6424b46083b9e8f399992bd7106e5b32de98c82d59a1d759bf952222f20e6426",
+      "image_size": [
+        1080,
+        1631
+      ],
+      "mask_sha256": "a6ae657a4e7fa8f77f9e8da101435c5cd03b855516142ec6a02961825e6eb821",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.4909135401248932,
+          "y": 0.15566502511501312,
+          "width": 0.23482069373130798,
+          "height": 0.20154960453510284,
+          "confidence": 0.9259378910064697,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5729799866676331,
+              0.2347005307674408
+            ],
+            [
+              0.6809744238853455,
+              0.23946130275726318
+            ],
+            [
+              0.630491316318512,
+              0.27827879786491394
+            ],
+            [
+              0.571027934551239,
+              0.30586308240890503
+            ],
+            [
+              0.6609807014465332,
+              0.3097832202911377
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.20018885741265344,
+        "y": 0.0,
+        "width": 0.7998111425873465,
+        "height": 0.705625
+      },
+      "input_size": [
+        1059,
+        1600
+      ],
+      "region_size": [
+        847,
+        1129
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 603.28,
+      "cleanup_ms": 5.595,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.10933704674243927,
+            "background_opacity": 0.17064647376537323,
+            "foreground_opacity_loss": 0.00038733865949325264,
+            "opaque_background_fraction": 0.012619161226789575
+          },
+          "after": {
+            "alpha_mae": 0.01732136867940426,
+            "background_opacity": 0.01317597460001707,
+            "foreground_opacity_loss": 0.0006219547358341515,
+            "opaque_background_fraction": 0.012685150404564421
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.013943815603852272,
+            "background_opacity": 0.011888721957802773,
+            "foreground_opacity_loss": 0.0009665363468229771,
+            "opaque_background_fraction": 0.011218160221723637
+          },
+          "after": {
+            "alpha_mae": 0.013905189000070095,
+            "background_opacity": 0.011813495308160782,
+            "foreground_opacity_loss": 0.0009665363468229771,
+            "opaque_background_fraction": 0.011218160221723637
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.12825320661067963,
+            "background_opacity": 0.0069731916300952435,
+            "foreground_opacity_loss": 0.3075958490371704,
+            "opaque_background_fraction": 0.0090049847209673
+          },
+          "after": {
+            "alpha_mae": 0.01243123970925808,
+            "background_opacity": 0.009691055864095688,
+            "foreground_opacity_loss": 0.0022075818851590157,
+            "opaque_background_fraction": 0.009152191348311184
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 310.6004390353094,
+            "sy": 11.070951196883058,
+            "sw": 667.2291145753601,
+            "sh": 889.6388194338134,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 310.6004390353094,
+            "sy": 11.070951196883058,
+            "sw": 667.2291145753601,
+            "sh": 889.6388194338134,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-085",
+      "row_index": 85,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=85",
+      "image_sha256": "327e8334deea3c4878d656ad1b5d7263475e3263b7d2a1b808b3f916aca71cf2",
+      "image_size": [
+        1080,
+        1440
+      ],
+      "mask_sha256": "8b00ca9c2fdeba4b7989fdffe427115e78c98d12e5a6dc6aad64fadbefd74368",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.42903223633766174,
+          "y": 0.0944817066192627,
+          "width": 0.1473347246646881,
+          "height": 0.15262436866760254,
+          "confidence": 0.9289721846580505,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.47767987847328186,
+              0.15658411383628845
+            ],
+            [
+              0.5411584377288818,
+              0.15632061660289764
+            ],
+            [
+              0.5150279402732849,
+              0.18668337166309357
+            ],
+            [
+              0.48260223865509033,
+              0.20935511589050293
+            ],
+            [
+              0.5376933813095093,
+              0.2068791389465332
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.2351851851851852,
+        "y": 0.0,
+        "width": 0.5342592592592592,
+        "height": 0.5340277777777778
+      },
+      "input_size": [
+        1080,
+        1440
+      ],
+      "region_size": [
+        577,
+        769
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 618.59,
+      "cleanup_ms": 8.406,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.06967345625162125,
+            "background_opacity": 0.160652756690979,
+            "foreground_opacity_loss": 0.00021890824427828193,
+            "opaque_background_fraction": 0.00026685427330729484
+          },
+          "after": {
+            "alpha_mae": 0.008200095035135746,
+            "background_opacity": 0.0010416065342724323,
+            "foreground_opacity_loss": 0.00034597169724293053,
+            "opaque_background_fraction": 0.00029111375269886706
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.006883123889565468,
+            "background_opacity": 0.0006539277383126318,
+            "foreground_opacity_loss": 0.0005353441229090095,
+            "opaque_background_fraction": 0.00010512441069681311
+          },
+          "after": {
+            "alpha_mae": 0.0070648277178406715,
+            "background_opacity": 0.0006116559961810708,
+            "foreground_opacity_loss": 0.0005353441229090095,
+            "opaque_background_fraction": 0.00010512441069681311
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.18494461476802826,
+            "background_opacity": 5.033287379774265e-05,
+            "foreground_opacity_loss": 0.30718186497688293,
+            "opaque_background_fraction": 8.086493130524086e-06
+          },
+          "after": {
+            "alpha_mae": 0.010812131687998772,
+            "background_opacity": 0.0002000418899115175,
+            "foreground_opacity_loss": 0.0012058899737894535,
+            "opaque_background_fraction": 8.086493130524086e-06
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 316.38556793568637,
+            "sy": -24.737649281819564,
+            "sw": 453.05999725583985,
+            "sh": 604.0799963411198,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 316.38556793568637,
+            "sy": -24.737649281819564,
+            "sw": 453.05999725583985,
+            "sh": 604.0799963411198,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-122",
+      "row_index": 122,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=122",
+      "image_sha256": "9cbcb71d9b865cd120b2a701ba1eae6d0d8c9e21162d183702312a08b8f48479",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "mask_sha256": "11be1a038aeb025c46efdaf3fc80a746bd0f3509996e89e94b7abfb732865a70",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.39128321409225464,
+          "y": 0.1398199498653412,
+          "width": 0.18873262405395508,
+          "height": 0.48677584528923035,
+          "confidence": 0.9326805472373962,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.417133629322052,
+              0.3310062885284424
+            ],
+            [
+              0.4892822206020355,
+              0.32253533601760864
+            ],
+            [
+              0.4256703853607178,
+              0.42320960760116577
+            ],
+            [
+              0.4295545518398285,
+              0.5032415390014648
+            ],
+            [
+              0.49436450004577637,
+              0.49518173933029175
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.2025,
+        "y": 0.0,
+        "width": 0.56625,
+        "height": 1.0
+      },
+      "input_size": [
+        1600,
+        900
+      ],
+      "region_size": [
+        906,
+        900
+      ],
+      "mask_size": [
+        512,
+        512
+      ],
+      "inference_ms": 460.41,
+      "cleanup_ms": 7.635,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.06659471243619919,
+            "background_opacity": 0.16442826390266418,
+            "foreground_opacity_loss": 7.889594417065382e-05,
+            "opaque_background_fraction": 0.0007059401280923247
+          },
+          "after": {
+            "alpha_mae": 0.00794211309403181,
+            "background_opacity": 0.007355667185038328,
+            "foreground_opacity_loss": 0.000935648859012872,
+            "opaque_background_fraction": 0.0007877882588856377
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.005755510646849871,
+            "background_opacity": 0.004428264684975147,
+            "foreground_opacity_loss": 0.0017871075542643666,
+            "opaque_background_fraction": 8.184813079331301e-05
+          },
+          "after": {
+            "alpha_mae": 0.005652662832289934,
+            "background_opacity": 0.004152268171310425,
+            "foreground_opacity_loss": 0.0017871075542643666,
+            "opaque_background_fraction": 8.184813079331301e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.19102917611598969,
+            "background_opacity": 8.720036566955969e-05,
+            "foreground_opacity_loss": 0.3084537982940674,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.00708653824403882,
+            "background_opacity": 0.0012390112970024347,
+            "foreground_opacity_loss": 0.005580211523920298,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 418.9002637188513,
+            "sy": -55.03727485845377,
+            "sw": 716.2779561438404,
+            "sh": 955.0372748584538,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 418.9002637188513,
+            "sy": -55.03727485845377,
+            "sw": 716.2779561438404,
+            "sh": 955.0372748584538,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-233",
+      "row_index": 233,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=233",
+      "image_sha256": "66a530e59720962ce46689e1047e9fcfdfa4e14b72ae81428bf94c811f73e04e",
+      "image_size": [
+        1080,
+        1547
+      ],
+      "mask_sha256": "e9b62fd76f5fb65474bf7403e13c01ac93644404c79b8aef0a18fefb30da3d9e",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.2524121105670929,
+          "y": 0.19874349236488342,
+          "width": 0.597437173128128,
+          "height": 0.5433301031589508,
+          "confidence": 0.9249177575111389,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5392182469367981,
+              0.40672430396080017
+            ],
+            [
+              0.755692183971405,
+              0.38897523283958435
+            ],
+            [
+              0.7324004769325256,
+              0.5033754110336304
+            ],
+            [
+              0.5722259283065796,
+              0.6083389520645142
+            ],
+            [
+              0.7545760869979858,
+              0.5940824747085571
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1547
+      ],
+      "region_size": [
+        1080,
+        1547
+      ],
+      "mask_size": [
+        512,
+        704
+      ],
+      "inference_ms": 642.73,
+      "cleanup_ms": 4.781,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.04728874936699867,
+            "background_opacity": 0.16482612490653992,
+            "foreground_opacity_loss": 0.0001930934377014637,
+            "opaque_background_fraction": 0.00086892194967298
+          },
+          "after": {
+            "alpha_mae": 0.009627796709537506,
+            "background_opacity": 0.007917432114481926,
+            "foreground_opacity_loss": 0.0012265582336112857,
+            "opaque_background_fraction": 0.0009628594577457347
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.006457977462559938,
+            "background_opacity": 0.004826131742447615,
+            "foreground_opacity_loss": 0.0023073405027389526,
+            "opaque_background_fraction": 8.219531956366028e-05
+          },
+          "after": {
+            "alpha_mae": 0.006374431774020195,
+            "background_opacity": 0.004471011459827423,
+            "foreground_opacity_loss": 0.0023073405027389526,
+            "opaque_background_fraction": 8.219531956366028e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.23130156099796295,
+            "background_opacity": 9.324678831035271e-05,
+            "foreground_opacity_loss": 0.3089739680290222,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010718374513089657,
+            "background_opacity": 0.0013362739700824022,
+            "foreground_opacity_loss": 0.006918983533978462,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -30.58342185210131,
+            "sy": -121.81219934333546,
+            "sw": 1251.6091495075016,
+            "sh": 1668.8121993433354,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -30.58342185210131,
+            "sy": -121.81219934333546,
+            "sw": 1251.6091495075016,
+            "sh": 1668.8121993433354,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-270",
+      "row_index": 270,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=270",
+      "image_sha256": "8df484750dd71c55c9ad1d3a57e67153c1ea3876c586bbf847a25388355a24f3",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "9768ca870020589521a4b030eae20afbca911560463ee1b668b073419d2269a5",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.3867463767528534,
+          "y": 0.08822834491729736,
+          "width": 0.21365782618522644,
+          "height": 0.14928880333900452,
+          "confidence": 0.9219684600830078,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.4293575584888458,
+              0.14280156791210175
+            ],
+            [
+              0.5153779983520508,
+              0.14141997694969177
+            ],
+            [
+              0.46548348665237427,
+              0.1694563329219818
+            ],
+            [
+              0.451898992061615,
+              0.19523575901985168
+            ],
+            [
+              0.5264692306518555,
+              0.1952921748161316
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.14555555555555555,
+        "y": 0.0,
+        "width": 0.6966666666666667,
+        "height": 0.5225
+      },
+      "input_size": [
+        900,
+        1600
+      ],
+      "region_size": [
+        627,
+        836
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 688.04,
+      "cleanup_ms": 4.228,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.10153503715991974,
+            "background_opacity": 0.16068124771118164,
+            "foreground_opacity_loss": 0.0016549117863178253,
+            "opaque_background_fraction": 3.0266038478223586e-05
+          },
+          "after": {
+            "alpha_mae": 0.008196498267352581,
+            "background_opacity": 0.001172042335383594,
+            "foreground_opacity_loss": 0.002640049671754241,
+            "opaque_background_fraction": 3.0266038478223586e-05
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.006472951732575893,
+            "background_opacity": 0.0006812430219724774,
+            "foreground_opacity_loss": 0.004234214313328266,
+            "opaque_background_fraction": 1.5133019239111793e-05
+          },
+          "after": {
+            "alpha_mae": 0.006443476304411888,
+            "background_opacity": 0.0006246080156415701,
+            "foreground_opacity_loss": 0.004234214313328266,
+            "opaque_background_fraction": 1.5133019239111793e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1266615390777588,
+            "background_opacity": 7.3271512519568205e-06,
+            "foreground_opacity_loss": 0.31083944439888,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010507860220968723,
+            "background_opacity": 0.00017663602193351835,
+            "foreground_opacity_loss": 0.009471163153648376,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 235.14521482287267,
+            "sy": 28.785559866163588,
+            "sw": 418.14509207609456,
+            "sh": 557.5267894347927,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 235.14521482287267,
+            "sy": 28.785559866163588,
+            "sw": 418.14509207609456,
+            "sh": 557.5267894347927,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-492",
+      "row_index": 492,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=492",
+      "image_sha256": "3d89656f31182d47912f55a6d466720313b006b3e8b837daf8b3eb934c46cb1b",
+      "image_size": [
+        1080,
+        1399
+      ],
+      "mask_sha256": "53ad54f5eb8d75e9113c42e00412827551c0df725f2825c6c9758924e9e84991",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.42933863401412964,
+          "y": 0.07258107513189316,
+          "width": 0.20913153886795044,
+          "height": 0.2224443033337593,
+          "confidence": 0.9332100749015808,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.4799550473690033,
+              0.16038574278354645
+            ],
+            [
+              0.5812626481056213,
+              0.16369402408599854
+            ],
+            [
+              0.5281094312667847,
+              0.20857545733451843
+            ],
+            [
+              0.48301631212234497,
+              0.23620745539665222
+            ],
+            [
+              0.5726900100708008,
+              0.23960451781749725
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.15555555555555556,
+        "y": 0.0,
+        "width": 0.7564814814814815,
+        "height": 0.7784131522516083
+      },
+      "input_size": [
+        1080,
+        1399
+      ],
+      "region_size": [
+        817,
+        1089
+      ],
+      "mask_size": [
+        480,
+        672
+      ],
+      "inference_ms": 612.78,
+      "cleanup_ms": 4.14,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.0880494937300682,
+            "background_opacity": 0.16052193939685822,
+            "foreground_opacity_loss": 3.2647429179633036e-05,
+            "opaque_background_fraction": 2.9632263608617062e-05
+          },
+          "after": {
+            "alpha_mae": 0.00369481579400599,
+            "background_opacity": 0.0009102718904614449,
+            "foreground_opacity_loss": 0.00010258081601932645,
+            "opaque_background_fraction": 2.9632263608617062e-05
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.002088962122797966,
+            "background_opacity": 0.000521946232765913,
+            "foreground_opacity_loss": 0.00017286291404161602,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.002068172674626112,
+            "background_opacity": 0.00048215760034509003,
+            "foreground_opacity_loss": 0.00017286291404161602,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.14345669746398926,
+            "background_opacity": 2.6169357170147123e-06,
+            "foreground_opacity_loss": 0.30683186650276184,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.002260127803310752,
+            "background_opacity": 0.00013460105401463807,
+            "foreground_opacity_loss": 0.000515865336637944,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 314.3656830505896,
+            "sy": -27.84129761780308,
+            "sw": 524.5021453467273,
+            "sh": 699.3361937956363,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 314.3656830505896,
+            "sy": -27.84129761780308,
+            "sw": 524.5021453467273,
+            "sh": 699.3361937956363,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-177",
+      "row_index": 177,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=177",
+      "image_sha256": "5c1f7e702cb6a46d58ec80e8bbc34c2d57faf9dbc953d2c9bab4cfc88041aaee",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "mask_sha256": "ff099ab1ff91f9bda080f0bf64e3319582206bc76ce23ef3dbba9aa661839cac",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.4549776613712311,
+          "y": 0.2604423463344574,
+          "width": 0.21987947821617126,
+          "height": 0.4809620678424835,
+          "confidence": 0.9224722981452942,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5458298325538635,
+              0.43329623341560364
+            ],
+            [
+              0.6357811689376831,
+              0.4415551424026489
+            ],
+            [
+              0.6069920659065247,
+              0.5357324481010437
+            ],
+            [
+              0.5445094704627991,
+              0.6103267073631287
+            ],
+            [
+              0.6158701777458191,
+              0.6207135319709778
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.235,
+        "y": 0.0,
+        "width": 0.659375,
+        "height": 1.0
+      },
+      "input_size": [
+        1600,
+        900
+      ],
+      "region_size": [
+        1055,
+        900
+      ],
+      "mask_size": [
+        576,
+        512
+      ],
+      "inference_ms": 523.23,
+      "cleanup_ms": 3.789,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.09651214629411697,
+            "background_opacity": 0.16098462045192719,
+            "foreground_opacity_loss": 0.0014661748427897692,
+            "opaque_background_fraction": 0.00015765697480520267
+          },
+          "after": {
+            "alpha_mae": 0.00642927922308445,
+            "background_opacity": 0.0015896032564342022,
+            "foreground_opacity_loss": 0.0026500083040446043,
+            "opaque_background_fraction": 0.00016978443440560288
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.005829148925840855,
+            "background_opacity": 0.0009846071479842067,
+            "foreground_opacity_loss": 0.0044266171753406525,
+            "opaque_background_fraction": 6.063729800200103e-06
+          },
+          "after": {
+            "alpha_mae": 0.005783034022897482,
+            "background_opacity": 0.0008865412673912942,
+            "foreground_opacity_loss": 0.0044266171753406525,
+            "opaque_background_fraction": 6.063729800200103e-06
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1343449205160141,
+            "background_opacity": 1.3421055882645305e-05,
+            "foreground_opacity_loss": 0.31105080246925354,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.01065788883715868,
+            "background_opacity": 0.00026122815324924886,
+            "foreground_opacity_loss": 0.010268219746649265,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 569.4583658497412,
+            "sy": 8.241400220891933,
+            "sw": 668.8189498343311,
+            "sh": 891.7585997791081,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 569.4583658497412,
+            "sy": 8.241400220891933,
+            "sw": 668.8189498343311,
+            "sh": 891.7585997791081,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-473",
+      "row_index": 473,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=473",
+      "image_sha256": "dfbc1e57b3bb8304d3578d4138ccb227e391bdb48d9a4b52964f4daf4e8c1f17",
+      "image_size": [
+        1080,
+        1411
+      ],
+      "mask_sha256": "85dfe56d59b0986f14cbda9bc3048206dc0def79c5a6d78ad1b2e10ae82cb21f",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.3605254888534546,
+          "y": 0.11261327564716339,
+          "width": 0.1646261215209961,
+          "height": 0.1558484584093094,
+          "confidence": 0.9436416625976562,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.3997650444507599,
+              0.1720595359802246
+            ],
+            [
+              0.4772373139858246,
+              0.17044343054294586
+            ],
+            [
+              0.4385603070259094,
+              0.20117244124412537
+            ],
+            [
+              0.4109339714050293,
+              0.2246665507555008
+            ],
+            [
+              0.4788173735141754,
+              0.22524642944335938
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.175,
+        "y": 0.0,
+        "width": 0.5351851851851852,
+        "height": 0.5457122608079377
+      },
+      "input_size": [
+        1080,
+        1411
+      ],
+      "region_size": [
+        578,
+        770
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 614.91,
+      "cleanup_ms": 4.246,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.07561055570840836,
+            "background_opacity": 0.16094638407230377,
+            "foreground_opacity_loss": 0.00010315317922504619,
+            "opaque_background_fraction": 0.00040849116978254656
+          },
+          "after": {
+            "alpha_mae": 0.005930575076490641,
+            "background_opacity": 0.0015966246137395501,
+            "foreground_opacity_loss": 0.00020922576368320733,
+            "opaque_background_fraction": 0.00044253210059775873
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.0038023132365196943,
+            "background_opacity": 0.0009463912574574351,
+            "foreground_opacity_loss": 0.0003500439634080976,
+            "opaque_background_fraction": 0.0001429719094238913
+          },
+          "after": {
+            "alpha_mae": 0.003797822864726186,
+            "background_opacity": 0.0009314933558925986,
+            "foreground_opacity_loss": 0.0003500439634080976,
+            "opaque_background_fraction": 0.0001429719094238913
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1708555966615677,
+            "background_opacity": 7.484733941964805e-05,
+            "foreground_opacity_loss": 0.30701231956481934,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.004117203410714865,
+            "background_opacity": 0.0002988751803059131,
+            "foreground_opacity_loss": 0.0009002457954920828,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 273.83414644265105,
+            "sy": 35.354608357781146,
+            "sw": 408.8629742808356,
+            "sh": 545.1506323744475,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 273.83414644265105,
+            "sy": 35.354608357781146,
+            "sw": 408.8629742808356,
+            "sh": 545.1506323744475,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-121",
+      "row_index": 121,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=121",
+      "image_sha256": "a4b0cb81fdbe5d5e4ad67249b60d5f7a08e6e1b29c15f6aa05e7c55d49bc60b4",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "3ef91d6843c10eabd15ff92240d0a30db92979b00ecf2472fccaf1eeb53fa335",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.42917948961257935,
+          "y": 0.2091791182756424,
+          "width": 0.2226235270500183,
+          "height": 0.4992162436246872,
+          "confidence": 0.9357172250747681,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.4654076099395752,
+              0.41431865096092224
+            ],
+            [
+              0.5650480389595032,
+              0.4125017821788788
+            ],
+            [
+              0.5046736598014832,
+              0.5116153955459595
+            ],
+            [
+              0.4818050265312195,
+              0.5927557945251465
+            ],
+            [
+              0.5603271722793579,
+              0.590750515460968
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.20625,
+        "y": 0.0,
+        "width": 0.668125,
+        "height": 1.0
+      },
+      "input_size": [
+        1600,
+        1000
+      ],
+      "region_size": [
+        1069,
+        1000
+      ],
+      "mask_size": [
+        544,
+        512
+      ],
+      "inference_ms": 501.56,
+      "cleanup_ms": 8.657,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.056795910000801086,
+            "background_opacity": 0.16026762127876282,
+            "foreground_opacity_loss": 0.00011549122427823022,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.009574084542691708,
+            "background_opacity": 9.982113260775805e-05,
+            "foreground_opacity_loss": 0.00045649133971892297,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.010779554024338722,
+            "background_opacity": 0.00026763309142552316,
+            "foreground_opacity_loss": 0.0008402563980780542,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.011047703213989735,
+            "background_opacity": 5.181134838494472e-05,
+            "foreground_opacity_loss": 0.0008402563980780542,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.20574480295181274,
+            "background_opacity": 0.0,
+            "foreground_opacity_loss": 0.30750688910484314,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.021155601367354393,
+            "background_opacity": 1.4157178156892769e-05,
+            "foreground_opacity_loss": 0.002429541666060686,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 477.72897958427995,
+            "sy": -32.15206782896439,
+            "sw": 774.1140508717233,
+            "sh": 1032.1520678289644,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 477.72897958427995,
+            "sy": -32.15206782896439,
+            "sw": 774.1140508717233,
+            "sh": 1032.1520678289644,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-195",
+      "row_index": 195,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=195",
+      "image_sha256": "2031a4fb96516c4015af3a8a2dd9252aac09489e66e24b5aa25a3620e09667a5",
+      "image_size": [
+        1080,
+        1621
+      ],
+      "mask_sha256": "c90c8d9742a036b3c3f2c02a4a5ad00a9786f7ce8b06fa05f25878c17c83f0fe",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.3236139416694641,
+          "y": 0.10460346937179565,
+          "width": 0.2329232096672058,
+          "height": 0.1949087381362915,
+          "confidence": 0.9260532855987549,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.3691655695438385,
+              0.1831122487783432
+            ],
+            [
+              0.4605623781681061,
+              0.17622539401054382
+            ],
+            [
+              0.40434449911117554,
+              0.223199725151062
+            ],
+            [
+              0.39558470249176025,
+              0.25355586409568787
+            ],
+            [
+              0.4715481996536255,
+              0.24620214104652405
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.05628517823639775,
+        "y": 0.0,
+        "width": 0.7673545966228893,
+        "height": 0.681875
+      },
+      "input_size": [
+        1066,
+        1600
+      ],
+      "region_size": [
+        818,
+        1091
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 602.0,
+      "cleanup_ms": 4.105,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.0896308571100235,
+            "background_opacity": 0.16154707968235016,
+            "foreground_opacity_loss": 0.0019976040348410606,
+            "opaque_background_fraction": 8.068559704460185e-05
+          },
+          "after": {
+            "alpha_mae": 0.008733358234167099,
+            "background_opacity": 0.0024299975484609604,
+            "foreground_opacity_loss": 0.0030015413649380207,
+            "opaque_background_fraction": 4.61060554540582e-05
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.006122776307165623,
+            "background_opacity": 0.0015470843063667417,
+            "foreground_opacity_loss": 0.0039005568251013756,
+            "opaque_background_fraction": 2.8816284658786373e-05
+          },
+          "after": {
+            "alpha_mae": 0.005996010731905699,
+            "background_opacity": 0.001295263646170497,
+            "foreground_opacity_loss": 0.0039006066508591175,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.14995449781417847,
+            "background_opacity": 1.2638484804483596e-05,
+            "foreground_opacity_loss": 0.3099971115589142,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.009258334524929523,
+            "background_opacity": 0.00036267933319322765,
+            "foreground_opacity_loss": 0.007337126415222883,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 166.86991744728925,
+            "sy": -28.5615013970273,
+            "sw": 604.5012302499604,
+            "sh": 806.0016403332805,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 166.86991744728925,
+            "sy": -28.5615013970273,
+            "sw": 604.5012302499604,
+            "sh": 806.0016403332805,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-343",
+      "row_index": 343,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=343",
+      "image_sha256": "465a49e8375e7e3b1eef8043b093758c69f988f5305994bfa5a6704f88fe47b3",
+      "image_size": [
+        1622,
+        1080
+      ],
+      "mask_sha256": "2581e734a1c0f7aa6912b79b00445b8e5a750b8f088d815447f1c07d23001a60",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.2780528664588928,
+          "y": 0.24481958150863647,
+          "width": 0.2627284526824951,
+          "height": 0.5034366250038147,
+          "confidence": 0.9345166683197021,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.3808046579360962,
+              0.439190149307251
+            ],
+            [
+              0.4909573495388031,
+              0.4554663598537445
+            ],
+            [
+              0.4471008777618408,
+              0.5501143336296082
+            ],
+            [
+              0.3718029856681824,
+              0.6045724153518677
+            ],
+            [
+              0.4704691469669342,
+              0.6215156316757202
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.015625,
+        "y": 0.0,
+        "width": 0.788125,
+        "height": 1.0
+      },
+      "input_size": [
+        1600,
+        1065
+      ],
+      "region_size": [
+        1261,
+        1065
+      ],
+      "mask_size": [
+        576,
+        512
+      ],
+      "inference_ms": 512.52,
+      "cleanup_ms": 4.083,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.09544629603624344,
+            "background_opacity": 0.16090138256549835,
+            "foreground_opacity_loss": 0.00021177860617171973,
+            "opaque_background_fraction": 0.00020717971898896297
+          },
+          "after": {
+            "alpha_mae": 0.007849141024053097,
+            "background_opacity": 0.0014829046558588743,
+            "foreground_opacity_loss": 0.0014914886560291052,
+            "opaque_background_fraction": 0.00021345789229165881
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.00524245435371995,
+            "background_opacity": 0.0009013733942992985,
+            "foreground_opacity_loss": 0.002806565258651972,
+            "opaque_background_fraction": 6.905990632965433e-05
+          },
+          "after": {
+            "alpha_mae": 0.00520668551325798,
+            "background_opacity": 0.0008198063587769866,
+            "foreground_opacity_loss": 0.002806565258651972,
+            "opaque_background_fraction": 6.905990632965433e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1368272751569748,
+            "background_opacity": 3.262680911575444e-05,
+            "foreground_opacity_loss": 0.3094732463359833,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010266461409628391,
+            "background_opacity": 0.00024369893071707338,
+            "foreground_opacity_loss": 0.00835072249174118,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 255.92175058119903,
+            "sy": 0.6117389359316974,
+            "sw": 798.2911957980511,
+            "sh": 1064.3882610640683,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 255.92175058119903,
+            "sy": 0.6117389359316974,
+            "sw": 798.2911957980511,
+            "sh": 1064.3882610640683,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-417",
+      "row_index": 417,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=417",
+      "image_sha256": "31fd11cf763ca4376b0adc4e569ab7d61f71db8e8428ee4c12bcf0e0e5a7e0f5",
+      "image_size": [
+        1080,
+        1447
+      ],
+      "mask_sha256": "8fe68d2b2b873ca9c0227fcba635c8ed1f5073e5aa841631e8b83fc9ed02b75c",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.34178006649017334,
+          "y": 0.15444055199623108,
+          "width": 0.36831849813461304,
+          "height": 0.3688596189022064,
+          "confidence": 0.9358455538749695,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5228801965713501,
+              0.31671279668807983
+            ],
+            [
+              0.6619862914085388,
+              0.315554678440094
+            ],
+            [
+              0.6425427198410034,
+              0.3965108096599579
+            ],
+            [
+              0.52385413646698,
+              0.44284096360206604
+            ],
+            [
+              0.6382278203964233,
+              0.44335731863975525
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1447
+      ],
+      "region_size": [
+        1080,
+        1447
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 603.51,
+      "cleanup_ms": 7.417,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.040465012192726135,
+            "background_opacity": 0.16293416917324066,
+            "foreground_opacity_loss": 0.0005099315894767642,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.016113005578517914,
+            "background_opacity": 0.004686059430241585,
+            "foreground_opacity_loss": 0.001905128825455904,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.011407474987208843,
+            "background_opacity": 0.0029341892804950476,
+            "foreground_opacity_loss": 0.0034862777683883905,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.011374764144420624,
+            "background_opacity": 0.002451459178701043,
+            "foreground_opacity_loss": 0.0034862777683883905,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.25726261734962463,
+            "background_opacity": 0.0,
+            "foreground_opacity_loss": 0.31015294790267944,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.02162952721118927,
+            "background_opacity": 0.0006740793469361961,
+            "foreground_opacity_loss": 0.009721984155476093,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 46.33354183444146,
+            "sy": -119.20859657559083,
+            "sw": 1043.3618379352736,
+            "sh": 1391.1491172470314,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 46.33354183444146,
+            "sy": -119.20859657559083,
+            "sw": 1043.3618379352736,
+            "sh": 1391.1491172470314,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-213",
+      "row_index": 213,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=213",
+      "image_sha256": "ea2e571ef816dbe9a5df987c4ab5b45b7868d295d4c8f2cf12c697ffb49467b9",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "mask_sha256": "483d5011fbecc8e1c982f58e70c00b683f3d42a10039ded83b14542e5c814e8d",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.4951843321323395,
+          "y": 0.17778311669826508,
+          "width": 0.15126624703407288,
+          "height": 0.33638496696949005,
+          "confidence": 0.9252512454986572,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5240370035171509,
+              0.3044336438179016
+            ],
+            [
+              0.5955005884170532,
+              0.3320358395576477
+            ],
+            [
+              0.5390186309814453,
+              0.3766530752182007
+            ],
+            [
+              0.5121443271636963,
+              0.4188094139099121
+            ],
+            [
+              0.5723093152046204,
+              0.44350361824035645
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.34375,
+        "y": 0.0,
+        "width": 0.45375,
+        "height": 1.0
+      },
+      "input_size": [
+        1600,
+        900
+      ],
+      "region_size": [
+        726,
+        900
+      ],
+      "mask_size": [
+        512,
+        608
+      ],
+      "inference_ms": 543.74,
+      "cleanup_ms": 4.763,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.07358457893133163,
+            "background_opacity": 0.16021136939525604,
+            "foreground_opacity_loss": 0.0016720674466341734,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.005447668023407459,
+            "background_opacity": 0.0003778877726290375,
+            "foreground_opacity_loss": 0.0023076499346643686,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.00546888867393136,
+            "background_opacity": 0.00021135118731763214,
+            "foreground_opacity_loss": 0.0027688192203640938,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.005471962038427591,
+            "background_opacity": 0.00020437499915715307,
+            "foreground_opacity_loss": 0.0027704250533133745,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1763537973165512,
+            "background_opacity": 1.736559056553233e-07,
+            "foreground_opacity_loss": 0.3089120388031006,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010086382739245892,
+            "background_opacity": 5.8158489991910756e-05,
+            "foreground_opacity_loss": 0.0044665466994047165,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 612.6067983672808,
+            "sy": -42.42662422751113,
+            "sw": 601.4022613434414,
+            "sh": 801.8696817912552,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 612.6067983672808,
+            "sy": -42.42662422751113,
+            "sw": 601.4022613434414,
+            "sh": 801.8696817912552,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-324",
+      "row_index": 324,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=324",
+      "image_sha256": "958d4939823aee7df3cf1b18d0ba5be7823a1b48233cf4348a1656292a40b4f9",
+      "image_size": [
+        1080,
+        1619
+      ],
+      "mask_sha256": "03291b07e4b2a3b29f798609d88acbda5262a571d2f2395278c8dff31b83d4a8",
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.3187022805213928,
+          "y": 0.1877523958683014,
+          "width": 0.185691237449646,
+          "height": 0.15012693405151367,
+          "confidence": 0.9345430731773376,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.3746037483215332,
+              0.2389242947101593
+            ],
+            [
+              0.4537467658519745,
+              0.24169401824474335
+            ],
+            [
+              0.4111179709434509,
+              0.2671815752983093
+            ],
+            [
+              0.37209415435791016,
+              0.28926733136177063
+            ],
+            [
+              0.43936145305633545,
+              0.29505664110183716
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.1162136832239925,
+        "y": 0.0675,
+        "width": 0.5913776944704779,
+        "height": 0.525625
+      },
+      "input_size": [
+        1067,
+        1600
+      ],
+      "region_size": [
+        631,
+        841
+      ],
+      "mask_size": [
+        512,
+        672
+      ],
+      "inference_ms": 606.22,
+      "cleanup_ms": 4.382,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.07673350721597672,
+            "background_opacity": 0.16019248962402344,
+            "foreground_opacity_loss": 0.00839253794401884,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.01284350547939539,
+            "background_opacity": 0.0002096064854413271,
+            "foreground_opacity_loss": 0.010244226083159447,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.013360134325921535,
+            "background_opacity": 0.00019250177138019353,
+            "foreground_opacity_loss": 0.011258430778980255,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.013478509150445461,
+            "background_opacity": 0.00010650168405845761,
+            "foreground_opacity_loss": 0.011258430778980255,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1863815188407898,
+            "background_opacity": 0.0,
+            "foreground_opacity_loss": 0.3152998983860016,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.02206851728260517,
+            "background_opacity": 2.855678576452192e-05,
+            "foreground_opacity_loss": 0.014156395569443703,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 248.60954084304663,
+            "sy": 225.89671096216676,
+            "sw": 381.0241353053313,
+            "sh": 508.0321804071084,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 248.60954084304663,
+            "sy": 225.89671096216676,
+            "sw": 381.0241353053313,
+            "sh": 508.0321804071084,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-472",
+      "row_index": 472,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=472",
+      "image_sha256": "5d55d5f4206f35d88af59b118667293217d81677b418cdab9b7f9a6c78ec0ec4",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "85dce286d50a315a57bc78a3cc9807867b4658c0c0fe9b9c60691940174516a0",
+      "mask_size": [
+        512,
+        576
+      ],
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.3744812607765198,
+          "y": 0.21455726027488708,
+          "width": 0.1787087321281433,
+          "height": 0.34619197249412537,
+          "confidence": 0.9044809341430664,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.4518353343009949,
+              0.3598062992095947
+            ],
+            [
+              0.5230699181556702,
+              0.3843661844730377
+            ],
+            [
+              0.4970615804195404,
+              0.46763870120048523
+            ],
+            [
+              0.4429554343223572,
+              0.4864366948604584
+            ],
+            [
+              0.4972178041934967,
+              0.5057576298713684
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.195625,
+        "y": 0.0,
+        "width": 0.53625,
+        "height": 1.0
+      },
+      "input_size": [
+        1600,
+        1000
+      ],
+      "region_size": [
+        858,
+        1000
+      ],
+      "inference_ms": 511.82,
+      "cleanup_ms": 4.04,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.09104225039482117,
+            "background_opacity": 0.1602981984615326,
+            "foreground_opacity_loss": 0.0002917343517765403,
+            "opaque_background_fraction": 0.00020671899371699543
+          },
+          "after": {
+            "alpha_mae": 0.0033208485692739487,
+            "background_opacity": 0.0004650928021874279,
+            "foreground_opacity_loss": 0.0006071231910027564,
+            "opaque_background_fraction": 0.00021298320564781348
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.0028623626567423344,
+            "background_opacity": 0.0003026474441867322,
+            "foreground_opacity_loss": 0.000995578127913177,
+            "opaque_background_fraction": 0.00012528423861636086
+          },
+          "after": {
+            "alpha_mae": 0.0028635195922106504,
+            "background_opacity": 0.0003007804916705936,
+            "foreground_opacity_loss": 0.000995578127913177,
+            "opaque_background_fraction": 0.00012528423861636086
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1388896256685257,
+            "background_opacity": 7.240938430186361e-05,
+            "foreground_opacity_loss": 0.3076309859752655,
+            "opaque_background_fraction": 7.517054316981653e-05
+          },
+          "after": {
+            "alpha_mae": 0.006707729771733284,
+            "background_opacity": 0.00013190764002501965,
+            "foreground_opacity_loss": 0.0024726656265556812,
+            "opaque_background_fraction": 7.517054316981653e-05
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 424.56541710797677,
+            "sy": 27.228968562903688,
+            "sw": 635.143171673939,
+            "sh": 846.8575622319187,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 424.56541710797677,
+            "sy": 27.228968562903688,
+            "sw": 635.143171673939,
+            "sh": 846.8575622319187,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-231",
+      "row_index": 231,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=231",
+      "image_sha256": "c01b89287b37ac3ee733691947a09cf7f9995f5690122123e08122ef25f56216",
+      "image_size": [
+        1080,
+        1452
+      ],
+      "mask_sha256": "ca42c2e443819bd214bdb3756b3d063c7caf48e7cfdaa1879fe014f9fd9fbed0",
+      "mask_size": [
+        512,
+        672
+      ],
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.44072261452674866,
+          "y": 0.1059860810637474,
+          "width": 0.34912922978401184,
+          "height": 0.36977023631334305,
+          "confidence": 0.9216042757034302,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.5741389393806458,
+              0.2608402669429779
+            ],
+            [
+              0.7266820669174194,
+              0.2345418632030487
+            ],
+            [
+              0.7041440010070801,
+              0.32248979806900024
+            ],
+            [
+              0.6259726881980896,
+              0.38787418603897095
+            ],
+            [
+              0.757434070110321,
+              0.3655288815498352
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1452
+      ],
+      "region_size": [
+        1080,
+        1452
+      ],
+      "inference_ms": 592.57,
+      "cleanup_ms": 10.324,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.09135197848081589,
+            "background_opacity": 0.23915132880210876,
+            "foreground_opacity_loss": 0.0005934365326538682,
+            "opaque_background_fraction": 0.09160493827160494
+          },
+          "after": {
+            "alpha_mae": 0.044633783400058746,
+            "background_opacity": 0.09564362466335297,
+            "foreground_opacity_loss": 0.002169097773730755,
+            "opaque_background_fraction": 0.09188034188034189
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.04013470187783241,
+            "background_opacity": 0.09010621905326843,
+            "foreground_opacity_loss": 0.003966092597693205,
+            "opaque_background_fraction": 0.08745489078822412
+          },
+          "after": {
+            "alpha_mae": 0.04000948742032051,
+            "background_opacity": 0.08943876624107361,
+            "foreground_opacity_loss": 0.003966092597693205,
+            "opaque_background_fraction": 0.08745489078822412
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.22316426038742065,
+            "background_opacity": 0.056608688086271286,
+            "foreground_opacity_loss": 0.31063273549079895,
+            "opaque_background_fraction": 0.07914529914529915
+          },
+          "after": {
+            "alpha_mae": 0.0471021831035614,
+            "background_opacity": 0.07884197682142258,
+            "foreground_opacity_loss": 0.010975800454616547,
+            "opaque_background_fraction": 0.07972459639126306
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 200.12829488645957,
+            "sy": -89.36344081660093,
+            "sw": 928.7638257715907,
+            "sh": 1238.3517676954543,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 200.12829488645957,
+            "sy": -89.36344081660093,
+            "sw": 928.7638257715907,
+            "sh": 1238.3517676954543,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-453",
+      "row_index": 453,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=453",
+      "image_sha256": "e7a73d0d1e2f54f0c4ccff74f1f6628a51fad8ce538f011f6d6b60f0a0d5c52b",
+      "image_size": [
+        1080,
+        1361
+      ],
+      "mask_sha256": "c495e4f232131aa63b3429ee2d2ee4dd01383e528a28449d4d6b97103cfb8fa6",
+      "mask_size": [
+        512,
+        672
+      ],
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.37177568674087524,
+          "y": 0.14423221349716187,
+          "width": 0.2930825352668762,
+          "height": 0.37545347213745117,
+          "confidence": 0.9202203750610352,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.42862287163734436,
+              0.29899948835372925
+            ],
+            [
+              0.5662429332733154,
+              0.2927951216697693
+            ],
+            [
+              0.4816713035106659,
+              0.3741018772125244
+            ],
+            [
+              0.45068076252937317,
+              0.43295684456825256
+            ],
+            [
+              0.5640634298324585,
+              0.4278694689273834
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.04537037037037037,
+        "y": 0.0,
+        "width": 0.9453703703703704,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1361
+      ],
+      "region_size": [
+        1021,
+        1361
+      ],
+      "inference_ms": 600.69,
+      "cleanup_ms": 5.578,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.045540738850831985,
+            "background_opacity": 0.18412765860557556,
+            "foreground_opacity_loss": 0.0009207260445691645,
+            "opaque_background_fraction": 0.02740092543045107
+          },
+          "after": {
+            "alpha_mae": 0.01424548588693142,
+            "background_opacity": 0.029079291969537735,
+            "foreground_opacity_loss": 0.0016050776466727257,
+            "opaque_background_fraction": 0.027416664043564482
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.015382341109216213,
+            "background_opacity": 0.028509292751550674,
+            "foreground_opacity_loss": 0.0026072352193295956,
+            "opaque_background_fraction": 0.027385186817337655
+          },
+          "after": {
+            "alpha_mae": 0.015422175638377666,
+            "background_opacity": 0.028331292793154716,
+            "foreground_opacity_loss": 0.0026072352193295956,
+            "opaque_background_fraction": 0.027385186817337655
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.24750596284866333,
+            "background_opacity": 0.018988726660609245,
+            "foreground_opacity_loss": 0.30921730399131775,
+            "opaque_background_fraction": 0.027385186817337655
+          },
+          "after": {
+            "alpha_mae": 0.024773964658379555,
+            "background_opacity": 0.027661938220262527,
+            "foreground_opacity_loss": 0.005913041066378355,
+            "opaque_background_fraction": 0.027385186817337655
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 76.93907536842232,
+            "sy": -103.88441724909637,
+            "sw": 965.6864707116722,
+            "sh": 1287.5819609488963,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 76.93907536842232,
+            "sy": -103.88441724909637,
+            "sw": 965.6864707116722,
+            "sh": 1287.5819609488963,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-490",
+      "row_index": 490,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=490",
+      "image_sha256": "9bb63dcfd935aea3c8c6cc6570c95a4658bb3cc75562f222188adb0269c95190",
+      "image_size": [
+        1080,
+        1368
+      ],
+      "mask_sha256": "8badc6d4e2034dad6c6ecc0224c450f73f141079e61b6b3b0641f80cf2a45ec3",
+      "mask_size": [
+        512,
+        640
+      ],
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.2758093476295471,
+          "y": 0.2102234810590744,
+          "width": 0.4338558316230774,
+          "height": 0.44271476566791534,
+          "confidence": 0.9519252181053162,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.3804146349430084,
+              0.3783973455429077
+            ],
+            [
+              0.575183629989624,
+              0.38431358337402344
+            ],
+            [
+              0.46759653091430664,
+              0.47193583846092224
+            ],
+            [
+              0.387633353471756,
+              0.5285001993179321
+            ],
+            [
+              0.5593288540840149,
+              0.5341878533363342
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.0,
+        "y": 0.0,
+        "width": 1.0,
+        "height": 1.0
+      },
+      "input_size": [
+        1080,
+        1368
+      ],
+      "region_size": [
+        1080,
+        1368
+      ],
+      "inference_ms": 570.31,
+      "cleanup_ms": 5.123,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.05461336299777031,
+            "background_opacity": 0.16144409775733948,
+            "foreground_opacity_loss": 8.221582538681105e-05,
+            "opaque_background_fraction": 0.00019766231370326934
+          },
+          "after": {
+            "alpha_mae": 0.014280734583735466,
+            "background_opacity": 0.0018209601985290647,
+            "foreground_opacity_loss": 0.0006248272256925702,
+            "opaque_background_fraction": 0.00021083980128348728
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.010194270871579647,
+            "background_opacity": 0.0014440978411585093,
+            "foreground_opacity_loss": 0.0011846902780234814,
+            "opaque_background_fraction": 1.3177487580217955e-05
+          },
+          "after": {
+            "alpha_mae": 0.010173973627388477,
+            "background_opacity": 0.0009979235474020243,
+            "foreground_opacity_loss": 0.0011846902780234814,
+            "opaque_background_fraction": 1.3177487580217955e-05
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.22520765662193298,
+            "background_opacity": 2.2654945496469736e-05,
+            "foreground_opacity_loss": 0.3078513443470001,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.016254689544439316,
+            "background_opacity": 0.00029127116431482136,
+            "foreground_opacity_loss": 0.0036334546748548746,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": -14.365779348126807,
+            "sy": -89.3920636386654,
+            "sw": 1093.044047728999,
+            "sh": 1457.3920636386654,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": -14.365779348126807,
+            "sy": -89.3920636386654,
+            "sw": 1093.044047728999,
+            "sh": 1457.3920636386654,
+            "faceAligned": true
+          }
+        }
+      }
+    },
+    {
+      "id": "p3m-np-027",
+      "row_index": 27,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=27",
+      "image_sha256": "33998d107a8f25e113feb5166e2f59b2f8784aca2c35b7609d0781e7358f3755",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "f07905bc64303d0a701201a5c2cb6d53f53ee1c84748b7a965fb2e218cd79a1f",
+      "mask_size": [
+        512,
+        672
+      ],
+      "status": "accepted",
+      "code": null,
+      "faces": [
+        {
+          "x": 0.6422371864318848,
+          "y": 0.24657711386680603,
+          "width": 0.08189088106155396,
+          "height": 0.15963774919509888,
+          "confidence": 0.9070484042167664,
+          "clipped": false,
+          "landmarks": [
+            [
+              0.6868948340415955,
+              0.3102381229400635
+            ],
+            [
+              0.710141122341156,
+              0.3125835061073303
+            ],
+            [
+              0.7066383361816406,
+              0.34348157048225403
+            ],
+            [
+              0.6845384240150452,
+              0.36742836236953735
+            ],
+            [
+              0.7010029554367065,
+              0.36909306049346924
+            ]
+          ]
+        }
+      ],
+      "region": {
+        "x": 0.5525,
+        "y": 0.119,
+        "width": 0.261875,
+        "height": 0.559
+      },
+      "input_size": [
+        1600,
+        1000
+      ],
+      "region_size": [
+        419,
+        559
+      ],
+      "inference_ms": 601.2,
+      "cleanup_ms": 9.331,
+      "metrics": {
+        "12": {
+          "before": {
+            "alpha_mae": 0.09259503334760666,
+            "background_opacity": 0.16010412573814392,
+            "foreground_opacity_loss": 0.012536793015897274,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010844303295016289,
+            "background_opacity": 0.00017519472748972476,
+            "foreground_opacity_loss": 0.015229800716042519,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "36": {
+          "before": {
+            "alpha_mae": 0.010260038077831268,
+            "background_opacity": 0.00010412943811388686,
+            "foreground_opacity_loss": 0.017390094697475433,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.010267127305269241,
+            "background_opacity": 8.908601012080908e-05,
+            "foreground_opacity_loss": 0.017391329631209373,
+            "opaque_background_fraction": 0.0
+          }
+        },
+        "82": {
+          "before": {
+            "alpha_mae": 0.1532355397939682,
+            "background_opacity": 0.0,
+            "foreground_opacity_loss": 0.32051798701286316,
+            "opaque_background_fraction": 0.0
+          },
+          "after": {
+            "alpha_mae": 0.01599765755236149,
+            "background_opacity": 2.390145709796343e-05,
+            "foreground_opacity_loss": 0.02311358042061329,
+            "opaque_background_fraction": 0.0
+          }
+        }
+      },
+      "renders": {
+        "before": {
+          "status": "rendered",
+          "crop": {
+            "sx": 937.1743713579482,
+            "sy": 144.2729056676231,
+            "sw": 311.8356635646212,
+            "sh": 415.78088475282823,
+            "faceAligned": true
+          }
+        },
+        "after": {
+          "status": "rendered",
+          "crop": {
+            "sx": 937.1743713579482,
+            "sy": 144.2729056676231,
+            "sw": 311.8356635646212,
+            "sh": 415.78088475282823,
+            "faceAligned": true
+          }
+        }
+      }
+    }
+  ],
+  "baseline_ref": "efbaa31"
+}

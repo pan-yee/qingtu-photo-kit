@@ -1,0 +1,673 @@
+{
+  "dataset": "nobg/P3M-10K",
+  "split": "P3M_500_NP",
+  "selection": "Existing complete-head / opaque-inner-face input safety checks before quality assessment. First initial sample then deterministic (11+37*i)%500 order. No selection on quality metrics; input rejections retained in screened list.",
+  "project": "https://github.com/JizhiziLi/P3M",
+  "agreement": "https://jizhizili.github.io/files/p3m_dataset_agreement/P3M-10k_Dataset_Release_Agreement.pdf",
+  "screened": [
+    {
+      "row_index": 5,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 35,
+      "code": "selected"
+    },
+    {
+      "row_index": 65,
+      "code": "selected"
+    },
+    {
+      "row_index": 95,
+      "code": "selected"
+    },
+    {
+      "row_index": 110,
+      "code": "selected"
+    },
+    {
+      "row_index": 140,
+      "code": "selected"
+    },
+    {
+      "row_index": 185,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 215,
+      "code": "selected"
+    },
+    {
+      "row_index": 230,
+      "code": "selected"
+    },
+    {
+      "row_index": 260,
+      "code": "selected"
+    },
+    {
+      "row_index": 290,
+      "code": "selected"
+    },
+    {
+      "row_index": 380,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 410,
+      "code": "selected"
+    },
+    {
+      "row_index": 470,
+      "code": "selected"
+    },
+    {
+      "row_index": 11,
+      "code": "selected"
+    },
+    {
+      "row_index": 85,
+      "code": "selected"
+    },
+    {
+      "row_index": 122,
+      "code": "selected"
+    },
+    {
+      "row_index": 233,
+      "code": "selected"
+    },
+    {
+      "row_index": 270,
+      "code": "selected"
+    },
+    {
+      "row_index": 307,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 492,
+      "code": "selected"
+    },
+    {
+      "row_index": 177,
+      "code": "selected"
+    },
+    {
+      "row_index": 473,
+      "code": "selected"
+    },
+    {
+      "row_index": 84,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 121,
+      "code": "selected"
+    },
+    {
+      "row_index": 195,
+      "code": "selected"
+    },
+    {
+      "row_index": 343,
+      "code": "selected"
+    },
+    {
+      "row_index": 417,
+      "code": "selected"
+    },
+    {
+      "row_index": 213,
+      "code": "selected"
+    },
+    {
+      "row_index": 324,
+      "code": "selected"
+    },
+    {
+      "row_index": 48,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 159,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 196,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 381,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 418,
+      "code": "MATTING_FACE_POSE"
+    },
+    {
+      "row_index": 455,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 29,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 66,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 214,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 251,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 288,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 325,
+      "code": "MATTING_FACE_POSE"
+    },
+    {
+      "row_index": 362,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 399,
+      "code": "MATTING_MULTIPLE_FACES"
+    },
+    {
+      "row_index": 436,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 10,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 47,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 158,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 232,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 269,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 306,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 454,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 491,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 28,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 102,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 139,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 176,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 250,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 287,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 398,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 435,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 472,
+      "code": "input_gate_pass"
+    },
+    {
+      "row_index": 9,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 46,
+      "code": "MATTING_MULTIPLE_FACES"
+    },
+    {
+      "row_index": 83,
+      "code": "MATTING_INCOMPLETE_HEAD"
+    },
+    {
+      "row_index": 157,
+      "code": "MATTING_FACE_POSE"
+    },
+    {
+      "row_index": 194,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 231,
+      "code": "input_gate_pass"
+    },
+    {
+      "row_index": 268,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 305,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 342,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 416,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 453,
+      "code": "input_gate_pass"
+    },
+    {
+      "row_index": 490,
+      "code": "input_gate_pass"
+    },
+    {
+      "row_index": 27,
+      "code": "input_gate_pass"
+    },
+    {
+      "row_index": 64,
+      "code": "MATTING_NO_FACE"
+    },
+    {
+      "row_index": 101,
+      "code": "input_gate_pass"
+    },
+    {
+      "row_index": 175,
+      "code": "MATTING_NO_FACE"
+    }
+  ],
+  "samples": [
+    {
+      "id": "p3m-np-035",
+      "row_index": 35,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=35",
+      "image_sha256": "868c6fe5ea0ec38af21cd6b28636cde8974df895ddb7b8772aa0addd0b9af38f",
+      "image_size": [
+        1080,
+        1484
+      ],
+      "mask_sha256": "88b8578ff815667bee9b1c19bd274848f095fb787887d44d7c40bd64f2ee0614"
+    },
+    {
+      "id": "p3m-np-065",
+      "row_index": 65,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=65",
+      "image_sha256": "32c868438a7c99ef96851cdc65287e10f109312c002c644e3d0b4afe91d15549",
+      "image_size": [
+        1080,
+        1430
+      ],
+      "mask_sha256": "eeaf99068e9a830967804e435bc9e711e3504a773e9f710f728ba22f680ec7f5"
+    },
+    {
+      "id": "p3m-np-095",
+      "row_index": 95,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=95",
+      "image_sha256": "e8563a31e398e3a11988c9e017eb72930ceb41c584d3ca5f3e34f0421d0fbe9c",
+      "image_size": [
+        1080,
+        1620
+      ],
+      "mask_sha256": "e278fddf8e6a9ad94e054bb59169d53c83a7e2ff2ae745faf87be0f00c2e949a"
+    },
+    {
+      "id": "p3m-np-110",
+      "row_index": 110,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=110",
+      "image_sha256": "679f70836be51fae9e2b0969e70c42fd58d09dc411d8b47fc66b0efa671d49ba",
+      "image_size": [
+        1080,
+        1627
+      ],
+      "mask_sha256": "8832ee0ae377c02530d450e9e4ca19b7b3f50e729333db05599837d794075ef3"
+    },
+    {
+      "id": "p3m-np-140",
+      "row_index": 140,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=140",
+      "image_sha256": "04f83d2187fbd0d3a3e24352c5d6e31e534408af5575d9f5c3aff687a4164d05",
+      "image_size": [
+        1080,
+        1622
+      ],
+      "mask_sha256": "f857a5457f6d4e71a1c3c161f6b47115c4b29c35cdd9fb9f0e394033d12038ea"
+    },
+    {
+      "id": "p3m-np-215",
+      "row_index": 215,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=215",
+      "image_sha256": "e70cf291e4e8ceaf837003035cc1aa76483379fdcfaa0f736cc93b6c9e725564",
+      "image_size": [
+        1080,
+        1514
+      ],
+      "mask_sha256": "7b0f7203a154cee7bf52377aa04606dfed5d33b0ad61c2425beb3ff71e51310c"
+    },
+    {
+      "id": "p3m-np-230",
+      "row_index": 230,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=230",
+      "image_sha256": "9b04ce396303628f4a7c9fa7a23ebeb0a22ad4c036316e86eeee6ace65b9371e",
+      "image_size": [
+        1622,
+        1080
+      ],
+      "mask_sha256": "092f5ff42808fe7317045128c1b99e3656509f3f6a9386ec10d06e8d8f946425"
+    },
+    {
+      "id": "p3m-np-260",
+      "row_index": 260,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=260",
+      "image_sha256": "cdd2d6b6cd897cecd80755afa6d0f654f3f9cbd40e4fe52c7adfc5c07d21bcc1",
+      "image_size": [
+        1080,
+        1384
+      ],
+      "mask_sha256": "49f605a48dc4fdd8297da04c4f996b98b2e2a8782168d23fad2bc538859f7cc8"
+    },
+    {
+      "id": "p3m-np-290",
+      "row_index": 290,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=290",
+      "image_sha256": "584744fdc3625aa4d821ab27e05709d14fd9f5b1dc4b5e5e47ca81344541d3a0",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "4d6961dced3972873e2ac0ad00f35f05edfd7654dd24da1946af3b389574d804"
+    },
+    {
+      "id": "p3m-np-410",
+      "row_index": 410,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=410",
+      "image_sha256": "280c59896db898835138a5ea81ffcaeb75bf7cbc5fae29004f07a145af2b33a5",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "49d81eaf5b4912138077f8bbe8eb3f0b146e4fed0143dd30b5542e5df1b4d12f"
+    },
+    {
+      "id": "p3m-np-470",
+      "row_index": 470,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=470",
+      "image_sha256": "adbd29e621cf2e12a61a15b8b6138054a617a48e7ef375bebf7eb5e89fabba39",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "39ee7edd62ba8f0696f99436a042108f9b9f4598e43bd94e68dff4521d4d757e"
+    },
+    {
+      "id": "p3m-np-011",
+      "row_index": 11,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=11",
+      "image_sha256": "6424b46083b9e8f399992bd7106e5b32de98c82d59a1d759bf952222f20e6426",
+      "image_size": [
+        1080,
+        1631
+      ],
+      "mask_sha256": "a6ae657a4e7fa8f77f9e8da101435c5cd03b855516142ec6a02961825e6eb821"
+    },
+    {
+      "id": "p3m-np-085",
+      "row_index": 85,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=85",
+      "image_sha256": "327e8334deea3c4878d656ad1b5d7263475e3263b7d2a1b808b3f916aca71cf2",
+      "image_size": [
+        1080,
+        1440
+      ],
+      "mask_sha256": "8b00ca9c2fdeba4b7989fdffe427115e78c98d12e5a6dc6aad64fadbefd74368"
+    },
+    {
+      "id": "p3m-np-122",
+      "row_index": 122,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=122",
+      "image_sha256": "9cbcb71d9b865cd120b2a701ba1eae6d0d8c9e21162d183702312a08b8f48479",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "mask_sha256": "11be1a038aeb025c46efdaf3fc80a746bd0f3509996e89e94b7abfb732865a70"
+    },
+    {
+      "id": "p3m-np-233",
+      "row_index": 233,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=233",
+      "image_sha256": "66a530e59720962ce46689e1047e9fcfdfa4e14b72ae81428bf94c811f73e04e",
+      "image_size": [
+        1080,
+        1547
+      ],
+      "mask_sha256": "e9b62fd76f5fb65474bf7403e13c01ac93644404c79b8aef0a18fefb30da3d9e"
+    },
+    {
+      "id": "p3m-np-270",
+      "row_index": 270,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=270",
+      "image_sha256": "8df484750dd71c55c9ad1d3a57e67153c1ea3876c586bbf847a25388355a24f3",
+      "image_size": [
+        1080,
+        1920
+      ],
+      "mask_sha256": "9768ca870020589521a4b030eae20afbca911560463ee1b668b073419d2269a5"
+    },
+    {
+      "id": "p3m-np-492",
+      "row_index": 492,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=492",
+      "image_sha256": "3d89656f31182d47912f55a6d466720313b006b3e8b837daf8b3eb934c46cb1b",
+      "image_size": [
+        1080,
+        1399
+      ],
+      "mask_sha256": "53ad54f5eb8d75e9113c42e00412827551c0df725f2825c6c9758924e9e84991"
+    },
+    {
+      "id": "p3m-np-177",
+      "row_index": 177,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=177",
+      "image_sha256": "5c1f7e702cb6a46d58ec80e8bbc34c2d57faf9dbc953d2c9bab4cfc88041aaee",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "mask_sha256": "ff099ab1ff91f9bda080f0bf64e3319582206bc76ce23ef3dbba9aa661839cac"
+    },
+    {
+      "id": "p3m-np-473",
+      "row_index": 473,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=473",
+      "image_sha256": "dfbc1e57b3bb8304d3578d4138ccb227e391bdb48d9a4b52964f4daf4e8c1f17",
+      "image_size": [
+        1080,
+        1411
+      ],
+      "mask_sha256": "85dfe56d59b0986f14cbda9bc3048206dc0def79c5a6d78ad1b2e10ae82cb21f"
+    },
+    {
+      "id": "p3m-np-121",
+      "row_index": 121,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=121",
+      "image_sha256": "a4b0cb81fdbe5d5e4ad67249b60d5f7a08e6e1b29c15f6aa05e7c55d49bc60b4",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "3ef91d6843c10eabd15ff92240d0a30db92979b00ecf2472fccaf1eeb53fa335"
+    },
+    {
+      "id": "p3m-np-195",
+      "row_index": 195,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=195",
+      "image_sha256": "2031a4fb96516c4015af3a8a2dd9252aac09489e66e24b5aa25a3620e09667a5",
+      "image_size": [
+        1080,
+        1621
+      ],
+      "mask_sha256": "c90c8d9742a036b3c3f2c02a4a5ad00a9786f7ce8b06fa05f25878c17c83f0fe"
+    },
+    {
+      "id": "p3m-np-343",
+      "row_index": 343,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=343",
+      "image_sha256": "465a49e8375e7e3b1eef8043b093758c69f988f5305994bfa5a6704f88fe47b3",
+      "image_size": [
+        1622,
+        1080
+      ],
+      "mask_sha256": "2581e734a1c0f7aa6912b79b00445b8e5a750b8f088d815447f1c07d23001a60"
+    },
+    {
+      "id": "p3m-np-417",
+      "row_index": 417,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=417",
+      "image_sha256": "31fd11cf763ca4376b0adc4e569ab7d61f71db8e8428ee4c12bcf0e0e5a7e0f5",
+      "image_size": [
+        1080,
+        1447
+      ],
+      "mask_sha256": "8fe68d2b2b873ca9c0227fcba635c8ed1f5073e5aa841631e8b83fc9ed02b75c"
+    },
+    {
+      "id": "p3m-np-213",
+      "row_index": 213,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=213",
+      "image_sha256": "ea2e571ef816dbe9a5df987c4ab5b45b7868d295d4c8f2cf12c697ffb49467b9",
+      "image_size": [
+        1920,
+        1080
+      ],
+      "mask_sha256": "483d5011fbecc8e1c982f58e70c00b683f3d42a10039ded83b14542e5c814e8d"
+    },
+    {
+      "id": "p3m-np-324",
+      "row_index": 324,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=324",
+      "image_sha256": "958d4939823aee7df3cf1b18d0ba5be7823a1b48233cf4348a1656292a40b4f9",
+      "image_size": [
+        1080,
+        1619
+      ],
+      "mask_sha256": "03291b07e4b2a3b29f798609d88acbda5262a571d2f2395278c8dff31b83d4a8"
+    },
+    {
+      "id": "p3m-np-472",
+      "row_index": 472,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=472",
+      "image_sha256": "5d55d5f4206f35d88af59b118667293217d81677b418cdab9b7f9a6c78ec0ec4",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "85dce286d50a315a57bc78a3cc9807867b4658c0c0fe9b9c60691940174516a0",
+      "mask_size": [
+        1728,
+        1080
+      ]
+    },
+    {
+      "id": "p3m-np-231",
+      "row_index": 231,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=231",
+      "image_sha256": "c01b89287b37ac3ee733691947a09cf7f9995f5690122123e08122ef25f56216",
+      "image_size": [
+        1080,
+        1452
+      ],
+      "mask_sha256": "ca42c2e443819bd214bdb3756b3d063c7caf48e7cfdaa1879fe014f9fd9fbed0",
+      "mask_size": [
+        1080,
+        1452
+      ]
+    },
+    {
+      "id": "p3m-np-453",
+      "row_index": 453,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=453",
+      "image_sha256": "e7a73d0d1e2f54f0c4ccff74f1f6628a51fad8ce538f011f6d6b60f0a0d5c52b",
+      "image_size": [
+        1080,
+        1361
+      ],
+      "mask_sha256": "c495e4f232131aa63b3429ee2d2ee4dd01383e528a28449d4d6b97103cfb8fa6",
+      "mask_size": [
+        1080,
+        1361
+      ]
+    },
+    {
+      "id": "p3m-np-490",
+      "row_index": 490,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=490",
+      "image_sha256": "9bb63dcfd935aea3c8c6cc6570c95a4658bb3cc75562f222188adb0269c95190",
+      "image_size": [
+        1080,
+        1368
+      ],
+      "mask_sha256": "8badc6d4e2034dad6c6ecc0224c450f73f141079e61b6b3b0641f80cf2a45ec3",
+      "mask_size": [
+        1080,
+        1368
+      ]
+    },
+    {
+      "id": "p3m-np-027",
+      "row_index": 27,
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=27",
+      "image_sha256": "33998d107a8f25e113feb5166e2f59b2f8784aca2c35b7609d0781e7358f3755",
+      "image_size": [
+        1728,
+        1080
+      ],
+      "mask_sha256": "f07905bc64303d0a701201a5c2cb6d53f53ee1c84748b7a965fb2e218cd79a1f",
+      "mask_size": [
+        1728,
+        1080
+      ]
+    }
+  ]
+}

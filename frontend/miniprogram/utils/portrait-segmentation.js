@@ -75,6 +75,9 @@ function applyPortraitMask(image, mask, options) {
   const feather = Number.isFinite(opts.featherRadius) ? opts.featherRadius : 3
   const midpoint = Math.max(0.2, Math.min(0.8, 0.5 + (tolerance - 36) / 150))
   const softness = Math.max(0, Math.min(0.3, feather * 0.04))
+  // Adjust uncertain edges, never add opacity to a cleared background or
+  // subtract it from an opaque face/clothing pixel. Neutral remains identity.
+  const edgeScale = Math.pow(2, (Math.max(12, Math.min(82, tolerance)) - 36) / 24)
   let removedPixels = 0
   for (let y = 0; y < image.height; y += 1) {
     for (let x = 0; x < image.width; x += 1) {
@@ -102,7 +105,8 @@ function applyPortraitMask(image, mask, options) {
             sample(values, maskWidth, maskHeight, mx, my - radius, 1, 0) +
             sample(values, maskWidth, maskHeight, mx, my + radius, 1, 0))
         }
-        alpha = Math.max(0, Math.min(1, matte + (36 - tolerance) / 150))
+        matte = Math.max(0, Math.min(1, matte))
+        alpha = matte / (matte + (1 - matte) * edgeScale)
       }
       const offset = (y * image.width + x) * 4 + 3
       output[offset] = Math.round(image.data[offset] * alpha)

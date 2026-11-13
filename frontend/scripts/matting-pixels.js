@@ -16,6 +16,7 @@ if (mode === 'frame') {
     validCrop: framing.validPortraitCrop(metadata.width, metadata.height, metadata.face, crop) }))
 } else if (mode === 'render') {
   const image = { width: 900, height: 1200, data: new Uint8ClampedArray(fs.readFileSync(metadata.imagePath)) }
-  const output = portrait.applyPortraitMask(image, mask, { edgeCleanup: true })
+  const renderer = metadata.rendererPath ? require(metadata.rendererPath) : portrait
+  const output = renderer.applyPortraitMask(image, mask, { edgeCleanup: true, ...(metadata.options || {}) })
   fs.writeFileSync(metadata.output, Buffer.from(output.data))
 } else throw new Error('Expected frame or render')

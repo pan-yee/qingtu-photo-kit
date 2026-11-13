@@ -11,7 +11,7 @@ RUN --mount=type=secret,id=proxy_ca --mount=type=bind,from=wheel_cache,target=/w
     else \
       pip install --no-cache-dir --timeout 30 --retries 2 --index-url ${PYTHON_PACKAGE_INDEX} -r requirements.txt; \
     fi
-COPY --chmod=644 server.py framing.py /app/
+COPY --chmod=644 server.py framing.py matte_cleanup.py /app/
 COPY --chmod=644 assets/face_detection_yunet_2023mar.onnx assets/LICENSE.YuNet /app/assets/
 USER 65534:65534
 CMD ["python", "server.py"]

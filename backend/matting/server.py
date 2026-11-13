@@ -10,6 +10,7 @@ import numpy as np
 import onnxruntime as ort
 from PIL import Image, ImageOps
 from framing import detect_faces, portrait_region, validate_face, validate_matte, PortraitInputError, FACE_DETECTOR
+from matte_cleanup import clean_matte
 
 Image.MAX_IMAGE_PIXELS = 24000000
 options = ort.SessionOptions()
@@ -42,6 +43,8 @@ def matte_image(raw):
     output = session.run(None, {session.get_inputs()[0].name: tensor})[0].squeeze()
     if not np.isfinite(output).all() or (output > .5).mean() < .005:
         raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
+    validate_matte(output, faces[0], region)
+    output = clean_matte(output, faces[0], region)
     validate_matte(output, faces[0], region)
     mask = Image.fromarray(np.rint(np.clip(output, 0, 1) * 255).astype(np.uint8))
     # Return inference-resolution matte; client interpolates continuously, without binarizing.

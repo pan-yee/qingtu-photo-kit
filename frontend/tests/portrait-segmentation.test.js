@@ -6,6 +6,31 @@ function tensor(mask) {
   return { activation_10: { type: 'float32', shape: [1, 1, 256, 256], data: mask.buffer } }
 }
 
+test('高清边缘范围全档位保持纯背景透明、脸和衣服不透明，不复活背景', function () {
+  const source = makeImage(7, 1, () => [120, 130, 140, 255])
+  const probabilities = [0, .001, .1, .5, .9, .999, 1]
+  const mask = { matting: true, width: 7, height: 1, data: new Float32Array(probabilities) }
+  for (const tolerance of [12, 24, 36, 60, 82]) {
+    const result = portrait.applyPortraitMask(source, mask, { tolerance, featherRadius: 3 })
+    const alpha = probabilities.map((_, i) => result.data[i * 4 + 3])
+    assert.strictEqual(alpha[0], 0)
+    assert.strictEqual(alpha[6], 255)
+    assert(alpha[1] <= 1, '低透明度背景不能变为整片半透明背景')
+    assert(alpha[5] >= 254, '近乎不透明衣物不能变透')
+    for (let i = 1; i < alpha.length; i++) assert(alpha[i] >= alpha[i - 1])
+    assert.deepStrictEqual(Array.from(result.data.slice(24, 27)), [120, 130, 140])
+  }
+})
+
+test('高清范围只连续调整边缘，默认保持原值，保留与清除方向正确', function () {
+  const source = makeImage(3, 1, () => [90, 80, 70, 255])
+  const mask = { matting: true, width: 3, height: 1, data: new Float32Array([.25, .5, .75]) }
+  const values = tolerance => portrait.applyPortraitMask(source, mask, { tolerance }).data
+  const keep = values(12), neutral = values(36), clean = values(82)
+  for (let i = 3; i < 12; i += 4) assert(keep[i] > neutral[i] && neutral[i] > clean[i])
+  assert.deepStrictEqual([neutral[3], neutral[7], neutral[11]], [64, 128, 191])
+})
+
 test('MODNet 默认设置不改变原始透明度，保留细发丝的连续层次', function () {
   const source = makeImage(4, 1, () => [90, 80, 70, 255])
   const mask = { matting: true, width: 4, height: 1, data: new Float32Array([0, .25, .75, 1]) }
