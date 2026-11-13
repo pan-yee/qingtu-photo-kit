@@ -9,7 +9,7 @@ def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--input',type=Path,required=True);p.add_argument('--worker',type=Path,required=True);p.add_argument('--name',required=True);p.add_argument('--node',default='node');a=p.parse_args()
  sys.path.insert(0,str(a.worker.resolve()));import server
  from framing import PortraitInputError
- rows=json.loads((a.input/'sources.json').read_text())['samples'];out=a.input/a.name;out.mkdir(exist_ok=True);records=[]
+ rows=json.loads((a.input/'sources.json').read_text(encoding='utf-8'))['samples'];out=a.input/a.name;out.mkdir(exist_ok=True);records=[]
  for row in rows:
   dest=out/row['id'];dest.mkdir(exist_ok=True);record={'id':row['id'],'source':row['source']};start=time.perf_counter()
   try:
@@ -17,7 +17,7 @@ def main():
    mask=np.asarray(Image.open(io.BytesIO(base64.b64decode(r['png']))),dtype=np.float32)/255;mask.tofile(dest/'mask.f32')
    request={'width':image.width,'height':image.height,'face':r['faces'][0],'region':r['region'],'maskPath':str(dest/'mask.f32'),'maskWidth':r['width'],'maskHeight':r['height'],'output':str(dest/'frame')}
    (dest/'frame-request.json').write_text(json.dumps(request));subprocess.run([a.node,str(ROOT/'frontend/scripts/matting-pixels.js'),'frame',str(dest/'frame-request.json')],check=True)
-   frame=json.loads((dest/'frame.json').read_text());crop=frame['crop']
+   frame=json.loads((dest/'frame.json').read_text(encoding='utf-8'));crop=frame['crop']
    if not frame['validCrop']:raise PortraitInputError('MATTING_INVALID_CROP')
    source=image.convert('RGBA').transform((900,1200),Image.Transform.AFFINE,(crop['sw']/900,0,crop['sx'],0,crop['sh']/1200,crop['sy']),Image.Resampling.BILINEAR);(dest/'source.rgba').write_bytes(source.tobytes())
    request={'maskPath':str(dest/'frame.f32'),'maskWidth':frame['width'],'maskHeight':frame['height'],'imagePath':str(dest/'source.rgba'),'output':str(dest/'result.rgba')}

@@ -1,0 +1,315 @@
+{
+  "dataset": "P3M_500_NP",
+  "selection": "先人工筛选37张室内或棚拍候选，再使用随机种子2026111303抽取30张；不按生成结果换样本",
+  "candidate_scenes": {
+    "254": "窗边建筑内部",
+    "153": "木墙及沙发",
+    "171": "室内墙面",
+    "196": "窗边逆光",
+    "166": "沙发",
+    "128": "室内墙面阴影",
+    "243": "白墙护墙板",
+    "54": "室内走廊",
+    "253": "暖色墙面",
+    "162": "窗框逆光",
+    "109": "沙发椅背",
+    "339": "布景家具",
+    "197": "粉色墙面",
+    "40": "室内窗边",
+    "224": "房间地毯",
+    "341": "浅色墙面",
+    "199": "黑色影棚",
+    "182": "室内家具",
+    "11": "楼梯及白砖墙",
+    "208": "书架室内",
+    "156": "展厅杂物",
+    "457": "白窗帘逆光",
+    "248": "房间走廊",
+    "276": "室内窗门逆光",
+    "376": "暖色房间",
+    "184": "室内门框",
+    "51": "浅色影棚",
+    "394": "墙面阴影",
+    "98": "灰色影棚",
+    "39": "粉色影棚",
+    "136": "深色影棚",
+    "222": "暗光影棚",
+    "318": "灰色影棚",
+    "203": "黄色影棚",
+    "195": "浅色影棚",
+    "311": "粉色墙面影棚",
+    "406": "深色影棚"
+  },
+  "samples": [
+    {
+      "id": "p3m-np-376",
+      "row_index": 376,
+      "scene": "暖色房间",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=376",
+      "image_sha256": "a564af3cb0ac4e73f9982258b768acfcdef55a6b4e810c82dee4295bad5d51ba",
+      "mask_sha256": "fb0fdfaad9e62fa14353054060c01df9bf64a9bee6d2447824af682c4314d119"
+    },
+    {
+      "id": "p3m-np-011",
+      "row_index": 11,
+      "scene": "楼梯及白砖墙",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=11",
+      "image_sha256": "6424b46083b9e8f399992bd7106e5b32de98c82d59a1d759bf952222f20e6426",
+      "mask_sha256": "a6ae657a4e7fa8f77f9e8da101435c5cd03b855516142ec6a02961825e6eb821"
+    },
+    {
+      "id": "p3m-np-406",
+      "row_index": 406,
+      "scene": "深色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=406",
+      "image_sha256": "27f6b432a44011bc43471b2cdee4e5d5f56a99e4e14b844c763e8e2aec21cebf",
+      "mask_sha256": "08457dc6b7f2dd62e210cc8b9a839a3eb1570301bda4eb1925663c64994109ce"
+    },
+    {
+      "id": "p3m-np-182",
+      "row_index": 182,
+      "scene": "室内家具",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=182",
+      "image_sha256": "c60f9b96e46e8a609e7762015eac727abe66098409f7e6405f521c3189ce07b0",
+      "mask_sha256": "bafceb5818e98db9f29a49c59a7651ebce05705fc6bd54cd11d378288371133d"
+    },
+    {
+      "id": "p3m-np-253",
+      "row_index": 253,
+      "scene": "暖色墙面",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=253",
+      "image_sha256": "8507cc1669ddcee51fcc9a7d15f59cf63daed4ba5891bb0630f88bdd0b3183d5",
+      "mask_sha256": "a17bfa6a58e116111d82aae65e988efa71022cd3b2f86617eaf23a04b0908ba4"
+    },
+    {
+      "id": "p3m-np-339",
+      "row_index": 339,
+      "scene": "布景家具",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=339",
+      "image_sha256": "d193c0b2d1f35c1dc698fac1594eea34b5a6aad020c50becb0dbc274df3e9c84",
+      "mask_sha256": "4f03149cccb66817d92298ca585f3c5d27cbe90a118ced37bd93dde651226029"
+    },
+    {
+      "id": "p3m-np-171",
+      "row_index": 171,
+      "scene": "室内墙面",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=171",
+      "image_sha256": "07cbd974381e863c9cd9de7ba99f65f6d65b3c8c9f728564fb69c2740b38892b",
+      "mask_sha256": "35ea4df48ac710f3b32eb9e792591d1663dcc310bcc0500ae773a1e0eaad5200"
+    },
+    {
+      "id": "p3m-np-276",
+      "row_index": 276,
+      "scene": "室内窗门逆光",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=276",
+      "image_sha256": "4b595f94a3c0eae633a573729302785d4d22c9e5f3160ba8079d2ed69c31af46",
+      "mask_sha256": "d551059dacb8a41090fbae3a3ff283e509035b310c93215cad255c74f05c9c66"
+    },
+    {
+      "id": "p3m-np-224",
+      "row_index": 224,
+      "scene": "房间地毯",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=224",
+      "image_sha256": "60b77f8e498537dd9eb77a959bd9f64a1212329891a0e7ea553f0b55c12800a9",
+      "mask_sha256": "8a13eae6cb8329bcb0e269e3f393200a96de017ab5dac42d356299ecc5eaf7d6"
+    },
+    {
+      "id": "p3m-np-054",
+      "row_index": 54,
+      "scene": "室内走廊",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=54",
+      "image_sha256": "5984b1e6ac0394fc4498bea912185299d35a79bf6dc477bd72a298fa8ba07247",
+      "mask_sha256": "d74aa1135a5093822c7c252a9b7b38556fe27a84c1aa8a824b024f575cbd949a"
+    },
+    {
+      "id": "p3m-np-222",
+      "row_index": 222,
+      "scene": "暗光影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=222",
+      "image_sha256": "97de596bcf8f02429e770e8010c6936ab679e3a27a8ed28ecbd2b5f15a3d22f5",
+      "mask_sha256": "8369779ad533db564493f8873ddc0dd87a369db72aba5a30d87878a1c03b289a"
+    },
+    {
+      "id": "p3m-np-098",
+      "row_index": 98,
+      "scene": "灰色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=98",
+      "image_sha256": "fda61b439dd94b31b512511f8e58e01854d8aa0a670b226a60e0a22fe9329290",
+      "mask_sha256": "6d9e19a566552305be7aa4ae27455665f0032f63df6b045a170d284502a20719"
+    },
+    {
+      "id": "p3m-np-197",
+      "row_index": 197,
+      "scene": "粉色墙面",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=197",
+      "image_sha256": "e4ccb5ae2a15d27951bd8059e33fde2001ae0594b49a512c8fd1121e94b4362d",
+      "mask_sha256": "f04e6f7182b1d4dcf8213038838ee26ca2b3156d353d5cd329f5435174053ecd"
+    },
+    {
+      "id": "p3m-np-195",
+      "row_index": 195,
+      "scene": "浅色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=195",
+      "image_sha256": "2031a4fb96516c4015af3a8a2dd9252aac09489e66e24b5aa25a3620e09667a5",
+      "mask_sha256": "c90c8d9742a036b3c3f2c02a4a5ad00a9786f7ce8b06fa05f25878c17c83f0fe"
+    },
+    {
+      "id": "p3m-np-199",
+      "row_index": 199,
+      "scene": "黑色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=199",
+      "image_sha256": "02cb6bee5110ed6722c468f716f2cc09db4913b153013d0da3ea8124f4ca3c2b",
+      "mask_sha256": "68ce9c8c85b003cace0d4630d9c0aaa61d2bb06011ac0d7ed61fd63caf3cd589"
+    },
+    {
+      "id": "p3m-np-166",
+      "row_index": 166,
+      "scene": "沙发",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=166",
+      "image_sha256": "1d6ebf0e77cccdb9e8fe41922edf101eb674e2818ff9a010175c41ae8c025996",
+      "mask_sha256": "4548557f6f1a093c2add03e1cca4febf9aa6434a42a698a08b6d60c670d6dd3e"
+    },
+    {
+      "id": "p3m-np-051",
+      "row_index": 51,
+      "scene": "浅色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=51",
+      "image_sha256": "7784d992050ec0c9831efd0a8de97e57f9f19700e004ad9932433ad97ebc6547",
+      "mask_sha256": "eea78f19c123dc94b70e4b0db4cfd4e8389a35b4deea2e7536c17f1148b765ec"
+    },
+    {
+      "id": "p3m-np-128",
+      "row_index": 128,
+      "scene": "室内墙面阴影",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=128",
+      "image_sha256": "9543ed02b766c2a952766c4aa16e09250435cfc124c4e4bcbcc27b34bdaa02fa",
+      "mask_sha256": "99fb85ec362f0eb2a2bf657b09239a97693402c3ba53d903665b1867661ba91b"
+    },
+    {
+      "id": "p3m-np-254",
+      "row_index": 254,
+      "scene": "窗边建筑内部",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=254",
+      "image_sha256": "f2163d6af5d7335f4437923d9dfa3ef5e908ffb72756403247a61d1efb119ff1",
+      "mask_sha256": "3a4757dbd4e7023e5941bd413dab51aaf6617de8b0246b8fc3b6dcc1ed9c88a4"
+    },
+    {
+      "id": "p3m-np-311",
+      "row_index": 311,
+      "scene": "粉色墙面影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=311",
+      "image_sha256": "fe5ccb1f714a7ffb21f4703eb1889b27e466941d100545d7373867b4807bd6d5",
+      "mask_sha256": "85a1bbf21867f5d15eefcf5cba57c38a89f91bcb321b80f1d0195ab644afbe9f"
+    },
+    {
+      "id": "p3m-np-341",
+      "row_index": 341,
+      "scene": "浅色墙面",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=341",
+      "image_sha256": "5154267c62468687b98f1ba6b3ec6dc7bdc1412c15536647f07a42da7a8d06da",
+      "mask_sha256": "b015da9a649090ed69cba0a9a331dac043edd6037fe82d5644f786c956cb6f4d"
+    },
+    {
+      "id": "p3m-np-184",
+      "row_index": 184,
+      "scene": "室内门框",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=184",
+      "image_sha256": "905ed58eeff757c9b926efb87cf1606bf78de2cb531e956b678771cbba64e8a1",
+      "mask_sha256": "155584b78822031d6b55f8034386b7a34bb009e919bdf87ee37c2ea66340576b"
+    },
+    {
+      "id": "p3m-np-318",
+      "row_index": 318,
+      "scene": "灰色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=318",
+      "image_sha256": "0b5bf402a3c78bf334050b4100056681ae77aacb28fa2136161b10899d07edfe",
+      "mask_sha256": "aefb05a875ec94fe7a60a8b9fc4f63d27cb93a28a716d0384bc591806268e048"
+    },
+    {
+      "id": "p3m-np-457",
+      "row_index": 457,
+      "scene": "白窗帘逆光",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=457",
+      "image_sha256": "b42700e6e10251e3d1b05197e27903dd505b9b6adb91612e90a48df9dadb3647",
+      "mask_sha256": "bfed239e8fe63267a4fe2a6833d34197a373582f97e4e49742911df9412e9c28"
+    },
+    {
+      "id": "p3m-np-039",
+      "row_index": 39,
+      "scene": "粉色影棚",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=39",
+      "image_sha256": "cd50a2090eae0bd145768a9e1ef99fd08dfd0a55c92faf63b7e0777e506edc2b",
+      "mask_sha256": "c5967d8ad840d4a882d04d89f9593fa22a9d885cbba712d6619881ad603a795b"
+    },
+    {
+      "id": "p3m-np-243",
+      "row_index": 243,
+      "scene": "白墙护墙板",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=243",
+      "image_sha256": "43504f31141971daef2b9130d3570a540852ca36c9913ea8c0daf76349a9b397",
+      "mask_sha256": "254a3ecf50abd60f0a7d71c25bd44132eb4e3ac3ae03780f8c74149ae0182ac8"
+    },
+    {
+      "id": "p3m-np-394",
+      "row_index": 394,
+      "scene": "墙面阴影",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=394",
+      "image_sha256": "cc7fc98c3ae2c6745ee7f1e1a33f8dccafd07e1a3c2dd30823f370155eb1c99e",
+      "mask_sha256": "38d94a975a79f02886a89d7005da27b8e412c91bc71cff129cdcdacea26a7288"
+    },
+    {
+      "id": "p3m-np-156",
+      "row_index": 156,
+      "scene": "展厅杂物",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=156",
+      "image_sha256": "7e9708915fd148c41d16036f4af48d5185b74cb47d370fffb8c2f2c9912c4d4b",
+      "mask_sha256": "d6feef474166d329e3aa6d5cb133b5f2fa10c9f86f35403f9e619b968bca5b95"
+    },
+    {
+      "id": "p3m-np-208",
+      "row_index": 208,
+      "scene": "书架室内",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=208",
+      "image_sha256": "97eef5114563b941e7a2c8bfd7546b11f3196c4c61b30f61d4bde0e907552600",
+      "mask_sha256": "0f0388cc6951afe03c97696fe49623f2ac983a99330aee2d2bd5c7f36ce52ec2"
+    },
+    {
+      "id": "p3m-np-196",
+      "row_index": 196,
+      "scene": "窗边逆光",
+      "scene_basis": "人工根据公开照片中的窗户、家具、内墙或摄影背景判断；棚拍与实景分开标注，非拍摄地点认证",
+      "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=196",
+      "image_sha256": "78cad5044d7aa0c1b9dc63484313778b4b3bd20aacf723e2aebf882809e47d7b",
+      "mask_sha256": "6bef3ca3ff77a88f3090d5b53651897a1dfcb28e4c3035989a66154a06b9697f"
+    }
+  ]
+}

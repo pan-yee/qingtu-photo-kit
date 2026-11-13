@@ -139,8 +139,16 @@ Page({
           // Send the complete photo; locate the face before the final ID crop.
           const input = framing.fitSize(dimensions.width, dimensions.height, config.limits.maxImageSide)
           const fullCanvas = canvasTools.createCanvas(input.width, input.height)
-          fullCanvas.getContext('2d').drawImage(image, 0, 0, input.width, input.height)
-          const processingPath = await canvasTools.canvasToProcessingFile(fullCanvas, path)
+          let processingPath
+          try {
+            fullCanvas.getContext('2d').drawImage(image, 0, 0, input.width, input.height)
+            processingPath = await canvasTools.canvasToProcessingFile(fullCanvas, path)
+          } finally {
+            // The uploaded derivative owns its bytes. Do not retain a second
+            // full-resolution pixel buffer throughout the network round trip.
+            fullCanvas.width = 1
+            fullCanvas.height = 1
+          }
           try { mask = await remotePortrait.segment(processingPath) }
           finally { wx.getFileSystemManager().unlink({ filePath: processingPath, fail() {} }) }
           if (this._disposed || photoToken !== this._photoToken) return

@@ -458,3 +458,31 @@ test('ECS 缺少可信人脸时停止生成，不退回居中裁切', async func
     assert.strictEqual(page.data.hasImage, false)
   } finally { page.onUnload(); remote.segment = previous; restoreWx() }
 })
+
+test('ECS 中间大图画布在网络请求前释放，导出失败也释放', async function () {
+  const canvasTools = require('../miniprogram/utils/canvas')
+  const remote = require('../miniprogram/utils/portrait-remote')
+  for (const failExport of [false, true]) {
+    const restoreWx = installWx()
+    const factory = wx.createOffscreenCanvas, created = []
+    wx.createOffscreenCanvas = options => { const c = factory(options); created.push(c); return c }
+    const oldExport = canvasTools.canvasToProcessingFile, oldSegment = remote.segment
+    const config = require('../miniprogram/config/index'), oldBackend = config.portraitBackend
+    config.portraitBackend = 'ecs'
+    if (failExport) canvasTools.canvasToProcessingFile = async () => { throw new Error('export failed') }
+    remote.segment = async () => {
+      assert.strictEqual(created[1].width, 1)
+      assert.strictEqual(created[1].height, 1)
+      throw new Error('network stopped')
+    }
+    const page = createPageInstance(loadPage())
+    try {
+      await assert.rejects(page.preparePhoto('tmp-source.png'), failExport ? /export failed/ : /network stopped/)
+      assert.strictEqual(created[1].width, 1)
+      assert.strictEqual(created[1].height, 1)
+      assert.strictEqual(page.data.resultSrc, '')
+    } finally {
+      page.onUnload(); canvasTools.canvasToProcessingFile = oldExport; remote.segment = oldSegment; config.portraitBackend = oldBackend; restoreWx()
+    }
+  }
+})
