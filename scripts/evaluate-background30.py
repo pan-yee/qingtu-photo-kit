@@ -9,6 +9,7 @@ import hashlib
 import io
 import json
 import os
+import random
 from pathlib import Path
 import sys
 import time
@@ -38,18 +39,22 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--prepared', action='store_true', help='Use a separately recorded, pre-screened 30-photo manifest')
+    parser.add_argument('--count', type=int, default=30)
+    parser.add_argument('--seed', type=int, help='Select a reproducible random sample before inference')
     args = parser.parse_args()
     out = args.output.resolve()
     raw = out / 'dataset'
     raw.mkdir(parents=True, exist_ok=True)
     # Fixed before model execution, disjoint from the 2026-11-11 sample.
+    if not 1 <= args.count <= 500:
+        parser.error('count must be 1..500')
     previous = {round(i * 499 / 29) for i in range(30)}
-    indices = [i for i in range(5, 500, 15) if i not in previous][:30]
-    assert len(indices) == 30
+    indices = random.Random(args.seed).sample(range(500), args.count) if args.seed is not None else [i for i in range(5, 500, 15) if i not in previous][:args.count]
+    assert len(indices) == args.count
     manifest_path = out / 'sources.json'
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text(encoding='utf-8'))
-        assert len(manifest['samples']) == 30
+        assert len(manifest['samples']) == args.count
         if not args.prepared:
             assert [s['row_index'] for s in manifest['samples']] == indices
     else:
@@ -67,17 +72,20 @@ def main():
             for field in ['image', 'mask']:
                 content = download(row[field]['src'])
                 image = Image.open(io.BytesIO(content))
+                original_size = list(image.size)
+                image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
                 image.convert('RGB' if field == 'image' else 'L').save(raw / f'{identifier}-{field}.png')
                 record[field + '_sha256'] = hashlib.sha256(content).hexdigest()
-                record[field + '_size'] = list(image.size)
+                record[field + '_size'] = original_size
+                record[field + '_local_size'] = list(image.size)
             print('downloaded', identifier, flush=True)
             return record
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
             records = list(pool.map(fetch, indices))
-        assert len({s['image_sha256'] for s in records}) == 30
+        assert len({s['image_sha256'] for s in records}) == args.count
         manifest = {'dataset': 'nobg/P3M-10K', 'split': 'P3M_500_NP',
-                    'selection': 'Fixed rows from range(5,500,15), excluding previous 30, first 30. No replacement for failures.',
+                    'selection': f'Random sample without replacement, seed={args.seed}, count={args.count}, selected before inference; no replacement for failures.' if args.seed is not None else 'Fixed rows from range(5,500,15), excluding previous 30. No replacement for failures.',
                     'project': 'https://github.com/JizhiziLi/P3M',
                     'agreement': 'https://jizhizili.github.io/files/p3m_dataset_agreement/P3M-10k_Dataset_Release_Agreement.pdf',
                     'samples': records}

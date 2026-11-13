@@ -1,0 +1,2480 @@
+{
+  "count": 100,
+  "seed": 20261113,
+  "before": {
+    "rendered": 32,
+    "rejected": 68
+  },
+  "after": {
+    "rendered": 31,
+    "rejected": 69
+  },
+  "changed": [
+    "p3m-np-162"
+  ],
+  "after_reasons": {
+    "MATTING_NO_FACE": 51,
+    "MATTING_MULTIPLE_FACES": 4,
+    "MATTING_FACE_POSE": 4,
+    "MATTING_INCOMPLETE_HEAD": 10
+  },
+  "scope": "100 random public P3M photos before inference; no replacement for rejected inputs. Existing e15b810 worker vs revised worker; actual frontend render, offline only. Not 100 successful or compliant ID photos.",
+  "samples": [
+    {
+      "id": "p3m-np-091",
+      "before": {
+        "id": "p3m-np-091",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=91",
+        "status": "rendered",
+        "region": {
+          "x": 0.1361111111111111,
+          "y": 0.1451388888888889,
+          "width": 0.462037037037037,
+          "height": 0.4618055555555556
+        },
+        "crop": {
+          "sx": 234.83058609344377,
+          "sy": 279.88151656256844,
+          "sw": 322.8630666379568,
+          "sh": 430.4840888506091,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1065.91
+      },
+      "after": {
+        "id": "p3m-np-091",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=91",
+        "status": "rendered",
+        "region": {
+          "x": 0.1361111111111111,
+          "y": 0.1451388888888889,
+          "width": 0.462037037037037,
+          "height": 0.4618055555555556
+        },
+        "crop": {
+          "sx": 234.83058609344377,
+          "sy": 279.88151656256844,
+          "sw": 322.8630666379568,
+          "sh": 430.4840888506091,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1470.81
+      }
+    },
+    {
+      "id": "p3m-np-009",
+      "before": {
+        "id": "p3m-np-009",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=9",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 249.8
+      },
+      "after": {
+        "id": "p3m-np-009",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=9",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 258.98
+      }
+    },
+    {
+      "id": "p3m-np-427",
+      "before": {
+        "id": "p3m-np-427",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=427",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 206.38
+      },
+      "after": {
+        "id": "p3m-np-427",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=427",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 210.86
+      }
+    },
+    {
+      "id": "p3m-np-066",
+      "before": {
+        "id": "p3m-np-066",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=66",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 212.81
+      },
+      "after": {
+        "id": "p3m-np-066",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=66",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 331.32
+      }
+    },
+    {
+      "id": "p3m-np-186",
+      "before": {
+        "id": "p3m-np-186",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=186",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 176.9
+      },
+      "after": {
+        "id": "p3m-np-186",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=186",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 308.34
+      }
+    },
+    {
+      "id": "p3m-np-470",
+      "before": {
+        "id": "p3m-np-470",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=470",
+        "status": "rendered",
+        "region": {
+          "x": 0.24333333333333335,
+          "y": 0.0,
+          "width": 0.6822222222222222,
+          "height": 0.51125
+        },
+        "crop": {
+          "sx": 311.77896028630965,
+          "sy": 7.421128537920033,
+          "sw": 427.8852062250568,
+          "sh": 570.5136083000757,
+          "faceAligned": true
+        },
+        "elapsed_ms": 944.25
+      },
+      "after": {
+        "id": "p3m-np-470",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=470",
+        "status": "rendered",
+        "region": {
+          "x": 0.24333333333333335,
+          "y": 0.0,
+          "width": 0.6822222222222222,
+          "height": 0.51125
+        },
+        "crop": {
+          "sx": 311.77896028630965,
+          "sy": 7.421128537920033,
+          "sw": 427.8852062250568,
+          "sh": 570.5136083000757,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1845.16
+      }
+    },
+    {
+      "id": "p3m-np-326",
+      "before": {
+        "id": "p3m-np-326",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=326",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 176.96
+      },
+      "after": {
+        "id": "p3m-np-326",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=326",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 400.74
+      }
+    },
+    {
+      "id": "p3m-np-466",
+      "before": {
+        "id": "p3m-np-466",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=466",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 246.45
+      },
+      "after": {
+        "id": "p3m-np-466",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=466",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 512.15
+      }
+    },
+    {
+      "id": "p3m-np-004",
+      "before": {
+        "id": "p3m-np-004",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=4",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 200.11
+      },
+      "after": {
+        "id": "p3m-np-004",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=4",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 350.3
+      }
+    },
+    {
+      "id": "p3m-np-234",
+      "before": {
+        "id": "p3m-np-234",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=234",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 186.51
+      },
+      "after": {
+        "id": "p3m-np-234",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=234",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 338.78
+      }
+    },
+    {
+      "id": "p3m-np-033",
+      "before": {
+        "id": "p3m-np-033",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=33",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 229.18
+      },
+      "after": {
+        "id": "p3m-np-033",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=33",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 409.97
+      }
+    },
+    {
+      "id": "p3m-np-263",
+      "before": {
+        "id": "p3m-np-263",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=263",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 61.786056062677744,
+          "sy": -117.89375903580147,
+          "sw": 1126.420319276851,
+          "sh": 1501.8937590358014,
+          "faceAligned": true
+        },
+        "elapsed_ms": 932.99
+      },
+      "after": {
+        "id": "p3m-np-263",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=263",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 61.786056062677744,
+          "sy": -117.89375903580147,
+          "sw": 1126.420319276851,
+          "sh": 1501.8937590358014,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1696.99
+      }
+    },
+    {
+      "id": "p3m-np-067",
+      "before": {
+        "id": "p3m-np-067",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=67",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 501.2
+      },
+      "after": {
+        "id": "p3m-np-067",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=67",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1426.38
+      }
+    },
+    {
+      "id": "p3m-np-048",
+      "before": {
+        "id": "p3m-np-048",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=48",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 207.82
+      },
+      "after": {
+        "id": "p3m-np-048",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=48",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 466.75
+      }
+    },
+    {
+      "id": "p3m-np-024",
+      "before": {
+        "id": "p3m-np-024",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=24",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 254.91
+      },
+      "after": {
+        "id": "p3m-np-024",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=24",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 582.81
+      }
+    },
+    {
+      "id": "p3m-np-200",
+      "before": {
+        "id": "p3m-np-200",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=200",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 185.97
+      },
+      "after": {
+        "id": "p3m-np-200",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=200",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 342.95
+      }
+    },
+    {
+      "id": "p3m-np-026",
+      "before": {
+        "id": "p3m-np-026",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=26",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 192.9
+      },
+      "after": {
+        "id": "p3m-np-026",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=26",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 341.99
+      }
+    },
+    {
+      "id": "p3m-np-282",
+      "before": {
+        "id": "p3m-np-282",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=282",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 169.11
+      },
+      "after": {
+        "id": "p3m-np-282",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=282",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 309.71
+      }
+    },
+    {
+      "id": "p3m-np-056",
+      "before": {
+        "id": "p3m-np-056",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=56",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 216.25
+      },
+      "after": {
+        "id": "p3m-np-056",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=56",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 298.01
+      }
+    },
+    {
+      "id": "p3m-np-307",
+      "before": {
+        "id": "p3m-np-307",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=307",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 588.41
+      },
+      "after": {
+        "id": "p3m-np-307",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=307",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1466.1
+      }
+    },
+    {
+      "id": "p3m-np-156",
+      "before": {
+        "id": "p3m-np-156",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=156",
+        "status": "rendered",
+        "region": {
+          "x": 0.3365318711446196,
+          "y": 0.04814814814814815,
+          "width": 0.5065113091158328,
+          "height": 0.9120370370370371
+        },
+        "crop": {
+          "sx": 607.4897309453402,
+          "sy": 134.80834133095257,
+          "sw": 505.0431219515972,
+          "sh": 673.3908292687962,
+          "faceAligned": true
+        },
+        "elapsed_ms": 937.5
+      },
+      "after": {
+        "id": "p3m-np-156",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=156",
+        "status": "rendered",
+        "region": {
+          "x": 0.3365318711446196,
+          "y": 0.04814814814814815,
+          "width": 0.5065113091158328,
+          "height": 0.9120370370370371
+        },
+        "crop": {
+          "sx": 607.4897309453402,
+          "sy": 134.80834133095257,
+          "sw": 505.0431219515972,
+          "sh": 673.3908292687962,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1720.62
+      }
+    },
+    {
+      "id": "p3m-np-015",
+      "before": {
+        "id": "p3m-np-015",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=15",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 197.57
+      },
+      "after": {
+        "id": "p3m-np-015",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=15",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 356.89
+      }
+    },
+    {
+      "id": "p3m-np-153",
+      "before": {
+        "id": "p3m-np-153",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=153",
+        "status": "rendered",
+        "region": {
+          "x": 0.695,
+          "y": 0.015,
+          "width": 0.305,
+          "height": 0.651
+        },
+        "crop": {
+          "sx": 1175.359133879344,
+          "sy": 46.93343544006375,
+          "sw": 360.47453085581424,
+          "sh": 480.63270780775235,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1012.35
+      },
+      "after": {
+        "id": "p3m-np-153",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=153",
+        "status": "rendered",
+        "region": {
+          "x": 0.695,
+          "y": 0.015,
+          "width": 0.305,
+          "height": 0.651
+        },
+        "crop": {
+          "sx": 1175.359133879344,
+          "sy": 46.93343544006375,
+          "sw": 360.47453085581424,
+          "sh": 480.63270780775235,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1668.34
+      }
+    },
+    {
+      "id": "p3m-np-453",
+      "before": {
+        "id": "p3m-np-453",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=453",
+        "status": "rendered",
+        "region": {
+          "x": 0.04537037037037037,
+          "y": 0.0,
+          "width": 0.9453703703703704,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 76.93907536842232,
+          "sy": -103.88441724909637,
+          "sw": 965.6864707116722,
+          "sh": 1287.5819609488963,
+          "faceAligned": true
+        },
+        "elapsed_ms": 873.53
+      },
+      "after": {
+        "id": "p3m-np-453",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=453",
+        "status": "rendered",
+        "region": {
+          "x": 0.04537037037037037,
+          "y": 0.0,
+          "width": 0.9453703703703704,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 76.93907536842232,
+          "sy": -103.88441724909637,
+          "sw": 965.6864707116722,
+          "sh": 1287.5819609488963,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1603.83
+      }
+    },
+    {
+      "id": "p3m-np-255",
+      "before": {
+        "id": "p3m-np-255",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=255",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 136.41
+      },
+      "after": {
+        "id": "p3m-np-255",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=255",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 244.98
+      }
+    },
+    {
+      "id": "p3m-np-007",
+      "before": {
+        "id": "p3m-np-007",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=7",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 158.75
+      },
+      "after": {
+        "id": "p3m-np-007",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=7",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 279.29
+      }
+    },
+    {
+      "id": "p3m-np-334",
+      "before": {
+        "id": "p3m-np-334",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=334",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 188.05
+      },
+      "after": {
+        "id": "p3m-np-334",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=334",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 316.54
+      }
+    },
+    {
+      "id": "p3m-np-347",
+      "before": {
+        "id": "p3m-np-347",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=347",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 147.86
+      },
+      "after": {
+        "id": "p3m-np-347",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=347",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 266.77
+      }
+    },
+    {
+      "id": "p3m-np-380",
+      "before": {
+        "id": "p3m-np-380",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=380",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 560.68
+      },
+      "after": {
+        "id": "p3m-np-380",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=380",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1185.61
+      }
+    },
+    {
+      "id": "p3m-np-441",
+      "before": {
+        "id": "p3m-np-441",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=441",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 7.810302183584099,
+          "sy": 12.494847509596326,
+          "sw": 1042.3905540395663,
+          "sh": 1389.8540720527549,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1448.39
+      },
+      "after": {
+        "id": "p3m-np-441",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=441",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 7.810302183584099,
+          "sy": 12.494847509596326,
+          "sw": 1042.3905540395663,
+          "sh": 1389.8540720527549,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1671.1
+      }
+    },
+    {
+      "id": "p3m-np-351",
+      "before": {
+        "id": "p3m-np-351",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=351",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 306.64
+      },
+      "after": {
+        "id": "p3m-np-351",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=351",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 460.19
+      }
+    },
+    {
+      "id": "p3m-np-155",
+      "before": {
+        "id": "p3m-np-155",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=155",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 168.9
+      },
+      "after": {
+        "id": "p3m-np-155",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=155",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 290.17
+      }
+    },
+    {
+      "id": "p3m-np-258",
+      "before": {
+        "id": "p3m-np-258",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=258",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 161.54
+      },
+      "after": {
+        "id": "p3m-np-258",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=258",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 288.81
+      }
+    },
+    {
+      "id": "p3m-np-358",
+      "before": {
+        "id": "p3m-np-358",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=358",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 173.29
+      },
+      "after": {
+        "id": "p3m-np-358",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=358",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 300.68
+      }
+    },
+    {
+      "id": "p3m-np-222",
+      "before": {
+        "id": "p3m-np-222",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=222",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 170.66
+      },
+      "after": {
+        "id": "p3m-np-222",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=222",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 273.5
+      }
+    },
+    {
+      "id": "p3m-np-133",
+      "before": {
+        "id": "p3m-np-133",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=133",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 484.35
+      },
+      "after": {
+        "id": "p3m-np-133",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=133",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 992.02
+      }
+    },
+    {
+      "id": "p3m-np-410",
+      "before": {
+        "id": "p3m-np-410",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=410",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 0.9
+        },
+        "crop": {
+          "sx": -51.012078424293804,
+          "sy": -8.299148082731605,
+          "sw": 883.7653199831625,
+          "sh": 1178.35375997755,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1147.01
+      },
+      "after": {
+        "id": "p3m-np-410",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=410",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 0.9
+        },
+        "crop": {
+          "sx": -51.012078424293804,
+          "sy": -8.299148082731605,
+          "sw": 883.7653199831625,
+          "sh": 1178.35375997755,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1856.89
+      }
+    },
+    {
+      "id": "p3m-np-485",
+      "before": {
+        "id": "p3m-np-485",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=485",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 238.97
+      },
+      "after": {
+        "id": "p3m-np-485",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=485",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 342.78
+      }
+    },
+    {
+      "id": "p3m-np-249",
+      "before": {
+        "id": "p3m-np-249",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=249",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 229.4
+      },
+      "after": {
+        "id": "p3m-np-249",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=249",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 388.31
+      }
+    },
+    {
+      "id": "p3m-np-433",
+      "before": {
+        "id": "p3m-np-433",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=433",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -122.37508077285838,
+          "sy": -28.490449610343433,
+          "sw": 1221.3678372077575,
+          "sh": 1628.4904496103434,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1062.09
+      },
+      "after": {
+        "id": "p3m-np-433",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=433",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -122.37508077285838,
+          "sy": -28.490449610343433,
+          "sw": 1221.3678372077575,
+          "sh": 1628.4904496103434,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2000.75
+      }
+    },
+    {
+      "id": "p3m-np-390",
+      "before": {
+        "id": "p3m-np-390",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=390",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 228.96
+      },
+      "after": {
+        "id": "p3m-np-390",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=390",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 434.03
+      }
+    },
+    {
+      "id": "p3m-np-201",
+      "before": {
+        "id": "p3m-np-201",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=201",
+        "status": "rendered",
+        "region": {
+          "x": 0.105,
+          "y": 0.0,
+          "width": 0.524375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 229.7126452781655,
+          "sy": -19.956995735042668,
+          "sw": 714.990631608586,
+          "sh": 953.3208421447814,
+          "faceAligned": true
+        },
+        "elapsed_ms": 984.0
+      },
+      "after": {
+        "id": "p3m-np-201",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=201",
+        "status": "rendered",
+        "region": {
+          "x": 0.105,
+          "y": 0.0,
+          "width": 0.524375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 229.7126452781655,
+          "sy": -19.956995735042668,
+          "sw": 714.990631608586,
+          "sh": 953.3208421447814,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1648.36
+      }
+    },
+    {
+      "id": "p3m-np-170",
+      "before": {
+        "id": "p3m-np-170",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=170",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 199.58
+      },
+      "after": {
+        "id": "p3m-np-170",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=170",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 450.84
+      }
+    },
+    {
+      "id": "p3m-np-350",
+      "before": {
+        "id": "p3m-np-350",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=350",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 169.49
+      },
+      "after": {
+        "id": "p3m-np-350",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=350",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 431.23
+      }
+    },
+    {
+      "id": "p3m-np-372",
+      "before": {
+        "id": "p3m-np-372",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=372",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 209.17
+      },
+      "after": {
+        "id": "p3m-np-372",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=372",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 419.86
+      }
+    },
+    {
+      "id": "p3m-np-144",
+      "before": {
+        "id": "p3m-np-144",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=144",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 278.17
+      },
+      "after": {
+        "id": "p3m-np-144",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=144",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 681.82
+      }
+    },
+    {
+      "id": "p3m-np-068",
+      "before": {
+        "id": "p3m-np-068",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=68",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 0.901875
+        },
+        "crop": {
+          "sx": 61.17347567563934,
+          "sy": 40.28561973571725,
+          "sw": 757.4711141132179,
+          "sh": 1009.9614854842905,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2030.65
+      },
+      "after": {
+        "id": "p3m-np-068",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=68",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 0.901875
+        },
+        "crop": {
+          "sx": 61.17347567563934,
+          "sy": 40.28561973571725,
+          "sw": 757.4711141132179,
+          "sh": 1009.9614854842905,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2247.42
+      }
+    },
+    {
+      "id": "p3m-np-411",
+      "before": {
+        "id": "p3m-np-411",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=411",
+        "status": "rendered",
+        "region": {
+          "x": 0.306875,
+          "y": 0.0,
+          "width": 0.48875,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 566.7250298791464,
+          "sy": -34.5033268133795,
+          "sw": 630.8361722363361,
+          "sh": 841.1148963151148,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2471.34
+      },
+      "after": {
+        "id": "p3m-np-411",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=411",
+        "status": "rendered",
+        "region": {
+          "x": 0.306875,
+          "y": 0.0,
+          "width": 0.48875,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 566.7250298791464,
+          "sy": -34.5033268133795,
+          "sw": 630.8361722363361,
+          "sh": 841.1148963151148,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1953.63
+      }
+    },
+    {
+      "id": "p3m-np-084",
+      "before": {
+        "id": "p3m-np-084",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=84",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1028.99
+      },
+      "after": {
+        "id": "p3m-np-084",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=84",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1050.82
+      }
+    },
+    {
+      "id": "p3m-np-439",
+      "before": {
+        "id": "p3m-np-439",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=439",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 328.15
+      },
+      "after": {
+        "id": "p3m-np-439",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=439",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 425.49
+      }
+    },
+    {
+      "id": "p3m-np-448",
+      "before": {
+        "id": "p3m-np-448",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=448",
+        "status": "rendered",
+        "region": {
+          "x": 0.1,
+          "y": 0.0,
+          "width": 0.687037037037037,
+          "height": 0.6220125786163522
+        },
+        "crop": {
+          "sx": 234.4655449563274,
+          "sy": 14.702193131877479,
+          "sw": 488.58798118948755,
+          "sh": 651.4506415859834,
+          "faceAligned": true
+        },
+        "elapsed_ms": 4223.41
+      },
+      "after": {
+        "id": "p3m-np-448",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=448",
+        "status": "rendered",
+        "region": {
+          "x": 0.1,
+          "y": 0.0,
+          "width": 0.687037037037037,
+          "height": 0.6220125786163522
+        },
+        "crop": {
+          "sx": 234.4655449563274,
+          "sy": 14.702193131877479,
+          "sw": 488.58798118948755,
+          "sh": 651.4506415859834,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2075.21
+      }
+    },
+    {
+      "id": "p3m-np-036",
+      "before": {
+        "id": "p3m-np-036",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=36",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 921.9
+      },
+      "after": {
+        "id": "p3m-np-036",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=36",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 363.68
+      }
+    },
+    {
+      "id": "p3m-np-182",
+      "before": {
+        "id": "p3m-np-182",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=182",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 943.98
+      },
+      "after": {
+        "id": "p3m-np-182",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=182",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 384.17
+      }
+    },
+    {
+      "id": "p3m-np-246",
+      "before": {
+        "id": "p3m-np-246",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=246",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 568.22
+      },
+      "after": {
+        "id": "p3m-np-246",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=246",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 376.31
+      }
+    },
+    {
+      "id": "p3m-np-384",
+      "before": {
+        "id": "p3m-np-384",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=384",
+        "status": "rendered",
+        "region": {
+          "x": 0.281875,
+          "y": 0.0,
+          "width": 0.445,
+          "height": 0.8894095595126523
+        },
+        "crop": {
+          "sx": 559.8658142825735,
+          "sy": -31.197575190415236,
+          "sw": 494.08916267935984,
+          "sh": 658.7855502391465,
+          "faceAligned": true
+        },
+        "elapsed_ms": 9472.64
+      },
+      "after": {
+        "id": "p3m-np-384",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=384",
+        "status": "rendered",
+        "region": {
+          "x": 0.281875,
+          "y": 0.0,
+          "width": 0.445,
+          "height": 0.8894095595126523
+        },
+        "crop": {
+          "sx": 559.8658142825735,
+          "sy": -31.197575190415236,
+          "sw": 494.08916267935984,
+          "sh": 658.7855502391465,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2120.27
+      }
+    },
+    {
+      "id": "p3m-np-408",
+      "before": {
+        "id": "p3m-np-408",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=408",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 70.91399266169651,
+          "sy": -23.10844098604575,
+          "sw": 1058.3313307395342,
+          "sh": 1411.1084409860457,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1575.19
+      },
+      "after": {
+        "id": "p3m-np-408",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=408",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 70.91399266169651,
+          "sy": -23.10844098604575,
+          "sw": 1058.3313307395342,
+          "sh": 1411.1084409860457,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1797.05
+      }
+    },
+    {
+      "id": "p3m-np-458",
+      "before": {
+        "id": "p3m-np-458",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=458",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 386.63
+      },
+      "after": {
+        "id": "p3m-np-458",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=458",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 414.89
+      }
+    },
+    {
+      "id": "p3m-np-138",
+      "before": {
+        "id": "p3m-np-138",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=138",
+        "status": "rendered",
+        "region": {
+          "x": 0.13055555555555556,
+          "y": 0.0,
+          "width": 0.7314814814814815,
+          "height": 0.96875
+        },
+        "crop": {
+          "sx": 254.28401814882068,
+          "sy": -8.346098687914072,
+          "sw": 564.3854036533016,
+          "sh": 752.5138715377356,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2327.58
+      },
+      "after": {
+        "id": "p3m-np-138",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=138",
+        "status": "rendered",
+        "region": {
+          "x": 0.13055555555555556,
+          "y": 0.0,
+          "width": 0.7314814814814815,
+          "height": 0.96875
+        },
+        "crop": {
+          "sx": 254.28401814882068,
+          "sy": -8.346098687914072,
+          "sw": 564.3854036533016,
+          "sh": 752.5138715377356,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1811.88
+      }
+    },
+    {
+      "id": "p3m-np-402",
+      "before": {
+        "id": "p3m-np-402",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=402",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -52.17216891245789,
+          "sy": 70.76071088984946,
+          "sw": 1146.929466832613,
+          "sh": 1529.2392891101506,
+          "faceAligned": true
+        },
+        "elapsed_ms": 3085.51
+      },
+      "after": {
+        "id": "p3m-np-402",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=402",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -52.17216891245789,
+          "sy": 70.76071088984946,
+          "sw": 1146.929466832613,
+          "sh": 1529.2392891101506,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1769.44
+      }
+    },
+    {
+      "id": "p3m-np-202",
+      "before": {
+        "id": "p3m-np-202",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=202",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 717.23
+      },
+      "after": {
+        "id": "p3m-np-202",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=202",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 364.99
+      }
+    },
+    {
+      "id": "p3m-np-160",
+      "before": {
+        "id": "p3m-np-160",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=160",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 853.64
+      },
+      "after": {
+        "id": "p3m-np-160",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=160",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 399.79
+      }
+    },
+    {
+      "id": "p3m-np-268",
+      "before": {
+        "id": "p3m-np-268",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=268",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 1450.67
+      },
+      "after": {
+        "id": "p3m-np-268",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=268",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 482.45
+      }
+    },
+    {
+      "id": "p3m-np-025",
+      "before": {
+        "id": "p3m-np-025",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=25",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 2058.77
+      },
+      "after": {
+        "id": "p3m-np-025",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=25",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1299.02
+      }
+    },
+    {
+      "id": "p3m-np-265",
+      "before": {
+        "id": "p3m-np-265",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=265",
+        "status": "rendered",
+        "region": {
+          "x": 0.366875,
+          "y": 0.0,
+          "width": 0.6,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 669.9232152973616,
+          "sy": -9.9222186058754,
+          "sw": 794.299496834476,
+          "sh": 1059.0659957793014,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1734.43
+      },
+      "after": {
+        "id": "p3m-np-265",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=265",
+        "status": "rendered",
+        "region": {
+          "x": 0.366875,
+          "y": 0.0,
+          "width": 0.6,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 669.9232152973616,
+          "sy": -9.9222186058754,
+          "sw": 794.299496834476,
+          "sh": 1059.0659957793014,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1705.26
+      }
+    },
+    {
+      "id": "p3m-np-225",
+      "before": {
+        "id": "p3m-np-225",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=225",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 470.03
+      },
+      "after": {
+        "id": "p3m-np-225",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=225",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 547.21
+      }
+    },
+    {
+      "id": "p3m-np-338",
+      "before": {
+        "id": "p3m-np-338",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=338",
+        "status": "rendered",
+        "region": {
+          "x": 0.145625,
+          "y": 0.0,
+          "width": 0.64125,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 362.0318244211376,
+          "sy": 43.05153947323562,
+          "sw": 767.6359036937355,
+          "sh": 1023.514538258314,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1734.58
+      },
+      "after": {
+        "id": "p3m-np-338",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=338",
+        "status": "rendered",
+        "region": {
+          "x": 0.145625,
+          "y": 0.0,
+          "width": 0.64125,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 362.0318244211376,
+          "sy": 43.05153947323562,
+          "sw": 767.6359036937355,
+          "sh": 1023.514538258314,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1613.23
+      }
+    },
+    {
+      "id": "p3m-np-377",
+      "before": {
+        "id": "p3m-np-377",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=377",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 258.93
+      },
+      "after": {
+        "id": "p3m-np-377",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=377",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 452.76
+      }
+    },
+    {
+      "id": "p3m-np-213",
+      "before": {
+        "id": "p3m-np-213",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=213",
+        "status": "rendered",
+        "region": {
+          "x": 0.34375,
+          "y": 0.0,
+          "width": 0.45375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 612.6067983672808,
+          "sy": -42.42662422751113,
+          "sw": 601.4022613434414,
+          "sh": 801.8696817912552,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1301.35
+      },
+      "after": {
+        "id": "p3m-np-213",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=213",
+        "status": "rendered",
+        "region": {
+          "x": 0.34375,
+          "y": 0.0,
+          "width": 0.45375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 612.6067983672808,
+          "sy": -42.42662422751113,
+          "sw": 601.4022613434414,
+          "sh": 801.8696817912552,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2044.69
+      }
+    },
+    {
+      "id": "p3m-np-180",
+      "before": {
+        "id": "p3m-np-180",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=180",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 55.248079543168274,
+          "sy": -91.14191126132377,
+          "sw": 954.8782402478557,
+          "sh": 1273.170986997141,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1385.38
+      },
+      "after": {
+        "id": "p3m-np-180",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=180",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 55.248079543168274,
+          "sy": -91.14191126132377,
+          "sw": 954.8782402478557,
+          "sh": 1273.170986997141,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1919.65
+      }
+    },
+    {
+      "id": "p3m-np-277",
+      "before": {
+        "id": "p3m-np-277",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=277",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 312.8
+      },
+      "after": {
+        "id": "p3m-np-277",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=277",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 505.18
+      }
+    },
+    {
+      "id": "p3m-np-238",
+      "before": {
+        "id": "p3m-np-238",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=238",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 215.2
+      },
+      "after": {
+        "id": "p3m-np-238",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=238",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 306.62
+      }
+    },
+    {
+      "id": "p3m-np-050",
+      "before": {
+        "id": "p3m-np-050",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=50",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 286.34
+      },
+      "after": {
+        "id": "p3m-np-050",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=50",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 469.94
+      }
+    },
+    {
+      "id": "p3m-np-146",
+      "before": {
+        "id": "p3m-np-146",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=146",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 246.91
+      },
+      "after": {
+        "id": "p3m-np-146",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=146",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 426.3
+      }
+    },
+    {
+      "id": "p3m-np-140",
+      "before": {
+        "id": "p3m-np-140",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=140",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -251.21300447363808,
+          "sy": -108.97057641556941,
+          "sw": 1281.727932311677,
+          "sh": 1708.9705764155694,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1358.91
+      },
+      "after": {
+        "id": "p3m-np-140",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=140",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -251.21300447363808,
+          "sy": -108.97057641556941,
+          "sw": 1281.727932311677,
+          "sh": 1708.9705764155694,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2961.2
+      }
+    },
+    {
+      "id": "p3m-np-013",
+      "before": {
+        "id": "p3m-np-013",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=13",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 299.8
+      },
+      "after": {
+        "id": "p3m-np-013",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=13",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 489.12
+      }
+    },
+    {
+      "id": "p3m-np-000",
+      "before": {
+        "id": "p3m-np-000",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=0",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 0.95
+        },
+        "crop": {
+          "sx": 140.19570385190593,
+          "sy": -66.33342721245474,
+          "sw": 798.2274348085573,
+          "sh": 1064.3032464114096,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1294.3
+      },
+      "after": {
+        "id": "p3m-np-000",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=0",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 0.95
+        },
+        "crop": {
+          "sx": 140.19570385190593,
+          "sy": -66.33342721245474,
+          "sw": 798.2274348085573,
+          "sh": 1064.3032464114096,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1861.12
+      }
+    },
+    {
+      "id": "p3m-np-379",
+      "before": {
+        "id": "p3m-np-379",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=379",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 299.35
+      },
+      "after": {
+        "id": "p3m-np-379",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=379",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 525.64
+      }
+    },
+    {
+      "id": "p3m-np-080",
+      "before": {
+        "id": "p3m-np-080",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=80",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 352.06
+      },
+      "after": {
+        "id": "p3m-np-080",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=80",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 575.68
+      }
+    },
+    {
+      "id": "p3m-np-492",
+      "before": {
+        "id": "p3m-np-492",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=492",
+        "status": "rendered",
+        "region": {
+          "x": 0.15555555555555556,
+          "y": 0.0,
+          "width": 0.7564814814814815,
+          "height": 0.7784131522516083
+        },
+        "crop": {
+          "sx": 314.3656830505896,
+          "sy": -27.84129761780308,
+          "sw": 524.5021453467273,
+          "sh": 699.3361937956363,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1207.32
+      },
+      "after": {
+        "id": "p3m-np-492",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=492",
+        "status": "rendered",
+        "region": {
+          "x": 0.15555555555555556,
+          "y": 0.0,
+          "width": 0.7564814814814815,
+          "height": 0.7784131522516083
+        },
+        "crop": {
+          "sx": 314.3656830505896,
+          "sy": -27.84129761780308,
+          "sw": 524.5021453467273,
+          "sh": 699.3361937956363,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1795.02
+      }
+    },
+    {
+      "id": "p3m-np-083",
+      "before": {
+        "id": "p3m-np-083",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=83",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 831.75
+      },
+      "after": {
+        "id": "p3m-np-083",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=83",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1380.34
+      }
+    },
+    {
+      "id": "p3m-np-345",
+      "before": {
+        "id": "p3m-np-345",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=345",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 229.14
+      },
+      "after": {
+        "id": "p3m-np-345",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=345",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 369.0
+      }
+    },
+    {
+      "id": "p3m-np-344",
+      "before": {
+        "id": "p3m-np-344",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=344",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 304.13
+      },
+      "after": {
+        "id": "p3m-np-344",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=344",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 404.96
+      }
+    },
+    {
+      "id": "p3m-np-064",
+      "before": {
+        "id": "p3m-np-064",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=64",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 241.3
+      },
+      "after": {
+        "id": "p3m-np-064",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=64",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 262.83
+      }
+    },
+    {
+      "id": "p3m-np-038",
+      "before": {
+        "id": "p3m-np-038",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=38",
+        "status": "rendered",
+        "region": {
+          "x": 0.28375,
+          "y": 0.0,
+          "width": 0.425,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 494.1074492409826,
+          "sy": -66.01964347064487,
+          "sw": 598.7872835248708,
+          "sh": 798.3830446998277,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1626.58
+      },
+      "after": {
+        "id": "p3m-np-038",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=38",
+        "status": "rendered",
+        "region": {
+          "x": 0.28375,
+          "y": 0.0,
+          "width": 0.425,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 494.1074492409826,
+          "sy": -66.01964347064487,
+          "sw": 598.7872835248708,
+          "sh": 798.3830446998277,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1578.81
+      }
+    },
+    {
+      "id": "p3m-np-242",
+      "before": {
+        "id": "p3m-np-242",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=242",
+        "status": "rendered",
+        "region": {
+          "x": 0.129375,
+          "y": 0.0,
+          "width": 0.641875,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 325.8108253280322,
+          "sy": -71.47688633203505,
+          "sw": 790.2060280243555,
+          "sh": 1053.6080373658074,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1943.83
+      },
+      "after": {
+        "id": "p3m-np-242",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=242",
+        "status": "rendered",
+        "region": {
+          "x": 0.129375,
+          "y": 0.0,
+          "width": 0.641875,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 325.8108253280322,
+          "sy": -71.47688633203505,
+          "sw": 790.2060280243555,
+          "sh": 1053.6080373658074,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1438.58
+      }
+    },
+    {
+      "id": "p3m-np-190",
+      "before": {
+        "id": "p3m-np-190",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=190",
+        "status": "rendered",
+        "region": {
+          "x": 0.06373008434864105,
+          "y": 0.005625,
+          "width": 0.9090909090909091,
+          "height": 0.80875
+        },
+        "crop": {
+          "sx": 175.80932755318838,
+          "sy": 41.20187600453593,
+          "sw": 754.2744155914077,
+          "sh": 1005.6992207885436,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1613.88
+      },
+      "after": {
+        "id": "p3m-np-190",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=190",
+        "status": "rendered",
+        "region": {
+          "x": 0.06373008434864105,
+          "y": 0.005625,
+          "width": 0.9090909090909091,
+          "height": 0.80875
+        },
+        "crop": {
+          "sx": 175.80932755318838,
+          "sy": 41.20187600453593,
+          "sw": 754.2744155914077,
+          "sh": 1005.6992207885436,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1627.93
+      }
+    },
+    {
+      "id": "p3m-np-073",
+      "before": {
+        "id": "p3m-np-073",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=73",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 392.21
+      },
+      "after": {
+        "id": "p3m-np-073",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=73",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 467.5
+      }
+    },
+    {
+      "id": "p3m-np-262",
+      "before": {
+        "id": "p3m-np-262",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=262",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 244.55
+      },
+      "after": {
+        "id": "p3m-np-262",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=262",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 327.27
+      }
+    },
+    {
+      "id": "p3m-np-111",
+      "before": {
+        "id": "p3m-np-111",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=111",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 312.63
+      },
+      "after": {
+        "id": "p3m-np-111",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=111",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 954.75
+      }
+    },
+    {
+      "id": "p3m-np-197",
+      "before": {
+        "id": "p3m-np-197",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=197",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.9802816901408451,
+          "height": 0.87
+        },
+        "crop": {
+          "sx": 114.6835241265714,
+          "sy": -33.305537382761514,
+          "sw": 765.2878047927976,
+          "sh": 1020.3837397237302,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1533.54
+      },
+      "after": {
+        "id": "p3m-np-197",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=197",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.9802816901408451,
+          "height": 0.87
+        },
+        "crop": {
+          "sx": 114.6835241265714,
+          "sy": -33.305537382761514,
+          "sw": 765.2878047927976,
+          "sh": 1020.3837397237302,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2389.46
+      }
+    },
+    {
+      "id": "p3m-np-162",
+      "before": {
+        "id": "p3m-np-162",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=162",
+        "status": "rendered",
+        "region": {
+          "x": 0.11666666666666667,
+          "y": 0.0,
+          "width": 0.5625,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 221.0670153583801,
+          "sy": -72.85533070564237,
+          "sw": 703.625666243689,
+          "sh": 938.1675549915853,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1257.68
+      },
+      "after": {
+        "id": "p3m-np-162",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=162",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1388.94
+      }
+    },
+    {
+      "id": "p3m-np-472",
+      "before": {
+        "id": "p3m-np-472",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=472",
+        "status": "rendered",
+        "region": {
+          "x": 0.195625,
+          "y": 0.0,
+          "width": 0.53625,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 424.56541710797677,
+          "sy": 27.228968562903688,
+          "sw": 635.143171673939,
+          "sh": 846.8575622319187,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1097.47
+      },
+      "after": {
+        "id": "p3m-np-472",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=472",
+        "status": "rendered",
+        "region": {
+          "x": 0.195625,
+          "y": 0.0,
+          "width": 0.53625,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 424.56541710797677,
+          "sy": 27.228968562903688,
+          "sw": 635.143171673939,
+          "sh": 846.8575622319187,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1841.58
+      }
+    },
+    {
+      "id": "p3m-np-123",
+      "before": {
+        "id": "p3m-np-123",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=123",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.729375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 131.85361417440265,
+          "sy": 27.33318541600154,
+          "sw": 788.0001109379989,
+          "sh": 1050.6668145839985,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1436.0
+      },
+      "after": {
+        "id": "p3m-np-123",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=123",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 0.729375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 131.85361417440265,
+          "sy": 27.33318541600154,
+          "sw": 788.0001109379989,
+          "sh": 1050.6668145839985,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1636.78
+      }
+    },
+    {
+      "id": "p3m-np-106",
+      "before": {
+        "id": "p3m-np-106",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=106",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 249.74
+      },
+      "after": {
+        "id": "p3m-np-106",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=106",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 317.18
+      }
+    },
+    {
+      "id": "p3m-np-214",
+      "before": {
+        "id": "p3m-np-214",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=214",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 278.25
+      },
+      "after": {
+        "id": "p3m-np-214",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=214",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 355.17
+      }
+    },
+    {
+      "id": "p3m-np-166",
+      "before": {
+        "id": "p3m-np-166",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=166",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 245.94
+      },
+      "after": {
+        "id": "p3m-np-166",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=166",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 360.07
+      }
+    },
+    {
+      "id": "p3m-np-047",
+      "before": {
+        "id": "p3m-np-047",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=47",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 213.05
+      },
+      "after": {
+        "id": "p3m-np-047",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=47",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 282.64
+      }
+    },
+    {
+      "id": "p3m-np-297",
+      "before": {
+        "id": "p3m-np-297",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=297",
+        "status": "rendered",
+        "region": {
+          "x": 0.3103678929765886,
+          "y": 0.0,
+          "width": 0.5418060200668896,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 557.6578589954547,
+          "sy": -56.9613446295261,
+          "sw": 622.8620553655282,
+          "sh": 830.4827404873711,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1370.29
+      },
+      "after": {
+        "id": "p3m-np-297",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=297",
+        "status": "rendered",
+        "region": {
+          "x": 0.3103678929765886,
+          "y": 0.0,
+          "width": 0.5418060200668896,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 557.6578589954547,
+          "sy": -56.9613446295261,
+          "sw": 622.8620553655282,
+          "sh": 830.4827404873711,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1645.52
+      }
+    },
+    {
+      "id": "p3m-np-386",
+      "before": {
+        "id": "p3m-np-386",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=386",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 274.85
+      },
+      "after": {
+        "id": "p3m-np-386",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=386",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 384.29
+      }
+    },
+    {
+      "id": "p3m-np-046",
+      "before": {
+        "id": "p3m-np-046",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=46",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 277.99
+      },
+      "after": {
+        "id": "p3m-np-046",
+        "source": "https://huggingface.co/datasets/nobg/P3M-10K/viewer/default/P3M_500_NP?row=46",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 334.75
+      }
+    }
+  ]
+}

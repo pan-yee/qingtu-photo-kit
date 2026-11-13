@@ -79,13 +79,13 @@ def validate_matte(mask, face, region):
     inner = mask[max(0, y0):min(mask.shape[0], y1 + 1), max(0, x0):min(mask.shape[1], x1 + 1)]
     if not inner.size or float(inner.mean()) < .85 or float((inner > .5).mean()) < .95:
         raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
-    # An opaque head intersecting the original top edge cannot be recovered by padding.
-    if not region or region['y'] <= 0:
-        x0, _ = local(face['x'], 0)
-        x1, _ = local(face['x'] + face['width'], 0)
-        top = mask[:2, max(0, x0):min(mask.shape[1], x1 + 1)]
-        if top.size and float((top > .5).mean()) > .3:
-            raise PortraitInputError('MATTING_INCOMPLETE_HEAD')
+    # Inspect both original and regional top edges. A regional crop can cut hair.
+    x0, _ = local(face['x'], 0)
+    x1, _ = local(face['x'] + face['width'], 0)
+    top = mask[:2, max(0, x0):min(mask.shape[1], x1 + 1)]
+    if top.size and float((top > .5).mean()) > .15:
+        raise PortraitInputError('MATTING_INCOMPLETE_HEAD')
+
 
 
 def portrait_region(image, faces):

@@ -15,6 +15,29 @@ from framing import detect_faces, portrait_region, validate_face, validate_matte
 
 
 class WorkerTests(unittest.TestCase):
+    def test_regional_top_edge_is_checked(self):
+        mask = np.ones((100,100), dtype=np.float32)
+        with self.assertRaises(PortraitInputError) as error:
+            validate_matte(mask, self.face(), {'x': 0, 'y': .1, 'width': 1, 'height': .8})
+        self.assertEqual(error.exception.code, 'MATTING_INCOMPLETE_HEAD')
+        # A narrower cropped bun was missed by the historical 30% threshold.
+        mask[:2] = 0; mask[:2, 30:36] = 1
+        with self.assertRaises(PortraitInputError): validate_matte(mask, self.face(), None)
+
+    def test_regional_head_cut_retries_full_source_once(self):
+        face = self.face()
+        clipped = np.ones((100,100), dtype=np.float32)
+        complete = clipped.copy(); complete[:5] = 0
+        image = Image.new('RGB', (1000,1000), 'white')
+        raw = io.BytesIO(); image.save(raw, format='PNG')
+        with patch.object(server, 'detect_faces', return_value=[face]), patch.object(server, 'portrait_region', return_value=(image, {'x':0,'y':.1,'width':1,'height':.8})), patch.object(server, 'infer_matte', side_effect=[(clipped,(100,100)),(complete,(100,100))]) as infer:
+            result = server.matte_image(raw.getvalue())
+            self.assertIsNone(result['region'])
+            self.assertEqual(infer.call_count, 2)
+        with patch.object(server, 'detect_faces', return_value=[face]), patch.object(server, 'portrait_region', return_value=(image, {'x':0,'y':.1,'width':1,'height':.8})), patch.object(server, 'infer_matte', return_value=(clipped,(100,100))) as infer:
+            with self.assertRaises(PortraitInputError): server.matte_image(raw.getvalue())
+            self.assertEqual(infer.call_count, 2)
+
     def face(self):
         return {'x': .3, 'y': .25, 'width': .3, 'height': .35, 'clipped': False,
                 'landmarks': [[.38,.38],[.52,.38],[.45,.46],[.4,.53],[.5,.53]]}

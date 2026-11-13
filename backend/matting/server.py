@@ -24,6 +24,18 @@ session = ort.InferenceSession(model_path, sess_options=options, providers=['CPU
 gate = threading.BoundedSemaphore(1)
 admission = threading.BoundedSemaphore(3)  # One processing + at most two waiting.
 
+def infer_matte(image):
+    width, height = image.size
+    scale = min(512 / min(width, height), 1024 / max(width, height))
+    size = (max(32, int(width * scale) // 32 * 32), max(32, int(height * scale) // 32 * 32))
+    values = (np.asarray(image.resize(size, Image.Resampling.BOX), dtype=np.float32) - 127.5) / 127.5
+    tensor = values.transpose(2, 0, 1)[None]
+    output = session.run(None, {session.get_inputs()[0].name: tensor})[0].squeeze()
+    if output.shape != (size[1], size[0]) or not np.isfinite(output).all() or (output > .5).mean() < .005:
+        raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
+    return output, size
+
+
 def matte_image(raw):
     with Image.open(io.BytesIO(raw)) as source:
         if source.format not in ('JPEG', 'PNG') or getattr(source, 'n_frames', 1) != 1:
@@ -33,17 +45,19 @@ def matte_image(raw):
         image = ImageOps.exif_transpose(source).convert('RGB')
     faces = detect_faces(image)
     validate_face(image, faces)
-    image, region = portrait_region(image, faces)
-    width, height = image.size
-    # Official MODNet preprocessing: RGB [-1,1], aspect ratio, multiple of 32.
-    scale = min(512 / min(width, height), 1024 / max(width, height))
-    size = (max(32, int(width * scale) // 32 * 32), max(32, int(height * scale) // 32 * 32))
-    values = (np.asarray(image.resize(size, Image.Resampling.BOX), dtype=np.float32) - 127.5) / 127.5
-    tensor = values.transpose(2, 0, 1)[None]
-    output = session.run(None, {session.get_inputs()[0].name: tensor})[0].squeeze()
-    if not np.isfinite(output).all() or (output > .5).mean() < .005:
-        raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
-    validate_matte(output, faces[0], region)
+    complete = image
+    image, region = portrait_region(complete, faces)
+    output, size = infer_matte(image)
+    try:
+        validate_matte(output, faces[0], region)
+    except PortraitInputError as error:
+        # A regional crop can cut off a tall bun even when the input is complete.
+        # Retry the complete source once; never invent or paint back missing hair.
+        if error.code != 'MATTING_INCOMPLETE_HEAD' or not region or region['y'] <= 0:
+            raise
+        region = None
+        output, size = infer_matte(complete)
+        validate_matte(output, faces[0], region)
     output = clean_matte(output, faces[0], region)
     validate_matte(output, faces[0], region)
     mask = Image.fromarray(np.rint(np.clip(output, 0, 1) * 255).astype(np.uint8))
