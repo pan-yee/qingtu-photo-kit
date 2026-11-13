@@ -1,0 +1,18 @@
+{
+  "indoor30-20261113": {
+    "summary": {
+      "rendered": 16,
+      "rejected": 14
+    },
+    "status_or_crop_changes": [],
+    "jpeg_hash_changes": []
+  },
+  "portrait100-20261113": {
+    "summary": {
+      "rendered": 31,
+      "rejected": 69
+    },
+    "status_or_crop_changes": [],
+    "jpeg_hash_changes": []
+  }
+}

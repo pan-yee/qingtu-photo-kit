@@ -79,6 +79,13 @@ def validate_matte(mask, face, region):
     inner = mask[max(0, y0):min(mask.shape[0], y1 + 1), max(0, x0):min(mask.shape[1], x1 + 1)]
     if not inner.size or float(inner.mean()) < .85 or float((inner > .5).mean()) < .95:
         raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
+    # The central check starts at 20% of the face box and can miss an erased
+    # forehead. This band is inside the detected face, not an assumed hairline.
+    x0, y0 = local(face['x'] + face['width'] * .25, face['y'] + face['height'] * .05)
+    x1, y1 = local(face['x'] + face['width'] * .75, face['y'] + face['height'] * .25)
+    forehead = mask[max(0, y0):min(mask.shape[0], y1 + 1), max(0, x0):min(mask.shape[1], x1 + 1)]
+    if not forehead.size or float(forehead.mean()) < .85 or float((forehead > .5).mean()) < .95:
+        raise PortraitInputError('MATTING_INCOMPLETE_SUBJECT')
     # Inspect both original and regional top edges. A regional crop can cut hair.
     x0, _ = local(face['x'], 0)
     x1, _ = local(face['x'] + face['width'], 0)

@@ -51,9 +51,12 @@ def matte_image(raw):
     try:
         validate_matte(output, faces[0], region)
     except PortraitInputError as error:
-        # A regional crop can cut off a tall bun even when the input is complete.
-        # Retry the complete source once; never invent or paint back missing hair.
-        if error.code != 'MATTING_INCOMPLETE_HEAD' or not region or region['y'] <= 0:
+        # A regional crop can cut hair or lose a dark forehead against clutter.
+        # Retry with real source context once; never paint missing pixels back.
+        retry_head = error.code == 'MATTING_INCOMPLETE_HEAD' and region and region['y'] > 0
+        retry_subject = error.code == 'MATTING_INCOMPLETE_SUBJECT' and region and (
+            region['width'] < 1 or region['height'] < 1)
+        if not (retry_head or retry_subject):
             raise
         region = None
         output, size = infer_matte(complete)

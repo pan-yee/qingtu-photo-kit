@@ -1,0 +1,2356 @@
+{
+  "count": 100,
+  "input_gates": {
+    "MATTING_NO_FACE": 53,
+    "MATTING_INCOMPLETE_HEAD": 5,
+    "MATTING_MULTIPLE_FACES": 13,
+    "eligible": 12,
+    "MATTING_IMAGE_TOO_SMALL": 16,
+    "MATTING_FACE_POSE": 1
+  },
+  "scope": "Diagnostic regional mattes on all 100, including app-rejected inputs. COCO coarse polygons with 5px excluded boundary on 512 grid; NOT fine-hair alpha ground truth or ID generation success.",
+  "summary": {
+    "tune": {
+      "paired_count": 60,
+      "candidates": {
+        "512": {
+          "background_residual": 0.06306907011182451,
+          "foreground_loss": 0.3578421834788363,
+          "inference_ms": 874.0721666666666
+        },
+        "384": {
+          "background_residual": 0.05998894693725561,
+          "foreground_loss": 0.35466634361849475,
+          "inference_ms": 479.8618333333333
+        },
+        "640": {
+          "background_residual": 0.06598873457528498,
+          "foreground_loss": 0.41165195395199894,
+          "inference_ms": 1337.9585000000002
+        }
+      }
+    },
+    "holdout": {
+      "paired_count": 40,
+      "candidates": {
+        "512": {
+          "background_residual": 0.08633425750035997,
+          "foreground_loss": 0.3311506944912253,
+          "inference_ms": 568.9772499999999
+        },
+        "384": {
+          "background_residual": 0.08767097620454933,
+          "foreground_loss": 0.291043172996433,
+          "inference_ms": 300.491
+        },
+        "640": {
+          "background_residual": 0.07105990445354564,
+          "foreground_loss": 0.34088528561696874,
+          "inference_ms": 870.98225
+        }
+      }
+    }
+  },
+  "samples": [
+    {
+      "id": "coco-000000468501",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.008234774693846703,
+          "foreground_loss": 0.25603315234184265,
+          "inference_ms": 504.41
+        },
+        "384": {
+          "background_residual": 0.0005484109278768301,
+          "foreground_loss": 0.27434125542640686,
+          "inference_ms": 293.93
+        },
+        "640": {
+          "background_residual": 0.0046516223810613155,
+          "foreground_loss": 0.20168238878250122,
+          "inference_ms": 2037.98
+        }
+      }
+    },
+    {
+      "id": "coco-000000355257",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.03370213136076927,
+          "foreground_loss": 0.999999463558197,
+          "inference_ms": 1785.78
+        },
+        "384": {
+          "background_residual": 0.0328647643327713,
+          "foreground_loss": 0.9999980926513672,
+          "inference_ms": 1054.29
+        },
+        "640": {
+          "background_residual": 0.03986930102109909,
+          "foreground_loss": 0.9999980330467224,
+          "inference_ms": 2763.68
+        }
+      }
+    },
+    {
+      "id": "coco-000000424349",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.02401730976998806,
+          "foreground_loss": 0.0039017926901578903,
+          "inference_ms": 1882.78
+        },
+        "384": {
+          "background_residual": 0.007602222263813019,
+          "foreground_loss": 0.002141037490218878,
+          "inference_ms": 1134.64
+        },
+        "640": {
+          "background_residual": 0.014747974462807178,
+          "foreground_loss": 0.00726060988381505,
+          "inference_ms": 2944.66
+        }
+      }
+    },
+    {
+      "id": "coco-000000310862",
+      "partition": "tune",
+      "input_gate": "MATTING_INCOMPLETE_HEAD",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.03363511338829994,
+          "foreground_loss": 0.001349868718534708,
+          "inference_ms": 1078.93
+        },
+        "384": {
+          "background_residual": 0.033644624054431915,
+          "foreground_loss": 0.0017161492723971605,
+          "inference_ms": 776.79
+        },
+        "640": {
+          "background_residual": 0.033409520983695984,
+          "foreground_loss": 0.0015337057411670685,
+          "inference_ms": 1656.87
+        }
+      }
+    },
+    {
+      "id": "coco-000000231339",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.00028927737730555236,
+          "foreground_loss": 0.0008936226367950439,
+          "inference_ms": 1208.81
+        },
+        "384": {
+          "background_residual": 0.0012720780214294791,
+          "foreground_loss": 0.001646059681661427,
+          "inference_ms": 582.16
+        },
+        "640": {
+          "background_residual": 0.0006288143340498209,
+          "foreground_loss": 0.003152258927002549,
+          "inference_ms": 1657.8
+        }
+      }
+    },
+    {
+      "id": "coco-000000554266",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0651228278875351,
+          "foreground_loss": 0.3952885568141937,
+          "inference_ms": 1093.86
+        },
+        "384": {
+          "background_residual": 0.06437870860099792,
+          "foreground_loss": 0.401207834482193,
+          "inference_ms": 968.97
+        },
+        "640": {
+          "background_residual": 0.052678100764751434,
+          "foreground_loss": 0.24649553000926971,
+          "inference_ms": 1788.35
+        }
+      }
+    },
+    {
+      "id": "coco-000000517056",
+      "partition": "tune",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.023091215640306473,
+          "foreground_loss": 0.07666244357824326,
+          "inference_ms": 1022.73
+        },
+        "384": {
+          "background_residual": 0.009709344245493412,
+          "foreground_loss": 0.054032426327466965,
+          "inference_ms": 782.69
+        },
+        "640": {
+          "background_residual": 0.009661592543125153,
+          "foreground_loss": 0.07261432707309723,
+          "inference_ms": 1742.9
+        }
+      }
+    },
+    {
+      "id": "coco-000000413395",
+      "partition": "tune",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.2549751102924347,
+          "foreground_loss": 0.01867511123418808,
+          "inference_ms": 982.52
+        },
+        "384": {
+          "background_residual": 0.2553361654281616,
+          "foreground_loss": 0.015104003250598907,
+          "inference_ms": 571.01
+        },
+        "640": {
+          "background_residual": 0.23188042640686035,
+          "foreground_loss": 0.04717840999364853,
+          "inference_ms": 1421.31
+        }
+      }
+    },
+    {
+      "id": "coco-000000534041",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.08021813631057739,
+          "foreground_loss": 0.20727823674678802,
+          "inference_ms": 862.77
+        },
+        "384": {
+          "background_residual": 0.01632317341864109,
+          "foreground_loss": 0.2652900218963623,
+          "inference_ms": 489.76
+        },
+        "640": {
+          "background_residual": 0.2750527262687683,
+          "foreground_loss": 0.2043110877275467,
+          "inference_ms": 1266.43
+        }
+      }
+    },
+    {
+      "id": "coco-000000468505",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.008745255880057812,
+          "foreground_loss": 0.9997100830078125,
+          "inference_ms": 786.08
+        },
+        "384": {
+          "background_residual": 0.003901810385286808,
+          "foreground_loss": 0.9999850988388062,
+          "inference_ms": 428.51
+        },
+        "640": {
+          "background_residual": 0.0017259003361687064,
+          "foreground_loss": 0.9999896883964539,
+          "inference_ms": 1390.96
+        }
+      }
+    },
+    {
+      "id": "coco-000000578871",
+      "partition": "tune",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.12490769475698471,
+          "foreground_loss": 0.01947575807571411,
+          "inference_ms": 1318.01
+        },
+        "384": {
+          "background_residual": 0.06613514572381973,
+          "foreground_loss": 0.10454821586608887,
+          "inference_ms": 756.6
+        },
+        "640": {
+          "background_residual": 0.19654130935668945,
+          "foreground_loss": 0.01606980711221695,
+          "inference_ms": 1833.68
+        }
+      }
+    },
+    {
+      "id": "coco-000000117908",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.02256672829389572,
+          "foreground_loss": 0.5487875938415527,
+          "inference_ms": 1636.59
+        },
+        "384": {
+          "background_residual": 0.024661121889948845,
+          "foreground_loss": 0.40160414576530457,
+          "inference_ms": 677.28
+        },
+        "640": {
+          "background_residual": 0.04621267691254616,
+          "foreground_loss": 0.6156649589538574,
+          "inference_ms": 2127.78
+        }
+      }
+    },
+    {
+      "id": "coco-000000435208",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.01375587284564972,
+          "foreground_loss": 0.8485988974571228,
+          "inference_ms": 1103.44
+        },
+        "384": {
+          "background_residual": 0.0017053807387128472,
+          "foreground_loss": 0.9095907211303711,
+          "inference_ms": 763.78
+        },
+        "640": {
+          "background_residual": 0.004869865253567696,
+          "foreground_loss": 0.7996364235877991,
+          "inference_ms": 1765.31
+        }
+      }
+    },
+    {
+      "id": "coco-000000319100",
+      "partition": "tune",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.025765592232346535,
+          "foreground_loss": 0.07682691514492035,
+          "inference_ms": 1250.72
+        },
+        "384": {
+          "background_residual": 0.027130909264087677,
+          "foreground_loss": 0.049394793808460236,
+          "inference_ms": 588.97
+        },
+        "640": {
+          "background_residual": 0.052291881293058395,
+          "foreground_loss": 0.07587049156427383,
+          "inference_ms": 1453.22
+        }
+      }
+    },
+    {
+      "id": "coco-000000173008",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.020491009578108788,
+          "foreground_loss": 0.05533131584525108,
+          "inference_ms": 1730.17
+        },
+        "384": {
+          "background_residual": 0.007799023296684027,
+          "foreground_loss": 0.0016182441031560302,
+          "inference_ms": 462.69
+        },
+        "640": {
+          "background_residual": 0.018017461523413658,
+          "foreground_loss": 0.5081465244293213,
+          "inference_ms": 1221.64
+        }
+      }
+    },
+    {
+      "id": "coco-000000557916",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.011536306701600552,
+          "foreground_loss": 0.06772684305906296,
+          "inference_ms": 948.57
+        },
+        "384": {
+          "background_residual": 0.004626828245818615,
+          "foreground_loss": 0.07124090939760208,
+          "inference_ms": 495.43
+        },
+        "640": {
+          "background_residual": 0.0023903129622340202,
+          "foreground_loss": 0.08742368221282959,
+          "inference_ms": 1511.12
+        }
+      }
+    },
+    {
+      "id": "coco-000000099810",
+      "partition": "tune",
+      "input_gate": "MATTING_INCOMPLETE_HEAD",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.09188450872898102,
+          "foreground_loss": 0.00177721306681633,
+          "inference_ms": 614.46
+        },
+        "384": {
+          "background_residual": 0.05415627360343933,
+          "foreground_loss": 0.0025663431733846664,
+          "inference_ms": 325.88
+        },
+        "640": {
+          "background_residual": 0.13329072296619415,
+          "foreground_loss": 0.0017381804063916206,
+          "inference_ms": 1035.61
+        }
+      }
+    },
+    {
+      "id": "coco-000000484978",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.055050212889909744,
+          "foreground_loss": 0.8889161348342896,
+          "inference_ms": 754.22
+        },
+        "384": {
+          "background_residual": 0.10198955237865448,
+          "foreground_loss": 0.28752610087394714,
+          "inference_ms": 424.45
+        },
+        "640": {
+          "background_residual": 0.0008231097017414868,
+          "foreground_loss": 0.9976071715354919,
+          "inference_ms": 1284.01
+        }
+      }
+    },
+    {
+      "id": "coco-000000084362",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.2978001534938812,
+          "foreground_loss": 0.5333932638168335,
+          "inference_ms": 829.07
+        },
+        "384": {
+          "background_residual": 0.27860167622566223,
+          "foreground_loss": 0.9889288544654846,
+          "inference_ms": 542.71
+        },
+        "640": {
+          "background_residual": 0.3439488708972931,
+          "foreground_loss": 0.5265358090400696,
+          "inference_ms": 1211.79
+        }
+      }
+    },
+    {
+      "id": "coco-000000010707",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.02103406749665737,
+          "foreground_loss": 0.9454495906829834,
+          "inference_ms": 853.99
+        },
+        "384": {
+          "background_residual": 0.04491187632083893,
+          "foreground_loss": 0.8331331014633179,
+          "inference_ms": 489.13
+        },
+        "640": {
+          "background_residual": 0.000526663672644645,
+          "foreground_loss": 0.9926005601882935,
+          "inference_ms": 1242.97
+        }
+      }
+    },
+    {
+      "id": "coco-000000419974",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.06367723643779755,
+          "foreground_loss": 0.04306779429316521,
+          "inference_ms": 979.74
+        },
+        "384": {
+          "background_residual": 0.0037145011592656374,
+          "foreground_loss": 0.04306168481707573,
+          "inference_ms": 462.71
+        },
+        "640": {
+          "background_residual": 0.019682621583342552,
+          "foreground_loss": 0.05744365602731705,
+          "inference_ms": 1420.39
+        }
+      }
+    },
+    {
+      "id": "coco-000000397133",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.012284626252949238,
+          "foreground_loss": 0.6738367080688477,
+          "inference_ms": 862.9
+        },
+        "384": {
+          "background_residual": 0.011026756837964058,
+          "foreground_loss": 0.9856896996498108,
+          "inference_ms": 467.21
+        },
+        "640": {
+          "background_residual": 0.012006087228655815,
+          "foreground_loss": 0.37030893564224243,
+          "inference_ms": 1258.03
+        }
+      }
+    },
+    {
+      "id": "coco-000000033638",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.00012691722076851875,
+          "foreground_loss": 6.092205876484513e-05,
+          "inference_ms": 819.1
+        },
+        "384": {
+          "background_residual": 7.776170605211519e-06,
+          "foreground_loss": 0.13098779320716858,
+          "inference_ms": 467.64
+        },
+        "640": {
+          "background_residual": 0.0006519644521176815,
+          "foreground_loss": 0.3053922951221466,
+          "inference_ms": 1328.89
+        }
+      }
+    },
+    {
+      "id": "coco-000000139077",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.000693082227371633,
+          "foreground_loss": 0.17028717696666718,
+          "inference_ms": 722.64
+        },
+        "384": {
+          "background_residual": 0.00501957256346941,
+          "foreground_loss": 0.015652447938919067,
+          "inference_ms": 428.55
+        },
+        "640": {
+          "background_residual": 0.0021305540576577187,
+          "foreground_loss": 0.1403203308582306,
+          "inference_ms": 1142.4
+        }
+      }
+    },
+    {
+      "id": "coco-000000371749",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.03262609243392944,
+          "foreground_loss": 0.7588855624198914,
+          "inference_ms": 726.22
+        },
+        "384": {
+          "background_residual": 0.0337848924100399,
+          "foreground_loss": 0.8732588291168213,
+          "inference_ms": 412.26
+        },
+        "640": {
+          "background_residual": 0.03609852492809296,
+          "foreground_loss": 0.816798210144043,
+          "inference_ms": 1132.49
+        }
+      }
+    },
+    {
+      "id": "coco-000000420840",
+      "partition": "tune",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.05072746425867081,
+          "foreground_loss": 0.0028465380892157555,
+          "inference_ms": 617.0
+        },
+        "384": {
+          "background_residual": 0.050510913133621216,
+          "foreground_loss": 0.0021653883159160614,
+          "inference_ms": 327.5
+        },
+        "640": {
+          "background_residual": 0.05011288449168205,
+          "foreground_loss": 0.001525301137007773,
+          "inference_ms": 919.82
+        }
+      }
+    },
+    {
+      "id": "coco-000000441247",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.016456052660942078,
+          "foreground_loss": 0.6043583154678345,
+          "inference_ms": 866.6
+        },
+        "384": {
+          "background_residual": 0.004173520486801863,
+          "foreground_loss": 0.6175841689109802,
+          "inference_ms": 471.0
+        },
+        "640": {
+          "background_residual": 0.015319150872528553,
+          "foreground_loss": 0.6042030453681946,
+          "inference_ms": 1330.38
+        }
+      }
+    },
+    {
+      "id": "coco-000000570471",
+      "partition": "tune",
+      "input_gate": "MATTING_INCOMPLETE_HEAD",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.1288391649723053,
+          "foreground_loss": 0.6382600665092468,
+          "inference_ms": 710.0
+        },
+        "384": {
+          "background_residual": 0.15051044523715973,
+          "foreground_loss": 0.463922917842865,
+          "inference_ms": 348.18
+        },
+        "640": {
+          "background_residual": 0.18093976378440857,
+          "foreground_loss": 0.6951460838317871,
+          "inference_ms": 1082.86
+        }
+      }
+    },
+    {
+      "id": "coco-000000044279",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0017876285128295422,
+          "foreground_loss": 0.08058368414640427,
+          "inference_ms": 773.77
+        },
+        "384": {
+          "background_residual": 0.0034921015612781048,
+          "foreground_loss": 0.11261887848377228,
+          "inference_ms": 456.36
+        },
+        "640": {
+          "background_residual": 0.002257793676108122,
+          "foreground_loss": 0.07615011930465698,
+          "inference_ms": 1298.98
+        }
+      }
+    },
+    {
+      "id": "coco-000000226147",
+      "partition": "tune",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.07870196551084518,
+          "foreground_loss": 0.14568741619586945,
+          "inference_ms": 715.23
+        },
+        "384": {
+          "background_residual": 0.0793192982673645,
+          "foreground_loss": 0.0956493690609932,
+          "inference_ms": 365.11
+        },
+        "640": {
+          "background_residual": 0.0920880138874054,
+          "foreground_loss": 0.2975674867630005,
+          "inference_ms": 1137.47
+        }
+      }
+    },
+    {
+      "id": "coco-000000286182",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 1.8433733202982694e-05,
+          "foreground_loss": 0.967978835105896,
+          "inference_ms": 730.41
+        },
+        "384": {
+          "background_residual": 2.7032459911424667e-05,
+          "foreground_loss": 0.8184182643890381,
+          "inference_ms": 393.75
+        },
+        "640": {
+          "background_residual": 9.731170393934008e-06,
+          "foreground_loss": 0.9999482035636902,
+          "inference_ms": 1136.62
+        }
+      }
+    },
+    {
+      "id": "coco-000000438774",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 3.7836873616470257e-06,
+          "foreground_loss": 0.9999759197235107,
+          "inference_ms": 785.53
+        },
+        "384": {
+          "background_residual": 4.136630377615802e-05,
+          "foreground_loss": 0.9994449019432068,
+          "inference_ms": 424.98
+        },
+        "640": {
+          "background_residual": 3.3205633371835575e-06,
+          "foreground_loss": 0.9999872446060181,
+          "inference_ms": 1141.62
+        }
+      }
+    },
+    {
+      "id": "coco-000000347174",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.4165590703487396,
+          "foreground_loss": 0.029513349756598473,
+          "inference_ms": 810.0
+        },
+        "384": {
+          "background_residual": 0.2940969467163086,
+          "foreground_loss": 0.32461056113243103,
+          "inference_ms": 455.55
+        },
+        "640": {
+          "background_residual": 0.3454159200191498,
+          "foreground_loss": 0.13129490613937378,
+          "inference_ms": 1292.35
+        }
+      }
+    },
+    {
+      "id": "coco-000000025603",
+      "partition": "tune",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.00022594621987082064,
+          "foreground_loss": 0.9571074843406677,
+          "inference_ms": 731.9
+        },
+        "384": {
+          "background_residual": 0.04413449019193649,
+          "foreground_loss": 0.8654972314834595,
+          "inference_ms": 414.74
+        },
+        "640": {
+          "background_residual": 0.007419372443109751,
+          "foreground_loss": 0.9175985455513,
+          "inference_ms": 1181.78
+        }
+      }
+    },
+    {
+      "id": "coco-000000494869",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.006171537563204765,
+          "foreground_loss": 0.0784226581454277,
+          "inference_ms": 828.96
+        },
+        "384": {
+          "background_residual": 0.011677336879074574,
+          "foreground_loss": 0.2607569992542267,
+          "inference_ms": 446.43
+        },
+        "640": {
+          "background_residual": 0.026659436523914337,
+          "foreground_loss": 0.08941805362701416,
+          "inference_ms": 1433.53
+        }
+      }
+    },
+    {
+      "id": "coco-000000051610",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.003353844163939357,
+          "foreground_loss": 0.3561830222606659,
+          "inference_ms": 852.28
+        },
+        "384": {
+          "background_residual": 0.0002910057082772255,
+          "foreground_loss": 0.3498302102088928,
+          "inference_ms": 459.37
+        },
+        "640": {
+          "background_residual": 0.0005240888567641377,
+          "foreground_loss": 0.32595327496528625,
+          "inference_ms": 1320.3
+        }
+      }
+    },
+    {
+      "id": "coco-000000284764",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0033757074270397425,
+          "foreground_loss": 0.15302084386348724,
+          "inference_ms": 848.62
+        },
+        "384": {
+          "background_residual": 0.002704611048102379,
+          "foreground_loss": 0.24752017855644226,
+          "inference_ms": 487.38
+        },
+        "640": {
+          "background_residual": 0.04216253012418747,
+          "foreground_loss": 0.27625688910484314,
+          "inference_ms": 1340.13
+        }
+      }
+    },
+    {
+      "id": "coco-000000172877",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 1.0034318620455451e-05,
+          "foreground_loss": 0.25961264967918396,
+          "inference_ms": 865.55
+        },
+        "384": {
+          "background_residual": 2.827097887347918e-06,
+          "foreground_loss": 0.05738018453121185,
+          "inference_ms": 444.85
+        },
+        "640": {
+          "background_residual": 3.685869160108268e-05,
+          "foreground_loss": 0.8857938647270203,
+          "inference_ms": 1249.03
+        }
+      }
+    },
+    {
+      "id": "coco-000000483999",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.017936628311872482,
+          "foreground_loss": 0.5641748905181885,
+          "inference_ms": 753.84
+        },
+        "384": {
+          "background_residual": 0.013403581455349922,
+          "foreground_loss": 0.6389592885971069,
+          "inference_ms": 441.25
+        },
+        "640": {
+          "background_residual": 0.03069770522415638,
+          "foreground_loss": 0.7031821608543396,
+          "inference_ms": 1292.25
+        }
+      }
+    },
+    {
+      "id": "coco-000000425226",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.00014069855387788266,
+          "foreground_loss": 0.1026323214173317,
+          "inference_ms": 785.73
+        },
+        "384": {
+          "background_residual": 0.00020248476357664913,
+          "foreground_loss": 0.08866017311811447,
+          "inference_ms": 487.68
+        },
+        "640": {
+          "background_residual": 2.2627278667641804e-05,
+          "foreground_loss": 0.13334843516349792,
+          "inference_ms": 1373.66
+        }
+      }
+    },
+    {
+      "id": "coco-000000035682",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.09481703490018845,
+          "foreground_loss": 0.9999979138374329,
+          "inference_ms": 960.55
+        },
+        "384": {
+          "background_residual": 0.09511544555425644,
+          "foreground_loss": 0.9999980330467224,
+          "inference_ms": 497.57
+        },
+        "640": {
+          "background_residual": 0.09547553211450577,
+          "foreground_loss": 0.7347672581672668,
+          "inference_ms": 1398.99
+        }
+      }
+    },
+    {
+      "id": "coco-000000445792",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.22400198876857758,
+          "foreground_loss": 0.018602121621370316,
+          "inference_ms": 803.76
+        },
+        "384": {
+          "background_residual": 0.220292329788208,
+          "foreground_loss": 0.1495422124862671,
+          "inference_ms": 468.34
+        },
+        "640": {
+          "background_residual": 0.2511601746082306,
+          "foreground_loss": 0.044557247310876846,
+          "inference_ms": 1371.83
+        }
+      }
+    },
+    {
+      "id": "coco-000000265777",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.29511192440986633,
+          "foreground_loss": 0.9076506495475769,
+          "inference_ms": 750.21
+        },
+        "384": {
+          "background_residual": 0.39406582713127136,
+          "foreground_loss": 0.5796447396278381,
+          "inference_ms": 392.11
+        },
+        "640": {
+          "background_residual": 0.1970740705728531,
+          "foreground_loss": 0.6638673543930054,
+          "inference_ms": 1345.76
+        }
+      }
+    },
+    {
+      "id": "coco-000000156643",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.016984984278678894,
+          "foreground_loss": 0.2998954951763153,
+          "inference_ms": 1535.43
+        },
+        "384": {
+          "background_residual": 0.16156263649463654,
+          "foreground_loss": 0.2523166239261627,
+          "inference_ms": 530.83
+        },
+        "640": {
+          "background_residual": 0.02939225733280182,
+          "foreground_loss": 0.8878271579742432,
+          "inference_ms": 979.46
+        }
+      }
+    },
+    {
+      "id": "coco-000000469067",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.04158642515540123,
+          "foreground_loss": 0.024203265085816383,
+          "inference_ms": 620.36
+        },
+        "384": {
+          "background_residual": 0.059319719672203064,
+          "foreground_loss": 0.005052465945482254,
+          "inference_ms": 339.88
+        },
+        "640": {
+          "background_residual": 0.015115058980882168,
+          "foreground_loss": 0.13847742974758148,
+          "inference_ms": 1456.1
+        }
+      }
+    },
+    {
+      "id": "coco-000000367095",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.020298147574067116,
+          "foreground_loss": 0.3599294424057007,
+          "inference_ms": 710.64
+        },
+        "384": {
+          "background_residual": 0.0015263718087226152,
+          "foreground_loss": 0.48070043325424194,
+          "inference_ms": 313.33
+        },
+        "640": {
+          "background_residual": 0.023506280034780502,
+          "foreground_loss": 0.5117350816726685,
+          "inference_ms": 1071.52
+        }
+      }
+    },
+    {
+      "id": "coco-000000040757",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.000868201837874949,
+          "foreground_loss": 0.9995996952056885,
+          "inference_ms": 645.74
+        },
+        "384": {
+          "background_residual": 0.00015906312910374254,
+          "foreground_loss": 0.9999911785125732,
+          "inference_ms": 405.71
+        },
+        "640": {
+          "background_residual": 0.014583471231162548,
+          "foreground_loss": 0.9181635975837708,
+          "inference_ms": 1044.4
+        }
+      }
+    },
+    {
+      "id": "coco-000000330818",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.007575780153274536,
+          "foreground_loss": 0.1861283779144287,
+          "inference_ms": 635.01
+        },
+        "384": {
+          "background_residual": 0.010167448781430721,
+          "foreground_loss": 0.12312504649162292,
+          "inference_ms": 373.62
+        },
+        "640": {
+          "background_residual": 0.0053718117997050285,
+          "foreground_loss": 0.5865485668182373,
+          "inference_ms": 1182.5
+        }
+      }
+    },
+    {
+      "id": "coco-000000382125",
+      "partition": "tune",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.10581045597791672,
+          "foreground_loss": 0.09603343904018402,
+          "inference_ms": 659.37
+        },
+        "384": {
+          "background_residual": 0.09989380836486816,
+          "foreground_loss": 0.09060174971818924,
+          "inference_ms": 386.91
+        },
+        "640": {
+          "background_residual": 0.08795945346355438,
+          "foreground_loss": 0.10515750199556351,
+          "inference_ms": 928.86
+        }
+      }
+    },
+    {
+      "id": "coco-000000023899",
+      "partition": "tune",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.2065059393644333,
+          "foreground_loss": 0.5210131406784058,
+          "inference_ms": 698.45
+        },
+        "384": {
+          "background_residual": 0.21451584994792938,
+          "foreground_loss": 0.697198212146759,
+          "inference_ms": 401.2
+        },
+        "640": {
+          "background_residual": 0.08708295226097107,
+          "foreground_loss": 0.5484215021133423,
+          "inference_ms": 1115.07
+        }
+      }
+    },
+    {
+      "id": "coco-000000402720",
+      "partition": "tune",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 3,
+      "metrics": {
+        "512": {
+          "background_residual": 0.12544618546962738,
+          "foreground_loss": 0.008998766541481018,
+          "inference_ms": 454.88
+        },
+        "384": {
+          "background_residual": 0.13170628249645233,
+          "foreground_loss": 0.004807948134839535,
+          "inference_ms": 259.08
+        },
+        "640": {
+          "background_residual": 0.12119800597429276,
+          "foreground_loss": 0.14984290301799774,
+          "inference_ms": 794.85
+        }
+      }
+    },
+    {
+      "id": "coco-000000226408",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.15162186324596405,
+          "foreground_loss": 0.13370254635810852,
+          "inference_ms": 741.42
+        },
+        "384": {
+          "background_residual": 0.013705454766750336,
+          "foreground_loss": 0.14796391129493713,
+          "inference_ms": 348.39
+        },
+        "640": {
+          "background_residual": 0.3513176441192627,
+          "foreground_loss": 0.10957241803407669,
+          "inference_ms": 1118.13
+        }
+      }
+    },
+    {
+      "id": "coco-000000243204",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.09873860329389572,
+          "foreground_loss": 0.5768963098526001,
+          "inference_ms": 623.17
+        },
+        "384": {
+          "background_residual": 0.0019200798124074936,
+          "foreground_loss": 0.8001531958580017,
+          "inference_ms": 393.53
+        },
+        "640": {
+          "background_residual": 0.1156424731016159,
+          "foreground_loss": 0.6636880040168762,
+          "inference_ms": 1125.07
+        }
+      }
+    },
+    {
+      "id": "coco-000000093437",
+      "partition": "tune",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.02581416629254818,
+          "foreground_loss": 0.004084927495568991,
+          "inference_ms": 641.88
+        },
+        "384": {
+          "background_residual": 0.02580851875245571,
+          "foreground_loss": 0.0026260868180543184,
+          "inference_ms": 336.09
+        },
+        "640": {
+          "background_residual": 0.020629458129405975,
+          "foreground_loss": 0.10750189423561096,
+          "inference_ms": 973.75
+        }
+      }
+    },
+    {
+      "id": "coco-000000213086",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.043297044932842255,
+          "foreground_loss": 0.1984577178955078,
+          "inference_ms": 796.4
+        },
+        "384": {
+          "background_residual": 0.025142408907413483,
+          "foreground_loss": 0.02122039720416069,
+          "inference_ms": 398.06
+        },
+        "640": {
+          "background_residual": 0.07117754966020584,
+          "foreground_loss": 0.3111588954925537,
+          "inference_ms": 1218.18
+        }
+      }
+    },
+    {
+      "id": "coco-000000195842",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0013966186670586467,
+          "foreground_loss": 0.05869866535067558,
+          "inference_ms": 642.12
+        },
+        "384": {
+          "background_residual": 0.00018848513718694448,
+          "foreground_loss": 0.05613667890429497,
+          "inference_ms": 356.64
+        },
+        "640": {
+          "background_residual": 0.0004720559227280319,
+          "foreground_loss": 0.07711426168680191,
+          "inference_ms": 1030.24
+        }
+      }
+    },
+    {
+      "id": "coco-000000208363",
+      "partition": "tune",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 3,
+      "metrics": {
+        "512": {
+          "background_residual": 0.07599420100450516,
+          "foreground_loss": 0.6084566116333008,
+          "inference_ms": 540.06
+        },
+        "384": {
+          "background_residual": 0.08525151759386063,
+          "foreground_loss": 0.6464062333106995,
+          "inference_ms": 310.14
+        },
+        "640": {
+          "background_residual": 0.027447296306490898,
+          "foreground_loss": 0.6366862654685974,
+          "inference_ms": 985.27
+        }
+      }
+    },
+    {
+      "id": "coco-000000019786",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.00957027729600668,
+          "foreground_loss": 0.33969196677207947,
+          "inference_ms": 719.57
+        },
+        "384": {
+          "background_residual": 0.006965257693082094,
+          "foreground_loss": 0.07559656351804733,
+          "inference_ms": 361.91
+        },
+        "640": {
+          "background_residual": 0.10670280456542969,
+          "foreground_loss": 0.3280433416366577,
+          "inference_ms": 912.92
+        }
+      }
+    },
+    {
+      "id": "coco-000000166478",
+      "partition": "tune",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.18513382971286774,
+          "foreground_loss": 0.08739840984344482,
+          "inference_ms": 633.5
+        },
+        "384": {
+          "background_residual": 0.30277219414711,
+          "foreground_loss": 0.015355877578258514,
+          "inference_ms": 337.49
+        },
+        "640": {
+          "background_residual": 0.009854158386588097,
+          "foreground_loss": 0.9252611398696899,
+          "inference_ms": 972.53
+        }
+      }
+    },
+    {
+      "id": "coco-000000246968",
+      "partition": "tune",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0030313199386000633,
+          "foreground_loss": 0.5085195302963257,
+          "inference_ms": 597.88
+        },
+        "384": {
+          "background_residual": 0.0038175664376467466,
+          "foreground_loss": 0.47426044940948486,
+          "inference_ms": 308.71
+        },
+        "640": {
+          "background_residual": 0.0007037620525807142,
+          "foreground_loss": 0.017578724771738052,
+          "inference_ms": 1081.03
+        }
+      }
+    },
+    {
+      "id": "coco-000000393569",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0063845086842775345,
+          "foreground_loss": 0.9064589142799377,
+          "inference_ms": 588.37
+        },
+        "384": {
+          "background_residual": 0.006372901611030102,
+          "foreground_loss": 0.9999974370002747,
+          "inference_ms": 349.3
+        },
+        "640": {
+          "background_residual": 0.006662728264927864,
+          "foreground_loss": 0.41344472765922546,
+          "inference_ms": 887.28
+        }
+      }
+    },
+    {
+      "id": "coco-000000317999",
+      "partition": "holdout",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.5681304335594177,
+          "foreground_loss": 0.14264148473739624,
+          "inference_ms": 720.06
+        },
+        "384": {
+          "background_residual": 0.5821095108985901,
+          "foreground_loss": 0.11116506904363632,
+          "inference_ms": 321.54
+        },
+        "640": {
+          "background_residual": 0.4263874292373657,
+          "foreground_loss": 0.3469676971435547,
+          "inference_ms": 1196.91
+        }
+      }
+    },
+    {
+      "id": "coco-000000312552",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.002768638078123331,
+          "foreground_loss": 0.04712170735001564,
+          "inference_ms": 627.71
+        },
+        "384": {
+          "background_residual": 0.0015127308433875442,
+          "foreground_loss": 0.19476749002933502,
+          "inference_ms": 376.84
+        },
+        "640": {
+          "background_residual": 0.02726665511727333,
+          "foreground_loss": 0.1735120266675949,
+          "inference_ms": 1093.5
+        }
+      }
+    },
+    {
+      "id": "coco-000000559543",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0027363491244614124,
+          "foreground_loss": 0.4250238537788391,
+          "inference_ms": 642.14
+        },
+        "384": {
+          "background_residual": 0.0028853013645857573,
+          "foreground_loss": 0.3537484109401703,
+          "inference_ms": 365.69
+        },
+        "640": {
+          "background_residual": 0.0018113696714863181,
+          "foreground_loss": 0.6779943108558655,
+          "inference_ms": 998.42
+        }
+      }
+    },
+    {
+      "id": "coco-000000113720",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.21476832032203674,
+          "foreground_loss": 0.2818858325481415,
+          "inference_ms": 604.8
+        },
+        "384": {
+          "background_residual": 0.19316712021827698,
+          "foreground_loss": 0.315974622964859,
+          "inference_ms": 293.1
+        },
+        "640": {
+          "background_residual": 0.032238349318504333,
+          "foreground_loss": 0.346530020236969,
+          "inference_ms": 878.3
+        }
+      }
+    },
+    {
+      "id": "coco-000000036936",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.08682762086391449,
+          "foreground_loss": 0.14008697867393494,
+          "inference_ms": 588.45
+        },
+        "384": {
+          "background_residual": 0.10766221582889557,
+          "foreground_loss": 0.3116777837276459,
+          "inference_ms": 316.31
+        },
+        "640": {
+          "background_residual": 0.09636668860912323,
+          "foreground_loss": 0.42592984437942505,
+          "inference_ms": 894.18
+        }
+      }
+    },
+    {
+      "id": "coco-000000268378",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 3,
+      "metrics": {
+        "512": {
+          "background_residual": 0.028221571817994118,
+          "foreground_loss": 0.307758092880249,
+          "inference_ms": 696.25
+        },
+        "384": {
+          "background_residual": 0.018406646326184273,
+          "foreground_loss": 0.566734254360199,
+          "inference_ms": 385.73
+        },
+        "640": {
+          "background_residual": 0.027467800304293633,
+          "foreground_loss": 0.30756875872612,
+          "inference_ms": 1055.68
+        }
+      }
+    },
+    {
+      "id": "coco-000000027186",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 1.3526515658668359e-06,
+          "foreground_loss": 0.01650090701878071,
+          "inference_ms": 635.27
+        },
+        "384": {
+          "background_residual": 1.227838765771594e-06,
+          "foreground_loss": 0.009602122940123081,
+          "inference_ms": 282.94
+        },
+        "640": {
+          "background_residual": 6.682687853754032e-06,
+          "foreground_loss": 0.018922079354524612,
+          "inference_ms": 773.53
+        }
+      }
+    },
+    {
+      "id": "coco-000000189475",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.17179785668849945,
+          "foreground_loss": 0.04144000634551048,
+          "inference_ms": 597.48
+        },
+        "384": {
+          "background_residual": 0.16373087465763092,
+          "foreground_loss": 0.07316305488348007,
+          "inference_ms": 335.78
+        },
+        "640": {
+          "background_residual": 0.12921974062919617,
+          "foreground_loss": 0.14111477136611938,
+          "inference_ms": 883.01
+        }
+      }
+    },
+    {
+      "id": "coco-000000394940",
+      "partition": "holdout",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.2459443211555481,
+          "foreground_loss": 0.0320105105638504,
+          "inference_ms": 749.76
+        },
+        "384": {
+          "background_residual": 0.24683161079883575,
+          "foreground_loss": 0.03151261433959007,
+          "inference_ms": 288.8
+        },
+        "640": {
+          "background_residual": 0.10472683608531952,
+          "foreground_loss": 0.010726050473749638,
+          "inference_ms": 859.74
+        }
+      }
+    },
+    {
+      "id": "coco-000000436617",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 4,
+      "metrics": {
+        "512": {
+          "background_residual": 0.01812833547592163,
+          "foreground_loss": 0.530461311340332,
+          "inference_ms": 474.97
+        },
+        "384": {
+          "background_residual": 0.028049329295754433,
+          "foreground_loss": 0.49795001745224,
+          "inference_ms": 299.56
+        },
+        "640": {
+          "background_residual": 0.024132700636982918,
+          "foreground_loss": 0.3940487205982208,
+          "inference_ms": 901.95
+        }
+      }
+    },
+    {
+      "id": "coco-000000182155",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.015537912026047707,
+          "foreground_loss": 0.0012326928554102778,
+          "inference_ms": 882.81
+        },
+        "384": {
+          "background_residual": 0.009528984315693378,
+          "foreground_loss": 0.029423320665955544,
+          "inference_ms": 358.47
+        },
+        "640": {
+          "background_residual": 0.022390656173229218,
+          "foreground_loss": 0.0020677230786532164,
+          "inference_ms": 883.57
+        }
+      }
+    },
+    {
+      "id": "coco-000000054654",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.030999664217233658,
+          "foreground_loss": 0.0799344927072525,
+          "inference_ms": 471.07
+        },
+        "384": {
+          "background_residual": 0.039960771799087524,
+          "foreground_loss": 0.07838758826255798,
+          "inference_ms": 295.46
+        },
+        "640": {
+          "background_residual": 0.02178744412958622,
+          "foreground_loss": 0.1325073540210724,
+          "inference_ms": 797.23
+        }
+      }
+    },
+    {
+      "id": "coco-000000215259",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0007806134526617825,
+          "foreground_loss": 0.08118823915719986,
+          "inference_ms": 618.62
+        },
+        "384": {
+          "background_residual": 0.00041390341357328,
+          "foreground_loss": 0.09969094395637512,
+          "inference_ms": 332.23
+        },
+        "640": {
+          "background_residual": 0.001085671130567789,
+          "foreground_loss": 0.08321315050125122,
+          "inference_ms": 958.41
+        }
+      }
+    },
+    {
+      "id": "coco-000000386912",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.00044106037239544094,
+          "foreground_loss": 0.6966114044189453,
+          "inference_ms": 496.97
+        },
+        "384": {
+          "background_residual": 0.004295247606933117,
+          "foreground_loss": 0.04791112244129181,
+          "inference_ms": 284.71
+        },
+        "640": {
+          "background_residual": 0.0011455337516963482,
+          "foreground_loss": 0.9873284697532654,
+          "inference_ms": 822.1
+        }
+      }
+    },
+    {
+      "id": "coco-000000422670",
+      "partition": "holdout",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.10852478444576263,
+          "foreground_loss": 0.1461406797170639,
+          "inference_ms": 496.01
+        },
+        "384": {
+          "background_residual": 0.062392283231019974,
+          "foreground_loss": 0.21733668446540833,
+          "inference_ms": 271.25
+        },
+        "640": {
+          "background_residual": 0.18456828594207764,
+          "foreground_loss": 0.05774744227528572,
+          "inference_ms": 763.35
+        }
+      }
+    },
+    {
+      "id": "coco-000000495732",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.002939861500635743,
+          "foreground_loss": 0.4207134544849396,
+          "inference_ms": 570.14
+        },
+        "384": {
+          "background_residual": 0.005424338858574629,
+          "foreground_loss": 0.16575904190540314,
+          "inference_ms": 299.52
+        },
+        "640": {
+          "background_residual": 0.002309473929926753,
+          "foreground_loss": 0.44147324562072754,
+          "inference_ms": 842.72
+        }
+      }
+    },
+    {
+      "id": "coco-000000066771",
+      "partition": "holdout",
+      "input_gate": "MATTING_INCOMPLETE_HEAD",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.28999578952789307,
+          "foreground_loss": 0.017278119921684265,
+          "inference_ms": 534.31
+        },
+        "384": {
+          "background_residual": 0.46361255645751953,
+          "foreground_loss": 0.007741930428892374,
+          "inference_ms": 280.44
+        },
+        "640": {
+          "background_residual": 0.26950836181640625,
+          "foreground_loss": 0.05544474720954895,
+          "inference_ms": 839.16
+        }
+      }
+    },
+    {
+      "id": "coco-000000553788",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.16414326429367065,
+          "foreground_loss": 0.0029489509761333466,
+          "inference_ms": 761.29
+        },
+        "384": {
+          "background_residual": 0.13817644119262695,
+          "foreground_loss": 0.004307362716645002,
+          "inference_ms": 401.78
+        },
+        "640": {
+          "background_residual": 0.13731135427951813,
+          "foreground_loss": 0.03334411233663559,
+          "inference_ms": 988.58
+        }
+      }
+    },
+    {
+      "id": "coco-000000529762",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0950307697057724,
+          "foreground_loss": 0.5522028803825378,
+          "inference_ms": 476.37
+        },
+        "384": {
+          "background_residual": 0.14736175537109375,
+          "foreground_loss": 0.5760411620140076,
+          "inference_ms": 321.59
+        },
+        "640": {
+          "background_residual": 0.059975765645504,
+          "foreground_loss": 0.5189917683601379,
+          "inference_ms": 862.93
+        }
+      }
+    },
+    {
+      "id": "coco-000000417249",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.02145889587700367,
+          "foreground_loss": 0.7137706279754639,
+          "inference_ms": 457.15
+        },
+        "384": {
+          "background_residual": 3.792735151364468e-05,
+          "foreground_loss": 0.9451676607131958,
+          "inference_ms": 277.56
+        },
+        "640": {
+          "background_residual": 0.021281644701957703,
+          "foreground_loss": 0.5410599112510681,
+          "inference_ms": 795.54
+        }
+      }
+    },
+    {
+      "id": "coco-000000194875",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.14108669757843018,
+          "foreground_loss": 0.9639508724212646,
+          "inference_ms": 384.21
+        },
+        "384": {
+          "background_residual": 0.11618917435407639,
+          "foreground_loss": 0.9680160284042358,
+          "inference_ms": 215.35
+        },
+        "640": {
+          "background_residual": 0.1389561891555786,
+          "foreground_loss": 0.6353592872619629,
+          "inference_ms": 695.87
+        }
+      }
+    },
+    {
+      "id": "coco-000000489764",
+      "partition": "holdout",
+      "input_gate": "MATTING_FACE_POSE",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.17796111106872559,
+          "foreground_loss": 0.12251318991184235,
+          "inference_ms": 579.44
+        },
+        "384": {
+          "background_residual": 0.029279734939336777,
+          "foreground_loss": 0.24839188158512115,
+          "inference_ms": 264.78
+        },
+        "640": {
+          "background_residual": 0.18853877484798431,
+          "foreground_loss": 0.01022662129253149,
+          "inference_ms": 907.3
+        }
+      }
+    },
+    {
+      "id": "coco-000000064868",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.1193372830748558,
+          "foreground_loss": 0.18588748574256897,
+          "inference_ms": 534.79
+        },
+        "384": {
+          "background_residual": 0.10404011607170105,
+          "foreground_loss": 0.11592096835374832,
+          "inference_ms": 299.19
+        },
+        "640": {
+          "background_residual": 0.1663033366203308,
+          "foreground_loss": 0.2305188626050949,
+          "inference_ms": 929.73
+        }
+      }
+    },
+    {
+      "id": "coco-000000455301",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.10719843208789825,
+          "foreground_loss": 0.00221091415733099,
+          "inference_ms": 567.55
+        },
+        "384": {
+          "background_residual": 0.09119361639022827,
+          "foreground_loss": 0.0008861427777446806,
+          "inference_ms": 329.14
+        },
+        "640": {
+          "background_residual": 0.2008669674396515,
+          "foreground_loss": 0.0013382345205172896,
+          "inference_ms": 970.0
+        }
+      }
+    },
+    {
+      "id": "coco-000000199551",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.09124297648668289,
+          "foreground_loss": 0.39852359890937805,
+          "inference_ms": 597.07
+        },
+        "384": {
+          "background_residual": 0.04266611486673355,
+          "foreground_loss": 0.09217484295368195,
+          "inference_ms": 362.14
+        },
+        "640": {
+          "background_residual": 0.05676668509840965,
+          "foreground_loss": 0.5819725394248962,
+          "inference_ms": 1085.43
+        }
+      }
+    },
+    {
+      "id": "coco-000000415882",
+      "partition": "holdout",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.22243456542491913,
+          "foreground_loss": 0.05959229916334152,
+          "inference_ms": 760.93
+        },
+        "384": {
+          "background_residual": 0.27907752990722656,
+          "foreground_loss": 0.07566452026367188,
+          "inference_ms": 303.74
+        },
+        "640": {
+          "background_residual": 0.14340484142303467,
+          "foreground_loss": 0.08011487126350403,
+          "inference_ms": 1089.65
+        }
+      }
+    },
+    {
+      "id": "coco-000000512657",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0037939066532999277,
+          "foreground_loss": 0.22020232677459717,
+          "inference_ms": 694.0
+        },
+        "384": {
+          "background_residual": 0.0024502971209585667,
+          "foreground_loss": 0.28956183791160583,
+          "inference_ms": 319.84
+        },
+        "640": {
+          "background_residual": 0.012776268646121025,
+          "foreground_loss": 0.21188636124134064,
+          "inference_ms": 794.79
+        }
+      }
+    },
+    {
+      "id": "coco-000000546717",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.3123760521411896,
+          "foreground_loss": 0.020535878837108612,
+          "inference_ms": 531.55
+        },
+        "384": {
+          "background_residual": 0.20186388492584229,
+          "foreground_loss": 0.04505060985684395,
+          "inference_ms": 252.15
+        },
+        "640": {
+          "background_residual": 0.18785029649734497,
+          "foreground_loss": 0.103882797062397,
+          "inference_ms": 747.96
+        }
+      }
+    },
+    {
+      "id": "coco-000000492758",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.019605809822678566,
+          "foreground_loss": 0.9999960660934448,
+          "inference_ms": 554.81
+        },
+        "384": {
+          "background_residual": 0.014403126202523708,
+          "foreground_loss": 0.99998539686203,
+          "inference_ms": 309.69
+        },
+        "640": {
+          "background_residual": 0.03671632707118988,
+          "foreground_loss": 0.9414665102958679,
+          "inference_ms": 847.42
+        }
+      }
+    },
+    {
+      "id": "coco-000000107339",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 1.885382880573161e-05,
+          "foreground_loss": 0.7369268536567688,
+          "inference_ms": 475.29
+        },
+        "384": {
+          "background_residual": 0.004189996048808098,
+          "foreground_loss": 0.38176339864730835,
+          "inference_ms": 250.56
+        },
+        "640": {
+          "background_residual": 3.968106102547608e-05,
+          "foreground_loss": 0.9959883093833923,
+          "inference_ms": 837.54
+        }
+      }
+    },
+    {
+      "id": "coco-000000565877",
+      "partition": "holdout",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.007845500484108925,
+          "foreground_loss": 0.003577861934900284,
+          "inference_ms": 495.22
+        },
+        "384": {
+          "background_residual": 0.007768851704895496,
+          "foreground_loss": 0.00521328579634428,
+          "inference_ms": 292.08
+        },
+        "640": {
+          "background_residual": 0.013331826776266098,
+          "foreground_loss": 0.009127145633101463,
+          "inference_ms": 784.6
+        }
+      }
+    },
+    {
+      "id": "coco-000000383842",
+      "partition": "holdout",
+      "input_gate": "MATTING_MULTIPLE_FACES",
+      "faces": 2,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0019194843480363488,
+          "foreground_loss": 0.1306634098291397,
+          "inference_ms": 561.59
+        },
+        "384": {
+          "background_residual": 0.0018450068309903145,
+          "foreground_loss": 0.09940406680107117,
+          "inference_ms": 302.84
+        },
+        "640": {
+          "background_residual": 0.0038745147176086903,
+          "foreground_loss": 0.12531092762947083,
+          "inference_ms": 925.09
+        }
+      }
+    },
+    {
+      "id": "coco-000000170099",
+      "partition": "holdout",
+      "input_gate": "eligible",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 1.4377465049619786e-05,
+          "foreground_loss": 0.011918313801288605,
+          "inference_ms": 484.91
+        },
+        "384": {
+          "background_residual": 5.026471626479179e-06,
+          "foreground_loss": 0.008612941019237041,
+          "inference_ms": 256.43
+        },
+        "640": {
+          "background_residual": 3.115531217190437e-05,
+          "foreground_loss": 0.00952774379402399,
+          "inference_ms": 862.37
+        }
+      }
+    },
+    {
+      "id": "coco-000000322163",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.03012591227889061,
+          "foreground_loss": 0.31458529829978943,
+          "inference_ms": 497.05
+        },
+        "384": {
+          "background_residual": 0.05444356054067612,
+          "foreground_loss": 0.4099659323692322,
+          "inference_ms": 285.58
+        },
+        "640": {
+          "background_residual": 0.03368282690644264,
+          "foreground_loss": 0.24894832074642181,
+          "inference_ms": 727.32
+        }
+      }
+    },
+    {
+      "id": "coco-000000280930",
+      "partition": "holdout",
+      "input_gate": "MATTING_INCOMPLETE_HEAD",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.04005363583564758,
+          "foreground_loss": 0.031154664233326912,
+          "inference_ms": 475.18
+        },
+        "384": {
+          "background_residual": 0.11928007751703262,
+          "foreground_loss": 0.03830025717616081,
+          "inference_ms": 238.78
+        },
+        "640": {
+          "background_residual": 0.02071370556950569,
+          "foreground_loss": 0.12365339696407318,
+          "inference_ms": 695.04
+        }
+      }
+    },
+    {
+      "id": "coco-000000000139",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.0063039385713636875,
+          "foreground_loss": 0.9999987483024597,
+          "inference_ms": 503.5
+        },
+        "384": {
+          "background_residual": 0.009244708344340324,
+          "foreground_loss": 0.9999997019767761,
+          "inference_ms": 281.56
+        },
+        "640": {
+          "background_residual": 0.024026665836572647,
+          "foreground_loss": 0.9999819397926331,
+          "inference_ms": 822.22
+        }
+      }
+    },
+    {
+      "id": "coco-000000356424",
+      "partition": "holdout",
+      "input_gate": "MATTING_NO_FACE",
+      "faces": 0,
+      "metrics": {
+        "512": {
+          "background_residual": 0.07976514846086502,
+          "foreground_loss": 0.4834015667438507,
+          "inference_ms": 419.43
+        },
+        "384": {
+          "background_residual": 0.0022764073219150305,
+          "foreground_loss": 0.3163830637931824,
+          "inference_ms": 259.53
+        },
+        "640": {
+          "background_residual": 0.015818778425455093,
+          "foreground_loss": 0.21660341322422028,
+          "inference_ms": 728.96
+        }
+      }
+    },
+    {
+      "id": "coco-000000166918",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.003586527658626437,
+          "foreground_loss": 0.9999639987945557,
+          "inference_ms": 425.51
+        },
+        "384": {
+          "background_residual": 1.3701701391255483e-05,
+          "foreground_loss": 0.9071016907691956,
+          "inference_ms": 217.8
+        },
+        "640": {
+          "background_residual": 2.2685402655042708e-05,
+          "foreground_loss": 0.9995925426483154,
+          "inference_ms": 712.55
+        }
+      }
+    },
+    {
+      "id": "coco-000000397303",
+      "partition": "holdout",
+      "input_gate": "MATTING_IMAGE_TOO_SMALL",
+      "faces": 1,
+      "metrics": {
+        "512": {
+          "background_residual": 0.013138162903487682,
+          "foreground_loss": 0.9770132899284363,
+          "inference_ms": 527.06
+        },
+        "384": {
+          "background_residual": 0.20467443764209747,
+          "foreground_loss": 0.0012706572888419032,
+          "inference_ms": 239.86
+        },
+        "640": {
+          "background_residual": 0.0010234792716801167,
+          "foreground_loss": 0.9999746680259705,
+          "inference_ms": 699.36
+        }
+      }
+    }
+  ]
+}

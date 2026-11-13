@@ -1,0 +1,2762 @@
+{
+  "selection": "Caption screening, manual inspection of 180 candidates, exclude outdoor/no-person/scene mismatch, then seed 20261113101 sample 100 unique real photos before matting. First 60 tune, final 40 holdout.",
+  "licenses": [
+    {
+      "url": "http://creativecommons.org/licenses/by-nc-sa/2.0/",
+      "id": 1,
+      "name": "Attribution-NonCommercial-ShareAlike License"
+    },
+    {
+      "url": "http://creativecommons.org/licenses/by-nc/2.0/",
+      "id": 2,
+      "name": "Attribution-NonCommercial License"
+    },
+    {
+      "url": "http://creativecommons.org/licenses/by-nc-nd/2.0/",
+      "id": 3,
+      "name": "Attribution-NonCommercial-NoDerivs License"
+    },
+    {
+      "url": "http://creativecommons.org/licenses/by/2.0/",
+      "id": 4,
+      "name": "Attribution License"
+    },
+    {
+      "url": "http://creativecommons.org/licenses/by-sa/2.0/",
+      "id": 5,
+      "name": "Attribution-ShareAlike License"
+    },
+    {
+      "url": "http://creativecommons.org/licenses/by-nd/2.0/",
+      "id": 6,
+      "name": "Attribution-NoDerivs License"
+    },
+    {
+      "url": "http://flickr.com/commons/usage/",
+      "id": 7,
+      "name": "No known copyright restrictions"
+    },
+    {
+      "url": "http://www.usa.gov/copyright.shtml",
+      "id": 8,
+      "name": "United States Government Work"
+    }
+  ],
+  "samples": [
+    {
+      "id": "coco-000000468501",
+      "row_index": 1492,
+      "image_id": 468501,
+      "source": "http://images.cocodataset.org/val2017/000000468501.jpg",
+      "flickr_url": "http://farm2.staticflickr.com/1126/1431706027_d4beec023f_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A group of women playing video games together",
+        "Two people using an interactive gaming system while a person observes them from a couch.",
+        "Three good friends are having a good time playing a game.",
+        "Two players compete in a video game as another person watches. ",
+        "a woman watching two people play a wii game with wii motes"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "d3ac0b9b36c51edd555e3341dae45cf1a88e0f34f3e5eb46a5b0dc280317432f",
+      "download_status": "ok",
+      "candidate_index": 9,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000355257",
+      "row_index": 90,
+      "image_id": 355257,
+      "source": "http://images.cocodataset.org/val2017/000000355257.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2869/8759177830_2ecb0f9160_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A woman laying in a hospital bed hooded up to machines.",
+        "A young girl lying in a hospital room hooked up to machines",
+        "A woman laying in a hospital bed hooked up to an IV and monitors.",
+        "A girl in a hospital bed with an IV and monitors. ",
+        "A woman is laying in a hospital bed and is hooked up to several machines."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "58332692b23cfa5ae5a42abe2b5b3086a46f8e037b501a4fdb5d17e5413206a8",
+      "download_status": "ok",
+      "candidate_index": 154,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000424349",
+      "row_index": 4772,
+      "image_id": 424349,
+      "source": "http://images.cocodataset.org/val2017/000000424349.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3117/2785570918_d1b9b5a6f6_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A man placing a pizza pie in the oven",
+        "A chef is pulling a pizza out of a pizza oven",
+        "A pizza chef putting a pizza in an oven in a professional kitchen.",
+        "people in kitchen taking a pizza out of an oven.",
+        "Two people in a commercial kitchen making pizza."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        640,
+        426
+      ],
+      "image_sha256": "cda92998686c298c4e80c88ad0331de9feec837137ea19e191d86b5c49d9ad18",
+      "download_status": "ok",
+      "candidate_index": 89,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000310862",
+      "row_index": 2596,
+      "image_id": 310862,
+      "source": "http://images.cocodataset.org/val2017/000000310862.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8075/8286602723_ae686aef37_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A man is frowning while standing in an empty room.",
+        "A man in formal business attire stands in an office and looks angry.",
+        "Man in vest and tie standing in room.",
+        "An office view shows cubicles and overhead lights in the background, and to the front ,  a serious looking man with a beard, vest and colorful tie. ",
+        "A man wearing a gray vest and a red stripe tie."
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        612,
+        612
+      ],
+      "image_sha256": "d308275268ce56f773ff5a8335194504089939acca75a040df20de0ed1e87582",
+      "download_status": "ok",
+      "candidate_index": 117,
+      "partition": "tune",
+      "scene": "desk_objects"
+    },
+    {
+      "id": "coco-000000231339",
+      "row_index": 123,
+      "image_id": 231339,
+      "source": "http://images.cocodataset.org/val2017/000000231339.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3163/2981304367_fef9cd9d44_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A little girl is kneeling in front of an open refrigerator. ",
+        "A child in front of a well stocked refrigerator.",
+        "A child kneeling in front of an open refrigerator and looking in at an empty lower shelf.",
+        "a girl is looking into an open refrigerator",
+        "a little girl looking inside the refrigerator. "
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "c1512cc65ba365778c4064c2f22798db1fccd96f127aeff2cdc0bb09ed1e6dc7",
+      "download_status": "ok",
+      "candidate_index": 126,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000554266",
+      "row_index": 4887,
+      "image_id": 554266,
+      "source": "http://images.cocodataset.org/val2017/000000554266.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3099/3226049395_b5478ab509_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A series of photos showing a person laying on a bed.",
+        "Many photos are arranged to show a couple holding hands in bed.",
+        "a bunch of stuff in a home living room",
+        "Adults seen lying in bed in mosaic photograph montage.",
+        "A collage of photos that shoes two people laying on a bed."
+      ],
+      "scene_tags": [
+        "sofa",
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        253
+      ],
+      "image_sha256": "dbf8686ed7c2deb65ffa4f5f4839ffea16b29051ce23b50a846e7aaafeb53612",
+      "download_status": "ok",
+      "candidate_index": 14,
+      "partition": "tune",
+      "scene": "sofa/bedroom_clothes"
+    },
+    {
+      "id": "coco-000000517056",
+      "row_index": 1745,
+      "image_id": 517056,
+      "source": "http://images.cocodataset.org/val2017/000000517056.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8381/8679628322_a6e5f2169e_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "Two women handing out cake on plates on a dining table. ",
+        "Two women stand close to a cake that is mostly gone.",
+        "Two woman are slicing and plating pieces of cake.\n",
+        "Two women stand over a table with a cake cut into pieces.",
+        "Two women are cutting and serving a large cake."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "6a6b5e10a1bb90c1a322cc39088a2e7174f30935e8fd4a9d6b0f9392ac2351e7",
+      "download_status": "ok",
+      "candidate_index": 53,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000413395",
+      "row_index": 1308,
+      "image_id": 413395,
+      "source": "http://images.cocodataset.org/val2017/000000413395.jpg",
+      "flickr_url": "http://farm2.staticflickr.com/1046/1358200056_5858eaf239_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A man sits on the couch with two cats on his lap.",
+        "A man resting on a couch with two different colored cats.",
+        "A man sitting on a couch has two cats on his lap.",
+        "A man and his two cats sitting on the couch.",
+        "a man sits on a couch with a couple of cats "
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        421
+      ],
+      "image_sha256": "e101bdf508bf0a74adb38301dc97cb0612fa95a84e2a660eb97749b31edec18a",
+      "download_status": "ok",
+      "candidate_index": 34,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000534041",
+      "row_index": 2887,
+      "image_id": 534041,
+      "source": "http://images.cocodataset.org/val2017/000000534041.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/212/526831619_fb699cd049_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "a woman is feeding food to this small child",
+        "A woman feeds a toddler a hot dog while he holds a purple bottle.",
+        "A person feeding a little boy a hot dog as he sits at an iron table.",
+        "A woman feeding a little boy french fries at a restaurant. ",
+        "Mom has to help him eat his hot dog and bun."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "226e705f51910ad527f9dc73a4c11ed2b5601aae82ea7f523da689ca243cdddc",
+      "download_status": "ok",
+      "candidate_index": 54,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000468505",
+      "row_index": 1737,
+      "image_id": 468505,
+      "source": "http://images.cocodataset.org/val2017/000000468505.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3012/2488900788_9115057573_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "a guy at a table with 6 plates of food around him",
+        "A man is surrounded by fast food at a restaurant booth.",
+        "A young man sitting at a blue table covered in plates of food.",
+        "A man sitting on at table covered with hot dogs fries and drinks.",
+        "Dude ecstatic sitting by himself at a table full of food."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "a3327665e199c84b0ad0e69c8e3f3f6df13902eb3b8580a0708c2c6cade370b6",
+      "download_status": "ok",
+      "candidate_index": 172,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000578871",
+      "row_index": 4433,
+      "image_id": 578871,
+      "source": "http://images.cocodataset.org/val2017/000000578871.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7320/9278497816_1562a3e32c_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A  young child standing in front of a table with plates of food.",
+        "A young girl holding up her food bowl.",
+        "there is a young girl sitting at a table eating",
+        "A young child holds up her bowl with a spoon in it.",
+        "A little girl holding a cup with food in dishes in front of her "
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "a565cac22fe2472459d238c036ca9a76c5c2a26fd6bd63d8a8ca2f56920b0577",
+      "download_status": "ok",
+      "candidate_index": 23,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000117908",
+      "row_index": 477,
+      "image_id": 117908,
+      "source": "http://images.cocodataset.org/val2017/000000117908.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3073/2365168122_f3d01a44ff_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A man looking in the refrigerator with a cat also looking inside ",
+        "a man and a cat looking inside a fridge",
+        "The person is looking in the refrigerator while the cat looks on.",
+        "There is a cat looking in a refrigerator with it's human.",
+        "A cat standing next to an open refrigerator door."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        500,
+        320
+      ],
+      "image_sha256": "551b548d780b0b4b4ce2aabb19cb249c9eb836a28303bb1239363c7b977166a1",
+      "download_status": "ok",
+      "candidate_index": 87,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000435208",
+      "row_index": 3413,
+      "image_id": 435208,
+      "source": "http://images.cocodataset.org/val2017/000000435208.jpg",
+      "flickr_url": "http://farm7.staticflickr.com/6008/5996235673_f6734313d7_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A young woman sitting cross legged on an apartment sofa.",
+        "A woman sitting cross legged in a living room area",
+        "A woman sitting on a cushion in front of a white table.",
+        "Woman sitting on top of a couch in front of two laptops. ",
+        "A woman sitting in a room near some computers."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "490b505d79c8fe73c3319eb3791ced9a55ddc370247d77e1db66e3482c9035d8",
+      "download_status": "ok",
+      "candidate_index": 38,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000319100",
+      "row_index": 4287,
+      "image_id": 319100,
+      "source": "http://images.cocodataset.org/val2017/000000319100.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/189/495719022_642e6111ea_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A woman and a man sitting on a couch next to each other.",
+        "ai man and a woman playing with a wii",
+        "A man and woman sitting on a couch playing a game.",
+        "A couple sitting on a couch holding Wii remotes.\n",
+        "Two people sitting together on a couch playing wii"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        333
+      ],
+      "image_sha256": "811d872083cccbab4bad1e04093031d1cffc9bb2e7fdf82ac6bf667bf1a726d9",
+      "download_status": "ok",
+      "candidate_index": 45,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000173008",
+      "row_index": 2664,
+      "image_id": 173008,
+      "source": "http://images.cocodataset.org/val2017/000000173008.jpg",
+      "flickr_url": "http://farm2.staticflickr.com/1162/1157171906_e210cf9a4e_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "A man in a tropical print shirt with glasses and long hair is eating a banana.",
+        "A man wearing a Hawaiian shirt eats a banana instead of pastries.",
+        "Man taking a bite of a half peeled banana. ",
+        "a person eating a banana in a kitchen",
+        "A man eating a banana at a kitchen counter."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "57e4391ce5b3b06e3b778342e9c4272a9a4a93e9fbb8ab8270f4d0c4dfd3e5c5",
+      "download_status": "ok",
+      "candidate_index": 165,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000557916",
+      "row_index": 1363,
+      "image_id": 557916,
+      "source": "http://images.cocodataset.org/val2017/000000557916.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/54/149390532_8e64360d3e_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A little girl sitting at the end of a bed looking at a teddy bear.",
+        "A little girl sitting on a bed with a teddy bear.",
+        "A small child sitting on a bed looking at a teddy bear.",
+        "A child sitting on a bed looking at a teddy bear.",
+        "A girl sitting on a bed in a room."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        426
+      ],
+      "image_sha256": "d0ed66b03146c8c001b308d9ba601731ef6a2684b33452fac162b5160ad424c5",
+      "download_status": "ok",
+      "candidate_index": 137,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000099810",
+      "row_index": 826,
+      "image_id": 99810,
+      "source": "http://images.cocodataset.org/val2017/000000099810.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3148/2547802515_97436f03b6_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A boy is eating donut holes while sitting at a dinner table. ",
+        "Small certain was child eating donuts off a blue plate. ",
+        "A little boy smiling for a picture as he eats.",
+        " A boy smiling and eating some food on a plate.",
+        "Young child looking enthused over some dessert on table"
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        500,
+        332
+      ],
+      "image_sha256": "e11d04aeebd3f5ef097ee4186795aacd71f05916e7d6872e97b823d6dbb2d0f1",
+      "download_status": "ok",
+      "candidate_index": 164,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000484978",
+      "row_index": 2278,
+      "image_id": 484978,
+      "source": "http://images.cocodataset.org/val2017/000000484978.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7391/10125629756_9aac7d103b_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A woman sitting at a table while eating food.",
+        "A woman sitting down holding a spoon and in her hand and eating.",
+        "A woman eating at her kitchen table ",
+        "A woman has her picture taken while eating",
+        "A woman eating food at a table in a kitchen."
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        491
+      ],
+      "image_sha256": "7110686f7909d235b993145e33ac6f5ae0baf8b89c308d5a32553aeb1601aed2",
+      "download_status": "ok",
+      "candidate_index": 37,
+      "partition": "tune",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000084362",
+      "row_index": 3799,
+      "image_id": 84362,
+      "source": "http://images.cocodataset.org/val2017/000000084362.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3529/3286653136_27cd84dfd8_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A young child and cat in a living room.",
+        "A toddler and cat are in a living room with open curtains.",
+        "a cat laying on top of a striped chair ",
+        "A young boy walking through a living room towards  a cat.",
+        "A young boy playing in a living room with a large window."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "078d217235bc234a17e34325cd551fa0944ea693a7e51c5647d0df7702bc840e",
+      "download_status": "ok",
+      "candidate_index": 7,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000010707",
+      "row_index": 1115,
+      "image_id": 10707,
+      "source": "http://images.cocodataset.org/val2017/000000010707.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/147/434840964_a9c5bc3b58_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "A man standing in a living room holding a Nintendo Wii game controller.",
+        "Three people with cups on the couch and one with remote standing",
+        "A man holding a motion controlled video game controller",
+        "Man with video game controller in living room with onlooker seated nearby.",
+        "A man playing a video game while two men sit on a couch. "
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "a361abb7579193709ef3debbec6298bf0c540bece429c4aadb19be82e04ab6a0",
+      "download_status": "ok",
+      "candidate_index": 138,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000419974",
+      "row_index": 1269,
+      "image_id": 419974,
+      "source": "http://images.cocodataset.org/val2017/000000419974.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3647/3655327694_5e4324ea90_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "a man standing next to a kitchen counter preparing food.",
+        "A dog watching a man cut a piece of food.",
+        "He is working on the meal while the dog is patiently waiting. ",
+        "A man slices meat in his kitchen while his dog begs from the floor.",
+        "A dog sits waiting while his owner cuts some meat.  "
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        426,
+        640
+      ],
+      "image_sha256": "eff82e4b2a14a39e1f76d1ef1f4dc986866d985f679367e45c8c071a1f4078cf",
+      "download_status": "ok",
+      "candidate_index": 81,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000397133",
+      "row_index": 0,
+      "image_id": 397133,
+      "source": "http://images.cocodataset.org/val2017/000000397133.jpg",
+      "flickr_url": "http://farm7.staticflickr.com/6116/6255196340_da26cf2c9e_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A man is in a kitchen making pizzas.",
+        "Man in apron standing on front of oven with pans and bakeware",
+        "A baker is working in the kitchen rolling dough.",
+        "A person standing by a stove in a kitchen.",
+        "A table with pies being made and a person standing near a wall with pots and pans hanging on the wall."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "09e1d25c75f7879bdaa69c327fece5cabacd53939c8c2ef9e87f1c97a2e478c4",
+      "download_status": "ok",
+      "candidate_index": 107,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000033638",
+      "row_index": 131,
+      "image_id": 33638,
+      "source": "http://images.cocodataset.org/val2017/000000033638.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8391/8634068123_0f717aebcb_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman observing something on a kitchen stove.",
+        "A woman is cooking on a large black stove",
+        "A woman cooking on an old fashioned stove.",
+        "A man preparing food on a large old oven.",
+        "A woman wearing shorts bends over a frying pan on a stove."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        425,
+        640
+      ],
+      "image_sha256": "997707b5024a71c18d33a03a6f8627556f0b309c92f03962bf0da3f83f5f8f0e",
+      "download_status": "ok",
+      "candidate_index": 101,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000139077",
+      "row_index": 3680,
+      "image_id": 139077,
+      "source": "http://images.cocodataset.org/val2017/000000139077.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2038/2503885075_f248a9d8cd_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A young boy holding a Nintendo Wii game controller.",
+        "a little kid playing a game with the wii driving remote",
+        "a kid with a remote playing video game",
+        "A small child stands in front of a television playing a video game.",
+        "A boy stands in front of a TV in a living room."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "f67d99a53607c04d909ee73d84f1e48f448ee6b8051f8c35e10e8fac33da750f",
+      "download_status": "ok",
+      "candidate_index": 70,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000371749",
+      "row_index": 2015,
+      "image_id": 371749,
+      "source": "http://images.cocodataset.org/val2017/000000371749.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3530/3290594604_98b7b6f851_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A couple of women holding game controllers in their hands.",
+        "There are two women holding objects in their hands.",
+        "Two women play Wii in a room with a white sofa.",
+        "Two woman playing a video game in their living room.",
+        "Two girls holding Wii controllers, playing video games in a living room."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "212be10f05ea75bbc3bd754f38cc23a7a3998d2050818fc0cefdbd1cfcf308d3",
+      "download_status": "ok",
+      "candidate_index": 15,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000420840",
+      "row_index": 4395,
+      "image_id": 420840,
+      "source": "http://images.cocodataset.org/val2017/000000420840.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8162/7730347798_2052cde7ff_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A female toddler who just finished eating with a bow in her hair",
+        "A young toddler with food on her face sticking out her tongue. ",
+        "A little girl sitting at a table with food on her face",
+        "An adorable baby girl sitting at a table with food on her face.",
+        "A baby with food on her face and her tongue sticking out."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        424
+      ],
+      "image_sha256": "02dbd84a164a6d7eea5545fac90f5d3f2ec837cce5e3251fdc6bb7ef044db0eb",
+      "download_status": "ok",
+      "candidate_index": 49,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000441247",
+      "row_index": 3447,
+      "image_id": 441247,
+      "source": "http://images.cocodataset.org/val2017/000000441247.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8150/7567411150_c6fd2d7da5_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman standing in a kitchen next to a table.",
+        "The woman is working at the kitchen counter.",
+        "A couple is preparing food in their white kitchen",
+        "a woman in a blue dress some black chairs and another person looking in an oven",
+        "Man and woman in the kitchen of a white house."
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        424
+      ],
+      "image_sha256": "f9303a120fb7c70fd6fb5ef1020fb6a356066dbd5390788a0a449b7fda559f59",
+      "download_status": "ok",
+      "candidate_index": 121,
+      "partition": "tune",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000570471",
+      "row_index": 441,
+      "image_id": 570471,
+      "source": "http://images.cocodataset.org/val2017/000000570471.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2728/4421878446_e5505c825a_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "Man cutting a cake on the table in the kitchen.",
+        "A man serving food from a table with the arm of woman around his chest.",
+        "A man is cutting into a cake as someone hugs him.",
+        "A man slices and serves a birthday cake.",
+        "A person hugging another while cutting a cake."
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        375,
+        500
+      ],
+      "image_sha256": "ee74f5c66871ee9453153f11e9b530e0c4562aa10e3ce6954d85b7ed4aeda5d1",
+      "download_status": "ok",
+      "candidate_index": 148,
+      "partition": "tune",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000044279",
+      "row_index": 4053,
+      "image_id": 44279,
+      "source": "http://images.cocodataset.org/val2017/000000044279.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7218/7349195240_70f103dd9c_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "Two men work in the kitchen of a restaurant.",
+        "People are cooking on grills in a commercial kitchen.",
+        "Two men cooking in a stainless steel restaurant kitchen",
+        "Two men cooking and packaging food in a kitchen.",
+        "A man in a kitchen pouring something from a pot."
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        425
+      ],
+      "image_sha256": "ec4f47bbaa7a948c06f4e748cfb9c8388facc711b1b69e98aa0dfdc656e6b95d",
+      "download_status": "ok",
+      "candidate_index": 167,
+      "partition": "tune",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000226147",
+      "row_index": 330,
+      "image_id": 226147,
+      "source": "http://images.cocodataset.org/val2017/000000226147.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4047/4650252315_a203496559_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman is taking a picture of food with a mobile device.",
+        "A woman that is sitting down in front of a table.",
+        "A woman taking a photo of her food with a cell phone.",
+        "a woman in a white top at a table with food",
+        "A women who is taking a picture of her food."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "bf59212be5221a26ae41a0e3e05adc902986b029d00b89d0c68760991a322053",
+      "download_status": "ok",
+      "candidate_index": 47,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000286182",
+      "row_index": 851,
+      "image_id": 286182,
+      "source": "http://images.cocodataset.org/val2017/000000286182.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8109/8486923405_c6e0905f81_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "there is a man that is sitting at a table with lots of food",
+        "A man sitting in a chair across from a table topped with food.",
+        "A man sitting by a table with food in bowls and pans ",
+        "A man sitting near a table with a bunch of food on it",
+        "a man sitting in a room with a food on a table"
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        478,
+        640
+      ],
+      "image_sha256": "916af45e543c1d1aac91807328a1d0437b28dcab1652fe89666cb43e8c188301",
+      "download_status": "ok",
+      "candidate_index": 51,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000438774",
+      "row_index": 3206,
+      "image_id": 438774,
+      "source": "http://images.cocodataset.org/val2017/000000438774.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8504/8309992877_42719867a0_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A group of people that are standing in front of a island.",
+        "a small party of people eats some pizza on a table",
+        "People with drinks standing around a kitchen island.",
+        "A group of people standing in a kitchen having conversation.",
+        "a coupe of people are standing around a small table"
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        640,
+        425
+      ],
+      "image_sha256": "c95f31f01a638953cc7a64bd17ded7d59273767908e03913babe742993b11c9a",
+      "download_status": "ok",
+      "candidate_index": 1,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000347174",
+      "row_index": 1480,
+      "image_id": 347174,
+      "source": "http://images.cocodataset.org/val2017/000000347174.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8344/8200201818_611f7d9822_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A woman laying in bed  in her underwear.",
+        "A tattooed woman lying down on a bed in a bedroom.",
+        "A tattooed woman wearing a white shirt is laying in a bed with a side table next to it.",
+        "A woman laying on quilted white bed in a room.",
+        "A girl is sleeping in a bed with the light on."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        427,
+        640
+      ],
+      "image_sha256": "6870b0bf429901a0af032dfbaf814d2a289a21e43936dbc59a810312bbabfcb5",
+      "download_status": "ok",
+      "candidate_index": 86,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000025603",
+      "row_index": 4151,
+      "image_id": 25603,
+      "source": "http://images.cocodataset.org/val2017/000000025603.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4105/4961922351_e152eb6e65_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A girl with some food and drink at a table.",
+        "A YOUNG GIRL EATING PIZZA DRESSED AS A EGYPTION",
+        "A girl sitting around a table in a restaurant eating a pizza.  ",
+        "A young girl eating pizza in a restaurant.",
+        "A girl in a Cleopatra outfit eating pizza at a table."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "f75a5898681ea62ef547b8c002e8e0eec00c50aa6b995334ab967798cff6e6dc",
+      "download_status": "ok",
+      "candidate_index": 52,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000494869",
+      "row_index": 130,
+      "image_id": 494869,
+      "source": "http://images.cocodataset.org/val2017/000000494869.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8255/8713396144_ea7d431000_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman standing at a kitchen counter with a child and a dog is behind her.",
+        "An older image of a toddler, dog, and adult doing dishes. ",
+        "An adult is cooking at the kitchen counter near a baby and a dog.",
+        "a yellow lap laying in a kitchen and looking at a little kid ",
+        "A small child is in the kitchen with an adult and dog."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        427,
+        640
+      ],
+      "image_sha256": "0beffebf8bf7e3d5561249474de3e457cae990b1ffd56165a19380d4cfc0c00a",
+      "download_status": "ok",
+      "candidate_index": 19,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000051610",
+      "row_index": 2780,
+      "image_id": 51610,
+      "source": "http://images.cocodataset.org/val2017/000000051610.jpg",
+      "flickr_url": "http://farm7.staticflickr.com/6103/6218746165_6ba13bf1df_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A young girl watches a laptop on a bed. ",
+        "A little girl sitting in front of a laptop computer.",
+        "A little child sitting in front of a laptop watching whats is on the screen.",
+        "A little girl sitting on a bed looking at a laptop ",
+        "A laptop on the table and a baby looking at it"
+      ],
+      "scene_tags": [
+        "bedroom_clothes",
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "c4b6fdea9764b29e9ef8015c0bf6c1bb45c396f17fa0a425cafa9f2c32a025e6",
+      "download_status": "ok",
+      "candidate_index": 74,
+      "partition": "tune",
+      "scene": "bedroom_clothes/desk_objects"
+    },
+    {
+      "id": "coco-000000284764",
+      "row_index": 3062,
+      "image_id": 284764,
+      "source": "http://images.cocodataset.org/val2017/000000284764.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7332/9759747051_a14de15d61_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "A man cutting up his meal before consumption.",
+        "A man eats from a green dish while holding a handheld radio.",
+        "A gentleman wearing a radio eating a plate of food.",
+        "A man picking up soup in a bowl with two utensils.",
+        "Man sitting at a table holding eating utensils in his hands over his food. "
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "aeb8eccd4790513a38c9d68152de78d465346e08ca505e7a956a4e568461ec6e",
+      "download_status": "ok",
+      "candidate_index": 97,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000172877",
+      "row_index": 2595,
+      "image_id": 172877,
+      "source": "http://images.cocodataset.org/val2017/000000172877.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/47/140251613_8273657d16_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A man in a shirt and tie sitting on a white chair next to a lamp.",
+        "a person sitting in a chair wearing a suit and tie",
+        "Man in business clothes sits on a chair with his hands crossed. ",
+        "A man dressed with a tie sits in a chair. ",
+        "Man wearing slacks and tie sitting in chair."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "079e9dfb3eb9067760e402cb6d52b7d48037dba9ed1f81cd85929ec4b1c43ea5",
+      "download_status": "ok",
+      "candidate_index": 173,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000483999",
+      "row_index": 1513,
+      "image_id": 483999,
+      "source": "http://images.cocodataset.org/val2017/000000483999.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7350/9302552335_f384163d1b_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A group of people at a dining table talking to each other.",
+        "People sitting at a long table in a restaurant with many plates. ",
+        "A group of people gathered at a table in a restaurant.",
+        "Group of adults enjoying food and conversation together.",
+        "a large group of people sitting at a table with plates of food"
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        428
+      ],
+      "image_sha256": "f962e1a9fc03577dbf716dfbf96f8e9b519807b59d5e25ae4718667f753daea4",
+      "download_status": "ok",
+      "candidate_index": 80,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000425226",
+      "row_index": 4187,
+      "image_id": 425226,
+      "source": "http://images.cocodataset.org/val2017/000000425226.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4055/4546463824_bc40e0752b_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A man kneeling down in front of a refrigerator.",
+        "A person kneels down to peer into a refrigerator",
+        "A man is searching for food in a refrigerator.",
+        "A chef is opening and looking into the fridge.",
+        "A man wearing an apron peering into the bottom of an open fridge"
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "feadc69a8190787088fda0ac12971d91badc93dbe06057645050fdbec1ce6911",
+      "download_status": "ok",
+      "candidate_index": 35,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000035682",
+      "row_index": 2375,
+      "image_id": 35682,
+      "source": "http://images.cocodataset.org/val2017/000000035682.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4062/4666441455_b9bac3570c_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "Eating a donut makes for a quick and easy breakfast.",
+        "a man sits at a table with a bunch of doughnuts ",
+        "A man sitting at a table that has plates with donuts on it.",
+        "A plate of donuts on a tray sitting on a table in a bakery.",
+        "A meal of donuts and a beverage is seen in front of a man at a restaurant."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "1844cfa76d23a9768578f2c27306ecbad99326d2d374b070af9c56d50058c155",
+      "download_status": "ok",
+      "candidate_index": 95,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000445792",
+      "row_index": 1630,
+      "image_id": 445792,
+      "source": "http://images.cocodataset.org/val2017/000000445792.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/163/385893071_5d60bf0cd5_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "there is a woman sitting on a couch playing a video game",
+        "A young woman is playing a video game on a couch.",
+        "A woman playing a video game while sitting on a couch. ",
+        "A women sitting down on a couch playing the wii . ",
+        "A woman that is sitting on a couch holding a remote."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "a29432f00584746de3c41eb2b9e9157db39dcf23f4173f98a522a008787151b3",
+      "download_status": "ok",
+      "candidate_index": 175,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000265777",
+      "row_index": 3041,
+      "image_id": 265777,
+      "source": "http://images.cocodataset.org/val2017/000000265777.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3820/9108526928_318582cc7f_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman sitting at a table with a pizza on a plate.",
+        "A woman sitting by a wooden table with green glasses and food.",
+        "A woman sitting at a table with wine glasses and fruit topped pizza.",
+        "A person waiting for her meal to be served.",
+        "a woman in a red top some glasses and a pizza"
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        612,
+        612
+      ],
+      "image_sha256": "ab4c9b0ea8b46ee4718d2469cfc6d77e2d2226b0edf902390e9f0076b4044498",
+      "download_status": "ok",
+      "candidate_index": 91,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000156643",
+      "row_index": 701,
+      "image_id": 156643,
+      "source": "http://images.cocodataset.org/val2017/000000156643.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8005/7534710698_69f4077419_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "Person cutting cake at a theme restaurant characters in background.",
+        "A man cuting a piece of cake while a person in costume stands behind him.",
+        "A smiling man sitting by a very nice looking cake.",
+        "a man that is sitting down cutting a cake",
+        "a man is carving into a cake covered in fruit"
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "9d16c4c9af76cdf2d8163e07d0257958cca6f39f42aff0bf3c5713c070b83907",
+      "download_status": "ok",
+      "candidate_index": 44,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000469067",
+      "row_index": 1309,
+      "image_id": 469067,
+      "source": "http://images.cocodataset.org/val2017/000000469067.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/194/463125731_46041095c3_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "this is a person sleeping on a bed with a cat",
+        "a woman laying down with a cat ",
+        "A sleeping woman cuddling a cat in bed.",
+        "A women in a blue shirt cuddles up with her cat",
+        "A woman laying in bed next to a cat."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "91ff6976fc10d19a086779c685c9882d92b01b25aa3942fa4d19d6f7eda64482",
+      "download_status": "ok",
+      "candidate_index": 130,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000367095",
+      "row_index": 4911,
+      "image_id": 367095,
+      "source": "http://images.cocodataset.org/val2017/000000367095.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7045/6944447435_1103574846_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A man that is sitting in front of a laptop.",
+        "The workers are working at their computers at their desks.",
+        "A man sitting at a desk in an office.",
+        "A man sitting in a chair in front of a computer.",
+        "Adults working in open office setting at desks."
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "973e4087c639a37961fc701333d051585e73468cc4b01d349243744bbb03a1bd",
+      "download_status": "ok",
+      "candidate_index": 40,
+      "partition": "tune",
+      "scene": "desk_objects"
+    },
+    {
+      "id": "coco-000000040757",
+      "row_index": 1242,
+      "image_id": 40757,
+      "source": "http://images.cocodataset.org/val2017/000000040757.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4066/4705721976_a7c6bc8e97_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A young boy laying in bed with a pacifier in his mouth",
+        "A child is landing on a shallow pillow.",
+        "A child laying on a bed with a white pillow.",
+        "a small childi is laying in a bed",
+        "A young child with a pacifier lying down in his bed"
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        425,
+        640
+      ],
+      "image_sha256": "60f4f240bb8fdd983afdb8966fcb7994e74d36b8e65d77f47066ea95fa297dba",
+      "download_status": "ok",
+      "candidate_index": 103,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000330818",
+      "row_index": 2630,
+      "image_id": 330818,
+      "source": "http://images.cocodataset.org/val2017/000000330818.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4054/4625870673_1ab15d25c6_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A young man is working behind a counter. ",
+        "A young man stands in a kitchen watching a griddle. ",
+        "A young man working at a range in a commercial kitchen.",
+        "A man prepare food in the small kitchen.",
+        "A young man is standing behind a counter, carefully looking over an array of food preparation equipment and related items. "
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        426,
+        640
+      ],
+      "image_sha256": "ec6b58d1ee8938d9efb4d231f13809de61f39caf8ce1479ccd32dec548869664",
+      "download_status": "ok",
+      "candidate_index": 168,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000382125",
+      "row_index": 4283,
+      "image_id": 382125,
+      "source": "http://images.cocodataset.org/val2017/000000382125.jpg",
+      "flickr_url": "http://farm6.staticflickr.com/5239/7053693277_0d21e419e0_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "Two men are posing for a photo, one man is holding a slice of pizza on a plate, and they are surrounded by other people sitting at tables.",
+        "a person holding a slice of pizza next to someone else posing for a photo",
+        "The man smiles with a slice of pizza while next to a friend.",
+        "two men sitting at a table with one holding a plate with a slice of pizza on it",
+        "Two friends sitting at diner eating a slice of pizza."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "d83f8b6bbbef41c27da7cc759e139b983c5025bc30da9f23f6c9402d29cfb22f",
+      "download_status": "ok",
+      "candidate_index": 26,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000023899",
+      "row_index": 103,
+      "image_id": 23899,
+      "source": "http://images.cocodataset.org/val2017/000000023899.jpg",
+      "flickr_url": "http://farm2.staticflickr.com/1419/4598390017_b554e5d29b_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "Three young men playing Wii on a projection television.",
+        "Three men laughing at some pictures from a projector.",
+        "A group of gentleman playing video games in a dimly lit room.",
+        "Some people chilling on the couch playing with a Nintendo Wii",
+        "A group of men playing a game with remote controllers."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        425
+      ],
+      "image_sha256": "b7ef13fe4d8ab47a77e55dadd30295110ca97b7b3c3b8c85603009e7dc497983",
+      "download_status": "ok",
+      "candidate_index": 11,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000402720",
+      "row_index": 4982,
+      "image_id": 402720,
+      "source": "http://images.cocodataset.org/val2017/000000402720.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7245/7276665146_20af39bbaf_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "A trio of men drinking wine at a restaurant table",
+        "three men sitting at  a table with some wine glasses",
+        "A group of three men at a restaurant drinking wine. ",
+        "A group of people that are sitting around a table.",
+        "Three men pose and smile at a table."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        612,
+        612
+      ],
+      "image_sha256": "94d78b7c6ded336af99a5d48fcd507ddeb7b43e93d1d7e7c1bdc62aa3d0b6fd6",
+      "download_status": "ok",
+      "candidate_index": 100,
+      "partition": "tune",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000226408",
+      "row_index": 1270,
+      "image_id": 226408,
+      "source": "http://images.cocodataset.org/val2017/000000226408.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3118/3170836178_f8732dab20_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "Child laying down with arms extended in the air.",
+        "Black and white photograph of a girl on a bed.",
+        "an image of a girl playing with a doll",
+        "A blurry black an white image of a girl laying down.",
+        "A girl lying down and smiling and feeling happy."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        469
+      ],
+      "image_sha256": "b1ec6312140b21f1ba9e6de00f1aae76ce065d263d331f101033a5597c18ece1",
+      "download_status": "ok",
+      "candidate_index": 21,
+      "partition": "tune",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000243204",
+      "row_index": 242,
+      "image_id": 243204,
+      "source": "http://images.cocodataset.org/val2017/000000243204.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3039/3110436903_34d28b5c9f_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A person is holding a spatula near slices of bread on a stove.",
+        "A person bundled in winter clothing and scarf cooking.",
+        "A man is cooking while wearing a jacket and scarf",
+        "A person that is cooking some food in a kitchen.",
+        "A person bundled up while frying something on the stove indoors."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "d181d6cf8249031cfe14c1077e99e4dec2b3871da1ee6564fc22f5d106820e84",
+      "download_status": "ok",
+      "candidate_index": 10,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000093437",
+      "row_index": 988,
+      "image_id": 93437,
+      "source": "http://images.cocodataset.org/val2017/000000093437.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3284/3087312929_11b2a967e0_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A shot of an elderly man inside a kitchen.",
+        "An old man is wearing an odd hat",
+        "An older man is wearing a funny hat in his dining room.",
+        "A man in a jacket and hat looks at the camera.",
+        "An old man standing in a kitchen posing for a picture."
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        361
+      ],
+      "image_sha256": "7c9c2698d8cb9f2d424196cd29bed724d7f9aa9fb0e46dc152b598c94861a4ea",
+      "download_status": "ok",
+      "candidate_index": 84,
+      "partition": "tune",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000213086",
+      "row_index": 122,
+      "image_id": 213086,
+      "source": "http://images.cocodataset.org/val2017/000000213086.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2350/2255342131_d42a052f4e_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A man holding an oven door open while he looks in it. ",
+        "a man holds down an oven door as he looks into the oven",
+        "A man is bent over opening an oven.",
+        "There is a man opening the oven door.",
+        "A man holding open an oven door in a kitchen."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        375,
+        500
+      ],
+      "image_sha256": "8a265d1aff0b74783807cf908b84e485c88c2f73d92ab470f49cb307a9338417",
+      "download_status": "ok",
+      "candidate_index": 156,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000195842",
+      "row_index": 2905,
+      "image_id": 195842,
+      "source": "http://images.cocodataset.org/val2017/000000195842.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3601/3632189307_4ae56e1386_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A person playing the Nintendo Wii in their messy living room",
+        "a room that has a lady with a remote in hand",
+        "A woman in a messy living room playing the Wii.",
+        "a person standing in a living room with a remote control",
+        "a man plays Wii Sports boxing in a very messy living room"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "dc2c6c102dd3a340414a135603e43c0a0c5d55bec57671847b679e1d9abf2a48",
+      "download_status": "ok",
+      "candidate_index": 153,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000208363",
+      "row_index": 1894,
+      "image_id": 208363,
+      "source": "http://images.cocodataset.org/val2017/000000208363.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2505/3711342158_1ceb746868_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "a group of people sitting together eating pizza",
+        "A large group of people are eating pizza in an office.",
+        "A group of people sitting around eating pizza together.",
+        "Fourteen college guys, and one woman, all eating pizza together.",
+        "A bunch of people are sitting together eating pizza and talking."
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "66a263add8365c5dc40af1d831c5ebf53c0a3bc500ad5ff2cc9ead97fd145848",
+      "download_status": "ok",
+      "candidate_index": 31,
+      "partition": "tune",
+      "scene": "desk_objects"
+    },
+    {
+      "id": "coco-000000019786",
+      "row_index": 4409,
+      "image_id": 19786,
+      "source": "http://images.cocodataset.org/val2017/000000019786.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/115/317277248_05f5ac031e_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "One person standing and another bending over in the foreground.",
+        "Two people with Wii remote controllers near a sofa.",
+        "Group of people sending around photography equipment and a living room. ",
+        "A man laughs while looking towards the floor.",
+        "some people are standing around in a room"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "109307de9a894df50386a58dec9347e6c280ee024f426933e2e34bfd57478960",
+      "download_status": "ok",
+      "candidate_index": 104,
+      "partition": "tune",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000166478",
+      "row_index": 3051,
+      "image_id": 166478,
+      "source": "http://images.cocodataset.org/val2017/000000166478.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2225/2090410615_bcaae51696_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A young guy using his computer and talking on his phone.",
+        "A man in brown shirt on black sofa with phone.",
+        "A man is talking on the phone while working on the computer.",
+        "I am unable to see an image above.",
+        "A man sits on the couch and is on laptop and phone."
+      ],
+      "scene_tags": [
+        "sofa",
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        426
+      ],
+      "image_sha256": "fd8bc7068c29415b1b343de153a1f77491f55f2ac5aaa3994a3ffa884c08d884",
+      "download_status": "ok",
+      "candidate_index": 102,
+      "partition": "tune",
+      "scene": "sofa/desk_objects"
+    },
+    {
+      "id": "coco-000000246968",
+      "row_index": 848,
+      "image_id": 246968,
+      "source": "http://images.cocodataset.org/val2017/000000246968.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4142/4778663159_985707cfc0_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A young woman standing in the kitchen pours from a large measuring cup.",
+        "A woman standing at a kitchen counter pouring something from a measuring cup.",
+        "A woman who is cooking in the kitchen.",
+        "A woman standing in a  kitchen preparing food.",
+        "A woman standing in a kitchen making food."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        640,
+        428
+      ],
+      "image_sha256": "5f7990e5edb8b8ab72faeef5ad6391976b24c2ab14d1c05d178fba70fadfd435",
+      "download_status": "ok",
+      "candidate_index": 39,
+      "partition": "tune",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000393569",
+      "row_index": 2292,
+      "image_id": 393569,
+      "source": "http://images.cocodataset.org/val2017/000000393569.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4014/4222801461_63b8674d2a_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A young woman using a laptop computer while sitting on a bunk bed.",
+        "A person that is sitting in a bed facing out.",
+        "A young girl sits in the bottom bunk of her bunkbed.",
+        "A bedroom with bunk beds and the bathroom next door.",
+        "Three people live in one room who share a bathroom."
+      ],
+      "scene_tags": [
+        "bedroom_clothes",
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "83f53c85f83977281211de6cd34a7eef01944b02704b17a25cf213e839586256",
+      "download_status": "ok",
+      "candidate_index": 112,
+      "partition": "holdout",
+      "scene": "bedroom_clothes/desk_objects"
+    },
+    {
+      "id": "coco-000000317999",
+      "row_index": 3898,
+      "image_id": 317999,
+      "source": "http://images.cocodataset.org/val2017/000000317999.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8014/7173995615_9c293a671c_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A baby is looking at a book while sucking a pacifier.",
+        "a child in bed with a pacifier looks at a picture book while an adult looks on",
+        "a man laying in bed with a child reading a book",
+        "A father with a braided beard is looking at his child. ",
+        "A  girl reading a book on a bed next to a man."
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        612,
+        612
+      ],
+      "image_sha256": "e544237abf5a228ed17308bac2ecb381ffcd1151b8bf404d473a401d142a41ab",
+      "download_status": "ok",
+      "candidate_index": 174,
+      "partition": "holdout",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000312552",
+      "row_index": 2507,
+      "image_id": 312552,
+      "source": "http://images.cocodataset.org/val2017/000000312552.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7198/6885319489_b9604a0234_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman holding a plate and eating pizza.",
+        "A person taking a pizza while holding a plate",
+        "A woman eating a piece of pizza near the kitchen counter.",
+        "A man eating a piece of pizza on top of a plate.",
+        "Woman standing while eating pizza from a plate."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        400,
+        300
+      ],
+      "image_sha256": "48debaf09e71230fc9aad193c78d4b35e150b48bbeeb1959a663223761ad5efd",
+      "download_status": "ok",
+      "candidate_index": 155,
+      "partition": "holdout",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000559543",
+      "row_index": 964,
+      "image_id": 559543,
+      "source": "http://images.cocodataset.org/val2017/000000559543.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3084/3167056823_4b3292345b_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A little girl in a pink shirt holding a game controller.",
+        "Girls stands in living room with microphone. ",
+        "A young girl with a video game controller in her hand.",
+        "A cute girl in pink is playing a video game.",
+        "A girl is playing a Wii videogame at Christmas time."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        500,
+        333
+      ],
+      "image_sha256": "6ab54d1e486e59158fdd792e0c529d14eb546a16664acbc67599cba334895684",
+      "download_status": "ok",
+      "candidate_index": 119,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000113720",
+      "row_index": 1490,
+      "image_id": 113720,
+      "source": "http://images.cocodataset.org/val2017/000000113720.jpg",
+      "flickr_url": "http://farm6.staticflickr.com/5050/5229783977_9c8cc82bc4_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A couple is sitting at a table eating pizza.",
+        "A man and woman are sitting at a table eating pizza.",
+        "A man and a woman eating pizza at a restaurant",
+        "A couple are enjoying pizza and drinks at the restaurant",
+        "Two people sit at a table with two pizzas."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        426
+      ],
+      "image_sha256": "50d329f69ab8f90bf4b2b6b65a92e47086d0b802a34f8f3ed06f644c89050200",
+      "download_status": "ok",
+      "candidate_index": 75,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000036936",
+      "row_index": 452,
+      "image_id": 36936,
+      "source": "http://images.cocodataset.org/val2017/000000036936.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2365/2132616750_a9e25a0df1_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "Two people play video games while sitting on a couch.",
+        "A man and woman playing a wii game.",
+        "A man and woman sitting on a sofa watching tv.",
+        "A man and woman sitting on a couch playing a video game.",
+        "A couple sits on a couch while playing wii."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        404
+      ],
+      "image_sha256": "335f0411b17499cd23577b270b9a1aa8519cc44f6f9a246fd666415c833f4ca0",
+      "download_status": "ok",
+      "candidate_index": 146,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000268378",
+      "row_index": 3064,
+      "image_id": 268378,
+      "source": "http://images.cocodataset.org/val2017/000000268378.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3798/9456957204_857700e338_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A group of people eating a meal at a table.",
+        "A group of people sitting at a table enjoying food.",
+        "Group of people smiling and eating a meal at a long table with candles.",
+        "Men and women eating dinner at a table.  ",
+        "A group of people sitting around a table with food and drink."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        359
+      ],
+      "image_sha256": "c8d28db19ef226195811e86b5c41ab6635d16c8e9d375a1d4fb841fcb038b68a",
+      "download_status": "ok",
+      "candidate_index": 65,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000027186",
+      "row_index": 4035,
+      "image_id": 27186,
+      "source": "http://images.cocodataset.org/val2017/000000027186.jpg",
+      "flickr_url": "http://farm2.staticflickr.com/1036/1039717379_9bdceb6a00_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A little girl playing with an interactive gaming unit.",
+        "The little girl is intently playing the video game.",
+        "a small girl plays a game of wii ",
+        "A little girl standing in front of a couch holding a remote.",
+        "A little, young girl playing the wii in the living room."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        428
+      ],
+      "image_sha256": "2e60a537145c388aba560db6312aecd5fddf5bce7a8f75adfd06492bdcd34e2e",
+      "download_status": "ok",
+      "candidate_index": 93,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000189475",
+      "row_index": 3049,
+      "image_id": 189475,
+      "source": "http://images.cocodataset.org/val2017/000000189475.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3473/3758038114_a3a54862a3_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "some people seated at a table with plates of food ",
+        "A woman with her hand over her glass while sitting at a dinner table.",
+        "A group of people sitting at a table.",
+        "A woman and child sitting at table with food and drinks.",
+        "A family dines at a packed sushi bar and buffet"
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "60f811f165e2fff08c1a9280361c0bf6102be0b5aa623455be1d314594f6ec53",
+      "download_status": "ok",
+      "candidate_index": 179,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000394940",
+      "row_index": 4998,
+      "image_id": 394940,
+      "source": "http://images.cocodataset.org/val2017/000000394940.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8227/8566023505_e9e9f997bc_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "a kid eating a cake on  table looking around",
+        "A young boy sits at a table with his head in his hand.",
+        "The child poses with a fork on his dessert plate.",
+        "a kid leaning on a table next to a plate with some food on it ",
+        "A young boy wearing a striped shirt eating some food. "
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        426,
+        640
+      ],
+      "image_sha256": "51b4ccfa9f43b660f9278efe808c402ab43c86e905d66f571e27c57699a8b37d",
+      "download_status": "ok",
+      "candidate_index": 88,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000436617",
+      "row_index": 3319,
+      "image_id": 436617,
+      "source": "http://images.cocodataset.org/val2017/000000436617.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3743/9479044816_7513fe85e7_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "THERE IS A GROUP OF PEOPLE SITTING AT A TABLE ",
+        "a group of people sitting at a long dining table in a restaurant",
+        "A bunch of people sitting at a table having a discussion. ",
+        "A large group of people at a table.",
+        "A group of people sitting around a table having a meal."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        425
+      ],
+      "image_sha256": "f8fd896f58cc18b7142e9e77cc0a5ff1a1b913383f0de7e360f917536ebbd999",
+      "download_status": "ok",
+      "candidate_index": 114,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000182155",
+      "row_index": 4406,
+      "image_id": 182155,
+      "source": "http://images.cocodataset.org/val2017/000000182155.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2387/2512226689_5539ec21bc_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "Two teenage girls paying a video game together.",
+        "Two girls play Ninendo Wii while standing in front of a couch.",
+        "Two girls with brown hair play with Wii remotes.",
+        "Two girls are playing a game on their Nintendo Wii.",
+        "A picture of two people playing a video game."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        426
+      ],
+      "image_sha256": "ee4e53370c734634f607e55baa72e97ec771302fc3b899f42ac96a7c872f68f3",
+      "download_status": "ok",
+      "candidate_index": 62,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000054654",
+      "row_index": 1273,
+      "image_id": 54654,
+      "source": "http://images.cocodataset.org/val2017/000000054654.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7266/6886950764_46c91c4651_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "The woman is dipping food out of the pot to eat.",
+        "A woman stirring a pot on the stove while holding a plate.",
+        "A woman preparing a plate of food in the kitchen",
+        "A woman preparing food from a pot in kitchen",
+        "a woman standing over a pot holding a plate of food"
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        407,
+        640
+      ],
+      "image_sha256": "e3e0a05408aa5e2a0a6554a51a4aa8c6707b149e97865ecd11a46be9ca6df16b",
+      "download_status": "ok",
+      "candidate_index": 66,
+      "partition": "holdout",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000215259",
+      "row_index": 592,
+      "image_id": 215259,
+      "source": "http://images.cocodataset.org/val2017/000000215259.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/162/384954373_5a59aaabd5_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "Two women playing a game with a Nintendo Wii controller.",
+        "two people standing close to each other playing nintendo wii",
+        "Two people playing wii in a living room.",
+        "Two women play a game in a living room.",
+        "two people playing video game while standing one in purple is smiling",
+        "Two people holding wii remote controls in a living room."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        336,
+        500
+      ],
+      "image_sha256": "4681f712406ecb952b74606dc1bc597d81019f209843ca806ae3c188be700afe",
+      "download_status": "ok",
+      "candidate_index": 169,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000386912",
+      "row_index": 11,
+      "image_id": 386912,
+      "source": "http://images.cocodataset.org/val2017/000000386912.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4088/4980393979_fb7325e0b6_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "a person sitting at a desk with a keyboard and monitor ",
+        "a woman at her desk sits intently and happy",
+        "A woman sitting at a desk in her work station",
+        "The woman is working on her computer at the desk.",
+        "a woman is sitting in front of a desk"
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "e4d58abb24655f12e70e056631e96915a142e1e60fb0b1f75372269bad764828",
+      "download_status": "ok",
+      "candidate_index": 57,
+      "partition": "holdout",
+      "scene": "desk_objects"
+    },
+    {
+      "id": "coco-000000422670",
+      "row_index": 4396,
+      "image_id": 422670,
+      "source": "http://images.cocodataset.org/val2017/000000422670.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3261/2475668665_c5f5cfff4e_z.jpg",
+      "license_id": 6,
+      "captions": [
+        "A small child is reaching for the camera.",
+        "a close up of a child on a couch",
+        "A baby is reaching up toward the camera.",
+        "A boy reaching towards his reflection in a mirror like object.",
+        "The little baby is reaching up with his hand."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "544fd8e0ef8eb4278b9f1708a584790780e936f88d8efb7b81a8c43d7ba63ccb",
+      "download_status": "ok",
+      "candidate_index": 4,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000495732",
+      "row_index": 4284,
+      "image_id": 495732,
+      "source": "http://images.cocodataset.org/val2017/000000495732.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2357/1847158168_87d9fdd66e_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "Two men play Wii in a cramped living room.",
+        "Two men standing in a living room with remotes.",
+        "Two men standing in a living room playing games.",
+        "Two men playing video games on the Nintendo Wii.",
+        "Two men standing in a living room holding game controllers."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        427,
+        640
+      ],
+      "image_sha256": "e9e32a72f839bdd5438814c6007ee97613e0c3c69c22535fcd1ab1920ddcfc92",
+      "download_status": "ok",
+      "candidate_index": 50,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000066771",
+      "row_index": 3819,
+      "image_id": 66771,
+      "source": "http://images.cocodataset.org/val2017/000000066771.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7326/9757709634_5b1dcf5699_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman holding a smart phone at a table.",
+        "Two people at a restaurant, one of whom is looking at a cellphone.",
+        "Two people sitting at a table with beverages on it and the woman holding her phone.",
+        "A man and woman at a table with several drinks.",
+        "A man and women sitting at a booth photographing tea."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "82e0b9ed0511a74ebef3dabcb3fbe37e9d9b7dc5a6fa41eec60f1817ce2374ff",
+      "download_status": "ok",
+      "candidate_index": 48,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000553788",
+      "row_index": 4971,
+      "image_id": 553788,
+      "source": "http://images.cocodataset.org/val2017/000000553788.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/21/39781384_d1d3743b07_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "there is a woman laying in a bed using a lap top",
+        "a woman using a white laptop on the bed",
+        "A girl on a bed studying something on her laptop.",
+        "Someone sitting on their bed looking at their laptop",
+        "A person laying on a bed in front of a laptop."
+      ],
+      "scene_tags": [
+        "bedroom_clothes",
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        363
+      ],
+      "image_sha256": "a62796663ca5243589b01f18733a45e599088b58e94ad05ec472a38cbb33a011",
+      "download_status": "ok",
+      "candidate_index": 162,
+      "partition": "holdout",
+      "scene": "bedroom_clothes/desk_objects"
+    },
+    {
+      "id": "coco-000000529762",
+      "row_index": 3666,
+      "image_id": 529762,
+      "source": "http://images.cocodataset.org/val2017/000000529762.jpg",
+      "flickr_url": "http://farm7.staticflickr.com/6190/6111133347_21ab33f11a_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A man sitting at a table eating a hamburger and fries.",
+        "a man sittig by a table taking of photo of his food ",
+        "A man is taking a picture of his food",
+        "Man taking a picture of food on a table.",
+        "A man at a table taking a picture of his food."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "b70d80f5e359e5e16c6976d94627e7a9392abf7a78ab495f10311def1e39f8dc",
+      "download_status": "ok",
+      "candidate_index": 127,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000417249",
+      "row_index": 3375,
+      "image_id": 417249,
+      "source": "http://images.cocodataset.org/val2017/000000417249.jpg",
+      "flickr_url": "http://farm7.staticflickr.com/6081/6073438444_f4535c3cd4_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A woman is carrying many packages in an office building",
+        "Adults in public area with luggage and carts near stairway.",
+        "A woman carrying luggage and many boxes in an airport.",
+        "A person carrying a large stack of luggage.",
+        "this is a woman pushing some luggage at the airport"
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "a0788f6d609cf3a4e194b317b810b1e806fe95436588355cc76073d783a4f7d2",
+      "download_status": "ok",
+      "candidate_index": 158,
+      "partition": "holdout",
+      "scene": "desk_objects"
+    },
+    {
+      "id": "coco-000000194875",
+      "row_index": 629,
+      "image_id": 194875,
+      "source": "http://images.cocodataset.org/val2017/000000194875.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7288/8715004598_a5613490a1_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "Here are motorcyclists parked outside a Polish gathering spot for women",
+        "The people sit at the bar next to the motorcycles.",
+        "A street scene with motorcycles parked along the side of the road with people dining outside.",
+        "some people sitting behind a line of motorcycles ",
+        "A line of neon colored motorcycles parked in front of a bar."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        574
+      ],
+      "image_sha256": "5b14af08d271a7468d1fba24e56d37c6235de4111af266ad8292296c2cba65eb",
+      "download_status": "ok",
+      "candidate_index": 140,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000489764",
+      "row_index": 2511,
+      "image_id": 489764,
+      "source": "http://images.cocodataset.org/val2017/000000489764.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/160/404335548_3bdc1f2ed9_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A woman and a man playing a video game in the living room",
+        "A woman in a striped shirt playing a video game.",
+        "A woman playing a video game with the Nintendo Wii.",
+        "A woman holding a game controller with a man looking on.",
+        "Two people sitting down playing a video game"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        538
+      ],
+      "image_sha256": "4a5c2b0c4d9fda2bd78378aa054e9876dfe36ac1db551ed3ba1e408c44248ce5",
+      "download_status": "ok",
+      "candidate_index": 145,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000064868",
+      "row_index": 1443,
+      "image_id": 64868,
+      "source": "http://images.cocodataset.org/val2017/000000064868.jpg",
+      "flickr_url": "http://farm1.staticflickr.com/219/509596297_7de5805edf_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A man smiles maniacly while putting a dog into an oven.",
+        "a man holding a cat in front of a stove ",
+        "a man putting a puppy inside of an oven.",
+        "A man acting like he's going to put his dog in an oven.",
+        "a person standing in front of an open oven ."
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        500,
+        375
+      ],
+      "image_sha256": "b3cde4030154cacc17d93aa0a01344ec749f96faab680016e0f680458410cb52",
+      "download_status": "ok",
+      "candidate_index": 56,
+      "partition": "holdout",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000455301",
+      "row_index": 3295,
+      "image_id": 455301,
+      "source": "http://images.cocodataset.org/val2017/000000455301.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8272/8697095831_3f7d70cd18_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A mother with her baby laying in bed.",
+        "a baby girl and her mom are looking at a book",
+        "A baby looking at a picture book while mother looks on.",
+        "A baby looking at a book, and sitting on a bed next to a woman. ",
+        "a child and a woman in bed with a book"
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        481
+      ],
+      "image_sha256": "cf8af48cf6e3affd53ce3409159360cc9cf047275381c8d0d312ba34cf6f302a",
+      "download_status": "ok",
+      "candidate_index": 171,
+      "partition": "holdout",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000199551",
+      "row_index": 93,
+      "image_id": 199551,
+      "source": "http://images.cocodataset.org/val2017/000000199551.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7123/7826328046_0165984695_z.jpg",
+      "license_id": 3,
+      "captions": [
+        "A picture of a young boy laying on top of a bed.",
+        "Boy sleeping with no blanket in a large bed. ",
+        "A young boy sleeping on the side of his bed.",
+        "A young boy sleeping on floral printed sheets",
+        "A boy asleep on a large bed under a mosquito net"
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        640,
+        428
+      ],
+      "image_sha256": "5b230cbc3b0e1b37913def7edc96741922058ee0cec00423385550a7a7425253",
+      "download_status": "ok",
+      "candidate_index": 106,
+      "partition": "holdout",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000415882",
+      "row_index": 3794,
+      "image_id": 415882,
+      "source": "http://images.cocodataset.org/val2017/000000415882.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2863/9433121554_a89e42c996_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "a woman lying on a bed underneath a blanket",
+        "A woman laying in bed next to a window.",
+        "A woman in a night gown lying on a bed.",
+        "A woman lounging in bed posing for this photo.",
+        "there is a woman with a robe on laying in bed"
+      ],
+      "scene_tags": [
+        "bedroom_clothes"
+      ],
+      "original_size": [
+        544,
+        640
+      ],
+      "image_sha256": "7d0e069b095e8611362263baac6905e447882dd04e128fd83e85307b733fb753",
+      "download_status": "ok",
+      "candidate_index": 6,
+      "partition": "holdout",
+      "scene": "bedroom_clothes"
+    },
+    {
+      "id": "coco-000000512657",
+      "row_index": 3184,
+      "image_id": 512657,
+      "source": "http://images.cocodataset.org/val2017/000000512657.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2294/2056159572_065c478e48_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A couple of people playing a game with remote controllers.",
+        "A beautiful young woman holding a Nintendo Wii game controller.",
+        "Two people in a living room hold Wii remote controls",
+        "two people are playing a video game and a male is watching",
+        "A couple of people in a room with remotes."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "18616777d2a12812bb7f6af55d8504871abd7d68f5401acecc1d35bc7c045075",
+      "download_status": "ok",
+      "candidate_index": 5,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000546717",
+      "row_index": 2147,
+      "image_id": 546717,
+      "source": "http://images.cocodataset.org/val2017/000000546717.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2769/4117004152_d8508e562d_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A woman sitting on a couch in front of a laptop.",
+        "A woman in pajama pants is on a computer.",
+        "A woman sitting on sofa with a laptop in front of her.",
+        "Girl on a couch with her computer on a table",
+        "A woman sitting down with a laptop on a table in front of her"
+      ],
+      "scene_tags": [
+        "sofa",
+        "desk_objects"
+      ],
+      "original_size": [
+        471,
+        640
+      ],
+      "image_sha256": "568866e8e9f96505d841eef5abd34f0a35b60aaeeed9daf6d168eeb7f8e45521",
+      "download_status": "ok",
+      "candidate_index": 85,
+      "partition": "holdout",
+      "scene": "sofa/desk_objects"
+    },
+    {
+      "id": "coco-000000492758",
+      "row_index": 4289,
+      "image_id": 492758,
+      "source": "http://images.cocodataset.org/val2017/000000492758.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2489/3966060902_3b14b3ab72_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "An older person sitting in a living room chair near a walker.",
+        "Living room arrangement with lights and windows and chairs",
+        "A person sits in a chair in a living room next to some windows.",
+        "A living room with windows, chairs, table, lamps, and a person sitting in a chair with a walker beside it.",
+        "a living room that has a couple of chairs in it"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        427
+      ],
+      "image_sha256": "f52d91a22fb02b1639385af64f85e4b285be269414b30990c6cd203c2fc13843",
+      "download_status": "ok",
+      "candidate_index": 132,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000107339",
+      "row_index": 1491,
+      "image_id": 107339,
+      "source": "http://images.cocodataset.org/val2017/000000107339.jpg",
+      "flickr_url": "http://farm4.staticflickr.com/3166/3079990670_62dd75501b_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A pretty young lady standing in front of a couch behind a wooden table.",
+        "Two girls in a room are looking at something.",
+        "Two children in a room with tables and couches.",
+        "A young girl is using a video game remote control.",
+        "Two girls play Wii in a room with ourange rugs and white sofas."
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        240,
+        180
+      ],
+      "image_sha256": "2f87cea6ff7cc56d497b7e1f7a37dbc753f1faa99713c7b2d579db2f75c50a22",
+      "download_status": "ok",
+      "candidate_index": 109,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000565877",
+      "row_index": 3194,
+      "image_id": 565877,
+      "source": "http://images.cocodataset.org/val2017/000000565877.jpg",
+      "flickr_url": "http://farm2.staticflickr.com/1044/3167881862_b47f8e17d4_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A woman sitting on the couch with her laptop in the house.",
+        "a woman in glasses holding a laptop on a courch",
+        "There is no image here to provide a caption for.",
+        "A girl is sitting on a couch holding a laptop computer.",
+        "A girl wearing a hat sits with her laptop."
+      ],
+      "scene_tags": [
+        "sofa",
+        "desk_objects"
+      ],
+      "original_size": [
+        427,
+        640
+      ],
+      "image_sha256": "41aec1d4be65badd8942877c66456dcaf834bb6d6b54b4668ad7f5652039d666",
+      "download_status": "ok",
+      "candidate_index": 28,
+      "partition": "holdout",
+      "scene": "sofa/desk_objects"
+    },
+    {
+      "id": "coco-000000383842",
+      "row_index": 2259,
+      "image_id": 383842,
+      "source": "http://images.cocodataset.org/val2017/000000383842.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4023/4536776986_0e75095fcb_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A lady hold a game controller, pointed towards a laptop.",
+        "this lady is using controllers and those men are watching",
+        "Woman playing Nintendo Wii in font of business people in office",
+        "a lady that has  a wii remote in her hand",
+        "Several professionally dressed men watching a woman holding a Wii controller"
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        434
+      ],
+      "image_sha256": "de9e05f37d8b3dd2c025ce80be273e364c6ad95dd337dacd7cd811f17db91e7b",
+      "download_status": "ok",
+      "candidate_index": 143,
+      "partition": "holdout",
+      "scene": "desk_objects"
+    },
+    {
+      "id": "coco-000000170099",
+      "row_index": 3066,
+      "image_id": 170099,
+      "source": "http://images.cocodataset.org/val2017/000000170099.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2280/1812763231_06381c802c_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "a person wearing a suit and tie next to a couch",
+        "A man in shirt and tie standing by a photograph.",
+        "A man talking in front of a photo of an orange sofa with black and white fence behind it.",
+        "A man is standing talking in front of a picture.",
+        "A man wearing a red tie with his long sleeve shirt and pants"
+      ],
+      "scene_tags": [
+        "sofa"
+      ],
+      "original_size": [
+        640,
+        478
+      ],
+      "image_sha256": "f2a5b87c4a5249e6b7c27fac24fb1e2994ebe22fe2a2f205f33893965c64b2b9",
+      "download_status": "ok",
+      "candidate_index": 32,
+      "partition": "holdout",
+      "scene": "sofa"
+    },
+    {
+      "id": "coco-000000322163",
+      "row_index": 1503,
+      "image_id": 322163,
+      "source": "http://images.cocodataset.org/val2017/000000322163.jpg",
+      "flickr_url": "http://farm8.staticflickr.com/7130/7538762932_e6c5671559_z.jpg",
+      "license_id": 1,
+      "captions": [
+        "A group of three chefs preparing food in a kitchen.",
+        "A man making a pizza in a kitchen. ",
+        "some people in a kitchen preparing food on a counter",
+        "A couple of guys cooking in a restaruant kitchen that is open to the restaurant.",
+        "Cooks are gathered preparing a meal in the kitchen."
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "6c3d9706def19f9785f3546456e085fa1f398c289720478c77e15e0110e62b0b",
+      "download_status": "ok",
+      "candidate_index": 144,
+      "partition": "holdout",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000280930",
+      "row_index": 1134,
+      "image_id": 280930,
+      "source": "http://images.cocodataset.org/val2017/000000280930.jpg",
+      "flickr_url": "http://farm6.staticflickr.com/5289/5227407234_31a3eb81cc_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "there is a young girl putting food in to a oven",
+        "A girl holding a tray of food by an oven ready to put it in.",
+        "A little girl smiling as she is about to put something in the oven. ",
+        "Little girl holding up a sheet of uncooked rolls by oven. ",
+        "Little girl laughing and holding a pan of food "
+      ],
+      "scene_tags": [
+        "kitchen_clutter"
+      ],
+      "original_size": [
+        640,
+        425
+      ],
+      "image_sha256": "57a58decd3d841b44ab611fda39b45f69815586899d28e0db8a58b8472213639",
+      "download_status": "ok",
+      "candidate_index": 41,
+      "partition": "holdout",
+      "scene": "kitchen_clutter"
+    },
+    {
+      "id": "coco-000000000139",
+      "row_index": 4145,
+      "image_id": 139,
+      "source": "http://images.cocodataset.org/val2017/000000000139.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8035/8024364858_9c41dc1666_z.jpg",
+      "license_id": 2,
+      "captions": [
+        "A woman stands in the dining area at the table.",
+        "A room with chairs, a table, and a woman in it.",
+        "A woman standing in a kitchen by a window",
+        "A person standing at a table in a room.",
+        "A living area with a television and a table"
+      ],
+      "scene_tags": [
+        "kitchen_clutter",
+        "dining_objects"
+      ],
+      "original_size": [
+        640,
+        426
+      ],
+      "image_sha256": "ffe0f0cec3b2e27aab1967229cdf0a0d7751dcdd5800322f0b8ac0dffb3b8a8d",
+      "download_status": "ok",
+      "candidate_index": 29,
+      "partition": "holdout",
+      "scene": "kitchen_clutter/dining_objects"
+    },
+    {
+      "id": "coco-000000356424",
+      "row_index": 1776,
+      "image_id": 356424,
+      "source": "http://images.cocodataset.org/val2017/000000356424.jpg",
+      "flickr_url": "http://farm9.staticflickr.com/8116/8607070980_b791deaeb4_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A man sitting in front of a plate of food.",
+        "A man at a wooden table looking at a plate of food.",
+        "a man smiling while looking at his plate of food",
+        "A man sitting at a table with a plate filled with food.",
+        "A man looking happily at some dish in front of him."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "c669af906be21b4c9113b05a7a9dc489d4f893b25641ffafad19ef6327275740",
+      "download_status": "ok",
+      "candidate_index": 76,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000166918",
+      "row_index": 4925,
+      "image_id": 166918,
+      "source": "http://images.cocodataset.org/val2017/000000166918.jpg",
+      "flickr_url": "http://farm5.staticflickr.com/4117/4745624149_369a63786e_z.jpg",
+      "license_id": 4,
+      "captions": [
+        "A group of people sitting down at a dining room table next to dishes.",
+        "people sitting around a long table talking to each other ",
+        "A group of people sitting at a dining table.",
+        "Long dining room table filled with people in dress clothing. ",
+        "A long wooden restaurant table surrounded by people seated."
+      ],
+      "scene_tags": [
+        "dining_objects"
+      ],
+      "original_size": [
+        480,
+        640
+      ],
+      "image_sha256": "a7f8457580a2bb8635ca7acd1b2061ea7977a84418e5e8441a77ba1f861d7e22",
+      "download_status": "ok",
+      "candidate_index": 122,
+      "partition": "holdout",
+      "scene": "dining_objects"
+    },
+    {
+      "id": "coco-000000397303",
+      "row_index": 2854,
+      "image_id": 397303,
+      "source": "http://images.cocodataset.org/val2017/000000397303.jpg",
+      "flickr_url": "http://farm3.staticflickr.com/2433/3830853864_c3216021f5_z.jpg",
+      "license_id": 5,
+      "captions": [
+        "Two men sell ties at an outdoor market.",
+        "A man sitting in front of a computer on top of a desk.",
+        "Two men at a table under a tent selling neckties.",
+        "Street vendors shows off their selection of ties.",
+        "Two men at a table with ties sitting near a laptop."
+      ],
+      "scene_tags": [
+        "desk_objects"
+      ],
+      "original_size": [
+        640,
+        480
+      ],
+      "image_sha256": "1c8a18f308b9febf0994c0bb26eed328c8a21cdb36a63a4432695994bb984af2",
+      "download_status": "ok",
+      "candidate_index": 176,
+      "partition": "holdout",
+      "scene": "desk_objects"
+    }
+  ]
+}

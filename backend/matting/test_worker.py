@@ -15,6 +15,37 @@ from framing import detect_faces, portrait_region, validate_face, validate_matte
 
 
 class WorkerTests(unittest.TestCase):
+    def test_erased_forehead_is_rejected_despite_intact_central_face(self):
+        face = self.face()
+        mask = np.ones((100, 100), dtype=np.float32)
+        mask[:5] = 0
+        # Above the historical central-face band; the old guard accepted it.
+        mask[27:31, 38:53] = 0
+        with self.assertRaises(PortraitInputError) as error:
+            validate_matte(mask, face, None)
+        self.assertEqual(error.exception.code, 'MATTING_INCOMPLETE_SUBJECT')
+
+    def test_regional_face_loss_retries_source_once_and_checks_result(self):
+        image = Image.new('RGB', (1000, 1000), 'white')
+        raw = io.BytesIO(); image.save(raw, format='PNG')
+        face = self.face()
+        bad = np.ones((100, 100), dtype=np.float32); bad[:5] = 0
+        bad[27:31, 38:53] = 0
+        good = np.ones((100, 100), dtype=np.float32); good[:5] = 0
+        region = {'x': 0, 'y': 0, 'width': .9, 'height': 1}
+        # Explicit validation failure models the regional damage independent
+        # of the coordinate transform; real photo regression verifies recovery.
+        for recovered in (True, False):
+            effects = [PortraitInputError('MATTING_INCOMPLETE_SUBJECT')]
+            effects += [None, None] if recovered else [PortraitInputError('MATTING_INCOMPLETE_SUBJECT')]
+            with patch.object(server, 'detect_faces', return_value=[face]), patch.object(server, 'portrait_region', return_value=(image, region)), patch.object(server, 'infer_matte', side_effect=[(bad,(100,100)),(good,(100,100))]) as infer, patch.object(server, 'validate_matte', side_effect=effects):
+                if recovered:
+                    self.assertIsNone(server.matte_image(raw.getvalue())['region'])
+                else:
+                    with self.assertRaises(PortraitInputError):
+                        server.matte_image(raw.getvalue())
+                self.assertEqual(infer.call_count, 2)
+
     def test_regional_top_edge_is_checked(self):
         mask = np.ones((100,100), dtype=np.float32)
         with self.assertRaises(PortraitInputError) as error:

@@ -1,0 +1,1938 @@
+{
+  "count": 100,
+  "selection": "Caption screening, manual inspection of 180 candidates, exclude outdoor/no-person/scene mismatch, then seed 20261113101 sample 100 unique real photos before matting. First 60 tune, final 40 holdout.",
+  "before": {
+    "rejected": 91,
+    "rendered": 9
+  },
+  "after": {
+    "rejected": 91,
+    "rendered": 9
+  },
+  "changed": [
+    "coco-000000226147",
+    "coco-000000317999"
+  ],
+  "after_reasons": {
+    "MATTING_NO_FACE": 53,
+    "MATTING_INCOMPLETE_HEAD": 7,
+    "MATTING_MULTIPLE_FACES": 13,
+    "MATTING_IMAGE_TOO_SMALL": 16,
+    "MATTING_INCOMPLETE_SUBJECT": 1,
+    "MATTING_FACE_POSE": 1
+  },
+  "scope": "All inputs retained, selection documented in sources.json. Actual worker and frontend render, offline only; rejection is not successful generation or ID compliance.",
+  "samples": [
+    {
+      "id": "coco-000000468501",
+      "before": {
+        "id": "coco-000000468501",
+        "source": "http://images.cocodataset.org/val2017/000000468501.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 95.25
+      },
+      "after": {
+        "id": "coco-000000468501",
+        "source": "http://images.cocodataset.org/val2017/000000468501.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 64.04
+      }
+    },
+    {
+      "id": "coco-000000355257",
+      "before": {
+        "id": "coco-000000355257",
+        "source": "http://images.cocodataset.org/val2017/000000355257.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 118.18
+      },
+      "after": {
+        "id": "coco-000000355257",
+        "source": "http://images.cocodataset.org/val2017/000000355257.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 93.0
+      }
+    },
+    {
+      "id": "coco-000000424349",
+      "before": {
+        "id": "coco-000000424349",
+        "source": "http://images.cocodataset.org/val2017/000000424349.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 102.37
+      },
+      "after": {
+        "id": "coco-000000424349",
+        "source": "http://images.cocodataset.org/val2017/000000424349.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 78.46
+      }
+    },
+    {
+      "id": "coco-000000310862",
+      "before": {
+        "id": "coco-000000310862",
+        "source": "http://images.cocodataset.org/val2017/000000310862.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 171.71
+      },
+      "after": {
+        "id": "coco-000000310862",
+        "source": "http://images.cocodataset.org/val2017/000000310862.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 113.18
+      }
+    },
+    {
+      "id": "coco-000000231339",
+      "before": {
+        "id": "coco-000000231339",
+        "source": "http://images.cocodataset.org/val2017/000000231339.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 144.57
+      },
+      "after": {
+        "id": "coco-000000231339",
+        "source": "http://images.cocodataset.org/val2017/000000231339.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 87.84
+      }
+    },
+    {
+      "id": "coco-000000554266",
+      "before": {
+        "id": "coco-000000554266",
+        "source": "http://images.cocodataset.org/val2017/000000554266.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 63.48
+      },
+      "after": {
+        "id": "coco-000000554266",
+        "source": "http://images.cocodataset.org/val2017/000000554266.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 44.55
+      }
+    },
+    {
+      "id": "coco-000000517056",
+      "before": {
+        "id": "coco-000000517056",
+        "source": "http://images.cocodataset.org/val2017/000000517056.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 100.23
+      },
+      "after": {
+        "id": "coco-000000517056",
+        "source": "http://images.cocodataset.org/val2017/000000517056.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 87.36
+      }
+    },
+    {
+      "id": "coco-000000413395",
+      "before": {
+        "id": "coco-000000413395",
+        "source": "http://images.cocodataset.org/val2017/000000413395.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.5203125,
+          "y": 0.0,
+          "width": 0.45,
+          "height": 0.9121140142517815
+        },
+        "crop": {
+          "sx": 382.9582942528502,
+          "sy": 14.651969117422823,
+          "sw": 187.45739678482698,
+          "sh": 249.94319571310263,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1882.93
+      },
+      "after": {
+        "id": "coco-000000413395",
+        "source": "http://images.cocodataset.org/val2017/000000413395.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.5203125,
+          "y": 0.0,
+          "width": 0.45,
+          "height": 0.9121140142517815
+        },
+        "crop": {
+          "sx": 382.9582942528502,
+          "sy": 14.651969117422823,
+          "sw": 187.45739678482698,
+          "sh": 249.94319571310263,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1345.01
+      }
+    },
+    {
+      "id": "coco-000000534041",
+      "before": {
+        "id": "coco-000000534041",
+        "source": "http://images.cocodataset.org/val2017/000000534041.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 129.81
+      },
+      "after": {
+        "id": "coco-000000534041",
+        "source": "http://images.cocodataset.org/val2017/000000534041.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 59.7
+      }
+    },
+    {
+      "id": "coco-000000468505",
+      "before": {
+        "id": "coco-000000468505",
+        "source": "http://images.cocodataset.org/val2017/000000468505.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 252.33
+      },
+      "after": {
+        "id": "coco-000000468505",
+        "source": "http://images.cocodataset.org/val2017/000000468505.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 103.26
+      }
+    },
+    {
+      "id": "coco-000000578871",
+      "before": {
+        "id": "coco-000000578871",
+        "source": "http://images.cocodataset.org/val2017/000000578871.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.04791666666666667,
+          "y": 0.0,
+          "width": 0.6208333333333333,
+          "height": 0.621875
+        },
+        "crop": {
+          "sx": 56.94004968991359,
+          "sy": -25.339656035105328,
+          "sw": 229.47183696050485,
+          "sh": 305.9624492806731,
+          "faceAligned": true
+        },
+        "elapsed_ms": 3035.25
+      },
+      "after": {
+        "id": "coco-000000578871",
+        "source": "http://images.cocodataset.org/val2017/000000578871.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.04791666666666667,
+          "y": 0.0,
+          "width": 0.6208333333333333,
+          "height": 0.621875
+        },
+        "crop": {
+          "sx": 56.94004968991359,
+          "sy": -25.339656035105328,
+          "sw": 229.47183696050485,
+          "sh": 305.9624492806731,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1332.26
+      }
+    },
+    {
+      "id": "coco-000000117908",
+      "before": {
+        "id": "coco-000000117908",
+        "source": "http://images.cocodataset.org/val2017/000000117908.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 141.7
+      },
+      "after": {
+        "id": "coco-000000117908",
+        "source": "http://images.cocodataset.org/val2017/000000117908.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 63.22
+      }
+    },
+    {
+      "id": "coco-000000435208",
+      "before": {
+        "id": "coco-000000435208",
+        "source": "http://images.cocodataset.org/val2017/000000435208.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 289.45
+      },
+      "after": {
+        "id": "coco-000000435208",
+        "source": "http://images.cocodataset.org/val2017/000000435208.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 115.51
+      }
+    },
+    {
+      "id": "coco-000000319100",
+      "before": {
+        "id": "coco-000000319100",
+        "source": "http://images.cocodataset.org/val2017/000000319100.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 143.33
+      },
+      "after": {
+        "id": "coco-000000319100",
+        "source": "http://images.cocodataset.org/val2017/000000319100.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 60.53
+      }
+    },
+    {
+      "id": "coco-000000173008",
+      "before": {
+        "id": "coco-000000173008",
+        "source": "http://images.cocodataset.org/val2017/000000173008.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 157.33
+      },
+      "after": {
+        "id": "coco-000000173008",
+        "source": "http://images.cocodataset.org/val2017/000000173008.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 103.18
+      }
+    },
+    {
+      "id": "coco-000000557916",
+      "before": {
+        "id": "coco-000000557916",
+        "source": "http://images.cocodataset.org/val2017/000000557916.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 151.82
+      },
+      "after": {
+        "id": "coco-000000557916",
+        "source": "http://images.cocodataset.org/val2017/000000557916.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 98.04
+      }
+    },
+    {
+      "id": "coco-000000099810",
+      "before": {
+        "id": "coco-000000099810",
+        "source": "http://images.cocodataset.org/val2017/000000099810.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 122.35
+      },
+      "after": {
+        "id": "coco-000000099810",
+        "source": "http://images.cocodataset.org/val2017/000000099810.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 57.27
+      }
+    },
+    {
+      "id": "coco-000000484978",
+      "before": {
+        "id": "coco-000000484978",
+        "source": "http://images.cocodataset.org/val2017/000000484978.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 209.68
+      },
+      "after": {
+        "id": "coco-000000484978",
+        "source": "http://images.cocodataset.org/val2017/000000484978.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 89.73
+      }
+    },
+    {
+      "id": "coco-000000084362",
+      "before": {
+        "id": "coco-000000084362",
+        "source": "http://images.cocodataset.org/val2017/000000084362.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 181.52
+      },
+      "after": {
+        "id": "coco-000000084362",
+        "source": "http://images.cocodataset.org/val2017/000000084362.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 111.01
+      }
+    },
+    {
+      "id": "coco-000000010707",
+      "before": {
+        "id": "coco-000000010707",
+        "source": "http://images.cocodataset.org/val2017/000000010707.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 187.69
+      },
+      "after": {
+        "id": "coco-000000010707",
+        "source": "http://images.cocodataset.org/val2017/000000010707.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 109.91
+      }
+    },
+    {
+      "id": "coco-000000419974",
+      "before": {
+        "id": "coco-000000419974",
+        "source": "http://images.cocodataset.org/val2017/000000419974.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 174.84
+      },
+      "after": {
+        "id": "coco-000000419974",
+        "source": "http://images.cocodataset.org/val2017/000000419974.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 116.22
+      }
+    },
+    {
+      "id": "coco-000000397133",
+      "before": {
+        "id": "coco-000000397133",
+        "source": "http://images.cocodataset.org/val2017/000000397133.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 176.3
+      },
+      "after": {
+        "id": "coco-000000397133",
+        "source": "http://images.cocodataset.org/val2017/000000397133.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 124.56
+      }
+    },
+    {
+      "id": "coco-000000033638",
+      "before": {
+        "id": "coco-000000033638",
+        "source": "http://images.cocodataset.org/val2017/000000033638.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 162.36
+      },
+      "after": {
+        "id": "coco-000000033638",
+        "source": "http://images.cocodataset.org/val2017/000000033638.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 113.48
+      }
+    },
+    {
+      "id": "coco-000000139077",
+      "before": {
+        "id": "coco-000000139077",
+        "source": "http://images.cocodataset.org/val2017/000000139077.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 114.23
+      },
+      "after": {
+        "id": "coco-000000139077",
+        "source": "http://images.cocodataset.org/val2017/000000139077.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 65.0
+      }
+    },
+    {
+      "id": "coco-000000371749",
+      "before": {
+        "id": "coco-000000371749",
+        "source": "http://images.cocodataset.org/val2017/000000371749.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 109.73
+      },
+      "after": {
+        "id": "coco-000000371749",
+        "source": "http://images.cocodataset.org/val2017/000000371749.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 52.01
+      }
+    },
+    {
+      "id": "coco-000000420840",
+      "before": {
+        "id": "coco-000000420840",
+        "source": "http://images.cocodataset.org/val2017/000000420840.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1352.98
+      },
+      "after": {
+        "id": "coco-000000420840",
+        "source": "http://images.cocodataset.org/val2017/000000420840.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 544.64
+      }
+    },
+    {
+      "id": "coco-000000441247",
+      "before": {
+        "id": "coco-000000441247",
+        "source": "http://images.cocodataset.org/val2017/000000441247.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 172.26
+      },
+      "after": {
+        "id": "coco-000000441247",
+        "source": "http://images.cocodataset.org/val2017/000000441247.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 110.52
+      }
+    },
+    {
+      "id": "coco-000000570471",
+      "before": {
+        "id": "coco-000000570471",
+        "source": "http://images.cocodataset.org/val2017/000000570471.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 134.2
+      },
+      "after": {
+        "id": "coco-000000570471",
+        "source": "http://images.cocodataset.org/val2017/000000570471.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 69.94
+      }
+    },
+    {
+      "id": "coco-000000044279",
+      "before": {
+        "id": "coco-000000044279",
+        "source": "http://images.cocodataset.org/val2017/000000044279.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 195.32
+      },
+      "after": {
+        "id": "coco-000000044279",
+        "source": "http://images.cocodataset.org/val2017/000000044279.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 162.29
+      }
+    },
+    {
+      "id": "coco-000000226147",
+      "before": {
+        "id": "coco-000000226147",
+        "source": "http://images.cocodataset.org/val2017/000000226147.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.4979166666666667,
+          "y": 0.0,
+          "width": 0.5020833333333333,
+          "height": 0.5015625
+        },
+        "crop": {
+          "sx": 309.8016718029976,
+          "sy": -10.941197276115417,
+          "sw": 159.088596701622,
+          "sh": 212.118128935496,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2260.41
+      },
+      "after": {
+        "id": "coco-000000226147",
+        "source": "http://images.cocodataset.org/val2017/000000226147.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 1365.18
+      }
+    },
+    {
+      "id": "coco-000000286182",
+      "before": {
+        "id": "coco-000000286182",
+        "source": "http://images.cocodataset.org/val2017/000000286182.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 202.93
+      },
+      "after": {
+        "id": "coco-000000286182",
+        "source": "http://images.cocodataset.org/val2017/000000286182.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 95.28
+      }
+    },
+    {
+      "id": "coco-000000438774",
+      "before": {
+        "id": "coco-000000438774",
+        "source": "http://images.cocodataset.org/val2017/000000438774.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 174.85
+      },
+      "after": {
+        "id": "coco-000000438774",
+        "source": "http://images.cocodataset.org/val2017/000000438774.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 96.96
+      }
+    },
+    {
+      "id": "coco-000000347174",
+      "before": {
+        "id": "coco-000000347174",
+        "source": "http://images.cocodataset.org/val2017/000000347174.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 165.43
+      },
+      "after": {
+        "id": "coco-000000347174",
+        "source": "http://images.cocodataset.org/val2017/000000347174.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 144.37
+      }
+    },
+    {
+      "id": "coco-000000025603",
+      "before": {
+        "id": "coco-000000025603",
+        "source": "http://images.cocodataset.org/val2017/000000025603.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_SUBJECT",
+        "elapsed_ms": 1485.79
+      },
+      "after": {
+        "id": "coco-000000025603",
+        "source": "http://images.cocodataset.org/val2017/000000025603.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_SUBJECT",
+        "elapsed_ms": 1415.85
+      }
+    },
+    {
+      "id": "coco-000000494869",
+      "before": {
+        "id": "coco-000000494869",
+        "source": "http://images.cocodataset.org/val2017/000000494869.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 192.56
+      },
+      "after": {
+        "id": "coco-000000494869",
+        "source": "http://images.cocodataset.org/val2017/000000494869.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 96.73
+      }
+    },
+    {
+      "id": "coco-000000051610",
+      "before": {
+        "id": "coco-000000051610",
+        "source": "http://images.cocodataset.org/val2017/000000051610.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 102.1
+      },
+      "after": {
+        "id": "coco-000000051610",
+        "source": "http://images.cocodataset.org/val2017/000000051610.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 68.55
+      }
+    },
+    {
+      "id": "coco-000000284764",
+      "before": {
+        "id": "coco-000000284764",
+        "source": "http://images.cocodataset.org/val2017/000000284764.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 140.54
+      },
+      "after": {
+        "id": "coco-000000284764",
+        "source": "http://images.cocodataset.org/val2017/000000284764.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 86.7
+      }
+    },
+    {
+      "id": "coco-000000172877",
+      "before": {
+        "id": "coco-000000172877",
+        "source": "http://images.cocodataset.org/val2017/000000172877.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 151.9
+      },
+      "after": {
+        "id": "coco-000000172877",
+        "source": "http://images.cocodataset.org/val2017/000000172877.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 109.95
+      }
+    },
+    {
+      "id": "coco-000000483999",
+      "before": {
+        "id": "coco-000000483999",
+        "source": "http://images.cocodataset.org/val2017/000000483999.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 142.51
+      },
+      "after": {
+        "id": "coco-000000483999",
+        "source": "http://images.cocodataset.org/val2017/000000483999.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 106.52
+      }
+    },
+    {
+      "id": "coco-000000425226",
+      "before": {
+        "id": "coco-000000425226",
+        "source": "http://images.cocodataset.org/val2017/000000425226.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 180.04
+      },
+      "after": {
+        "id": "coco-000000425226",
+        "source": "http://images.cocodataset.org/val2017/000000425226.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 104.35
+      }
+    },
+    {
+      "id": "coco-000000035682",
+      "before": {
+        "id": "coco-000000035682",
+        "source": "http://images.cocodataset.org/val2017/000000035682.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 162.83
+      },
+      "after": {
+        "id": "coco-000000035682",
+        "source": "http://images.cocodataset.org/val2017/000000035682.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 106.87
+      }
+    },
+    {
+      "id": "coco-000000445792",
+      "before": {
+        "id": "coco-000000445792",
+        "source": "http://images.cocodataset.org/val2017/000000445792.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 99.01
+      },
+      "after": {
+        "id": "coco-000000445792",
+        "source": "http://images.cocodataset.org/val2017/000000445792.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 63.5
+      }
+    },
+    {
+      "id": "coco-000000265777",
+      "before": {
+        "id": "coco-000000265777",
+        "source": "http://images.cocodataset.org/val2017/000000265777.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 195.94
+      },
+      "after": {
+        "id": "coco-000000265777",
+        "source": "http://images.cocodataset.org/val2017/000000265777.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 143.2
+      }
+    },
+    {
+      "id": "coco-000000156643",
+      "before": {
+        "id": "coco-000000156643",
+        "source": "http://images.cocodataset.org/val2017/000000156643.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 143.53
+      },
+      "after": {
+        "id": "coco-000000156643",
+        "source": "http://images.cocodataset.org/val2017/000000156643.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 116.3
+      }
+    },
+    {
+      "id": "coco-000000469067",
+      "before": {
+        "id": "coco-000000469067",
+        "source": "http://images.cocodataset.org/val2017/000000469067.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 134.18
+      },
+      "after": {
+        "id": "coco-000000469067",
+        "source": "http://images.cocodataset.org/val2017/000000469067.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 100.13
+      }
+    },
+    {
+      "id": "coco-000000367095",
+      "before": {
+        "id": "coco-000000367095",
+        "source": "http://images.cocodataset.org/val2017/000000367095.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 136.07
+      },
+      "after": {
+        "id": "coco-000000367095",
+        "source": "http://images.cocodataset.org/val2017/000000367095.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 97.67
+      }
+    },
+    {
+      "id": "coco-000000040757",
+      "before": {
+        "id": "coco-000000040757",
+        "source": "http://images.cocodataset.org/val2017/000000040757.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 135.22
+      },
+      "after": {
+        "id": "coco-000000040757",
+        "source": "http://images.cocodataset.org/val2017/000000040757.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 82.09
+      }
+    },
+    {
+      "id": "coco-000000330818",
+      "before": {
+        "id": "coco-000000330818",
+        "source": "http://images.cocodataset.org/val2017/000000330818.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 128.59
+      },
+      "after": {
+        "id": "coco-000000330818",
+        "source": "http://images.cocodataset.org/val2017/000000330818.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 84.33
+      }
+    },
+    {
+      "id": "coco-000000382125",
+      "before": {
+        "id": "coco-000000382125",
+        "source": "http://images.cocodataset.org/val2017/000000382125.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 161.69
+      },
+      "after": {
+        "id": "coco-000000382125",
+        "source": "http://images.cocodataset.org/val2017/000000382125.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 92.35
+      }
+    },
+    {
+      "id": "coco-000000023899",
+      "before": {
+        "id": "coco-000000023899",
+        "source": "http://images.cocodataset.org/val2017/000000023899.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 123.61
+      },
+      "after": {
+        "id": "coco-000000023899",
+        "source": "http://images.cocodataset.org/val2017/000000023899.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 89.71
+      }
+    },
+    {
+      "id": "coco-000000402720",
+      "before": {
+        "id": "coco-000000402720",
+        "source": "http://images.cocodataset.org/val2017/000000402720.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 142.53
+      },
+      "after": {
+        "id": "coco-000000402720",
+        "source": "http://images.cocodataset.org/val2017/000000402720.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 115.26
+      }
+    },
+    {
+      "id": "coco-000000226408",
+      "before": {
+        "id": "coco-000000226408",
+        "source": "http://images.cocodataset.org/val2017/000000226408.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 111.61
+      },
+      "after": {
+        "id": "coco-000000226408",
+        "source": "http://images.cocodataset.org/val2017/000000226408.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 107.46
+      }
+    },
+    {
+      "id": "coco-000000243204",
+      "before": {
+        "id": "coco-000000243204",
+        "source": "http://images.cocodataset.org/val2017/000000243204.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 127.21
+      },
+      "after": {
+        "id": "coco-000000243204",
+        "source": "http://images.cocodataset.org/val2017/000000243204.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 104.53
+      }
+    },
+    {
+      "id": "coco-000000093437",
+      "before": {
+        "id": "coco-000000093437",
+        "source": "http://images.cocodataset.org/val2017/000000093437.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.2484375,
+          "y": 0.0,
+          "width": 0.4234375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 153.28394477851901,
+          "sy": -27.44083930965903,
+          "sw": 281.5448652647393,
+          "sh": 375.3931536863191,
+          "faceAligned": true
+        },
+        "elapsed_ms": 2424.64
+      },
+      "after": {
+        "id": "coco-000000093437",
+        "source": "http://images.cocodataset.org/val2017/000000093437.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.2484375,
+          "y": 0.0,
+          "width": 0.4234375,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 153.28394477851901,
+          "sy": -27.44083930965903,
+          "sw": 281.5448652647393,
+          "sh": 375.3931536863191,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1214.98
+      }
+    },
+    {
+      "id": "coco-000000213086",
+      "before": {
+        "id": "coco-000000213086",
+        "source": "http://images.cocodataset.org/val2017/000000213086.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 91.54
+      },
+      "after": {
+        "id": "coco-000000213086",
+        "source": "http://images.cocodataset.org/val2017/000000213086.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 57.31
+      }
+    },
+    {
+      "id": "coco-000000195842",
+      "before": {
+        "id": "coco-000000195842",
+        "source": "http://images.cocodataset.org/val2017/000000195842.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 151.55
+      },
+      "after": {
+        "id": "coco-000000195842",
+        "source": "http://images.cocodataset.org/val2017/000000195842.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 96.96
+      }
+    },
+    {
+      "id": "coco-000000208363",
+      "before": {
+        "id": "coco-000000208363",
+        "source": "http://images.cocodataset.org/val2017/000000208363.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 181.67
+      },
+      "after": {
+        "id": "coco-000000208363",
+        "source": "http://images.cocodataset.org/val2017/000000208363.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 95.03
+      }
+    },
+    {
+      "id": "coco-000000019786",
+      "before": {
+        "id": "coco-000000019786",
+        "source": "http://images.cocodataset.org/val2017/000000019786.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 79.1
+      },
+      "after": {
+        "id": "coco-000000019786",
+        "source": "http://images.cocodataset.org/val2017/000000019786.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 55.53
+      }
+    },
+    {
+      "id": "coco-000000166478",
+      "before": {
+        "id": "coco-000000166478",
+        "source": "http://images.cocodataset.org/val2017/000000166478.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 129.83
+      },
+      "after": {
+        "id": "coco-000000166478",
+        "source": "http://images.cocodataset.org/val2017/000000166478.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 89.88
+      }
+    },
+    {
+      "id": "coco-000000246968",
+      "before": {
+        "id": "coco-000000246968",
+        "source": "http://images.cocodataset.org/val2017/000000246968.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 119.75
+      },
+      "after": {
+        "id": "coco-000000246968",
+        "source": "http://images.cocodataset.org/val2017/000000246968.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 94.56
+      }
+    },
+    {
+      "id": "coco-000000393569",
+      "before": {
+        "id": "coco-000000393569",
+        "source": "http://images.cocodataset.org/val2017/000000393569.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 148.2
+      },
+      "after": {
+        "id": "coco-000000393569",
+        "source": "http://images.cocodataset.org/val2017/000000393569.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 104.82
+      }
+    },
+    {
+      "id": "coco-000000317999",
+      "before": {
+        "id": "coco-000000317999",
+        "source": "http://images.cocodataset.org/val2017/000000317999.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_SUBJECT",
+        "elapsed_ms": 1037.92
+      },
+      "after": {
+        "id": "coco-000000317999",
+        "source": "http://images.cocodataset.org/val2017/000000317999.jpg",
+        "status": "rendered",
+        "region": null,
+        "crop": {
+          "sx": 95.05318337678911,
+          "sy": 20.720190882682804,
+          "sw": 218.0745035409927,
+          "sh": 290.7660047213236,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1767.65
+      }
+    },
+    {
+      "id": "coco-000000312552",
+      "before": {
+        "id": "coco-000000312552",
+        "source": "http://images.cocodataset.org/val2017/000000312552.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 85.03
+      },
+      "after": {
+        "id": "coco-000000312552",
+        "source": "http://images.cocodataset.org/val2017/000000312552.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 50.7
+      }
+    },
+    {
+      "id": "coco-000000559543",
+      "before": {
+        "id": "coco-000000559543",
+        "source": "http://images.cocodataset.org/val2017/000000559543.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 79.22
+      },
+      "after": {
+        "id": "coco-000000559543",
+        "source": "http://images.cocodataset.org/val2017/000000559543.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 58.3
+      }
+    },
+    {
+      "id": "coco-000000113720",
+      "before": {
+        "id": "coco-000000113720",
+        "source": "http://images.cocodataset.org/val2017/000000113720.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 140.15
+      },
+      "after": {
+        "id": "coco-000000113720",
+        "source": "http://images.cocodataset.org/val2017/000000113720.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 107.14
+      }
+    },
+    {
+      "id": "coco-000000036936",
+      "before": {
+        "id": "coco-000000036936",
+        "source": "http://images.cocodataset.org/val2017/000000036936.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 122.08
+      },
+      "after": {
+        "id": "coco-000000036936",
+        "source": "http://images.cocodataset.org/val2017/000000036936.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 119.14
+      }
+    },
+    {
+      "id": "coco-000000268378",
+      "before": {
+        "id": "coco-000000268378",
+        "source": "http://images.cocodataset.org/val2017/000000268378.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 108.03
+      },
+      "after": {
+        "id": "coco-000000268378",
+        "source": "http://images.cocodataset.org/val2017/000000268378.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 91.13
+      }
+    },
+    {
+      "id": "coco-000000027186",
+      "before": {
+        "id": "coco-000000027186",
+        "source": "http://images.cocodataset.org/val2017/000000027186.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 111.83
+      },
+      "after": {
+        "id": "coco-000000027186",
+        "source": "http://images.cocodataset.org/val2017/000000027186.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 106.13
+      }
+    },
+    {
+      "id": "coco-000000189475",
+      "before": {
+        "id": "coco-000000189475",
+        "source": "http://images.cocodataset.org/val2017/000000189475.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 87.48
+      },
+      "after": {
+        "id": "coco-000000189475",
+        "source": "http://images.cocodataset.org/val2017/000000189475.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 58.8
+      }
+    },
+    {
+      "id": "coco-000000394940",
+      "before": {
+        "id": "coco-000000394940",
+        "source": "http://images.cocodataset.org/val2017/000000394940.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -2.637577932190368,
+          "sy": 25.38252883487217,
+          "sw": 429.04355349364175,
+          "sh": 572.0580713248556,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1719.67
+      },
+      "after": {
+        "id": "coco-000000394940",
+        "source": "http://images.cocodataset.org/val2017/000000394940.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.0,
+          "width": 1.0,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": -2.637577932190368,
+          "sy": 25.38252883487217,
+          "sw": 429.04355349364175,
+          "sh": 572.0580713248556,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1323.12
+      }
+    },
+    {
+      "id": "coco-000000436617",
+      "before": {
+        "id": "coco-000000436617",
+        "source": "http://images.cocodataset.org/val2017/000000436617.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 119.68
+      },
+      "after": {
+        "id": "coco-000000436617",
+        "source": "http://images.cocodataset.org/val2017/000000436617.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 82.56
+      }
+    },
+    {
+      "id": "coco-000000182155",
+      "before": {
+        "id": "coco-000000182155",
+        "source": "http://images.cocodataset.org/val2017/000000182155.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 112.8
+      },
+      "after": {
+        "id": "coco-000000182155",
+        "source": "http://images.cocodataset.org/val2017/000000182155.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 74.73
+      }
+    },
+    {
+      "id": "coco-000000054654",
+      "before": {
+        "id": "coco-000000054654",
+        "source": "http://images.cocodataset.org/val2017/000000054654.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 106.02
+      },
+      "after": {
+        "id": "coco-000000054654",
+        "source": "http://images.cocodataset.org/val2017/000000054654.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 82.29
+      }
+    },
+    {
+      "id": "coco-000000215259",
+      "before": {
+        "id": "coco-000000215259",
+        "source": "http://images.cocodataset.org/val2017/000000215259.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 76.78
+      },
+      "after": {
+        "id": "coco-000000215259",
+        "source": "http://images.cocodataset.org/val2017/000000215259.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 54.52
+      }
+    },
+    {
+      "id": "coco-000000386912",
+      "before": {
+        "id": "coco-000000386912",
+        "source": "http://images.cocodataset.org/val2017/000000386912.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 127.79
+      },
+      "after": {
+        "id": "coco-000000386912",
+        "source": "http://images.cocodataset.org/val2017/000000386912.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 94.51
+      }
+    },
+    {
+      "id": "coco-000000422670",
+      "before": {
+        "id": "coco-000000422670",
+        "source": "http://images.cocodataset.org/val2017/000000422670.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.065625,
+          "y": 0.0,
+          "width": 0.8625,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 165.89660488069057,
+          "sy": 20.236461281776428,
+          "sw": 305.0726540386677,
+          "sh": 406.7635387182236,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1357.6
+      },
+      "after": {
+        "id": "coco-000000422670",
+        "source": "http://images.cocodataset.org/val2017/000000422670.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.065625,
+          "y": 0.0,
+          "width": 0.8625,
+          "height": 1.0
+        },
+        "crop": {
+          "sx": 165.89660488069057,
+          "sy": 20.236461281776428,
+          "sw": 305.0726540386677,
+          "sh": 406.7635387182236,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1150.58
+      }
+    },
+    {
+      "id": "coco-000000495732",
+      "before": {
+        "id": "coco-000000495732",
+        "source": "http://images.cocodataset.org/val2017/000000495732.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 116.44
+      },
+      "after": {
+        "id": "coco-000000495732",
+        "source": "http://images.cocodataset.org/val2017/000000495732.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 99.64
+      }
+    },
+    {
+      "id": "coco-000000066771",
+      "before": {
+        "id": "coco-000000066771",
+        "source": "http://images.cocodataset.org/val2017/000000066771.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 118.64
+      },
+      "after": {
+        "id": "coco-000000066771",
+        "source": "http://images.cocodataset.org/val2017/000000066771.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 103.72
+      }
+    },
+    {
+      "id": "coco-000000553788",
+      "before": {
+        "id": "coco-000000553788",
+        "source": "http://images.cocodataset.org/val2017/000000553788.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 96.62
+      },
+      "after": {
+        "id": "coco-000000553788",
+        "source": "http://images.cocodataset.org/val2017/000000553788.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 68.34
+      }
+    },
+    {
+      "id": "coco-000000529762",
+      "before": {
+        "id": "coco-000000529762",
+        "source": "http://images.cocodataset.org/val2017/000000529762.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 120.61
+      },
+      "after": {
+        "id": "coco-000000529762",
+        "source": "http://images.cocodataset.org/val2017/000000529762.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 80.48
+      }
+    },
+    {
+      "id": "coco-000000417249",
+      "before": {
+        "id": "coco-000000417249",
+        "source": "http://images.cocodataset.org/val2017/000000417249.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 126.02
+      },
+      "after": {
+        "id": "coco-000000417249",
+        "source": "http://images.cocodataset.org/val2017/000000417249.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 91.4
+      }
+    },
+    {
+      "id": "coco-000000194875",
+      "before": {
+        "id": "coco-000000194875",
+        "source": "http://images.cocodataset.org/val2017/000000194875.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 158.46
+      },
+      "after": {
+        "id": "coco-000000194875",
+        "source": "http://images.cocodataset.org/val2017/000000194875.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 125.5
+      }
+    },
+    {
+      "id": "coco-000000489764",
+      "before": {
+        "id": "coco-000000489764",
+        "source": "http://images.cocodataset.org/val2017/000000489764.jpg",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 150.21
+      },
+      "after": {
+        "id": "coco-000000489764",
+        "source": "http://images.cocodataset.org/val2017/000000489764.jpg",
+        "status": "rejected",
+        "code": "MATTING_FACE_POSE",
+        "elapsed_ms": 135.02
+      }
+    },
+    {
+      "id": "coco-000000064868",
+      "before": {
+        "id": "coco-000000064868",
+        "source": "http://images.cocodataset.org/val2017/000000064868.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 78.69
+      },
+      "after": {
+        "id": "coco-000000064868",
+        "source": "http://images.cocodataset.org/val2017/000000064868.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 71.77
+      }
+    },
+    {
+      "id": "coco-000000455301",
+      "before": {
+        "id": "coco-000000455301",
+        "source": "http://images.cocodataset.org/val2017/000000455301.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 142.23
+      },
+      "after": {
+        "id": "coco-000000455301",
+        "source": "http://images.cocodataset.org/val2017/000000455301.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 123.36
+      }
+    },
+    {
+      "id": "coco-000000199551",
+      "before": {
+        "id": "coco-000000199551",
+        "source": "http://images.cocodataset.org/val2017/000000199551.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 121.57
+      },
+      "after": {
+        "id": "coco-000000199551",
+        "source": "http://images.cocodataset.org/val2017/000000199551.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 99.51
+      }
+    },
+    {
+      "id": "coco-000000415882",
+      "before": {
+        "id": "coco-000000415882",
+        "source": "http://images.cocodataset.org/val2017/000000415882.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.278125,
+          "width": 0.5643382352941176,
+          "height": 0.6390625
+        },
+        "crop": {
+          "sx": -2.991113484851155,
+          "sy": 179.36742337544882,
+          "sw": 248.43018925379045,
+          "sh": 331.2402523383873,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1566.65
+      },
+      "after": {
+        "id": "coco-000000415882",
+        "source": "http://images.cocodataset.org/val2017/000000415882.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0,
+          "y": 0.278125,
+          "width": 0.5643382352941176,
+          "height": 0.6390625
+        },
+        "crop": {
+          "sx": -2.991113484851155,
+          "sy": 179.36742337544882,
+          "sw": 248.43018925379045,
+          "sh": 331.2402523383873,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1191.23
+      }
+    },
+    {
+      "id": "coco-000000512657",
+      "before": {
+        "id": "coco-000000512657",
+        "source": "http://images.cocodataset.org/val2017/000000512657.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 129.67
+      },
+      "after": {
+        "id": "coco-000000512657",
+        "source": "http://images.cocodataset.org/val2017/000000512657.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 99.94
+      }
+    },
+    {
+      "id": "coco-000000546717",
+      "before": {
+        "id": "coco-000000546717",
+        "source": "http://images.cocodataset.org/val2017/000000546717.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 131.46
+      },
+      "after": {
+        "id": "coco-000000546717",
+        "source": "http://images.cocodataset.org/val2017/000000546717.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 106.07
+      }
+    },
+    {
+      "id": "coco-000000492758",
+      "before": {
+        "id": "coco-000000492758",
+        "source": "http://images.cocodataset.org/val2017/000000492758.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 114.91
+      },
+      "after": {
+        "id": "coco-000000492758",
+        "source": "http://images.cocodataset.org/val2017/000000492758.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 116.04
+      }
+    },
+    {
+      "id": "coco-000000107339",
+      "before": {
+        "id": "coco-000000107339",
+        "source": "http://images.cocodataset.org/val2017/000000107339.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 25.18
+      },
+      "after": {
+        "id": "coco-000000107339",
+        "source": "http://images.cocodataset.org/val2017/000000107339.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 17.22
+      }
+    },
+    {
+      "id": "coco-000000565877",
+      "before": {
+        "id": "coco-000000565877",
+        "source": "http://images.cocodataset.org/val2017/000000565877.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0351288056206089,
+          "y": 0.0546875,
+          "width": 0.7049180327868853,
+          "height": 0.6171875
+        },
+        "crop": {
+          "sx": 50.31493294570146,
+          "sy": 44.530436833698964,
+          "sw": 230.60341411166792,
+          "sh": 307.4712188155572,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1867.26
+      },
+      "after": {
+        "id": "coco-000000565877",
+        "source": "http://images.cocodataset.org/val2017/000000565877.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0351288056206089,
+          "y": 0.0546875,
+          "width": 0.7049180327868853,
+          "height": 0.6171875
+        },
+        "crop": {
+          "sx": 50.31493294570146,
+          "sy": 44.530436833698964,
+          "sw": 230.60341411166792,
+          "sh": 307.4712188155572,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1166.42
+      }
+    },
+    {
+      "id": "coco-000000383842",
+      "before": {
+        "id": "coco-000000383842",
+        "source": "http://images.cocodataset.org/val2017/000000383842.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 122.86
+      },
+      "after": {
+        "id": "coco-000000383842",
+        "source": "http://images.cocodataset.org/val2017/000000383842.jpg",
+        "status": "rejected",
+        "code": "MATTING_MULTIPLE_FACES",
+        "elapsed_ms": 92.64
+      }
+    },
+    {
+      "id": "coco-000000170099",
+      "before": {
+        "id": "coco-000000170099",
+        "source": "http://images.cocodataset.org/val2017/000000170099.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0640625,
+          "y": 0.0,
+          "width": 0.4609375,
+          "height": 0.8221757322175732
+        },
+        "crop": {
+          "sx": 96.71438871808945,
+          "sy": 16.336369569102978,
+          "sw": 182.69298197849395,
+          "sh": 243.59064263799195,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1639.6
+      },
+      "after": {
+        "id": "coco-000000170099",
+        "source": "http://images.cocodataset.org/val2017/000000170099.jpg",
+        "status": "rendered",
+        "region": {
+          "x": 0.0640625,
+          "y": 0.0,
+          "width": 0.4609375,
+          "height": 0.8221757322175732
+        },
+        "crop": {
+          "sx": 96.71438871808945,
+          "sy": 16.336369569102978,
+          "sw": 182.69298197849395,
+          "sh": 243.59064263799195,
+          "faceAligned": true
+        },
+        "elapsed_ms": 1188.27
+      }
+    },
+    {
+      "id": "coco-000000322163",
+      "before": {
+        "id": "coco-000000322163",
+        "source": "http://images.cocodataset.org/val2017/000000322163.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 153.23
+      },
+      "after": {
+        "id": "coco-000000322163",
+        "source": "http://images.cocodataset.org/val2017/000000322163.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 117.62
+      }
+    },
+    {
+      "id": "coco-000000280930",
+      "before": {
+        "id": "coco-000000280930",
+        "source": "http://images.cocodataset.org/val2017/000000280930.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 121.87
+      },
+      "after": {
+        "id": "coco-000000280930",
+        "source": "http://images.cocodataset.org/val2017/000000280930.jpg",
+        "status": "rejected",
+        "code": "MATTING_INCOMPLETE_HEAD",
+        "elapsed_ms": 103.76
+      }
+    },
+    {
+      "id": "coco-000000000139",
+      "before": {
+        "id": "coco-000000000139",
+        "source": "http://images.cocodataset.org/val2017/000000000139.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 121.3
+      },
+      "after": {
+        "id": "coco-000000000139",
+        "source": "http://images.cocodataset.org/val2017/000000000139.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 102.98
+      }
+    },
+    {
+      "id": "coco-000000356424",
+      "before": {
+        "id": "coco-000000356424",
+        "source": "http://images.cocodataset.org/val2017/000000356424.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 131.36
+      },
+      "after": {
+        "id": "coco-000000356424",
+        "source": "http://images.cocodataset.org/val2017/000000356424.jpg",
+        "status": "rejected",
+        "code": "MATTING_NO_FACE",
+        "elapsed_ms": 84.05
+      }
+    },
+    {
+      "id": "coco-000000166918",
+      "before": {
+        "id": "coco-000000166918",
+        "source": "http://images.cocodataset.org/val2017/000000166918.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 127.37
+      },
+      "after": {
+        "id": "coco-000000166918",
+        "source": "http://images.cocodataset.org/val2017/000000166918.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 96.04
+      }
+    },
+    {
+      "id": "coco-000000397303",
+      "before": {
+        "id": "coco-000000397303",
+        "source": "http://images.cocodataset.org/val2017/000000397303.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 133.64
+      },
+      "after": {
+        "id": "coco-000000397303",
+        "source": "http://images.cocodataset.org/val2017/000000397303.jpg",
+        "status": "rejected",
+        "code": "MATTING_IMAGE_TOO_SMALL",
+        "elapsed_ms": 83.12
+      }
+    }
+  ]
+}
